@@ -2,8 +2,8 @@
 import { Image } from "astro:assets";
 import svgl from "../../public/svgl.png";
 import stockin from "../../public/stockin.png";
-import moviesfordevs from "../../public/moviesfordevs.png";
 import velez from "../../public/velez.png";
+import ohaImage from "../../public/oha.webp";
 
 interface Project {
   title: string;
@@ -15,43 +15,43 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "MoviesForDevs",
-    image: moviesfordevs as ImageMetadata,
-    link: "https://github.com/gothsec/MoviesForDevs",
-    preview: "https://movies-for-devs.vercel.app",
-    status: "Deployed",
+    title: "OHA!",
+    image: ohaImage as ImageMetadata,
+    link: "",
+    preview: "/mock_site/oha/",
+    status: "公開中",
   },
   {
     title: "StockIn",
     image: stockin as ImageMetadata,
     link: "https://github.com/gothsec/stockin-demo",
     preview: "https://stockin-demo.vercel.app",
-    status: "On Development",
+    status: "開発中",
   },
   {
     title: "Svgl.app",
     image: svgl as ImageMetadata,
     link: "https://github.com/pheralb/svgl",
     preview: "https://svgl.app",
-    status: "Contributor",
+    status: "コントリビューター",
   },
   {
     title: "Rifas Velez Web",
     image: velez as ImageMetadata,
     link: "https://github.com/Buga-Software/rifasvelez-web",
     preview: "https://www.rifasvelez.com",
-    status: "Deployed",
+    status: "公開中",
   },
 ];
 ---
 
 <section
   id="projects"
-  class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
+  class="py-12 border-t border-[var(--white-icon-tr)] text-[var(--white)]"
 >
   <div class="max-w-5xl mx-auto">
-    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My work</h2>
-    <h3 class="text-4xl md:text-5xl font-medium mb-8">Projects</h3>
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">実績</h2>
+    <h3 class="text-4xl md:text-5xl font-medium mb-8">制作実績</h3>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {
@@ -80,24 +80,9 @@ const projects: Project[] = [
                 <div class="flex gap-2 ml-auto">
                   <a
                     target="_blank"
-                    href={project.link}
-                    aria-label="GitHub"
-                    class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="size-7"
-                    >
-                      <path d="M24 12L18.3431 17.6569L16.9289 16.2426L21.1716 12L16.9289 7.75736L18.3431 6.34315L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6569L0 12L5.65685 6.34315L7.07107 7.75736L2.82843 12ZM9.78845 21H7.66009L14.2116 3H16.3399L9.78845 21Z" />
-                    </svg>
-                  </a>
-                  <a
-                    target="_blank"
                     href={project.preview}
                     aria-label="Preview"
-                    class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
+                    class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-white hover:bg-[var(--white-icon-tr)]"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -115,13 +100,14 @@ const projects: Project[] = [
         ))
       }
     </div>
+    <!-- もっと見るボタン（非表示）
     <a
       target="_blank"
       href="https://github.com/Gothsec?tab=repositories"
       aria-label="GitHub"
-      class="w-full flex items-center justify-center gap-2 mt-9 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full bg-[#1414149c] hover:bg-[var(--white-icon-tr)] hover:scale-105"
+      class="w-full flex items-center justify-center gap-2 mt-9 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full bg-white hover:bg-[var(--white-icon-tr)] hover:scale-105"
     >
-      <span class="md:text-lg text-md">More projects on</span>
+      <span class="md:text-lg text-md">もっと見る</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -133,5 +119,6 @@ const projects: Project[] = [
         ></path>
       </svg>
     </a>
+    -->
   </div>
 </section>

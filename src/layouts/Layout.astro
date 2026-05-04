@@ -7,17 +7,18 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>{title} | Software Developer</title>
+    <title>{title} | Front-end Engineer</title>
     <meta
       name="description"
-      content="Oscar Andres Hernandez Pineda - Software Developer building interactive and seamless digital experiences with cutting-edge frontend development."
+      content="フロントエンドエンジニア Hiroyuki Chuman のポートフォリオサイトです。"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="canonical" href="https://oscarhernandez.vercel.app/" />
+    <link rel="canonical" href="" />
 
     <link
       rel="preload"
@@ -27,40 +28,27 @@ const { title } = Astro.props;
       crossorigin="anonymous"
     />
 
-    <meta
-      property="og:title"
-      content="Oscar Andres Hernandez Pineda | Software Developer"
-    />
+    <meta property="og:title" content="Hiroyuki Chuman | Front-end Engineer" />
     <meta
       property="og:description"
-      content="Portfolio of Oscar Andres Hernandez Pineda, Software Developer specializing in frontend and interactive experiences."
+      content="フロントエンドエンジニア Hiroyuki Chuman のポートフォリオサイトです。"
     />
-    <meta
-      property="og:image"
-      content="https://oscarhernandez.vercel.app/og.image.png"
-    />
-    <meta property="og:url" content="https://oscarhernandez.vercel.app" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:site_name"
-      content="Oscar Andres Hernandez Pineda Portfolio"
-    />
+    <meta property="og:site_name" content="Hiroyuki Chuman Portfolio" />
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Oscar Andres Hernandez Pineda",
-        "alternateName": "Oscar Hernandez",
-        "url": "https://oscarhernandez.vercel.app",
-        "image": "https://oscarhernandez.vercel.app/og.image.png",
-        "sameAs": [
-          "https://github.com/gothsec",
-          "https://linkedin.com/in/andresshernandez-eng"
-        ],
-        "jobTitle": "Software Developer",
-        "description": "Software Developer building interactive and seamless digital experiences."
+        "name": "Hiroyuki Chuman",
+        "url": "",
+        "image": "",
+        "sameAs": ["https://github.com/coder-hiro"],
+        "jobTitle": "Front-end Engineer",
+        "description": "ビジネスの意図を正確に汲み取り、確かな技術で形にするフロントエンドエンジニア。"
       }
     </script>
   </head>
@@ -80,11 +68,12 @@ const { title } = Astro.props;
   }
 
   :root {
-    --background: #101010;
-    --sec: #a476ff;
-    --white: #dfdfdf;
-    --white-icon: #f3f3f398;
-    --white-icon-tr: #f3f3f310;
+    --background: #f8f9fa;
+    --sec: #3b82f6;
+    --white: #1a1a2e;
+    --white-icon: #1a1a2e99;
+    --white-icon-tr: #1a1a2e15;
+    --component-bg: #ffffff;
   }
 
   * {

@@ -1,4 +1,4 @@
-<section id="contact" class="w-full py-12 border-t border-[#ffffff10]">
+<section id="contact" class="w-full py-12 border-t border-[var(--white-icon-tr)]">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Let's talk</h2>
     <h3 class="text-4xl md:text-5xl font-medium text-[var(--white)] mb-6">
@@ -7,54 +7,68 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="text-[var(--white-icon)]">
         <p class="mb-4">
-          Have a question or a project in mind? Feel free to reach out.
+          コーディングの代行や、Web制作のパートナーをお探しですか？<br
+          />デザインの意図を汲み取った丁寧な実装を心がけています。<br
+          />まずはお気軽にご相談ください。
         </p>
         <div class="flex items-center gap-2">
           <span>Location:</span>
-          <span class="text-[var(--white)]">Colombia, Valle del cauca</span>
+          <span class="text-[var(--white)]">Tokyo, Japan</span>
         </div>
       </div>
 
       <div>
         <form
           id="contact-form"
-          action="https://formspree.io/f/mnnjznkj"
+          action="https://api.web3forms.com/submit"
           method="POST"
           class="flex flex-col gap-4"
         >
+          <input type="hidden" name="access_key" value="754d6aa3-98aa-4421-88bc-b768cf7d46f7" />
           <input
             type="text"
             name="from_name"
-            placeholder="Name"
+            placeholder="お名前（会社名）"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            class="px-4 py-2 bg-white text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
           />
           <input
             type="email"
             name="reply_to"
-            placeholder="Email"
+            placeholder="メールアドレス"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            class="px-4 py-2 bg-white text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
           />
           <textarea
             name="message"
-            placeholder="Message"
+            placeholder="ご相談内容"
             rows="6"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
+            class="px-4 py-2 bg-white text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
           ></textarea>
           <button
             type="submit"
-            class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
+            id="submit-btn"
+            class="px-4 py-3 bg-[var(--sec)] text-white font-medium rounded-lg transition-all duration-200 hover:bg-blue-600 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Submit
+            送信する
           </button>
         </form>
         <div
-          id="form-message"
-          class="hidden justify-center items-center mt-4 text-[var(--white)] text-lg"
+          id="form-success"
+          class="hidden flex-col items-center gap-2 mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-center"
         >
-          ✅ Thank you for your message!
+          <span class="text-2xl">✅</span>
+          <p class="text-[var(--white)] font-medium">お問い合わせありがとうございます。</p>
+          <p class="text-[var(--white-icon)] text-sm">内容を確認次第、返信いたします。</p>
+        </div>
+        <div
+          id="form-error"
+          class="hidden flex-col items-center gap-2 mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-center"
+        >
+          <span class="text-2xl">⚠️</span>
+          <p class="text-[var(--white)] font-medium">送信に失敗しました。</p>
+          <p class="text-[var(--white-icon)] text-sm">時間をおいて再度お試しいただくか、直接メールにてご連絡ください。</p>
         </div>
       </div>
     </div>
@@ -63,10 +77,15 @@
 
 <script type="module" is:inline>
   const form = document.getElementById("contact-form");
-  const formMessage = document.getElementById("form-message");
+  const submitBtn = document.getElementById("submit-btn");
+  const formSuccess = document.getElementById("form-success");
+  const formError = document.getElementById("form-error");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = "送信中...";
+
     const formData = new FormData(form);
 
     try {
@@ -75,18 +94,20 @@
         body: formData,
         headers: { Accept: "application/json" },
       });
-      if (response.ok) {
-        form.reset();
+      const data = await response.json();
+
+      if (data.success) {
         form.style.display = "none";
-        formMessage.classList.remove("hidden");
+        formSuccess.style.display = "flex";
       } else {
-        const data = await response.json();
-        console.error("Error response:", data);
-        alert("There was a problem sending your message.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "送信する";
+        formError.style.display = "flex";
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("There was a problem sending your message.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "送信する";
+      formError.style.display = "flex";
     }
   });
 </script>

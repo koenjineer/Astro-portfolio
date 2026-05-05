@@ -1,0 +1,56 @@
+---
+import "@/styles/mock_site/webservice/_footer.scss";
+
+const navLinks = [
+  { href: "#", label: "会社概要" },
+  { href: "#", label: "プライバシーポリシー" },
+  { href: "#", label: "利用規約" },
+  { href: "#", label: "お問い合わせ" },
+];
+
+const snsLinks = [
+  {
+    href: "#",
+    label: "Twitter",
+    icon: "/mock_site/webservice/images/icon-twitter.svg",
+  },
+  {
+    href: "#",
+    label: "Instagram",
+    icon: "/mock_site/webservice/images/icon-instagram.svg",
+  },
+  {
+    href: "#",
+    label: "Facebook",
+    icon: "/mock_site/webservice/images/icon-facebook.svg",
+  },
+];
+---
+
+<footer class="ws-footer">
+  <div class="ws-footer__inner">
+    <div class="ws-footer__left">
+      <a href="#" class="ws-footer__logo">Ravek</a>
+      <nav class="ws-footer__nav">
+        {navLinks.map(({ href, label }) => <a href={href}>{label}</a>)}
+      </nav>
+      <div class="ws-footer__copy">
+        <span>© Ravek Inc. 2021</span>
+        <span>Illustration by FreepikStoryset</span>
+      </div>
+    </div>
+
+    <div class="ws-footer__right">
+      <p class="ws-footer__sns-label">Share on SNS</p>
+      <div class="ws-footer__sns-icons">
+        {
+          snsLinks.map(({ href, label, icon }) => (
+            <a href={href} aria-label={label}>
+              <img src={icon} alt={label} width="24" height="24" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>

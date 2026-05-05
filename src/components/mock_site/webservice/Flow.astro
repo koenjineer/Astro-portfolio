@@ -1,0 +1,66 @@
+---
+import "@/styles/mock_site/webservice/_flow.scss";
+
+const steps = [
+  {
+    num: "01",
+    img: "/mock_site/webservice/images/flow-01.webp",
+    title: "無料トライアルを開始",
+    text: "まずはRavekの使用感をお試しください。最初の14日間は無料でご使用いただけます。",
+  },
+  {
+    num: "02",
+    img: "/mock_site/webservice/images/flow-02.webp",
+    title: "本格導入をサポート",
+    text: "Ravekを気に入っていただけましたら、適したプランで導入ください。導入にお困りの際は、メール、またはチャットにてサポートいたします。",
+  },
+  {
+    num: "03",
+    img: "/mock_site/webservice/images/flow-03.webp",
+    title: "全プロジェクトへ展開",
+    text: "Ravekは段階的な導入がおすすめです。主要プロジェクトでの運用に慣れたら、全プロジェクトへ展開を行いましょう。",
+  },
+];
+---
+
+<section class="ws-flow" id="flow">
+  <div class="ws-flow__inner">
+    <div class="ws-flow__header">
+      <p class="ws-flow__en">Flow</p>
+      <h2 class="ws-flow__heading">導入までの流れ</h2>
+    </div>
+    <div class="ws-flow__steps">
+      {
+        steps.map((step, i) => (
+          <>
+            <div class="ws-flow__step">
+              <p class="ws-flow__step-num">{step.num}</p>
+              <div class="ws-flow__step-card">
+                <img
+                  src={step.img}
+                  alt={`ステップ${step.num}のイラスト`}
+                  width="398"
+                  height="298"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="ws-flow__step-title">{step.title}</h3>
+              <p class="ws-flow__step-text">{step.text}</p>
+            </div>
+            {i < steps.length - 1 && (
+              <div class="ws-flow__arrow" aria-hidden="true">
+                <svg
+                  viewBox="0 0 28 64"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M28 32L0 0V64L28 32Z" fill="#64629D" />
+                </svg>
+              </div>
+            )}
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>

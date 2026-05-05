@@ -1,0 +1,79 @@
+@use 'variables' as *;
+
+.ws-users {
+  background-color: $color-white;
+  padding: 100px $content-padding;
+
+  @media (max-width: 767px) {
+    padding: 60px 20px;
+  }
+
+  &__inner {
+    max-width: $page-width;
+    margin: 0 auto;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 64px;
+
+    @media (max-width: 767px) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__en {
+    font-family: $font-en;
+    font-weight: 700;
+    font-size: 36px;
+    color: $color-primary-mid;
+    margin: 0 0 8px;
+
+    @media (max-width: 767px) {
+      font-size: 22px;
+    }
+  }
+
+  &__heading {
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 48px;
+    color: $color-primary;
+    letter-spacing: 2.4px;
+    margin: 0;
+
+    @media (max-width: 767px) {
+      font-size: 30px;
+      letter-spacing: 1.5px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 213px);
+    justify-content: center;
+    gap: 24px 40px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(4, 75px);
+      gap: 12px;
+    }
+  }
+
+  &__logo {
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 213 / 169;
+
+    @media (max-width: 767px) {
+      border-radius: 4px;
+      aspect-ratio: 75 / 60;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

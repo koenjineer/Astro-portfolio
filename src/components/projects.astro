@@ -4,6 +4,7 @@ import svgl from "../../public/svgl.png";
 import stockin from "../../public/stockin.png";
 import velez from "../../public/velez.png";
 import ohaImage from "../../public/oha.webp";
+import ravek from "../../public/ravek.webp";
 
 interface Project {
   title: string;
@@ -19,28 +20,35 @@ const projects: Project[] = [
     image: ohaImage as ImageMetadata,
     link: "",
     preview: "/mock_site/oha/",
-    status: "公開中",
+    status: "架空サイト",
+  },
+  {
+    title: "Ravek",
+    image: ravek as ImageMetadata,
+    link: "",
+    preview: "/mock_site/webservice/",
+    status: "架空サイト",
   },
   {
     title: "StockIn",
     image: stockin as ImageMetadata,
-    link: "https://github.com/gothsec/stockin-demo",
-    preview: "https://stockin-demo.vercel.app",
-    status: "開発中",
+    link: "",
+    preview: "",
+    status: "架空サイト",
   },
   {
     title: "Svgl.app",
     image: svgl as ImageMetadata,
-    link: "https://github.com/pheralb/svgl",
-    preview: "https://svgl.app",
-    status: "コントリビューター",
+    link: "",
+    preview: "",
+    status: "架空サイト",
   },
   {
     title: "Rifas Velez Web",
     image: velez as ImageMetadata,
-    link: "https://github.com/Buga-Software/rifasvelez-web",
-    preview: "https://www.rifasvelez.com",
-    status: "公開中",
+    link: "",
+    preview: "",
+    status: "架空サイト",
   },
 ];
 ---

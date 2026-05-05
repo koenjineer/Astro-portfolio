@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_metadata",
+      "mcp__figma__get_screenshot",
+      "Bash(sips --help)",
+      "Bash(curl -s http://localhost:4322/mock_site/webservice/)"
     ]
   }
 }

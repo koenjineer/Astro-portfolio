@@ -1,0 +1,102 @@
+---
+import "@/styles/mock_site/webservice/_price.scss";
+
+const features = [
+  { label: "プロジェクト数", light: "５", basic: "15", premium: "15" },
+  { label: "メンバー数", light: "10", basic: "30", premium: "30" },
+  { label: "ストレージ(容量)", light: "25GB", basic: "50GB", premium: "100GB" },
+  { label: "2段階認証", light: "", basic: "〇", premium: "〇" },
+  { label: "IP制限", light: "", basic: "", premium: "〇" },
+  { label: "メールサポート", light: "〇", basic: "〇", premium: "〇" },
+  { label: "チャットサポート", light: "〇", basic: "〇", premium: "〇" },
+];
+---
+
+<section class="ws-price" id="price">
+  <div class="ws-price__inner">
+    <div class="ws-price__header">
+      <p class="ws-price__en">Price</p>
+      <h2 class="ws-price__heading">料金プラン</h2>
+    </div>
+
+    <div class="ws-price__table-wrap">
+      <!-- Plan headers -->
+      <div class="ws-price__plans">
+        <div class="ws-price__plan-header ws-price__plan-header--label"></div>
+
+        <div class="ws-price__plan-header">
+          <p class="ws-price__plan-name">ライト</p>
+          <p class="ws-price__plan-price">
+            <span class="price-label">月額</span>
+            <span class="price-num"> 1,980 </span>
+            <span class="price-unit">円</span>
+          </p>
+          <a href="#" class="ws-price__plan-btn ws-price__plan-btn--white"
+            >無料で使ってみる</a
+          >
+        </div>
+
+        <div class="ws-price__plan-header ws-price__plan-header--featured">
+          <span class="ws-price__featured-badge">おすすめ</span>
+          <p class="ws-price__plan-name">ベーシック</p>
+          <p class="ws-price__plan-price">
+            <span class="price-label">月額</span>
+            <span class="price-num"> 2,980 </span>
+            <span class="price-unit">円</span>
+          </p>
+          <a href="#" class="ws-price__plan-btn ws-price__plan-btn--primary"
+            >無料で使ってみる</a
+          >
+        </div>
+
+        <div class="ws-price__plan-header">
+          <p class="ws-price__plan-name">プレミアム</p>
+          <p class="ws-price__plan-price">
+            <span class="price-label">月額</span>
+            <span class="price-num"> 4,980 </span>
+            <span class="price-unit">円</span>
+          </p>
+          <a href="#" class="ws-price__plan-btn ws-price__plan-btn--white"
+            >無料で使ってみる</a
+          >
+        </div>
+      </div>
+
+      <!-- Feature rows -->
+      <div class="ws-price__rows">
+        {
+          features.map((row) => (
+            <div class="ws-price__row">
+              <div class="ws-price__row-label">{row.label}</div>
+              <div class="ws-price__row-cell">{row.light}</div>
+              <div class="ws-price__row-cell ws-price__row-cell--featured">
+                {row.basic}
+              </div>
+              <div class="ws-price__row-cell">{row.premium}</div>
+            </div>
+          ))
+        }
+
+        <!-- Bottom CTA row -->
+        <div class="ws-price__row ws-price__row--footer">
+          <div></div>
+          <div class="ws-price__row-btn-cell">
+            <a href="#" class="ws-price__plan-btn ws-price__plan-btn--white"
+              >無料で使ってみる</a
+            >
+          </div>
+          <div class="ws-price__row-btn-cell">
+            <a href="#" class="ws-price__plan-btn ws-price__plan-btn--primary"
+              >無料で使ってみる</a
+            >
+          </div>
+          <div class="ws-price__row-btn-cell">
+            <a href="#" class="ws-price__plan-btn ws-price__plan-btn--white"
+              >無料で使ってみる</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,319 @@
+@use 'variables' as *;
+
+.ws-price {
+  background-color: $color-white;
+  padding: 100px $content-padding;
+
+  @media (max-width: 767px) {
+    padding: 60px 0;
+  }
+
+  &__inner {
+    max-width: $page-width;
+    margin: 0 auto;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 0;
+
+    @media (max-width: 767px) {
+      margin-bottom: 40px;
+      padding: 0 20px;
+    }
+  }
+
+  &__en {
+    font-family: $font-en;
+    font-weight: 700;
+    font-size: 36px;
+    color: $color-primary-mid;
+    margin: 0 0 8px;
+
+    @media (max-width: 767px) {
+      font-size: 22px;
+    }
+  }
+
+  &__heading {
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 48px;
+    color: $color-primary;
+    letter-spacing: 2.4px;
+    margin: 0;
+
+    @media (max-width: 767px) {
+      font-size: 30px;
+      letter-spacing: 1.5px;
+    }
+  }
+
+  &__table-wrap {
+    max-width: 1020px;
+    margin: 0 auto;
+
+    @media (max-width: 767px) {
+      max-width: none;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 20px 16px;
+
+      // scroll hint shadow
+      background:
+        linear-gradient(to right, $color-white 16px, transparent 100%),
+        linear-gradient(to left,  $color-white 16px, transparent 100%) 100% 0,
+        radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.12), transparent) 0,
+        radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.12), transparent) 100%;
+      background-repeat: no-repeat;
+      background-size: 40px 100%, 40px 100%, 12px 100%, 12px 100%;
+      background-attachment: local, local, scroll, scroll;
+    }
+  }
+
+  &__plans {
+    display: grid;
+    grid-template-columns: 241px 260px 260px 260px;
+    margin-bottom: 0;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 130px 180px 216px 180px;
+      min-width: 706px;
+    }
+  }
+
+  &__plan-header {
+    background-color: $color-dark;
+    border-radius: 8px 8px 0 0;
+    padding: 28px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    &--featured {
+      background-color: $color-primary;
+      padding: 20px 16px 24px;
+      border-radius: 12px 12px 0 0;
+      margin-top: -24px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 -4px 24px rgba(100, 98, 157, 0.4);
+
+      .ws-price__plan-btn {
+        background-color: $color-white;
+        color: $color-primary;
+        border-color: $color-white;
+
+        &:hover {
+          background-color: $color-primary-light;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+      }
+    }
+
+    &--label {
+      background-color: transparent;
+    }
+
+    @media (max-width: 767px) {
+      padding: 16px 8px 12px;
+      gap: 8px;
+
+      &--featured {
+        padding-top: 16px;
+        margin-top: -16px;
+      }
+    }
+  }
+
+  &__featured-badge {
+    display: inline-block;
+    background-color: $color-white;
+    color: $color-primary;
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 18px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+
+    @media (max-width: 767px) {
+      font-size: 11px;
+      padding: 3px 12px;
+    }
+  }
+
+  &__plan-name {
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 24px;
+    color: $color-white;
+    text-align: center;
+    margin: 0;
+
+    .ws-price__plan-header--featured & {
+      font-size: 28px;
+    }
+
+    @media (max-width: 767px) {
+      font-size: 16px;
+
+      .ws-price__plan-header--featured & {
+        font-size: 18px;
+      }
+    }
+  }
+
+  &__plan-price {
+    font-family: $font-jp;
+    font-weight: 700;
+    color: $color-white;
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+
+    .price-label { font-size: 20px; }
+    .price-num   { font-size: 36px; }
+    .price-unit  { font-size: 18px; }
+
+    .ws-price__plan-header--featured & {
+      .price-label { font-size: 26px; }
+      .price-num   { font-size: 42px; }
+      .price-unit  { font-size: 24px; }
+    }
+
+    @media (max-width: 767px) {
+      .price-label { font-size: 12px; }
+      .price-num   { font-size: 22px; }
+      .price-unit  { font-size: 11px; }
+
+      .ws-price__plan-header--featured & {
+        .price-label { font-size: 14px; }
+        .price-num   { font-size: 26px; }
+        .price-unit  { font-size: 12px; }
+      }
+    }
+  }
+
+  &__plan-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 234px;
+    height: 50px;
+    border-radius: 50px;
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+
+    &--white {
+      background-color: $color-white;
+      color: $color-dark;
+      border: 2px solid $color-dark;
+
+      &:hover {
+        background-color: $color-dark;
+        color: $color-white;
+        border-color: $color-dark;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    &--primary {
+      background-color: $color-primary;
+      color: $color-white;
+      border: 2px solid $color-white;
+
+      &:hover {
+        background-color: lighten($color-primary, 10%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(100, 98, 157, 0.4);
+      }
+    }
+
+    @media (max-width: 767px) {
+      width: 166px;
+      height: 42px;
+      font-size: 14px;
+    }
+  }
+
+  &__rows {
+    border: none;
+
+    @media (max-width: 767px) {
+      min-width: 706px;
+    }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 241px 260px 260px 260px;
+
+    &:nth-child(odd)  { background-color: $color-primary-light; }
+    &:nth-child(even) { background-color: $color-white; }
+    &--footer         { background-color: $color-white !important; padding: 16px 0; }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 130px 180px 216px 180px;
+    }
+  }
+
+  &__row-label {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 22px;
+    color: $color-text;
+
+    @media (max-width: 767px) {
+      font-size: 14px;
+      height: 42px;
+      padding: 0 8px;
+    }
+  }
+
+  &__row-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 18px;
+    color: $color-text;
+    text-align: center;
+
+    &--featured {
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    @media (max-width: 767px) {
+      height: 42px;
+      font-size: 14px;
+
+      &--featured { font-size: 16px; }
+    }
+  }
+
+  &__row-btn-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 81px;
+
+    @media (max-width: 767px) {
+      height: 60px;
+    }
+  }
+}

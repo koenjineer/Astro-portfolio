@@ -1,0 +1,111 @@
+---
+import "@/styles/mock_site/webservice/_header.scss";
+import "@/styles/mock_site/webservice/_sp-menu.scss";
+
+const navItems = [
+  { href: "#feature", label: "特長" },
+  { href: "#users", label: "導入実績" },
+  { href: "#flow", label: "導入までの流れ" },
+  { href: "#price", label: "料金プラン" },
+  { href: "#question", label: "よくある質問" },
+];
+---
+
+<header class="ws-header">
+  <div class="ws-header__inner">
+    <a href="#" class="ws-header__logo">Ravek</a>
+
+    <!-- PC nav (hidden on SP) -->
+    <nav class="ws-header__nav">
+      {navItems.map(({ href, label }) => <a href={href}>{label}</a>)}
+    </nav>
+    <a href="#" class="ws-header__cta">無料で使ってみる</a>
+
+    <!-- SP hamburger (hidden on PC) -->
+    <button
+      class="ws-header__hamburger"
+      id="ws-hamburger"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="ws-sp-menu"
+    >
+      <span class="ws-header__hamburger-label">MENU</span>
+      <span class="ws-header__hamburger-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- SP backdrop overlay -->
+<div class="ws-sp-overlay" id="ws-sp-overlay" aria-hidden="true"></div>
+
+<!-- SP slide-in menu panel -->
+<div class="ws-sp-menu" id="ws-sp-menu" aria-hidden="true">
+  <div class="ws-sp-menu__header">
+    <a href="#" class="ws-sp-menu__logo">Ravek</a>
+    <button
+      class="ws-sp-menu__close"
+      id="ws-menu-close"
+      aria-label="メニューを閉じる"></button>
+  </div>
+  <div class="ws-sp-menu__body">
+    <nav class="ws-sp-menu__nav">
+      {
+        navItems.map(({ href, label }) => (
+          <a href={href} class="ws-sp-menu__nav-item">
+            <span class="ws-sp-menu__diamond" aria-hidden="true" />
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="ws-sp-menu__actions">
+      <a href="#" class="ws-sp-menu__btn ws-sp-menu__btn--primary"
+        >無料でRavekを使ってみる</a
+      >
+      <a href="#" class="ws-sp-menu__btn ws-sp-menu__btn--outline"
+        >資料をダウンロードする</a
+      >
+    </div>
+  </div>
+</div>
+
+<script>
+  const hamburger = document.getElementById(
+    "ws-hamburger",
+  ) as HTMLButtonElement;
+  const menu = document.getElementById("ws-sp-menu") as HTMLElement;
+  const overlay = document.getElementById("ws-sp-overlay") as HTMLElement;
+  const closeBtn = document.getElementById(
+    "ws-menu-close",
+  ) as HTMLButtonElement;
+
+  const openMenu = () => {
+    menu.classList.add("is-open");
+    overlay.classList.add("is-open");
+    menu.setAttribute("aria-hidden", "false");
+    overlay.setAttribute("aria-hidden", "false");
+    hamburger.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeMenu = () => {
+    menu.classList.remove("is-open");
+    overlay.classList.remove("is-open");
+    menu.setAttribute("aria-hidden", "true");
+    overlay.setAttribute("aria-hidden", "true");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  };
+
+  hamburger.addEventListener("click", openMenu);
+  closeBtn.addEventListener("click", closeMenu);
+  overlay.addEventListener("click", closeMenu);
+
+  menu.querySelectorAll(".ws-sp-menu__nav-item").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+</script>

@@ -1,0 +1,80 @@
+---
+import "@/styles/mock_site/webservice/_feature.scss";
+
+type ImgPosition = "right" | "left";
+
+interface FeatureItem {
+  num: string;
+  title: string;
+  text: string;
+  img: string;
+  alt: string;
+  imgPosition: ImgPosition;
+}
+
+const features: FeatureItem[] = [
+  {
+    num: "01",
+    title: "タスクの種類・進捗を\nダッシュボードで確認可能",
+    text: "Ravekはメンバーが入力したタスクを整理し、ダッシュボードにガントチャートとして表示。ダッシュボードを確認するだけで、誰のどのタスクがどの程度進んでいるのかを一目で把握できます。",
+    img: "/mock_site/webservice/images/feature-01.webp",
+    alt: "ダッシュボードのイラスト",
+    imgPosition: "right",
+  },
+  {
+    num: "02",
+    title: "タスクの入力がシンプルかつ簡単。\n入力の手間が最小限に",
+    text: "タスク管理ツールで面倒になりがちなタスクの入力作業。RavekはPC・スマートフォンのどちらでもシンプルかつ簡単に入力でき、手間が最小限に抑えられます。本質的な業務に時間を割きましょう。",
+    img: "/mock_site/webservice/images/feature-02.webp",
+    alt: "デザインツールのイラスト",
+    imgPosition: "left",
+  },
+  {
+    num: "03",
+    title: "SlackとのAPI連携\nツール切り替えの手間を削減",
+    text: "RavekはSlackと連携することで、Slack上でRavekをタスクを追加したり、確認したりできます。都度の切り替えの手間がなくなり、シームレスに扱えるのが特長です。Slackを導入しているなら違和感なく使用できます。",
+    img: "/mock_site/webservice/images/feature-03.webp",
+    alt: "オンライン連携のイラスト",
+    imgPosition: "right",
+  },
+];
+---
+
+<section class="ws-feature" id="feature">
+  <div class="ws-feature__header">
+    <p class="ws-feature__en">Feature</p>
+    <h2 class="ws-feature__heading">
+      Ravekの<span class="num">3</span>つの特長
+    </h2>
+  </div>
+
+  {
+    features.map((feature) => (
+      <div
+        class={`ws-feature__item ws-feature__item--${feature.imgPosition}-img`}
+      >
+        <div class="ws-feature__card">
+          <span class="ws-feature__num">{feature.num}</span>
+          <h3 class="ws-feature__title">
+            {feature.title.split("\n").map((line, i, arr) => (
+              <>
+                {line}
+                {i < arr.length - 1 && <br />}
+              </>
+            ))}
+          </h3>
+          <p class="ws-feature__text">{feature.text}</p>
+        </div>
+        <div class="ws-feature__img">
+          <img
+            src={feature.img}
+            alt={feature.alt}
+            width="1040"
+            height="1040"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    ))
+  }
+</section>

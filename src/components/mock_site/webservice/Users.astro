@@ -1,0 +1,29 @@
+---
+import "@/styles/mock_site/webservice/_users.scss";
+
+const logos = Array(8).fill("/mock_site/webservice/images/users-logo.webp");
+---
+
+<section class="ws-users" id="users">
+  <div class="ws-users__inner">
+    <div class="ws-users__header">
+      <p class="ws-users__en">Users</p>
+      <h2 class="ws-users__heading">導入実績</h2>
+    </div>
+    <div class="ws-users__grid">
+      {
+        logos.map((src, i) => (
+          <div class="ws-users__logo">
+            <img
+              src={src}
+              alt={`導入企業ロゴ ${i + 1}`}
+              width="426"
+              height="338"
+              loading="lazy"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

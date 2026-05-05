@@ -1,0 +1,47 @@
+---
+import "@/styles/mock_site/webservice/_question.scss";
+
+const faqs = [
+  {
+    q: "Ravekはユーザー1人あたりの課金制なのですか？",
+    a: "いえ、Ravekは１アカウント開設いただくと、そのプランに応じたユーザー数の分だけ、使用できます。もしプランのデフォルトユーザー数を超えて利用されたい場合は、お問い合わせください。",
+  },
+  {
+    q: "トライアル期間終了後はどうなりますか？",
+    a: "いえ、Ravekは１アカウント開設いただくと、そのプランに応じたユーザー数の分だけ、使用できます。もしプランのデフォルトユーザー数を超えて利用されたい場合は、お問い合わせください。",
+  },
+  {
+    q: "途中でプランを変更することはできますか？",
+    a: "いえ、Ravekは１アカウント開設いただくと、そのプランに応じたユーザー数の分だけ、使用できます。もしプランのデフォルトユーザー数を超えて利用されたい場合は、お問い合わせください。",
+  },
+  {
+    q: "セキュリティについて教えてください。",
+    a: "いえ、Ravekは１アカウント開設いただくと、そのプランに応じたユーザー数の分だけ、使用できます。もしプランのデフォルトユーザー数を超えて利用されたい場合は、お問い合わせください。",
+  },
+];
+---
+
+<section class="ws-question" id="question">
+  <div class="ws-question__inner">
+    <div class="ws-question__header">
+      <p class="ws-question__en">Question</p>
+      <h2 class="ws-question__heading">よくある質問</h2>
+    </div>
+    <div class="ws-question__list">
+      {
+        faqs.map((faq) => (
+          <div class="ws-question__item">
+            <div class="ws-question__question">
+              <span class="label">Q</span>
+              <span class="text">{faq.q}</span>
+            </div>
+            <div class="ws-question__answer">
+              <span class="label">A</span>
+              <span class="text">{faq.a}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

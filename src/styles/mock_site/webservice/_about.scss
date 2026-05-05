@@ -1,0 +1,67 @@
+@use 'variables' as *;
+
+.ws-about {
+  background-color: $color-white;
+  padding: 100px $content-padding;
+  text-align: center;
+
+  @media (max-width: 767px) {
+    padding: 60px 20px;
+  }
+
+  &__inner {
+    max-width: $page-width;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__en {
+    font-family: $font-en;
+    font-weight: 700;
+    font-size: 36px;
+    color: $color-primary-mid;
+    margin: 0 0 8px;
+
+    @media (max-width: 767px) {
+      font-size: 22px;
+    }
+  }
+
+  &__heading {
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 48px;
+    color: $color-primary;
+    letter-spacing: 2.4px;
+    margin: 0 0 48px;
+
+    @media (max-width: 767px) {
+      font-size: 30px;
+      letter-spacing: 1.5px;
+      margin-bottom: 32px;
+    }
+  }
+
+  &__text {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 18px;
+    color: $color-text;
+    line-height: 1.8;
+    margin: 0 0 64px;
+    max-width: 860px;
+    text-align: center;
+
+    strong { font-weight: 700; }
+
+    @media (max-width: 767px) {
+      font-size: 16px;
+      text-align: left;
+      margin-bottom: 40px;
+
+      br { display: none; }
+    }
+  }
+}

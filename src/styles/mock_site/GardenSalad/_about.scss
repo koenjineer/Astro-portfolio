@@ -1,0 +1,166 @@
+@use 'variables' as *;
+
+.gs-about {
+  background-color: $color-light;
+  padding: 100px 0 120px;
+
+  @media (max-width: $bp-sp) {
+    padding: 60px 0 70px;
+  }
+
+  // ─── 内側コンテナ ─────────────────────────────────────────────────────────
+  // Figma: コンテンツ x=180〜1260 (幅1080px) / ページ1440px
+  &__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 180px;
+
+    @media (max-width: $bp-sp) {
+      padding: 0 20px;
+    }
+  }
+
+  // ─── 各アイテム ───────────────────────────────────────────────────────────
+  // DOM順: content（テキスト）→ img-wrap（画像）
+  // PC: --img-left で row-reverse → 画像が左に来る
+  // SP: column → content（テキスト）が上、画像が下
+  &__item {
+    display: flex;
+    align-items: center;
+    // Figma: 画像とテキスト列の間のギャップ ≈ 67px
+    gap: 67px;
+    // Figma: 画像高さ 288px
+    height: 288px;
+    margin-top: 64px;  // Figma: アイテム間の間隔 = 64px
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    // 画像を左側に配置するアイテム（01, 03）
+    &--img-left {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: $bp-sp) {
+      // SP: テキスト上、画像下
+      flex-direction: column !important;
+      height: auto;
+      gap: 20px;
+      margin-top: 48px;
+    }
+  }
+
+  // ─── 画像 ─────────────────────────────────────────────────────────────────
+  // Figma: 450×288px
+  &__img-wrap {
+    flex: 0 0 450px;
+    height: 288px;
+    overflow: hidden;
+
+    @media (max-width: $bp-sp) {
+      flex: none;
+      width: 100%;
+      height: 220px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.03);
+    }
+
+    // item01: Figmaでは object-position: bottom
+    .gs-about__item:first-of-type & img {
+      object-position: bottom;
+    }
+  }
+
+  // ─── テキスト列 ───────────────────────────────────────────────────────────
+  // Figma: 幅 ≈ 563px (1080 - 450 - 67)
+  &__content {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 288px;
+    // 数字が右側に large で溢れる場合も背景色で自然に隠れる
+    overflow: visible;
+
+    @media (max-width: $bp-sp) {
+      height: auto;
+      min-height: 120px;
+    }
+  }
+
+  // ─── 背景数字（装飾） ─────────────────────────────────────────────────────
+  // Figma: font-size=288px, h=288px, color=rgba(255,255,255,0.8)
+  // コンテンツ列の右端に絶対配置
+  &__num {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-family: $font-display;
+    font-weight: 700;
+    // Figma 実寸: 288px
+    font-size: 288px;
+    line-height: 1;
+    height: 288px;
+    color: rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 0;
+    letter-spacing: -8px; // 数字間を詰めてFigmaに近づける
+
+    @media (max-width: $bp-sp) {
+      font-size: 100px;
+      height: 100px;
+      letter-spacing: -2px;
+    }
+  }
+
+  // ─── 見出し ───────────────────────────────────────────────────────────────
+  &__heading {
+    position: relative;
+    z-index: 1;
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 30px;
+    color: $color-text;
+    line-height: 1.5;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+
+    @media (max-width: $bp-sp) {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .accent {
+      color: $color-primary;
+    }
+  }
+
+  // ─── 本文 ─────────────────────────────────────────────────────────────────
+  &__text {
+    position: relative;
+    z-index: 1;
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 18px;
+    color: $color-text;
+    line-height: 1.5;
+    letter-spacing: 0.54px;
+    text-align: justify;
+
+    @media (max-width: $bp-sp) {
+      font-size: 15px;
+    }
+  }
+}

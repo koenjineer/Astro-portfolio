@@ -1,0 +1,439 @@
+@use 'variables' as *;
+
+.gs-menu {
+  background-color: $color-dark;
+  padding: 70px 0 80px;
+
+  @media (max-width: $bp-sp) {
+    padding: 50px 0 60px;
+  }
+
+  &__frame {
+    max-width: 1296px;
+    margin: 0 auto;
+    border: 2px solid $color-white;
+    padding: 60px 40px 50px;
+
+    @media (max-width: $bp-sp) {
+      border: none;
+      padding: 0 20px;
+    }
+  }
+
+  &__note {
+    font-family: $font-jp;
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-white;
+    letter-spacing: 0.54px;
+    text-align: center;
+    margin-bottom: 40px;
+
+    @media (max-width: $bp-sp) {
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+  }
+
+  &__featured {
+    // Figma: image(451×445px) が info card(592×367px) に
+    // 横90px・縦51pxオフセットでオーバーラップ
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 50px;
+
+    @media (max-width: $bp-sp) {
+      flex-direction: column;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__featured-img {
+    flex: 0 0 451px;
+    height: 445px;
+    position: relative;
+    z-index: 2;
+    // 横方向に90px info card にオーバーラップ
+    margin-right: -90px;
+    overflow: hidden;
+
+    @media (max-width: $bp-sp) {
+      flex: none;
+      width: 100%;
+      height: 260px;
+      margin-right: 0;
+      // SP: 縦方向に30pxオーバーラップ
+      margin-bottom: -30px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.03);
+    }
+  }
+
+  &__featured-info {
+    // Figma: info card は image top より51px下から開始、height=367px
+    flex: 0 0 592px;
+    height: 367px;
+    margin-top: 51px;
+    position: relative;
+    z-index: 1;
+    background-color: $color-light;
+    border: 1px solid $color-border;
+    display: flex;
+    flex-direction: column;
+    // Figma: タグ(78px) + ギャップ(35px) = 113px から名前テキスト開始
+    // padding-top: 110px で tag 直下に名前を配置
+    padding: 110px 40px 30px;
+
+    @media (max-width: $bp-sp) {
+      flex: none;
+      width: 100%;
+      height: auto;
+      margin-top: 0;
+      padding: 80px 20px 24px;
+    }
+  }
+
+  &__tag {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $color-primary;
+    border: 2px solid $color-primary;
+    padding: 8px 30px;
+    text-align: center;
+    z-index: 3;
+
+    &-en {
+      font-family: $font-handwriting;
+      font-size: 14px;
+      color: $color-white;
+      display: block;
+      letter-spacing: 0.42px;
+    }
+
+    &-ja {
+      font-family: $font-jp;
+      font-weight: 500;
+      font-size: 24px;
+      color: $color-white;
+      display: block;
+      letter-spacing: 0.72px;
+    }
+  }
+
+  &__item-name {
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 30px;
+    color: $color-text;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 20px;
+
+    @media (max-width: $bp-sp) {
+      font-size: 24px;
+    }
+  }
+
+  &__price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 16px;
+
+    &-symbol {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 24px;
+      color: $color-text;
+      letter-spacing: 2.4px;
+    }
+
+    &-num {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 40px;
+      color: $color-text;
+      letter-spacing: 4px;
+    }
+
+    &-tax {
+      font-family: $font-jp;
+      font-weight: 500;
+      font-size: 18px;
+      color: $color-text;
+      letter-spacing: 1.8px;
+    }
+  }
+
+  &__nutrition {
+    font-family: $font-jp;
+    font-weight: 400;
+    // Figma: text-[24px]
+    font-size: 24px;
+    color: $color-text;
+    letter-spacing: 0.72px;
+    text-align: center;
+
+    @media (max-width: $bp-sp) {
+      font-size: 14px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+
+    @media (max-width: $bp-sp) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  &__card {
+    // Figma: プレート写真(434px)がカード上部に76pxオーバーラップ
+    // 画像は絶対配置、カードはmargin-topで358px(434-76)下から開始
+    position: relative;
+    cursor: pointer;
+    // カード全体の高さ = margin-top(358) + card-info min-height(280) = 638px
+  }
+
+  &__card-img {
+    // 絶対配置でカード上部に重なるように配置
+    position: absolute;
+    top: 0;
+    // Figma: 画像417px / カード情報524px ≈ 80% → 実装カード幅に比例換算
+    // 左右それぞれ約60pxのインセットで縦横比を正方形に近づけ上下クリップを最小化
+    left: 60px;
+    right: 60px;
+    height: 434px;
+    z-index: 2;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+
+    // SP: Figma SP で 305×317px（縦横比0.96:1）→ aspect-ratioで再現
+    @media (max-width: $bp-sp) {
+      position: static;
+      left: auto;
+      right: auto;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 305 / 317;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s ease;
+    }
+  }
+
+  &__card:hover &__card-img {
+    transform: translateY(-4px);
+  }
+
+  &__card:hover &__card-img img {
+    transform: scale(1.04);
+  }
+
+  &__card-info {
+    // margin-top = image_height(434) - overlap(76) = 358px
+    margin-top: 358px;
+    position: relative;
+    z-index: 1;
+    background-color: $color-light;
+    border: 1px solid $color-border;
+    // padding-top: 76px(overlap区域) + 通常パディング
+    padding: 80px 30px 24px;
+    min-height: 280px; // Figma: card height
+
+    @media (max-width: $bp-sp) {
+      margin-top: 0;
+      padding: 24px 16px;
+      min-height: auto;
+    }
+  }
+
+  &__card-name {
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 30px;
+    color: $color-text;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 16px;
+
+    @media (max-width: $bp-sp) {
+      font-size: 22px;
+    }
+  }
+
+  &__card-nutrition {
+    font-family: $font-jp;
+    font-weight: 400;
+    // Figma: text-[24px]
+    font-size: 24px;
+    color: $color-text;
+    letter-spacing: 0.72px;
+    text-align: center;
+
+    @media (max-width: $bp-sp) {
+      font-size: 13px;
+    }
+  }
+}
+
+.gs-instagram {
+  background-color: $color-light;
+  border: 1px solid $color-border;
+  margin-top: 50px;
+
+  @media (max-width: $bp-sp) {
+    margin-top: 40px;
+  }
+
+  &__header {
+    background-color: $color-primary;
+    text-align: center;
+    padding: 16px 0;
+
+    span {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 30px;
+      color: $color-white;
+      letter-spacing: 1.5px;
+    }
+  }
+
+  &__desc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px 40px 0;
+
+    @media (max-width: $bp-sp) {
+      padding: 20px 20px 0;
+      gap: 10px;
+    }
+
+    &-line {
+      width: 21px;
+      height: 29px;
+      position: relative;
+      flex-shrink: 0;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 36px;
+        height: 1.5px;
+        background-color: $color-text;
+        transform: translate(-50%, -50%) rotate(54deg);
+      }
+
+      &:last-child::after {
+        transform: translate(-50%, -50%) rotate(-54deg);
+      }
+    }
+
+    p {
+      font-family: $font-jp;
+      font-weight: 400;
+      font-size: 18px;
+      color: $color-text;
+      letter-spacing: 0.9px;
+      white-space: nowrap;
+
+      @media (max-width: $bp-sp) {
+        font-size: 14px;
+        white-space: normal;
+        text-align: center;
+      }
+    }
+  }
+
+  &__gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 24px 40px;
+
+    @media (max-width: $bp-sp) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 20px;
+    }
+
+    img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  &__id {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 18px;
+    color: $color-text;
+    text-align: center;
+    letter-spacing: 0;
+    margin-bottom: 16px;
+  }
+
+  &__btn-wrap {
+    text-align: center;
+    padding-bottom: 40px;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid $color-border;
+    padding: 14px 40px;
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 16px;
+    color: $color-text;
+    text-decoration: none;
+    letter-spacing: 0.48px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background-color: $color-text;
+      color: $color-white;
+
+      svg path {
+        stroke: $color-white;
+      }
+    }
+  }
+}

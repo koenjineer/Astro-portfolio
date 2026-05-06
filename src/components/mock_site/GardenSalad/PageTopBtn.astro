@@ -1,0 +1,32 @@
+---
+---
+
+<div class="gs-pagetop" id="gs-pagetop" aria-hidden="true">
+  <button
+    class="gs-pagetop__btn"
+    id="gs-pagetop-btn"
+    aria-label="ページトップへ戻る"
+    type="button"
+  >
+    <span class="gs-pagetop__arrow" aria-hidden="true"></span>
+    <span class="gs-pagetop__label">Page top</span>
+  </button>
+</div>
+
+<script>
+  const pagetop = document.getElementById("gs-pagetop");
+  const btn = document.getElementById("gs-pagetop-btn");
+
+  const toggleVisibility = () => {
+    const isVisible = window.scrollY > 300;
+    pagetop?.classList.toggle("is-visible", isVisible);
+    pagetop?.setAttribute("aria-hidden", String(!isVisible));
+  };
+
+  window.addEventListener("scroll", toggleVisibility, { passive: true });
+  toggleVisibility();
+
+  btn?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>

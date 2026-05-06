@@ -1,0 +1,70 @@
+---
+// DOM順: content（テキスト）→ img-wrap（画像）
+// --img-left で PC時に row-reverse し画像を左に配置
+// SP時は column で自動的にテキスト上・画像下になる
+const items = [
+  {
+    num: "01",
+    img: "/mock_site/GardenSalad/images/about-farm.webp",
+    alt: "産地直送の新鮮な野菜",
+    heading: `全ての食材が安心の<span class="accent">国産</span>`,
+    text: "TF Garden Saladaの食材は全て産地の公表をしています。信頼できる農家さんから直接買い取り、その日採れたものをその日のうちに厨房へ。",
+    imgLeft: true,   // PC: 画像を左に配置
+  },
+  {
+    num: "02",
+    img: "/mock_site/GardenSalad/images/about-topping.webp",
+    alt: "豊富なトッピング",
+    heading: `カスタム可能で<br>その組み合わせは<span class="accent">全400種類</span>！`,
+    text: "定番のメニューに加えてサラダのフルカスタムも可能。お好みのベース×トッピング×ドレッシングを選んであなた好みにアレンジして。",
+    imgLeft: false,  // PC: テキストを左に配置
+  },
+  {
+    num: "03",
+    img: "/mock_site/GardenSalad/images/about-protein.webp",
+    alt: "タンパク質が豊富なサラダ",
+    heading: `<span class="accent">ジムトレーナー監修</span>のメニュー`,
+    text: "コンビニのサラダチキンに飽きたらこれ！一食でタンパク質20gがとれるトレーニング向けのメニューもご用意してます。",
+    imgLeft: true,   // PC: 画像を左に配置
+    imgMirror: true, // Figma: 水平ミラー（scaleX(-1)）
+  },
+];
+---
+
+<section class="gs-about" id="about">
+  <div class="gs-about__inner">
+    <!-- セクションタイトル -->
+    <div class="gs-section-title gs-reveal">
+      <span class="gs-section-title__ja">Garden Saladのこだわり</span>
+      <span class="gs-section-title__en">About</span>
+      <span class="gs-section-title__line"></span>
+    </div>
+
+    <!-- コンテンツアイテム（DOM: テキスト → 画像） -->
+    {
+      items.map(({ num, img, alt, heading, text, imgLeft, imgMirror }) => (
+        <div class={`gs-about__item gs-reveal${imgLeft ? " gs-about__item--img-left" : ""}`}>
+
+          {/* テキスト列（DOM上は先に来る → SP時に上部表示） */}
+          <div class="gs-about__content">
+            <span class="gs-about__num" aria-hidden="true">{num}</span>
+            <h3 class="gs-about__heading" set:html={heading} />
+            <p class="gs-about__text">{text}</p>
+          </div>
+
+          {/* 画像（DOM上は後 → SP時に下部表示） */}
+          <div class="gs-about__img-wrap">
+            <img
+              src={img}
+              alt={alt}
+              width="900"
+              height="576"
+              loading="lazy"
+              style={imgMirror ? "transform: scaleX(-1);" : undefined}
+            />
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

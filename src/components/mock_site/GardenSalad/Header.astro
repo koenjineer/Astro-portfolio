@@ -1,0 +1,30 @@
+---
+const navItems = [
+  { href: "#about", label: "About" },
+  { href: "#menu", label: "Menu" },
+  { href: "#shop", label: "Shop" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header class="gs-header">
+  <div class="gs-header__inner">
+    <!-- Logo -->
+    <a href="#" class="gs-header__logo" aria-label="TF Garden Salad トップへ">
+      <div class="gs-header__logo-wrap">
+        <!-- 白塗りドーム（下半分の楕円形） -->
+        <div class="gs-header__logo-dome" aria-hidden="true"></div>
+        <!-- テキスト要素 -->
+        <span class="gs-header__logo-tf">TF</span>
+        <span class="gs-header__logo-garden">Garden</span>
+        <span class="gs-header__logo-salad">Salad</span>
+      </div>
+    </a>
+
+    <!-- PC ナビゲーション -->
+    <nav class="gs-header__nav" aria-label="メインナビゲーション">
+      {navItems.map(({ href, label }) => <a href={href}>{label}</a>)}
+    </nav>
+
+  </div>
+</header>

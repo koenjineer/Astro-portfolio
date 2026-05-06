@@ -1,0 +1,147 @@
+@use 'variables' as *;
+
+.gs-mv {
+  position: relative;
+  height: 650px;
+  overflow: hidden;
+  background-color: $color-dark;
+
+  // SP: Figmaで高さ243px固定
+  @media (max-width: $bp-sp) {
+    height: 243px;
+    min-height: auto;
+  }
+
+  // ─── 背景画像（右側 360px〜1440px） ─────────────────────────────────────
+  &__img-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    // PC: left=360px から右端まで
+    width: calc(100% - 360px);
+    height: 100%;
+
+    // SP: Figmaで right:0、幅308px（67pxを左の暗帯として残す）
+    @media (max-width: $bp-sp) {
+      width: calc(100% - 67px);
+      left: auto;
+      right: 0;
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  // ─── キャッチコピー領域 ───────────────────────────────────────────────────
+  &__copy {
+    position: absolute;
+    // PC Figma: left=178px, top=94px
+    left: 178px;
+    top: 94px;
+    z-index: 2;
+
+    // SP Figma: left=16px、top=30px（FV top=0からの相対値）
+    @media (max-width: $bp-sp) {
+      left: 16px;
+      top: 30px;
+      right: auto;
+      transform: none;
+    }
+  }
+
+  // ─── 英語キャッチ（3行: Let's eat / delicious / salad.） ────────────────
+  &__en {
+    // PC Figma: font-size=100px, line-height=100px
+    font-family: $font-display;
+    font-weight: 700;
+    color: $color-white;
+    font-size: 100px;
+    line-height: 1;
+    white-space: nowrap;
+
+    // SP Figma: font-size=36px
+    @media (max-width: $bp-sp) {
+      font-size: 36px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    // SP: "Let's eat"と"delicious"の間に7px gap
+    p:first-child {
+      @media (max-width: $bp-sp) {
+        margin-bottom: 7px;
+      }
+    }
+
+    &-salad {
+      color: $color-primary;
+    }
+  }
+
+  // ─── 日本語キャッチ ────────────────────────────────────────────────────
+  &__ja {
+    // PC: en下端(394px) → ja top(435px) ≈ 41px gap
+    margin-top: 40px;
+
+    // SP: Figmaでen下端(145px) → ja top(160px) = 15px gap
+    @media (max-width: $bp-sp) {
+      margin-top: 15px;
+    }
+
+    &-line1 {
+      font-family: $font-jp;
+      font-weight: 700;
+      font-size: 32px;
+      color: $color-white;
+      letter-spacing: 1.6px;
+      white-space: nowrap;
+      // PC: left=199px（21pxインデント）
+      padding-left: 21px;
+
+      // SP Figma: font-size=14px、パディングなし
+      @media (max-width: $bp-sp) {
+        font-size: 14px;
+        letter-spacing: 0.7px;
+        padding-left: 0;
+        white-space: nowrap;
+      }
+    }
+
+    &-bar {
+      // PC Figma: height=64px
+      margin-top: 10px;
+      display: inline-block;
+      background-color: $color-primary;
+      padding: 9px 20px;
+
+      // SP Figma: width=225px, height=31px
+      @media (max-width: $bp-sp) {
+        display: block;
+        width: 225px;
+        padding: 7px 14px;
+        margin-top: 14px;
+      }
+    }
+
+    &-line2 {
+      font-family: $font-jp;
+      font-weight: 700;
+      font-size: 32px;
+      color: $color-white;
+      letter-spacing: 1.6px;
+      white-space: nowrap;
+
+      // SP Figma: font-size=14px
+      @media (max-width: $bp-sp) {
+        font-size: 14px;
+        letter-spacing: 0.7px;
+      }
+    }
+  }
+}

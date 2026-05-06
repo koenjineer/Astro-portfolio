@@ -1,0 +1,27 @@
+@use 'variables' as *;
+
+// ─── パララックス仕切り画像 ───────────────────────────────────────────────
+// PC: background-attachment: fixed でスクロール視差
+// SP: background-attachment: scroll（iOS Safari で fixed が動作しないため）
+.gs-parallax {
+  height: 450px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  @media (max-width: $bp-sp) {
+    height: 240px;
+    // SP: 視差なし（静止スクロール）
+    background-attachment: scroll;
+    background-position: center 40%;
+  }
+
+  &--salad {
+    background-image: url('/mock_site/GardenSalad/images/salad-bgimg.webp');
+  }
+
+  &--interior {
+    background-image: url('/mock_site/GardenSalad/images/interior.webp');
+  }
+}

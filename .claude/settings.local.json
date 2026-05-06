@@ -6,7 +6,7 @@
       "mcp__figma__get_metadata",
       "mcp__figma__get_screenshot",
       "Bash(sips --help)",
-    "Bash(curl -s http://localhost:4322/mock_site/webservice/)",
+      "Bash(curl -s http://localhost:4322/mock_site/webservice/)",
       "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(data[0]['text'][:3000]\\)\")",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('dependencies',{}\\), indent=2\\)\\); print\\(json.dumps\\(d.get\\('devDependencies',{}\\), indent=2\\)\\)\")",
       "Bash(convert --version)",

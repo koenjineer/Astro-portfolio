@@ -1,0 +1,186 @@
+@use 'variables' as *;
+
+.gs-footer {
+  background-color: $color-light;
+  padding: 50px 0 30px;
+
+  @media (max-width: $bp-sp) {
+    padding: 40px 0 24px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  &__sns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__sns-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    &:hover {
+      transform: scale(1.12);
+      opacity: 0.8;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (max-width: $bp-sp) {
+      gap: 24px;
+    }
+
+    a {
+      font-family: $font-display;
+      font-weight: 400;
+      font-size: 18px;
+      color: $color-text;
+      text-decoration: none;
+      letter-spacing: 0.54px;
+      position: relative;
+      transition: color 0.3s ease;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: $color-primary;
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        color: $color-primary;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // ─── フッターロゴ ──────────────────────────────────────────────────────
+  // Figma: 166.48×90px、ドーム色=#333(ダーク)、テキスト色=dark/green
+  // ヘッダーロゴと構造は同じだが、色が反転（ライト背景のためドームとテキストはダーク）
+  &__logo-wrap {
+    position: relative;
+    // Figma: 166.48 × 90px
+    width: 166px;
+    height: 90px;
+
+    @media (max-width: $bp-sp) {
+      width: 116px;
+      height: 63px;
+    }
+  }
+
+  // ダーク塗りのドーム（下半分）— SVG fill="#333333"
+  &__logo-dome {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%; // = 45px (Figma: viewBox "0 0 165.484 45")
+    background-color: $color-dark; // #2f2f2f ≒ #333333
+    border-radius: 0 0 50% 50%;
+  }
+
+  // "TF" — 左上、ダーク文字
+  &__logo-tf {
+    position: absolute;
+    left: 0;
+    top: 10px; // Figma: top=10.65px from container
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 13px; // Figma: text-[13px]
+    color: $color-text; // #333
+    line-height: 1;
+
+    @media (max-width: $bp-sp) {
+      font-size: 9px;
+      top: 7px;
+    }
+  }
+
+  // "Garden" — 上段センター、ダーク文字
+  &__logo-garden {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 7px; // Figma: top=7.39px
+    text-align: center;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 40px; // Figma: text-[40px]
+    color: $color-text; // #333
+    line-height: 1;
+    white-space: nowrap;
+
+    @media (max-width: $bp-sp) {
+      font-size: 28px;
+      top: 5px;
+    }
+  }
+
+  // "Salad" — 下段（ドーム上）、グリーン文字
+  &__logo-salad {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 47px; // Figma: top=47.30px
+    text-align: center;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 40px; // Figma: text-[40px]
+    color: $color-primary; // green
+    line-height: 1;
+    white-space: nowrap;
+
+    @media (max-width: $bp-sp) {
+      font-size: 28px;
+      top: 33px;
+    }
+  }
+
+  &__copyright {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 12px;
+    color: $color-text;
+    letter-spacing: 0.36px;
+    text-align: center;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,400 @@
+@use 'variables' as *;
+
+.gs-access {
+  background-color: $color-light;
+  padding-bottom: 80px;
+
+  @media (max-width: $bp-sp) {
+    padding-bottom: 60px;
+  }
+
+  &__title-wrap {
+    padding-top: 80px;
+    margin-bottom: 60px;
+
+    @media (max-width: $bp-sp) {
+      padding-top: 60px;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__map {
+    width: 100%;
+    height: 465px;
+    position: relative;
+    overflow: hidden;
+
+    @media (max-width: $bp-sp) {
+      height: 280px;
+    }
+
+    img:not(.gs-access__map-pin) {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+    }
+
+    // マップピン複合要素
+    &-pin {
+      position: absolute;
+      top: 50%;
+      left: 62%;
+      transform: translate(-50%, -100%);
+      width: 150px;
+      pointer-events: none;
+
+      @media (max-width: $bp-sp) {
+        width: 80px;
+      }
+
+      &-bg {
+        width: 100%;
+        display: block;
+      }
+
+      // ロゴオーバーレイ（Figma: pin内 left=12.93px, top=39.49px, 121×62.8px）
+      &-logo {
+        position: absolute;
+        top: 26%;    // 39.49/151.44 ≈ 26%
+        left: 8.6%;  // 12.93/150 ≈ 8.6%
+        width: 80.7%; // 121.014/150 ≈ 80.7%
+        height: 41.5%; // 62.812/151.44 ≈ 41.5%
+
+        &-dome {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 50%;
+          background-color: $color-white;
+          border-radius: 0 0 50% 50%;
+        }
+
+        &-tf {
+          position: absolute;
+          left: 0;
+          top: 8%;
+          font-family: $font-display;
+          font-weight: 700;
+          font-size: 10px;
+          color: $color-white;
+          line-height: 1;
+          white-space: nowrap;
+          @media (max-width: $bp-sp) {
+            font-size: 6px;
+          }
+        }
+
+        &-garden {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 5%;
+          text-align: center;
+          font-family: $font-display;
+          font-weight: 700;
+          font-size: 28px;
+          color: $color-white;
+          line-height: 1;
+          white-space: nowrap;
+          @media (max-width: $bp-sp) {
+            font-size: 14px;
+          }
+        }
+
+        &-salad {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 52%;
+          text-align: center;
+          font-family: $font-display;
+          font-weight: 700;
+          font-size: 28px;
+          color: $color-primary;
+          line-height: 1;
+          white-space: nowrap;
+          @media (max-width: $bp-sp) {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  &__info-wrap {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 60px 40px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 80px;
+
+    @media (max-width: $bp-sp) {
+      flex-direction: column;
+      padding: 40px 20px 0;
+      gap: 40px;
+    }
+  }
+
+  &__store-info {
+    flex: 0 0 430px;
+
+    @media (max-width: $bp-sp) {
+      flex: none;
+      width: 100%;
+    }
+  }
+
+  &__store-name {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 24px;
+    white-space: nowrap;
+
+    .tf {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 18px;
+      color: $color-text;
+    }
+
+    .en {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 32px;
+      color: $color-text;
+      letter-spacing: 0.96px;
+    }
+
+    .ja {
+      font-family: $font-jp;
+      font-weight: 400;
+      font-size: 18px;
+      color: $color-text;
+      letter-spacing: 0.54px;
+    }
+  }
+
+  &__address {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 18px;
+    color: $color-text;
+    line-height: 2;
+    letter-spacing: 0.54px;
+    margin-bottom: 24px;
+
+    @media (max-width: $bp-sp) {
+      font-size: 15px;
+    }
+  }
+
+  &__details {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 18px;
+    color: $color-text;
+    line-height: 2;
+    letter-spacing: 0.54px;
+
+    @media (max-width: $bp-sp) {
+      font-size: 15px;
+    }
+  }
+
+  &__exterior-img {
+    flex: 1;
+    height: 400px;
+    overflow: hidden;
+
+    @media (max-width: $bp-sp) {
+      width: 100%;
+      height: 240px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+  }
+}
+
+.gs-postcard {
+  max-width: 1260px;
+  margin: 60px auto 0;
+  padding: 0 40px;
+  position: relative;
+
+  @media (max-width: $bp-sp) {
+    padding: 0 20px;
+    margin-top: 40px;
+  }
+
+  &__stamp {
+    position: absolute;
+    top: -60px;
+    left: -40px;
+    width: 180px;
+    z-index: 2;
+
+    @media (max-width: $bp-sp) {
+      width: 100px;
+      top: -40px;
+      left: 20px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__card {
+    background-color: $color-white;
+    box-shadow: 0 4px 20px rgba(161, 159, 159, 0.6);
+    overflow: hidden;
+  }
+
+  &__photos {
+    display: grid;
+    grid-template-columns: 630fr 450fr;
+    height: 430px;
+    padding: 20px 20px 0;
+
+    @media (max-width: $bp-sp) {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+  }
+
+  &__photo {
+    position: relative;
+    overflow: hidden;
+
+    @media (max-width: $bp-sp) {
+      height: 220px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      pointer-events: none;
+    }
+  }
+
+  // Figma: Dear You.(左) | 本文(中央) | Have a nice day!!(右) の3列
+  &__body {
+    display: grid;
+    grid-template-columns: 200px 1fr 260px;
+    gap: 0 24px;
+    padding: 40px 50px 40px 40px;
+    align-items: center;
+
+    @media (max-width: $bp-sp) {
+      grid-template-columns: 1fr;
+      padding: 28px 24px;
+      gap: 20px;
+    }
+  }
+
+  &__message {
+    // 本文エリア（中央列）
+  }
+
+  &__dear {
+    font-family: $font-handwriting;
+    font-size: 45px;
+    color: $color-text;
+    letter-spacing: 2.4px;
+    margin-bottom: 16px;
+    line-height: 1;
+
+    @media (max-width: $bp-sp) {
+      font-size: 32px;
+    }
+  }
+
+  &__lines {
+    position: relative;
+    padding: 0;
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background-color: #ccc;
+      margin: 12px 0;
+    }
+  }
+
+  &__text {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 16px;
+    color: #4f4f4f;
+    line-height: 2.5;
+    letter-spacing: 0.32px;
+
+    & + & {
+      margin-top: 8px;
+    }
+
+    @media (max-width: $bp-sp) {
+      font-size: 14px;
+    }
+  }
+
+  &__nice-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-family: $font-handwriting;
+      font-size: 30px;
+      color: $color-primary;
+      letter-spacing: 2px;
+      display: inline-block;
+      transform: rotate(-6deg);
+      position: relative;
+
+      @media (max-width: $bp-sp) {
+        font-size: 24px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: $color-primary;
+        transform: rotate(2.5deg);
+        opacity: 0.4;
+      }
+    }
+  }
+}

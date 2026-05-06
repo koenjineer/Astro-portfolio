@@ -1,0 +1,119 @@
+---
+const menuItems = [
+  {
+    img: "/mock_site/GardenSalad/images/menu-avocad.webp",
+    alt: "アボガドサラダ",
+    name: "アボガドサラダ",
+    price: "980",
+    nutrition: "425kcal　P : 12.2g　F : 15.3g　C : 16.8g",
+  },
+  {
+    img: "/mock_site/GardenSalad/images/menu-chicken.webp",
+    alt: "チキンサラダ",
+    name: "チキンサラダ",
+    price: "980",
+    nutrition: "455kcal　P : 20.2g　F : 11.3g　C : 15.7g",
+  },
+];
+
+const instagramImgs = [
+  { src: "/mock_site/GardenSalad/images/instagram-01.webp", alt: "Instagram投稿1" },
+  { src: "/mock_site/GardenSalad/images/instagram-02.webp", alt: "Instagram投稿2" },
+  { src: "/mock_site/GardenSalad/images/instagram-03.webp", alt: "Instagram投稿3" },
+  { src: "/mock_site/GardenSalad/images/instagram-04.webp", alt: "Instagram投稿4" },
+];
+---
+
+<section class="gs-menu" id="menu">
+  <div class="gs-menu__frame">
+    <div class="gs-section-title gs-reveal">
+      <span class="gs-section-title__ja gs-section-title__ja--light">メニュー</span>
+      <span class="gs-section-title__en gs-section-title__en--light">Menu</span>
+      <span class="gs-section-title__line"></span>
+    </div>
+
+    <p class="gs-menu__note gs-reveal">P : タンパク質　F : 脂質　C : 糖質</p>
+
+    <!-- 店長おすすめ（カッテージチーズとバジルのサラダ） -->
+    <div class="gs-menu__featured gs-reveal">
+      <div class="gs-menu__featured-img">
+        <img
+          src="/mock_site/GardenSalad/images/menu-basil.webp"
+          alt="カッテージチーズとバジルのサラダ"
+          width="902"
+          height="890"
+          loading="lazy"
+        />
+      </div>
+      <div class="gs-menu__featured-info">
+        <div class="gs-menu__tag">
+          <span class="gs-menu__tag-en">Recommendation</span>
+          <span class="gs-menu__tag-ja">店長おすすめ</span>
+        </div>
+        <p class="gs-menu__item-name">カッテージチーズと<br />バジルのサラダ</p>
+        <div class="gs-menu__price">
+          <span class="gs-menu__price-symbol">¥</span>
+          <span class="gs-menu__price-num">1,100</span>
+          <span class="gs-menu__price-tax">（税込）</span>
+        </div>
+        <p class="gs-menu__nutrition">305kcal　P : 16.2g　F : 12.5g　C : 13.3g</p>
+      </div>
+    </div>
+
+    <!-- その他メニュー -->
+    <div class="gs-menu__grid">
+      {
+        menuItems.map(({ img, alt, name, price, nutrition }, i) => (
+          <div class={`gs-menu__card gs-reveal gs-reveal--delay-${i + 1}`}>
+            <div class="gs-menu__card-img">
+              <img src={img} alt={alt} width="834" height="868" loading="lazy" />
+            </div>
+            <div class="gs-menu__card-info">
+              <p class="gs-menu__card-name">{name}</p>
+              <div class="gs-menu__price">
+                <span class="gs-menu__price-symbol">¥</span>
+                <span class="gs-menu__price-num">{price}</span>
+                <span class="gs-menu__price-tax">（税込）</span>
+              </div>
+              <p class="gs-menu__card-nutrition">{nutrition}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Instagram -->
+    <div class="gs-instagram gs-reveal">
+      <div class="gs-instagram__header">
+        <span>Instagram</span>
+      </div>
+      <div class="gs-instagram__desc">
+        <div class="gs-instagram__desc-line" aria-hidden="true"></div>
+        <p>Instagramにはさらに詳しいメニュー内容などを載せています</p>
+        <div class="gs-instagram__desc-line" aria-hidden="true"></div>
+      </div>
+      <div class="gs-instagram__gallery">
+        {
+          instagramImgs.map(({ src, alt }) => (
+            <img src={src} alt={alt} width="462" height="462" loading="lazy" />
+          ))
+        }
+      </div>
+      <p class="gs-instagram__id">ID：tf_gardensalad</p>
+      <div class="gs-instagram__btn-wrap">
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="gs-instagram__btn"
+        >
+          もっとメニューを見る
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 4H4C3.44772 4 3 4.44772 3 5V18C3 18.5523 3.44772 19 4 19H17C17.5523 19 18 18.5523 18 18V13" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M12 3H19M19 3V10M19 3L10 12" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

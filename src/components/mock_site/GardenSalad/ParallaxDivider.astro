@@ -1,0 +1,15 @@
+---
+interface Props {
+  modifier: string;
+  label: string;
+}
+
+const { modifier, label } = Astro.props;
+---
+
+<div
+  class={`gs-parallax gs-parallax--${modifier}`}
+  role="img"
+  aria-label={label}
+>
+</div>

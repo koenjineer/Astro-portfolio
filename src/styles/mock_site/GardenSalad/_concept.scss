@@ -1,0 +1,87 @@
+@use "variables" as *;
+
+.gs-concept {
+  position: relative;
+  // Figma: セクション高さ539px固定
+  min-height: 539px;
+  padding: 120px 0 100px;
+  overflow: hidden;
+  background-color: $color-dark;
+  text-align: center;
+
+  @media (max-width: $bp-sp) {
+    min-height: auto;
+    padding: 70px 20px;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-family: $font-jp;
+    font-weight: 700;
+    font-size: 30px;
+    color: $color-white;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+
+    @media (max-width: $bp-sp) {
+      font-size: 22px;
+      margin-bottom: 28px;
+    }
+  }
+
+  // ─── 「Garden Salad」透かし文字 ─────────────────────────────────────────
+  // Figma: top=329px（セクション高さ539px内）→ overflow:hiddenで下端が切れる
+  &__watermark {
+    position: absolute;
+    top: 329px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 200px;
+    line-height: 1;
+    color: rgba(103, 103, 103, 0.3);
+    letter-spacing: 4px;
+
+    @media (max-width: $bp-sp) {
+      font-size: 80px;
+      top: auto;
+      bottom: -16px;
+      letter-spacing: 2px;
+    }
+  }
+
+  &__body {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-size: 18px;
+    color: $color-white;
+    line-height: 1.5;
+    letter-spacing: 0.54px;
+    text-align: center;
+
+    @media (max-width: $bp-sp) {
+      font-size: 15px;
+      text-align: left;
+    }
+
+    p {
+      margin: 0;
+
+      & + p {
+        margin-top: 1.5em;
+      }
+    }
+  }
+}

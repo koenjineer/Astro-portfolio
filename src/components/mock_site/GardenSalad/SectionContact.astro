@@ -1,0 +1,113 @@
+---
+---
+
+<section class="gs-contact" id="contact">
+  <div class="gs-contact__bg" aria-hidden="true">
+    <img
+      src="/mock_site/GardenSalad/images/contact-bg.webp"
+      alt=""
+      width="2880"
+      height="2584"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="gs-contact__panel gs-reveal">
+    <div class="gs-contact__title-wrap">
+      <div class="gs-section-title">
+        <span class="gs-section-title__ja">お問い合わせ</span>
+        <span class="gs-section-title__en">Contact</span>
+        <span class="gs-section-title__line"></span>
+      </div>
+    </div>
+
+    <p class="gs-contact__lead">
+      ご質問などは、下記のフォームよりお問い合わせください。
+    </p>
+
+    <form class="gs-contact__form" novalidate>
+      <!-- お名前 -->
+      <div class="gs-contact__field">
+        <label class="gs-contact__label" for="gs-name">
+          お名前<span class="gs-contact__required">必須</span>
+        </label>
+        <input
+          class="gs-contact__input"
+          type="text"
+          id="gs-name"
+          name="name"
+          placeholder="例 ) 山田　花子"
+          required
+          autocomplete="name"
+        />
+      </div>
+
+      <!-- メールアドレス -->
+      <div class="gs-contact__field">
+        <label class="gs-contact__label" for="gs-email">
+          メールアドレス<span class="gs-contact__required">必須</span>
+        </label>
+        <input
+          class="gs-contact__input"
+          type="email"
+          id="gs-email"
+          name="email"
+          placeholder="例 ) hanako-yamada@example.com"
+          required
+          autocomplete="email"
+        />
+      </div>
+
+      <!-- 電話番号 -->
+      <div class="gs-contact__field">
+        <label class="gs-contact__label" for="gs-tel">電話番号</label>
+        <input
+          class="gs-contact__input"
+          type="tel"
+          id="gs-tel"
+          name="tel"
+          placeholder="例 ) 090-0000-0000"
+          autocomplete="tel"
+        />
+      </div>
+
+      <!-- お問い合わせ内容 -->
+      <div class="gs-contact__field">
+        <label class="gs-contact__label" for="gs-message">
+          お問い合わせ内容<span class="gs-contact__required">必須</span>
+        </label>
+        <textarea
+          class="gs-contact__textarea"
+          id="gs-message"
+          name="message"
+          placeholder="例 ) ご質問やお問い合わせ内容をご記入ください。"
+          required></textarea>
+      </div>
+
+      <!-- プライバシーポリシー -->
+      <div class="gs-contact__field">
+        <label class="gs-contact__privacy">
+          <div class="gs-contact__checkbox-wrap">
+            <input
+              class="gs-contact__checkbox"
+              type="checkbox"
+              name="privacy"
+              required
+            />
+            <div class="gs-contact__checkbox-custom" aria-hidden="true"></div>
+          </div>
+          <span class="gs-contact__privacy-text">
+            <a href="#" target="_blank" rel="noopener noreferrer"
+              >プライバシーポリシー</a
+            >に同意する。
+          </span>
+        </label>
+      </div>
+
+      <!-- 送信ボタン -->
+      <div class="gs-contact__submit-wrap">
+        <button type="submit" class="gs-contact__submit">送信</button>
+      </div>
+    </form>
+  </div>
+</section>

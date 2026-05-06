@@ -1,0 +1,33 @@
+---
+import Layout from "@/layouts/mock_site/GardenSalad/Layout.astro";
+import Header from "@components/mock_site/GardenSalad/Header.astro";
+import MV from "@components/mock_site/GardenSalad/MV.astro";
+import SectionConcept from "@components/mock_site/GardenSalad/SectionConcept.astro";
+import SectionAbout from "@components/mock_site/GardenSalad/SectionAbout.astro";
+import SectionMenu from "@components/mock_site/GardenSalad/SectionMenu.astro";
+import SectionAccess from "@components/mock_site/GardenSalad/SectionAccess.astro";
+import SectionContact from "@components/mock_site/GardenSalad/SectionContact.astro";
+import PageTopBtn from "@components/mock_site/GardenSalad/PageTopBtn.astro";
+import Footer from "@components/mock_site/GardenSalad/Footer.astro";
+import ParallaxDivider from "@components/mock_site/GardenSalad/ParallaxDivider.astro";
+
+const title = "TF Garden Salad - おいしいから食べたいサラダ";
+const description =
+  "ヘルシーで栄養豊富なサラダ専門店。毎日食べるからこそ、おいしいものを。表参道・原宿エリアにある「TF Garden Salad」の公式サイトです。";
+---
+
+<Layout {title} {description}>
+  <Header />
+  <main>
+    <MV />
+    <SectionConcept />
+    <SectionAbout />
+    <ParallaxDivider modifier="salad" label="新鮮なサラダのイメージ" />
+    <SectionMenu />
+    <ParallaxDivider modifier="interior" label="TF Garden Salad 店内の様子" />
+    <SectionAccess />
+    <SectionContact />
+  </main>
+  <Footer />
+  <PageTopBtn />
+</Layout>

@@ -1,0 +1,159 @@
+@use 'variables' as *;
+
+.gs-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 90px;
+  background-color: $color-dark;
+
+  @media (max-width: $bp-sp) {
+    height: 60px;
+  }
+
+  &__inner {
+    max-width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+  }
+
+  // ─── Logo ────────────────────────────────────────────────────────────────
+  &__logo {
+    display: block;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  &__logo-wrap {
+    position: relative;
+    // PC: Figmaの実寸 116px × 63px
+    width: 116px;
+    height: 63px;
+
+    @media (max-width: $bp-sp) {
+      width: 80px;
+      height: 43px;
+    }
+  }
+
+  // 白い塗りのドーム（下半分の楕円形）
+  &__logo-dome {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;           // = 31.5px (Figma: bottom half of 63px container)
+    background-color: $color-white;
+    border-radius: 0 0 50% 50%;
+  }
+
+  // "TF" — 左上に小さく配置
+  &__logo-tf {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 10px;
+    color: $color-white;
+    line-height: 1;
+    letter-spacing: 0;
+
+    @media (max-width: $bp-sp) {
+      font-size: 7px;
+      top: 3px;
+    }
+  }
+
+  // "Garden" — 上段、センター配置、白文字
+  &__logo-garden {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 4px;
+    text-align: center;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 28.5px;
+    color: $color-white;
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+
+    @media (max-width: $bp-sp) {
+      font-size: 19.5px;
+      top: 3px;
+    }
+  }
+
+  // "Salad" — 下段（ドーム上）、センター配置、グリーン文字
+  &__logo-salad {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 32.5px;           // Figma: 47.52px (page) - 15px (container top) = 32.52px
+    text-align: center;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 28.5px;
+    color: $color-primary;
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+
+    @media (max-width: $bp-sp) {
+      font-size: 19.5px;
+      top: 22px;
+    }
+  }
+
+  // ─── Nav ─────────────────────────────────────────────────────────────────
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 44px;
+    margin-left: auto;
+
+    @media (max-width: $bp-sp) {
+      gap: 20px;
+    }
+
+    a {
+      font-family: $font-display;
+      font-size: 18px;
+      color: $color-white;
+      text-decoration: none;
+      letter-spacing: 0.54px;
+      position: relative;
+      transition: color 0.3s ease;
+
+      @media (max-width: $bp-sp) {
+        font-size: 13px;
+        letter-spacing: 0.3px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: $color-primary;
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        color: $color-primary;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

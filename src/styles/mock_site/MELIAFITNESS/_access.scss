@@ -1,0 +1,82 @@
+@use 'variables' as *;
+
+.mf-access {
+  padding: 96px $container-padding-pc 80px;
+  background: $color-white;
+  min-height: 775px;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    margin-bottom: 80px;
+  }
+
+  &__body {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name {
+    font-family: $font-jp;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 24px;
+    color: $color-dark;
+    margin-bottom: 12px;
+  }
+
+  &__sub-name {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: $color-dark;
+    margin-bottom: 20px;
+  }
+
+  &__detail {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: $color-dark;
+    line-height: 32px;
+
+    p {
+      margin-bottom: 4px;
+    }
+  }
+
+  &__map {
+    flex-shrink: 0;
+    width: 520px;
+    height: 390px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @include sp {
+    padding: 60px $container-padding-sp;
+    min-height: auto;
+
+    &__body {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    &__map {
+      width: 100%;
+      height: 281px;
+    }
+  }
+}

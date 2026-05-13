@@ -1,0 +1,134 @@
+---
+const navLeft = [
+  { href: "#profile", label: "OWNER'S PROFILE" },
+  { href: "#feature", label: "FEATURE" },
+  { href: "#members-voice", label: "MEMBER'S VOICE" },
+];
+
+const navRight = [
+  { href: "#price", label: "PRICE" },
+  { href: "#qa", label: "Q&A" },
+  { href: "#access", label: "ACCESS" },
+];
+
+const drawerNav = [
+  { href: "#", label: "TOP" },
+  { href: "#profile", label: "OWNER'S PROFILE" },
+  { href: "#feature", label: "FEATURE" },
+  { href: "#members-voice", label: "MEMBER'S VOICE" },
+  { href: "#price", label: "PRICE" },
+  { href: "#qa", label: "Q&A" },
+  { href: "#access", label: "ACCESS" },
+];
+
+const snsLinks = [
+  { href: "https://www.youtube.com/", label: "YouTube", img: "/mock_site/MELIAFITNESS/images/icon-youtube.webp" },
+  { href: "https://twitter.com/", label: "Twitter", img: "/mock_site/MELIAFITNESS/images/icon-twitter.webp" },
+  { href: "https://www.instagram.com/", label: "Instagram", img: "/mock_site/MELIAFITNESS/images/icon-instagram.webp" },
+];
+---
+
+<header class="mf-header" id="mf-header">
+  <div class="mf-header__inner">
+    <!-- PC Nav Left -->
+    <nav class="mf-header__nav mf-header__nav--left" aria-label="左ナビゲーション">
+      {navLeft.map(({ href, label }) => <a href={href}>{label}</a>)}
+    </nav>
+
+    <!-- Logo (center) -->
+    <a href="#" class="mf-header__logo" aria-label="MELIA FITNESS トップへ">
+      <img
+        src="/mock_site/MELIAFITNESS/images/header-logo.webp"
+        alt="MELIA FITNESS"
+        loading="eager"
+      />
+    </a>
+
+    <!-- PC Nav Right -->
+    <nav class="mf-header__nav mf-header__nav--right" aria-label="右ナビゲーション">
+      {navRight.map(({ href, label }) => <a href={href}>{label}</a>)}
+    </nav>
+
+    <!-- PC CTA Button -->
+    <a href="#campaign" class="mf-header__btn" aria-label="LINE予約">
+      <span>LINE予約</span>
+    </a>
+
+    <!-- SP LINE予約ボタン -->
+    <a href="#campaign" class="mf-header__sp-btn" aria-label="LINE予約">
+      <span>LINE予約</span>
+    </a>
+
+    <!-- Hamburger (SP) -->
+    <button
+      class="mf-header__hamburger"
+      id="mf-hamburger"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      type="button"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Drawer (SP) -->
+  <nav class="mf-header__drawer" id="mf-drawer" aria-label="ドロワーナビゲーション">
+    {drawerNav.map(({ href, label }) => <a href={href}>{label}</a>)}
+
+    <!-- SNSアイコン -->
+    <div class="mf-header__drawer-sns">
+      {snsLinks.map(({ href, label, img }) => (
+        <a href={href} aria-label={label} target="_blank" rel="noopener noreferrer">
+          <img src={img} alt={label} loading="lazy" />
+        </a>
+      ))}
+    </div>
+
+    <!-- 下部ロゴ -->
+    <div class="mf-header__drawer-logo">
+      <img
+        src="/mock_site/MELIAFITNESS/images/drawer-logo.webp"
+        alt="MELIA FITNESS"
+        loading="lazy"
+      />
+    </div>
+  </nav>
+
+  <!-- Overlay (SP) -->
+  <div class="mf-header__overlay" id="mf-drawer-overlay" aria-hidden="true"></div>
+</header>
+
+<script>
+  const hamburger = document.getElementById("mf-hamburger");
+  const drawer = document.getElementById("mf-drawer");
+  const overlay = document.getElementById("mf-drawer-overlay");
+
+  const openDrawer = () => {
+    hamburger?.classList.add("is-open");
+    drawer?.classList.add("is-open");
+    overlay?.classList.add("is-open");
+    hamburger?.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeDrawer = () => {
+    hamburger?.classList.remove("is-open");
+    drawer?.classList.remove("is-open");
+    overlay?.classList.remove("is-open");
+    hamburger?.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  };
+
+  hamburger?.addEventListener("click", () => {
+    const isOpen = drawer?.classList.contains("is-open");
+    isOpen ? closeDrawer() : openDrawer();
+  });
+
+  overlay?.addEventListener("click", closeDrawer);
+
+  drawer?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeDrawer);
+  });
+</script>

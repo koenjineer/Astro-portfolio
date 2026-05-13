@@ -1,0 +1,53 @@
+---
+const concerns = [
+  "トレーニングをしても本当に痩せられるか不安。",
+  "トレーニングしたいけど時間がない。",
+  "厳しい食事制限に耐えられるか分からない。",
+  "一時的に痩せてもリバウンドしないか心配。",
+  "ダイエットに失敗してきたので続けられるか不安。",
+];
+---
+
+<section class="mf-onayami" aria-labelledby="mf-onayami-heading">
+  <!-- Right background image (PC only) -->
+  <div class="mf-onayami__bg-img" aria-hidden="true">
+    <img
+      src="/mock_site/MELIAFITNESS/images/onayami-bg.webp"
+      alt=""
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Top woman image (SP only) -->
+  <div class="mf-onayami__sp-img" aria-hidden="true">
+    <img
+      src="/mock_site/MELIAFITNESS/images/onayami-bg-sp.webp"
+      alt=""
+      loading="lazy"
+    />
+  </div>
+
+  <div class="mf-onayami__content">
+    <h2 class="mf-onayami__heading mf-reveal" id="mf-onayami-heading">
+      こんなお悩みありませんか？
+    </h2>
+
+    <ul class="mf-onayami__list">
+      {
+        concerns.map((text, i) => (
+          <li class={`mf-onayami__item mf-reveal mf-reveal--delay-${i + 1}`}>
+            <img
+              src="/mock_site/MELIAFITNESS/images/check-icon.webp"
+              alt=""
+              width="24"
+              height="24"
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <span>{text}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

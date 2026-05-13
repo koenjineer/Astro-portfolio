@@ -1,0 +1,115 @@
+@use 'variables' as *;
+
+.mf-flow {
+  padding: 80px $container-padding-pc;
+  background: $color-bg;
+  min-height: 906px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__title {
+    margin-bottom: 60px;
+  }
+
+  &__list {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 20px;
+  }
+
+  &__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__img {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 28px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__step {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: $color-gold;
+    letter-spacing: 1.6px;
+    margin-bottom: 12px;
+  }
+
+  &__name {
+    font-family: $font-jp;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 22px;
+    color: $color-dark;
+    margin-bottom: 16px;
+  }
+
+  &__body {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: $color-dark;
+    line-height: 32px;
+    text-align: left;
+  }
+
+  @include sp {
+    padding: 60px $container-padding-sp;
+    min-height: auto;
+
+    &__title {
+      margin-bottom: 40px;
+    }
+
+    &__list {
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 0;
+    }
+
+    &__item {
+      width: 100%;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    &__img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      margin-bottom: 24px;
+    }
+
+    &__step {
+      margin-bottom: 16px;
+    }
+
+    &__name {
+      font-size: 18px;
+      letter-spacing: 0.9px;
+      margin-bottom: 8px;
+    }
+
+    &__body {
+      text-align: left;
+      line-height: 1.8;
+      letter-spacing: 0.32px;
+    }
+  }
+}

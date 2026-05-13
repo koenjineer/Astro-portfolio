@@ -1,0 +1,86 @@
+@use 'variables' as *;
+
+.mf-qa {
+  padding: 80px $container-padding-pc;
+  background: $color-white;
+  min-height: 1396px;
+
+  &__title {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  &__list {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  &__item {
+    padding: 36px 0;
+    border-top: 1px solid #e8e0d4;
+
+    &:last-child {
+      border-bottom: 1px solid #e8e0d4;
+    }
+  }
+
+  &__q {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+
+    &-label {
+      font-family: $font-en;
+      font-size: 20px;
+      color: $color-gold;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+
+    &-text {
+      font-family: $font-jp;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      color: $color-dark;
+      line-height: 32px;
+    }
+  }
+
+  &__a {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
+    &-label {
+      font-family: $font-en;
+      font-size: 20px;
+      color: $color-dark;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+
+    &-text {
+      font-family: $font-jp;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      color: $color-dark;
+      line-height: 32px;
+    }
+  }
+
+  @include sp {
+    padding: 60px $container-padding-sp;
+    min-height: auto;
+
+    &__title {
+      text-align: left;
+    }
+
+    &__item {
+      padding: 28px 0;
+    }
+  }
+}

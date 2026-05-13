@@ -1,0 +1,46 @@
+// Global reset and base styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+  body {
+    min-width: 1440px;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: visible;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  cursor: pointer;
+}
+
+button {
+  font-family: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}

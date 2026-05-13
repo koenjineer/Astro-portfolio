@@ -1,0 +1,70 @@
+---
+const snsLinks = [
+  {
+    href: "https://www.youtube.com/",
+    label: "YouTube",
+    img: "/mock_site/MELIAFITNESS/images/icon-youtube.webp",
+  },
+  {
+    href: "https://twitter.com/",
+    label: "Twitter",
+    img: "/mock_site/MELIAFITNESS/images/icon-twitter.webp",
+  },
+  {
+    href: "https://www.instagram.com/",
+    label: "Instagram",
+    img: "/mock_site/MELIAFITNESS/images/icon-instagram.webp",
+  },
+];
+---
+
+<section class="mf-profile" id="profile" aria-labelledby="mf-profile-title">
+  <div class="mf-profile__title mf-section-title mf-reveal">
+    <p class="mf-section-title__en">OWNER'S PROFILE</p>
+    <div class="mf-section-title__line"></div>
+    <p class="mf-section-title__jp">代表プロフィール</p>
+  </div>
+
+  <div class="mf-profile__main mf-reveal">
+    <!-- Photo -->
+    <div
+      class="mf-profile__photo"
+      style="background-image: url('/mock_site/MELIAFITNESS/images/owner-photo.webp')"
+      role="img"
+      aria-label="オーナー Kailani"
+    ></div>
+
+    <!-- Info -->
+    <div class="mf-profile__info">
+      <div class="mf-profile__name-row">
+        <h2 class="mf-profile__name" id="mf-profile-title">Kailani</h2>
+        <div class="mf-profile__sns">
+          {
+            snsLinks.map(({ href, label, img }) => (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+              >
+                <img src={img} alt={label} width="40" height="40" loading="lazy" />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="mf-profile__bio">
+        出産を機に激太りし、様々なダイエット法を試し、失敗を繰り返した過去を持つ。その後、筋トレや食事改善によってダイエットに成功。自身の経験を活かし、現在はパーソナルトレーナーをしており、これまで1000人以上の肉体改造に成功。またYouTubeで1000万回再生された動画を持つ、筋トレインフルエンサーとしても活動している。YouTubeやInstagramではトレーニングやダイエットに良い食事法を発信している。
+      </p>
+    </div>
+  </div>
+
+  <!-- Message Box -->
+  <div class="mf-profile__message mf-reveal">
+    <p class="mf-profile__message-label">Message</p>
+    <p class="mf-profile__message-body">
+      MELIA FITNESSではあなたに合った身体の動かし方や食生活の大切さをプロのトレーナーがマンツーマンでサポートいたします。継続することができて挫折しないボディメイク・ダイエットに自信があります。ぜひMELIA FITNESSで身体づくりの素晴らしさを体験してください。
+    </p>
+  </div>
+</section>

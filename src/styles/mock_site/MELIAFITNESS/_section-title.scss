@@ -1,0 +1,67 @@
+@use 'variables' as *;
+
+.mf-section-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  &__en {
+    font-family: $font-en;
+    font-size: 56px;
+    color: $color-dark;
+    letter-spacing: 4.48px;
+    line-height: 1;
+    margin-right: 24px;
+  }
+
+  &__line {
+    width: 340px;
+    height: 1px;
+    background-color: $color-dark;
+    flex-shrink: 0;
+  }
+
+  &__jp {
+    width: 100%;
+    font-family: $font-jp;
+    font-size: 16px;
+    font-style: normal;
+    color: $color-dark;
+    letter-spacing: 1.6px;
+    margin-top: 16px;
+  }
+
+  &--center {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .mf-section-title__en {
+      margin-right: 0;
+    }
+
+    .mf-section-title__line {
+      display: none;
+    }
+
+    .mf-section-title__jp {
+      width: auto;
+    }
+  }
+
+  @include sp {
+    &__line {
+      display: none;
+    }
+
+    &__en {
+      margin-right: 0;
+      font-size: 28px;
+      letter-spacing: 1.4px;
+    }
+
+    &__jp {
+      font-size: 14px;
+    }
+  }
+}

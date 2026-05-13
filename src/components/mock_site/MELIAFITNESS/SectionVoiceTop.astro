@@ -1,0 +1,63 @@
+---
+const voices = [
+  {
+    img: "/mock_site/MELIAFITNESS/images/voice-top-01.webp",
+    bgPosition: "50% 33%",
+    alt: "会員様の声1",
+    title: "理想的なカラダになれました！",
+    meta: "38歳 会社員 女性",
+    body: "マンツーマンの指導を受けることができ、自分のなりたい身体に合ったトレーニングができてとても良かったです。2か月で理想の体型になることができました！",
+    reverse: true,
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/voice-top-02.webp",
+    bgPosition: "50% 50%",
+    alt: "会員様の声2",
+    title: "リバウンドせずに体型維持できています！",
+    meta: "42歳 会社経営 女性",
+    body: "4か月前に目標の体重になってからなってからリバウンドもなく、今でもボディメイクを楽しんで続けられています。",
+    reverse: false,
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/voice-top-03.webp",
+    bgPosition: "50% 50%",
+    alt: "会員様の声3",
+    title: '周りから"キレイになった"と言われます！',
+    meta: "32歳 専業主婦 女性",
+    body: "トレーニングをしてメリハリのある体になると、家族や友人から「とてもキレイになった」と褒めてもらえるように。ボディメイクをきっかけに自信が持てるようになりました。",
+    reverse: true,
+  },
+];
+---
+
+<section
+  class="mf-voice-top"
+ 
+  aria-labelledby="mf-voice-top-heading"
+>
+  <h2 class="mf-voice-top__heading mf-reveal" id="mf-voice-top-heading">
+    トレーニングを受けた会員様からこんな声が届いています。
+  </h2>
+
+  <ul class="mf-voice-top__list">
+    {
+      voices.map(({ img, bgPosition, alt, title, body, meta, reverse }) => (
+        <li
+          class={`mf-voice-top__item mf-reveal${reverse ? " mf-voice-top__item--reverse" : ""}`}
+        >
+          <div
+            class="mf-voice-top__img"
+            style={`background-image: url('${img}'); background-position: ${bgPosition};`}
+            role="img"
+            aria-label={alt}
+          />
+          <div class="mf-voice-top__text">
+            <h3 class="mf-voice-top__title">{title}</h3>
+            <p class="mf-voice-top__meta">{meta}</p>
+            <p class="mf-voice-top__body">{body}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

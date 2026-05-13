@@ -1,0 +1,69 @@
+---
+const features = [
+  {
+    img: "/mock_site/MELIAFITNESS/images/feature-01.webp",
+    alt: "特徴1",
+    title: '「人に見せたくなるカラダ作り」にこだわったトレーニング',
+    body: "体重を落とすだけではなく、人に見せたくなるカラダを目指したトレーニングをします。引き締まった魅力的なカラダになると、自信を持つことができます。",
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/feature-02.webp",
+    alt: "特徴2",
+    title: "お尻・太ももなどの部位を効率的に鍛える最先端マシンの導入",
+    body: "お尻や太ももを引き締めるトレーニングをするためのヒップスラスターという最先端のマシンを導入。女性の美尻をつくると有名なマシンです。",
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/feature-03.webp",
+    alt: "特徴3",
+    title: "厳しい食事制限なし&トレーニングは週一～二回でOK",
+    body: "厳しい食事制限ではなく、正しい食事習慣を身に着けられるようにサポートします。トレーニングは週1回、たったの50分でOKなので、仕事や家事が忙しくてもご利用いただけます。",
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/feature-04.webp",
+    alt: "特徴4",
+    title: "確実に筋肉をつけるのでリバウンドと無縁",
+    body: "リバウンドの多くの原因は筋肉が落ちてしまって基礎代謝がおちてしまうこと。MELIA FITNESSのプログラムは確実に筋肉をつけるのでリバウンドしにくい身体になれます。",
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/feature-05.webp",
+    alt: "特徴5",
+    title: '"ボディメイクを楽しむ"がモットーなので楽しく続けられる',
+    body: "MELIA FITNESSはその方のなりたい体に合わせて、無理のない継続できるトレーニングを提案いたします。トレーニングと正しい食生活を継続すると、１〜２か月で効果を感じていただけます。あなたの体が引き締まっていくのを感じると楽しく前向きに続けることができます。",
+  },
+];
+---
+
+<section class="mf-feature" id="feature" aria-labelledby="mf-feature-title">
+  <!-- Lead text -->
+  <div class="mf-feature__lead mf-reveal">
+    <p>MELIA FITNESSはそんな悩みをお持ちの方にこそ</p>
+    <p>ご利用していただきたい理由があります。</p>
+    <div class="mf-feature__lead-arrow" aria-hidden="true">
+      <img src="/mock_site/MELIAFITNESS/images/feature-arrow.webp" alt="" />
+    </div>
+  </div>
+
+  <!-- Section title -->
+  <div class="mf-feature__title mf-section-title mf-section-title--center mf-reveal" id="mf-feature-title">
+    <p class="mf-section-title__en">FEATURE</p>
+    <p class="mf-section-title__jp">MELIA FITNESSが選ばれる5つの特徴</p>
+  </div>
+
+  <!-- Feature list -->
+  <ul class="mf-feature__list">
+    {
+      features.map(({ img, alt, title, body }) => (
+        <li class="mf-feature__item mf-reveal">
+          <div class="mf-feature__img">
+            <img src={img} alt={alt} loading="lazy" />
+          </div>
+          <div class="mf-feature__divider" aria-hidden="true"></div>
+          <div class="mf-feature__text">
+            <h3 class="mf-feature__title-item">{title}</h3>
+            <p class="mf-feature__body">{body}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Claude Code working files
+.claude/handoff/
+.claude/worktrees/
+
+# lock file (using pnpm)
+package-lock.json

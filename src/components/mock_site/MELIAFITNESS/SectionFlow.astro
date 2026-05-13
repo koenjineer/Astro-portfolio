@@ -1,0 +1,48 @@
+---
+const steps = [
+  {
+    img: "/mock_site/MELIAFITNESS/images/flow-01.webp",
+    alt: "カウンセリングの様子",
+    step: "STEP01",
+    name: "カウンセリング",
+    body: "まずはカウンセリングでお体の状態やライフスタイルをお伺いし、今後の流れをご説明いたします。",
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/flow-02.webp",
+    alt: "測定・メニュー提案の様子",
+    step: "STEP02",
+    name: "測定・メニュー提案",
+    body: "体組成計で現在の身体の状態を確認します。その後、理想の身体になるためのトレーニングメニューをご提案させていただきます。",
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/flow-03.webp",
+    alt: "トレーニングの様子",
+    step: "STEP03",
+    name: "トレーニング",
+    body: "専属のトレーナーがマンツーマンであなたのなりたい身体に合わせたトレーニングをサポートいたします。",
+  },
+];
+---
+
+<section class="mf-flow" id="flow" aria-labelledby="mf-flow-title">
+  <div class="mf-flow__title mf-section-title mf-reveal" id="mf-flow-title">
+    <p class="mf-section-title__en">FLOW</p>
+    <div class="mf-section-title__line"></div>
+    <p class="mf-section-title__jp">パーソナルトレーニングの流れ</p>
+  </div>
+
+  <ol class="mf-flow__list">
+    {
+      steps.map(({ img, alt, step, name, body }, i) => (
+        <li class={`mf-flow__item mf-reveal mf-reveal--delay-${i + 1}`}>
+          <div class="mf-flow__img">
+            <img src={img} alt={alt} loading="lazy" />
+          </div>
+          <p class="mf-flow__step">{step}</p>
+          <h3 class="mf-flow__name">{name}</h3>
+          <p class="mf-flow__body">{body}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

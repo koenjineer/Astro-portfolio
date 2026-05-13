@@ -1,0 +1,284 @@
+@use 'variables' as *;
+
+.mf-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: $color-white;
+  z-index: 200;
+  transition: box-shadow 0.3s ease;
+
+  &.is-scrolled {
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 $container-padding-pc;
+    position: relative;
+  }
+
+  &__logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    img {
+      height: 60px;
+      width: auto;
+      display: block;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    a {
+      font-family: $font-en;
+      font-size: 15px;
+      color: $color-dark;
+      text-decoration: none;
+      letter-spacing: 1.5px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $color-gold;
+      }
+    }
+
+    &--left {
+      margin-right: auto;
+    }
+
+    &--right {
+    }
+  }
+
+  &__btn {
+    flex-shrink: 0;
+    margin-left: 56px;
+    width: 169px;
+    height: 50px;
+    background: $gradient-gold;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    span {
+      font-family: $font-jp;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 16px;
+      color: $color-white;
+      letter-spacing: 3.2px;
+    }
+  }
+
+  // SP用LINE予約ボタン（PCでは非表示）
+  &__sp-btn {
+    display: none;
+  }
+
+  // Hamburger button
+  &__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 9px;
+    width: 28px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: auto;
+
+    span {
+      display: block;
+      height: 1px;
+      background: $color-dark;
+      transition: transform 0.3s, opacity 0.3s, width 0.3s;
+
+      &:nth-child(1) { width: 28px; }
+      &:nth-child(2) { width: 22px; }
+      &:nth-child(3) { width: 15px; }
+    }
+
+    &.is-open {
+      span:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+      }
+      span:nth-child(2) {
+        opacity: 0;
+      }
+      span:nth-child(3) {
+        width: 28px;
+        transform: translateY(-10px) rotate(-45deg);
+      }
+    }
+  }
+
+  // Drawer
+  &__drawer {
+    display: none;
+    position: fixed;
+    top: 70px;
+    right: 0;
+    width: 250px;
+    height: calc(100vh - 70px);
+    background: $color-white;
+    z-index: 150;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    padding: 56px 0 48px;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.08);
+    overflow-y: auto;
+
+    &.is-open {
+      transform: translateX(0);
+    }
+
+    a {
+      font-family: $font-en;
+      font-size: 16px;
+      color: $color-dark;
+      text-decoration: none;
+      letter-spacing: 1.6px;
+      padding: 16px 0;
+      text-align: center;
+      width: 100%;
+      display: block;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $color-gold;
+      }
+    }
+  }
+
+  &__drawer-sns {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 24px;
+
+    a {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+
+      img {
+        width: 40px;
+        height: 40px;
+        display: block;
+      }
+    }
+  }
+
+  &__drawer-logo {
+    margin-top: 28px;
+    text-align: center;
+
+    img {
+      height: 50px;
+      width: auto;
+      display: inline-block;
+    }
+  }
+
+  &__overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 140;
+
+    &.is-open {
+      display: block;
+    }
+  }
+
+  @include sp {
+    height: 70px;
+
+    &__inner {
+      padding: 0 $container-padding-sp;
+      max-width: none;
+      position: relative;
+    }
+
+    &__logo {
+      left: $container-padding-sp;
+      top: 50%;
+      transform: translateY(-50%);
+
+      img {
+        height: 40px;
+      }
+    }
+
+    &__sp-btn {
+      display: flex;
+      position: absolute;
+      right: calc(#{$container-padding-sp} + 28px + 21px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 134px;
+      height: 38px;
+      background: $gradient-gold;
+      border-radius: 2px;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.85;
+      }
+
+      span {
+        font-family: $font-jp;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 14px;
+        color: $color-white;
+        letter-spacing: 2.8px;
+      }
+    }
+
+    &__nav--left,
+    &__nav--right,
+    &__btn {
+      display: none;
+    }
+
+    &__hamburger {
+      display: flex;
+    }
+
+    &__drawer {
+      display: flex;
+    }
+  }
+}

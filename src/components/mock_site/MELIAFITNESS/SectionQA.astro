@@ -1,0 +1,48 @@
+---
+const qaItems = [
+  {
+    q: "ダイエットをしたいのですが、どれくらいの効果がありますか？",
+    a: "個人差はありますが、週に1回のパーソナルトレーニングと自宅でのトレーニング、食生活を改善することで、２か月で効果を感じていただくことができます。",
+  },
+  {
+    q: "運動をしたことがなく、体力に自信がありません。大丈夫でしょうか？",
+    a: "MELIA FITNESSは専属のトレーナーがマンツーマンでトレーニングのサポートをしております。また、無理なトレーニングはしないため、運動をしたことがなく、体力に自信がない方でも安心して取り組んでいただけます。",
+  },
+  {
+    q: "リバウンドはしませんか？",
+    a: "リバウンドの原因は筋肉が落ちて基礎代謝が下がってしまうことが原因であると考えられています。MELIA FITNESSのプログラムでは、確実に筋肉をつけられますので、リバウンドしにくい体になれます。",
+  },
+  {
+    q: "厳しい食事制限をする自信がありません。",
+    a: "MELIA FITNESSでは食事の選び方や食べ方など食事改善についてアドバイスを行っております。厳しい食事制限はありませんのでご安心ください。",
+  },
+  {
+    q: "トレーニングの際に必要なものはありますか？",
+    a: "トレーニングウェアとトレーニング時に使用するシューズをおもちください。お持ちでない場合はレンタルをご用意しておりますのでご利用ください。",
+  },
+];
+---
+
+<section class="mf-qa" id="qa" aria-labelledby="mf-qa-title">
+  <div class="mf-qa__title mf-section-title mf-section-title--center mf-reveal" id="mf-qa-title">
+    <p class="mf-section-title__en">Q&amp;A</p>
+    <p class="mf-section-title__jp">よくあるご質問</p>
+  </div>
+
+  <dl class="mf-qa__list">
+    {
+      qaItems.map(({ q, a }, i) => (
+        <div class={`mf-qa__item mf-reveal mf-reveal--delay-${(i % 3) + 1}`}>
+          <div class="mf-qa__q">
+            <span class="mf-qa__q-label">Q</span>
+            <dt class="mf-qa__q-text">{q}</dt>
+          </div>
+          <div class="mf-qa__a">
+            <span class="mf-qa__a-label">A</span>
+            <dd class="mf-qa__a-text">{a}</dd>
+          </div>
+        </div>
+      ))
+    }
+  </dl>
+</section>

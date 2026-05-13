@@ -1,0 +1,57 @@
+@use 'variables' as *;
+
+.mf-pagetop {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 60px;
+    height: 60px;
+    background: $gradient-gold;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__arrow {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid $color-white;
+    border-right: 2px solid $color-white;
+    transform: rotate(-45deg) translateY(3px);
+  }
+
+  &__label {
+    font-family: $font-en;
+    font-size: 9px;
+    color: $color-white;
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+
+  @include sp {
+    bottom: 24px;
+    right: 20px;
+  }
+}

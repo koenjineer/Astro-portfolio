@@ -1,0 +1,22 @@
+@use 'variables' as *;
+@use 'animations';
+@use 'section-title';
+@use 'header';
+@use 'mv';
+@use 'voice-top';
+@use 'profile';
+@use 'onayami';
+@use 'feature';
+@use 'yoga';
+@use 'members-voice';
+@use 'price';
+@use 'campaign';
+@use 'flow';
+@use 'qa';
+@use 'access';
+@use 'footer';
+@use 'pagetop';
+
+// ユーティリティ
+.sp-only { display: none; }
+@include sp { .sp-only { display: inline; } }

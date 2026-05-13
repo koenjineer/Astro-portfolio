@@ -1,0 +1,352 @@
+@use 'variables' as *;
+
+.mf-campaign {
+  position: relative;
+  min-height: 913px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  &__box {
+    position: relative;
+    z-index: 1;
+    width: 1060px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid $color-gold;
+    padding: 64px 80px 64px;
+    text-align: center;
+  }
+
+  // Title area with deco lines
+  &__title-area {
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  &__deco {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__heading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    font-family: $font-jp;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 40px;
+    color: $color-gold;
+    letter-spacing: 6px;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  // Middle price area
+  &__price-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+
+  &__left {
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  &__course {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 28px;
+    color: $color-dark;
+    letter-spacing: 4.2px;
+    margin-bottom: 16px;
+  }
+
+  &__original-label {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    color: $color-dark;
+    letter-spacing: 1.2px;
+    margin-bottom: 4px;
+  }
+
+  &__original {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 40px;
+    color: $color-dark;
+    letter-spacing: 0;
+
+    .t0 { letter-spacing: 4px; }
+    .tax { font-size: 24px; }
+  }
+
+  &__arrow {
+    flex-shrink: 0;
+
+    img {
+      width: 50px;
+      height: auto;
+      display: block;
+    }
+  }
+
+  &__right {
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  // 先着10名様限定 badge
+  &__limit {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 8px;
+
+    img {
+      display: block;
+      width: 236px;
+      height: auto;
+    }
+
+    span {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: $font-jp;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 24px;
+      color: $color-gold;
+      letter-spacing: 2.4px;
+      white-space: nowrap;
+    }
+  }
+
+  // ¥０
+  &__price {
+    display: flex;
+    align-items: baseline;
+    line-height: 1;
+  }
+
+  &__yen {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 72px;
+    color: $color-gold;
+    letter-spacing: -6px;
+  }
+
+  &__price-num {
+    font-family: $font-jp;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 160px;
+    color: $color-gold;
+    line-height: 1;
+  }
+
+  // Period
+  &__period {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  &__period-label {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    color: $color-dark;
+    letter-spacing: 1.8px;
+    border: 1px solid $color-dark;
+    padding: 8px 20px;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  &__period-date {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    color: $color-dark;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+  }
+
+  // CTA Button
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 600px;
+    height: 80px;
+    background: $gradient-gold;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    span {
+      font-family: $font-jp;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 28px;
+      color: $color-white;
+      letter-spacing: 5.6px;
+    }
+  }
+
+  &__btn-arrow {
+    width: 16px;
+    height: auto;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  @include sp {
+    min-height: 612px;
+
+    &__box {
+      width: 335px;
+      padding: 40px 16px 40px;
+    }
+
+    &__title-area {
+      margin-bottom: 78px;
+    }
+
+    &__heading {
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    &__price-area {
+      flex-direction: row;
+      gap: 8px;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    &__left {
+      text-align: left;
+    }
+
+    &__course {
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    &__original-label {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    &__original {
+      font-size: 22px;
+
+      .tax { font-size: 14px; }
+    }
+
+    &__arrow {
+      img { width: 20px; }
+    }
+
+    &__right {
+      text-align: left;
+    }
+
+    &__limit {
+      img { width: 120px; }
+
+      span {
+        font-size: 12px;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    &__price-num {
+      font-size: 72px;
+    }
+
+    &__yen {
+      font-size: 40px;
+      letter-spacing: -2px;
+    }
+
+    &__period {
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+
+    &__period-label {
+      font-size: 14px;
+      padding: 4px 12px;
+    }
+
+    &__period-date {
+      font-size: 16px;
+      white-space: normal;
+      letter-spacing: 0;
+      text-align: left;
+    }
+
+    &__btn {
+      width: 295px;
+      height: 61px;
+
+      span {
+        font-size: 16px;
+        letter-spacing: 0.8px;
+      }
+    }
+
+    &__btn-arrow {
+      display: none;
+    }
+  }
+}

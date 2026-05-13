@@ -1,0 +1,140 @@
+@use 'variables' as *;
+
+.mf-profile {
+  padding: 80px $container-padding-pc;
+  background: $color-white;
+
+  &__title {
+    margin-bottom: 60px;
+    text-align: center;
+
+    .mf-section-title__line {
+      display: none;
+    }
+  }
+
+  &__main {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  &__photo {
+    flex-shrink: 0;
+    width: 360px;
+    height: 360px;
+    background-color: lightgray;
+    background-position: 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 28px;
+  }
+
+  &__name {
+    font-family: $font-jp;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 24px;
+    color: $color-dark;
+    letter-spacing: 2.4px;
+  }
+
+  &__sns {
+    display: flex;
+    gap: 24px;
+
+    a {
+      display: block;
+      width: 40px;
+      height: 40px;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.75;
+      }
+
+      img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__bio {
+    font-family: $font-jp;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: $color-dark;
+    line-height: 32px;
+  }
+
+  &__message {
+    border: 1px solid $color-gold;
+    background: $color-white;
+    padding: 48px 60px;
+    max-width: 878px;
+    margin: 0 auto;
+
+    &-label {
+      font-family: $font-deco;
+      font-size: 56px;
+      color: $color-gold;
+      letter-spacing: 5.6px;
+      margin-bottom: 24px;
+      line-height: 1;
+      text-align: center;
+    }
+
+    &-body {
+      font-family: $font-jp;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      color: $color-dark;
+      line-height: 32px;
+    }
+  }
+
+  @include sp {
+    padding: 60px $container-padding-sp;
+
+    &__title {
+      padding-left: 0;
+    }
+
+    &__main {
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    &__photo {
+      width: 240px;
+      height: 240px;
+    }
+
+    &__name-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    &__message {
+      padding: 32px 24px;
+      max-width: 100%;
+    }
+  }
+}

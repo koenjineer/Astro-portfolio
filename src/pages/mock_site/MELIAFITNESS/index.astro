@@ -1,0 +1,46 @@
+---
+import Layout from "@/layouts/mock_site/MELIAFITNESS/Layout.astro";
+import Header from "@components/mock_site/MELIAFITNESS/Header.astro";
+import MV from "@components/mock_site/MELIAFITNESS/MV.astro";
+import SectionVoiceTop from "@components/mock_site/MELIAFITNESS/SectionVoiceTop.astro";
+import SectionProfile from "@components/mock_site/MELIAFITNESS/SectionProfile.astro";
+import SectionOnayami from "@components/mock_site/MELIAFITNESS/SectionOnayami.astro";
+import SectionFeature from "@components/mock_site/MELIAFITNESS/SectionFeature.astro";
+import SectionYoga from "@components/mock_site/MELIAFITNESS/SectionYoga.astro";
+import SectionMembersVoice from "@components/mock_site/MELIAFITNESS/SectionMembersVoice.astro";
+import SectionPrice from "@components/mock_site/MELIAFITNESS/SectionPrice.astro";
+import SectionCampaign from "@components/mock_site/MELIAFITNESS/SectionCampaign.astro";
+import SectionFlow from "@components/mock_site/MELIAFITNESS/SectionFlow.astro";
+import SectionQA from "@components/mock_site/MELIAFITNESS/SectionQA.astro";
+import SectionGym from "@components/mock_site/MELIAFITNESS/SectionGym.astro";
+import SectionAccess from "@components/mock_site/MELIAFITNESS/SectionAccess.astro";
+import Footer from "@components/mock_site/MELIAFITNESS/Footer.astro";
+import PageTopBtn from "@components/mock_site/MELIAFITNESS/PageTopBtn.astro";
+
+const title =
+  "MELIA FITNESS - 楽しくボディメイクが続けられるパーソナルトレーニングジム";
+const description =
+  "週一のトレーニングで人に見せたくなるカラダをつくる。一流俳優・モデルを指導してきた本物のパーソナルトレーニング。期間限定で無料体験実施中。";
+---
+
+<Layout {title} {description}>
+  <Header />
+  <main>
+    <MV />
+    <SectionVoiceTop />
+    <SectionProfile />
+    <SectionOnayami />
+    <SectionFeature />
+    <SectionYoga />
+    <SectionMembersVoice />
+    <SectionPrice />
+    <SectionCampaign />
+    <SectionFlow />
+    <SectionQA />
+    <SectionGym />
+    <SectionAccess />
+    <SectionCampaign />
+  </main>
+  <Footer />
+  <PageTopBtn />
+</Layout>

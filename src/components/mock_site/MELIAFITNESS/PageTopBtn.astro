@@ -1,0 +1,32 @@
+---
+---
+
+<div class="mf-pagetop" id="mf-pagetop" aria-hidden="true">
+  <button
+    class="mf-pagetop__btn"
+    id="mf-pagetop-btn"
+    aria-label="ページトップへ戻る"
+    type="button"
+  >
+    <span class="mf-pagetop__arrow" aria-hidden="true"></span>
+    <span class="mf-pagetop__label">TOP</span>
+  </button>
+</div>
+
+<script>
+  const pagetop = document.getElementById("mf-pagetop");
+  const btn = document.getElementById("mf-pagetop-btn");
+
+  const toggleVisibility = () => {
+    const isVisible = window.scrollY > 300;
+    pagetop?.classList.toggle("is-visible", isVisible);
+    pagetop?.setAttribute("aria-hidden", String(!isVisible));
+  };
+
+  window.addEventListener("scroll", toggleVisibility, { passive: true });
+  toggleVisibility();
+
+  btn?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>

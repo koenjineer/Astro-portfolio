@@ -1,0 +1,31 @@
+$color-gold:       #8b6c3a;
+$color-gold-light: #b19464;
+$color-dark:       #393327;
+$color-black:      #1a1a1a;
+$color-text:       #333;
+$color-bg:         #fafafa;
+$color-white:      #ffffff;
+
+$gradient-gold: linear-gradient(242deg, #8b6c3a 23%, #b19464 55%, #8b6c3a 85%);
+
+$font-en:   'Lora', serif;
+$font-jp:   'Yu Mincho', '游明朝', YuMincho, serif;
+$font-deco: 'Allura', cursive;
+
+$bp-sp: 767px;
+$bp-pc: 768px;
+
+$container-padding-pc: 190px;
+$container-padding-sp: 20px;
+
+@mixin sp {
+  @media (max-width: #{$bp-sp}) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media (min-width: #{$bp-pc}) {
+    @content;
+  }
+}

@@ -1,0 +1,53 @@
+---
+const voices = [
+  {
+    img: "/mock_site/MELIAFITNESS/images/members-voice-01.webp",
+    alt: "会員様の声1",
+    title: "引き締まったメリハリボディになれました！",
+    meta: "43歳 会社員 女性",
+    body: "自己流のダイエットでは体重は落ちても、なぜか体型はだらしないままで、少し時間が経つとリバウンドをしてしまっていました。MELIA FITNESSでマンツーマンのトレーニングを受けて、リバウンド知らずの引き締まった身体を維持できています。週1のトレーニングで無理なく通うことができ、楽しく続けることができています。MELIA FITNESSを選んで良かったです！",
+    reverse: false,
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/members-voice-02.webp",
+    alt: "会員様の声2",
+    title: "ボディメイクが楽しくなりました！",
+    meta: "36歳 公務員 女性",
+    body: "前からジムに通っていましたが、ダイエットはいつも途中で挫折してしまっていたのでプロのトレーナーの方から教わりたいと思い、MELIA FITNESSを利用しました。自分の目指している身体に合わせて、トレーニングや食生活について提案をしてくださるので、理想的なボディメイクができたと思っています。今ではボディメイクをとても楽しく感じるようになりました。",
+    reverse: true,
+  },
+  {
+    img: "/mock_site/MELIAFITNESS/images/members-voice-03.webp",
+    alt: "会員様の声3",
+    title: "ダイエットに成功しました！",
+    meta: "32歳 会社員 女性",
+    body: "運動をほぼしたことがなく、トレーニングは厳しいものというイメージがあり、最初は不安でしたが、トレーナーの方に丁寧にトレーニング方法を教えていただくことができ、無理なく楽しく取り組めました。２か月で目標体重になり、身体も引き締まり、ダイエットに成功しました。ダイエットに成功すると同時に、健康な身体を手に入れることが出来たと思います。",
+    reverse: false,
+  },
+];
+---
+
+<section class="mf-members-voice" id="members-voice" aria-labelledby="mf-members-voice-title">
+  <div class="mf-members-voice__title mf-section-title mf-reveal" id="mf-members-voice-title">
+    <p class="mf-section-title__en">MEMBER'S VOICE</p>
+    <div class="mf-section-title__line"></div>
+    <p class="mf-section-title__jp">会員様の声</p>
+  </div>
+
+  <ul class="mf-members-voice__list">
+    {
+      voices.map(({ img, alt, title, body, meta, reverse }) => (
+        <li class={`mf-members-voice__item mf-reveal${reverse ? " mf-members-voice__item--reverse" : ""}`}>
+          <div class="mf-members-voice__img">
+            <img src={img} alt={alt} loading="lazy" />
+          </div>
+          <div class="mf-members-voice__text">
+            <h3 class="mf-members-voice__title-item">{title}</h3>
+            <p class="mf-members-voice__meta">{meta}</p>
+            <p class="mf-members-voice__body">{body}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

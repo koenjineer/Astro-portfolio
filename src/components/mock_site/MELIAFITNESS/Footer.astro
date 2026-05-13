@@ -1,0 +1,99 @@
+---
+const navItems = [
+  { href: "#", label: "TOP", spOnly: true },
+  { href: "#profile", label: "OWNER'S PROFILE" },
+  { href: "#feature", label: "FEATURE" },
+  { href: "#members-voice", label: "MEMBER'S VOICE" },
+  { href: "#price", label: "PRICE" },
+  { href: "#qa", label: "Q&A" },
+  { href: "#access", label: "ACCESS" },
+];
+
+const snsItems = [
+  {
+    href: "https://www.youtube.com/",
+    label: "YouTube",
+    img: "/mock_site/MELIAFITNESS/images/icon-youtube.webp",
+  },
+  {
+    href: "https://twitter.com/",
+    label: "Twitter",
+    img: "/mock_site/MELIAFITNESS/images/icon-twitter.webp",
+  },
+  {
+    href: "https://www.instagram.com/",
+    label: "Instagram",
+    img: "/mock_site/MELIAFITNESS/images/icon-instagram.webp",
+  },
+];
+---
+
+<footer class="mf-footer">
+  <!-- Left column: Logo + Note -->
+  <div class="mf-footer__left">
+    <div class="mf-footer__logo">
+      <a href="#" aria-label="MELIA FITNESS トップへ">
+        <img
+          src="/mock_site/MELIAFITNESS/images/footer-logo.webp"
+          alt="MELIA FITNESS"
+          loading="lazy"
+        />
+      </a>
+    </div>
+    <p class="mf-footer__note">
+      このサイトはMELINDA様のご協力のもと作成したコーディング用の練習課題です。実在の人物・団体とは関係ありません。
+    </p>
+  </div>
+
+  <!-- Right column: Nav + SNS + Copyright -->
+  <div class="mf-footer__right">
+    <!-- Nav -->
+    <nav class="mf-footer__nav" aria-label="フッターナビゲーション">
+      {navItems.filter(({ spOnly }) => !spOnly).map(({ href, label }) => <a href={href}>{label}</a>)}
+    </nav>
+
+    <!-- SNS -->
+    <div class="mf-footer__sns">
+      {
+        snsItems.map(({ href, label, img }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+          >
+            <img src={img} alt={label} width="40" height="40" loading="lazy" />
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Copyright -->
+    <p class="mf-footer__copyright">&copy; 2021 MELIA FITNESS</p>
+  </div>
+
+  <!-- SP only: Nav (with TOP) + SNS + Copyright -->
+  <div class="mf-footer__sp">
+    <nav class="mf-footer__nav-sp" aria-label="フッターナビゲーション（SP）">
+      {navItems.map(({ href, label }) => <a href={href}>{label}</a>)}
+    </nav>
+    <div class="mf-footer__sns mf-footer__sns--sp">
+      {
+        snsItems.map(({ href, label, img }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+          >
+            <img src={img} alt={label} width="40" height="40" loading="lazy" />
+          </a>
+        ))
+      }
+    </div>
+    <p class="mf-footer__note mf-footer__note--sp">
+      このサイトはMELINDA様のご協力のもと作成したコーディング用の練習課題です。実在の人物・団体とは関係ありません。
+    </p>
+    <p class="mf-footer__copyright mf-footer__copyright--sp">&copy; 2021 MELIA FITNESS</p>
+  </div>
+</footer>

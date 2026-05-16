@@ -70,7 +70,7 @@ const SkillsList = () => {
               onClick={() => toggleItem(category)}
               className="w-full bg-white rounded-2xl text-left hover:bg-opacity-80 transition-all border border-[var(--white-icon-tr)] cursor-pointer overflow-hidden"
             >
-              <div className="flex items-center gap-3 p-4">
+              <div className="flex items-center gap-3 p-8">
                 {CategoryIcons[category]}
                 <div className="flex items-center gap-2 flex-grow justify-between">
                   <div className="min-w-0 max-w-[200px] md:max-w-none overflow-hidden">

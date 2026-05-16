@@ -1,8 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import svgl from "../../public/svgl.png";
-import stockin from "../../public/stockin.png";
-import velez from "../../public/velez.png";
 import ohaImage from "../../public/oha.webp";
 import ravek from "../../public/ravek.webp";
 import gardensalad from "../../public/gardensalad.webp";
@@ -14,22 +11,19 @@ interface Project {
   link: string;
   preview: string;
   status: string;
+  intent: string;
+  tech: string[];
 }
 
 const projects: Project[] = [
-  {
-    title: "OHA!",
-    image: ohaImage as ImageMetadata,
-    link: "",
-    preview: "/mock_site/oha/",
-    status: "架空サイト",
-  },
   {
     title: "Ravek",
     image: ravek as ImageMetadata,
     link: "",
     preview: "/mock_site/webservice/",
     status: "架空サイト",
+    intent: "BtoB SaaSを想定したWebサービスLP。信頼感と機能訴求を両立するレイアウト構成を目指しました。",
+    tech: ["Astro", "SCSS", "JavaScript"],
   },
   {
     title: "Garden Salad",
@@ -37,6 +31,17 @@ const projects: Project[] = [
     link: "",
     preview: "/mock_site/GardenSalad/",
     status: "架空サイト",
+    intent: "飲食店向けブランドサイト。写真の迫力を活かしたフルスクリーンレイアウトで食欲を刺激するデザインを目指しました。",
+    tech: ["Astro", "SCSS", "JavaScript"],
+  },
+  {
+    title: "OHA!",
+    image: ohaImage as ImageMetadata,
+    link: "",
+    preview: "/mock_site/oha/",
+    status: "架空サイト",
+    intent: "目覚まし×マッチングをテーマにしたアプリLP。ユーザーの共感を引き出すコピーと直感的なCTAを意識して設計しました。",
+    tech: ["HTML", "SCSS", "JavaScript"],
   },
   {
     title: "MELIA FITNESS",
@@ -44,29 +49,9 @@ const projects: Project[] = [
     link: "",
     preview: "/mock_site/MELIAFITNESS/",
     status: "架空サイト",
+    intent: "パーソナルトレーニングジムのLP。高級感と説得力を意識したビジュアル構成で、入会への導線を強く設計しました。",
+    tech: ["Astro", "SCSS", "JavaScript"],
   },
-  {
-    title: "StockIn",
-    image: stockin as ImageMetadata,
-    link: "",
-    preview: "",
-    status: "架空サイト",
-  },
-  {
-    title: "Svgl.app",
-    image: svgl as ImageMetadata,
-    link: "",
-    preview: "",
-    status: "架空サイト",
-  },
-  {
-    title: "Rifas Velez Web",
-    image: velez as ImageMetadata,
-    link: "",
-    preview: "",
-    status: "架空サイト",
-  },
-  
 ];
 ---
 
@@ -81,69 +66,82 @@ const projects: Project[] = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {
         projects.map((project) => (
-          <div class="group">
-            <a
-              href={project.preview}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="block"
-            >
-              <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-4">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  class="w-full h-48 md:h-72 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div class="flex items-center px-3">
-                <div class="flex-grow">
-                  <h4 class="text-2xl font-semibold">{project.title}</h4>
-                  <span class="py-1 text-sm text-[var(--white-icon)]">
-                    {project.status}
-                  </span>
+          <div class="project-card group">
+            <div class="project-img-area rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-4 relative cursor-pointer">
+              <Image
+                src={project.image}
+                alt={project.title}
+                class="project-img w-full h-48 md:h-72 object-cover"
+              />
+              <div class="project-overlay absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
+                <p class="text-xs text-white/60 uppercase tracking-wider mb-1">制作意図</p>
+                <p class="text-white text-sm leading-relaxed mb-4">{project.intent}</p>
+                <p class="text-xs text-white/60 uppercase tracking-wider mb-2">使用技術</p>
+                <div class="flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span class="text-xs bg-white/20 text-white px-2 py-1 rounded-full">{t}</span>
+                  ))}
                 </div>
-                <div class="flex gap-2 ml-auto">
-                  <a
-                    target="_blank"
-                    href={project.preview}
-                    aria-label="Preview"
-                    class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-white hover:bg-[var(--white-icon-tr)]"
+              </div>
+            </div>
+            <div class="flex items-center px-3">
+              <div class="flex-grow">
+                <h4 class="text-2xl font-semibold">{project.title}</h4>
+                <span class="py-1 text-sm text-[var(--white-icon)]">
+                  {project.status}
+                </span>
+              </div>
+              <div class="flex gap-2 ml-auto">
+                <a
+                  target="_blank"
+                  href={project.preview}
+                  rel="noopener noreferrer"
+                  aria-label="Preview"
+                  class="project-link size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-white hover:bg-[var(--white-icon-tr)]"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="size-7"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="size-7"
-                    >
-                      <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
-                    </svg>
-                  </a>
-                </div>
+                    <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
+                  </svg>
+                </a>
               </div>
-            </a>
+            </div>
           </div>
         ))
       }
     </div>
-    <!-- もっと見るボタン（非表示）
-    <a
-      target="_blank"
-      href="https://github.com/Gothsec?tab=repositories"
-      aria-label="GitHub"
-      class="w-full flex items-center justify-center gap-2 mt-9 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full bg-white hover:bg-[var(--white-icon-tr)] hover:scale-105"
-    >
-      <span class="md:text-lg text-md">もっと見る</span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        class="size-6"
-      >
-        <path
-          d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"
-        ></path>
-      </svg>
-    </a>
-    -->
   </div>
 </section>
+
+<style>
+  .project-card.is-active .project-overlay {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>(".project-card");
+  const hasHover = window.matchMedia("(hover: hover)").matches;
+
+  if (!hasHover) {
+    cards.forEach((card) => {
+      const imgArea = card.querySelector<HTMLElement>(".project-img-area");
+
+      imgArea?.addEventListener("click", () => {
+        const isActive = card.classList.contains("is-active");
+        cards.forEach((c) => c.classList.remove("is-active"));
+        if (!isActive) card.classList.add("is-active");
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!(e.target as HTMLElement).closest(".project-card")) {
+        cards.forEach((c) => c.classList.remove("is-active"));
+      }
+    });
+  }
+</script>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 28" width="140" height="28">
+  <!-- Border (rectangle around text) -->
+  <rect
+    x="0.5"
+    y="0.5"
+    width="139"
+    height="27"
+    fill="none"
+    stroke="#1a1a1a"
+    stroke-width="1"
+  />
+
+  <!-- Brand name text (monospace, dark) -->
+  <text
+    x="12"
+    y="21"
+    font-family="'Courier New', Courier, monospace"
+    font-size="19"
+    font-weight="700"
+    fill="#1a1a1a"
+    letter-spacing="0.5"
+  >KoEn<tspan fill="#00bcd4">J</tspan>ineer</text>
+</svg>

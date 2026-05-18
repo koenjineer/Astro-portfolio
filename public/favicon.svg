@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#3B82F6"/>
-  <text x="16" y="21.5" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="auto" letter-spacing="-0.5">HC</text>
-</svg>
+<svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a1a" height="32" rx="5" width="32"/><path d="m4 5 12 11-12 11" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/><rect fill="#00bcd4" height="3.5" rx="1.5" width="12" x="17" y="23"/></svg>

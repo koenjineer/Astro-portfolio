@@ -26,6 +26,7 @@ pnpm-debug.log*
 # Claude Code working files
 .claude/handoff/
 .claude/worktrees/
+.claude/settings.local.json
 
 # lock file (using pnpm)
 package-lock.json

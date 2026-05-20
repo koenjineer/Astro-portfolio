@@ -1,4 +1,6 @@
 @use 'variables' as *;
+@use '../shared/reset';
+@use '../shared/utilities';
 @use 'animations';
 @use 'section-title';
 @use 'header';

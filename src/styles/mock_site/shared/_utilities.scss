@@ -1,0 +1,15 @@
+.pc-only {
+  display: inline;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.sp-only {
+  display: none;
+
+  @media (max-width: 767px) {
+    display: inline;
+  }
+}

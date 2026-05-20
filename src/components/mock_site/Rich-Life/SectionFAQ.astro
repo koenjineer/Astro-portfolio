@@ -1,0 +1,81 @@
+---
+const faqs = [
+  {
+    q: 'Rich-Lifeはどんなサービスですか？',
+    a: 'Rich-lifeは必要なときに必要なものだけを使える家具・家電のレンタルサービスです。',
+  },
+  {
+    q: 'レンタル期間は選べますか？',
+    a: 'レンタル期間は1ヶ月からです。更新手続きは毎月自動で行いますので更新手続きは不要です。',
+  },
+  {
+    q: '注文してから届くまでどのくらい期間がかかりますか？',
+    a: '商品とお住まいの地域によりますが、約1週間ほどでお届けいたします。',
+  },
+  {
+    q: '商品の交換は可能ですか？',
+    a: '可能でございます。マイページより交換申請手続きをお願いいたします。',
+  },
+  {
+    q: '申込の仕方を教えてください。',
+    a: '1.ご希望の商品を選択し、カートへ入れてください。2.右上のカートボタンを押し、お届け先と支払い情報の登録をお願いいたします。3.配送日を選択し、注文確定ボタンを押していただけましたら注文完了となります。',
+  },
+];
+---
+<section class="rl-faq">
+  <div class="rl-faq__inner">
+    <div class="rl-faq__title rl-fade">
+      <h2 class="rl-faq__title-jp">よくある質問</h2>
+      <img src="/mock_site/Rich-Life/images/section-line.svg" alt="" class="rl-faq__line" loading="lazy" decoding="async" />
+      <p class="rl-faq__title-en">FAQ</p>
+    </div>
+    <div class="rl-faq__list">
+      {faqs.map((faq, index) => (
+        <div class="rl-faq__item rl-fade" data-faq>
+          <button class="rl-faq__q" aria-expanded="false" aria-controls={`faq-answer-${index}`}>
+            <div class="rl-faq__q-inner">
+              <span class="rl-faq__q-label">Q</span>
+              <span class="rl-faq__q-text">{faq.q}</span>
+            </div>
+            <span class="rl-faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="rl-faq__a" id={`faq-answer-${index}`} hidden>
+            <div class="rl-faq__a-inner">
+              <span class="rl-faq__a-label">A</span>
+              <p class="rl-faq__a-text">{faq.a}</p>
+            </div>
+          </div>
+          <div class="rl-faq__divider"></div>
+        </div>
+      ))}
+    </div>
+    <a href="#" class="rl-faq__more-btn rl-fade">
+      よくある質問を見る
+      <span class="rl-faq__more-arrow">&#9654;</span>
+    </a>
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll('[data-faq]');
+  items.forEach(item => {
+    const btn = item.querySelector('.rl-faq__q') as HTMLButtonElement;
+    const answer = item.querySelector('.rl-faq__a') as HTMLElement;
+    const icon = item.querySelector('.rl-faq__icon') as HTMLElement;
+    const divider = item.querySelector('.rl-faq__divider') as HTMLElement;
+
+    btn?.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      if (isOpen) {
+        answer.hidden = true;
+        icon.textContent = '+';
+        divider.style.opacity = '1';
+      } else {
+        answer.hidden = false;
+        icon.textContent = '−';
+        divider.style.opacity = '0';
+      }
+    });
+  });
+</script>

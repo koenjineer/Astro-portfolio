@@ -1,0 +1,83 @@
+@use 'variables' as *;
+
+.rl-fv {
+  position: relative;
+  height: 476px;
+  background: url('/mock_site/Rich-Life/images/fv-pc.webp') center/cover no-repeat;
+
+  @media (max-width: $bp-sp) {
+    height: 742px;
+    background-image: url('/mock_site/Rich-Life/images/fv-sp.webp');
+    background-position: center;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 16px;
+    max-width: 1440px;
+    margin: 0 auto;
+
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__catch {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__catch-line {
+    display: inline-block;
+    background: $color-white;
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: 1.6px;
+    color: $color-main;
+    line-height: 1.5;
+    padding: 4px 24px;
+
+    @media (max-width: $bp-sp) {
+      font-size: 28px;
+      letter-spacing: 1.12px;
+    }
+
+    &--pc {
+      @media (max-width: $bp-sp) {
+        display: none;
+      }
+    }
+
+    &--sp {
+      display: none;
+
+      @media (max-width: $bp-sp) {
+        display: inline-block;
+      }
+    }
+  }
+
+  &__sub {
+    span {
+      display: inline-block;
+      background: $color-white;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 0.96px;
+      color: $color-main;
+      line-height: 1.5;
+      padding: 8px 24px;
+
+      @media (max-width: $bp-sp) {
+        font-size: 16px;
+        letter-spacing: 0.64px;
+      }
+    }
+  }
+}

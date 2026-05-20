@@ -1,0 +1,42 @@
+---
+const topItems = [
+  'しっくりくる家具を選びたい。でもいきなり買うのは自信がない',
+  '引っ越しのたびに物を持っていることが大きな負担である。',
+  'きちんとした家具を使いたいけど、予算的に負担が大きい',
+];
+const rowItems = [
+  '新しい商品が出たら買い換えたい',
+  '模様替えをもっと楽しみたい',
+];
+const bottomItem = 'モノを捨てない、環境に優しい暮らしを楽しみながらしたい';
+---
+<section class="rl-solution">
+  <div class="rl-solution__inner">
+    <div class="rl-solution__title rl-fade">
+      <h2 class="rl-solution__title-jp">こんなことでお悩みではないですか？</h2>
+      <img src="/mock_site/Rich-Life/images/section-line.svg" alt="" class="rl-solution__line" loading="lazy" decoding="async" />
+      <p class="rl-solution__title-en">SOLUTION</p>
+    </div>
+    <ul class="rl-solution__list">
+      {topItems.map(item => (
+        <li class="rl-solution__item rl-fade">
+          <img src="/mock_site/Rich-Life/images/icon-check.svg" alt="" class="rl-solution__check" width="32" height="32" loading="lazy" decoding="async" />
+          <p class="rl-solution__text">{item}</p>
+        </li>
+      ))}
+      <li class="rl-solution__item-row rl-fade">
+        {rowItems.map(item => (
+          <div class="rl-solution__item">
+            <img src="/mock_site/Rich-Life/images/icon-check.svg" alt="" class="rl-solution__check" width="32" height="32" loading="lazy" decoding="async" />
+            <p class="rl-solution__text">{item}</p>
+          </div>
+        ))}
+      </li>
+      <li class="rl-solution__item rl-fade">
+        <img src="/mock_site/Rich-Life/images/icon-check.svg" alt="" class="rl-solution__check" width="32" height="32" loading="lazy" decoding="async" />
+        <p class="rl-solution__text">{bottomItem}</p>
+      </li>
+    </ul>
+
+  </div>
+</section>

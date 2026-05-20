@@ -1,0 +1,52 @@
+// Colors
+$color-white:   #ffffff;
+$color-main:    #565956;
+$color-green:   #609484;
+$color-gold:    #948260;
+
+// Fonts
+$font-jp: 'Noto Sans JP', sans-serif;
+$font-en: 'Jost', sans-serif;
+
+// Breakpoints
+$bp-sp: 767px;
+$bp-pc: 768px;
+
+// Container
+$container-padding-pc: 130px;
+$container-padding-sp: 20px;
+
+// Section heading mixin (shared across all sections)
+@mixin section-heading {
+  &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  &__title-jp {
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.96px;
+    color: $color-main;
+    line-height: 1.5;
+  }
+
+  &__line {
+    width: 160px;
+    height: 1px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  &__title-en {
+    font-family: $font-en;
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0.96px;
+    color: $color-main;
+    line-height: 1.5;
+  }
+}

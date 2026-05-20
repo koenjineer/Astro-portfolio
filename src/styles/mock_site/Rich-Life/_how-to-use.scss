@@ -1,0 +1,100 @@
+@use 'variables' as *;
+
+.rl-how-to-use {
+  padding: 88px 16px;
+
+  @media (max-width: $bp-sp) {
+    padding-top: 56px;
+  }
+
+  @include section-heading;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+    max-width: 1180px;
+    margin: 0 auto;
+
+    @media (max-width: $bp-sp) {
+      gap: 32px;
+    }
+  }
+
+  &__flow {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+
+    @media (max-width: $bp-sp) {
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+  }
+
+  &__step {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    width: 268px;
+
+    @media (max-width: $bp-sp) {
+      width: 100%;
+      max-width: 343px;
+    }
+  }
+
+  &__img {
+    width: 268px;
+    height: 268px;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+
+    @media (max-width: $bp-sp) {
+      width: 100%;
+      height: 343px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  &__num-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  &__num {
+    font-family: $font-en;
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0.96px;
+    color: $color-green;
+    line-height: 1.5;
+  }
+
+  &__name {
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.8px;
+    color: $color-main;
+    line-height: 1.5;
+  }
+
+  &__body {
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    color: $color-main;
+    line-height: 1.5;
+  }
+}

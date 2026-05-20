@@ -1,0 +1,56 @@
+---
+const voices = [
+  {
+    num: '01',
+    img: 'voice-01.webp',
+    bg: '#f2f4f1',
+    titles: ['センスのいい家具で', 'ワンランク上のお部屋に'],
+    body: '必要なときにだけ借りることができるコンセプトに魅力を感じて利用。レンタルできる家具はどれもセンスが良いので、ハズレがありません。そしてRich-Lifeの家具をお迎えしたことで、いつものおうち空間がワンランク上の部屋になって本当にうれしいです。今ではシーズンごとに家具のテイストを変えるのが楽しみになっています。',
+    meta: '20代女性・XXXX子さん',
+  },
+  {
+    num: '02',
+    img: 'voice-02.webp',
+    bg: '#ffffff',
+    titles: ['家具家電を汚した時の', 'レンタル保証がうれしい。'],
+    body: '家具のレンタルに興味はあったものの、小さい子どもがいるので家具・家電を汚してしまった時のことが心配でなかなか踏み切れずにいました。ですがRich-Lifeは家具を汚したときの保証があるので安心して利用できています。以前子供がソファーに飲み物をこぼしてしまったのですが無料で交換してくれてとても助かりました。',
+    meta: '30代女性・XXXX子さん',
+  },
+  {
+    num: '03',
+    img: 'voice-03.webp',
+    bg: '#f2f4f1',
+    titles: ['本当に好きなモノに囲まれる', '豊かな暮らしを。'],
+    body: '子どもが巣立ち、これからは必要最小限でかつ品質の良いお気に入りのモノたちに囲まれた生活をしたいと思っていました。でもいきなり購入するのは気が引ける、と思っていたところこちらのサービスを見つけました。月額440円〜利用できますので色々試しながらこれからの自分たちに合った家具・家電を探しています。',
+    meta: '50代女性・XXXX子さん',
+  },
+];
+---
+<section class="rl-voice">
+  <div class="rl-voice__title rl-fade">
+    <h2 class="rl-voice__title-jp">利用者さまの声</h2>
+    <img src="/mock_site/Rich-Life/images/section-line.svg" alt="" class="rl-voice__line" loading="lazy" decoding="async" />
+    <p class="rl-voice__title-en">VOICE</p>
+  </div>
+  <ul class="rl-voice__list">
+    {voices.map(v => (
+      <li class="rl-voice__item rl-fade">
+        <div class="rl-voice__img-wrap">
+          <img src={`/mock_site/Rich-Life/images/${v.img}`} alt="" class="rl-voice__img" loading="lazy" decoding="async" />
+          <div class="rl-voice__review-label">REVIEW {v.num}</div>
+        </div>
+        <div class="rl-voice__comment" style={`background: ${v.bg};`}>
+          <div class="rl-voice__comment-inner">
+            <div class="rl-voice__titles">
+              {v.titles.map(t => (
+                <span class="rl-voice__title-tag">{t}</span>
+              ))}
+            </div>
+            <p class="rl-voice__body">{v.body}</p>
+            <p class="rl-voice__meta">{v.meta}</p>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>

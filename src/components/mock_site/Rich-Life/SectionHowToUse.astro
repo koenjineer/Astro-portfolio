@@ -1,0 +1,31 @@
+---
+const steps = [
+  { num: '01', img: 'how-to-search.webp', title: 'ネットで注文', body: 'スマホやパソコンから、商品と配送希望日を選んで、注文' },
+  { num: '02', img: 'how-to-moving.webp', title: '配送・設置', body: '専門業者がご自宅までお届け 商品の搬入は全ておまかせ' },
+  { num: '03', img: 'how-to-chair.webp', title: 'ご利用', body: '購入した商品と同じように普段の生活でご利用いただけます' },
+  { num: '04', img: 'how-to-room.webp', title: '交換・返送', body: '交換や返却の際も、搬出は専門業者に全ておまかせ ※一部地域を除く' },
+];
+---
+<section class="rl-how-to-use">
+  <div class="rl-how-to-use__inner">
+    <div class="rl-how-to-use__title rl-fade">
+      <h2 class="rl-how-to-use__title-jp">気軽に簡単に<br class="sp-only" />Rich-Lifeの使い方</h2>
+      <img src="/mock_site/Rich-Life/images/section-line.svg" alt="" class="rl-how-to-use__line" loading="lazy" decoding="async" />
+      <p class="rl-how-to-use__title-en">HOW TO USE</p>
+    </div>
+    <ol class="rl-how-to-use__flow">
+      {steps.map(step => (
+        <li class="rl-how-to-use__step rl-fade">
+          <img src={`/mock_site/Rich-Life/images/${step.img}`} alt={step.title} class="rl-how-to-use__img" width="268" height="268" loading="lazy" decoding="async" />
+          <div class="rl-how-to-use__info">
+            <div class="rl-how-to-use__num-row">
+              <span class="rl-how-to-use__num">{step.num}</span>
+              <h3 class="rl-how-to-use__name">{step.title}</h3>
+            </div>
+            <p class="rl-how-to-use__body">{step.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

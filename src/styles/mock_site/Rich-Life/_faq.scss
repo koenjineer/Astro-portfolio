@@ -1,0 +1,157 @@
+@use 'variables' as *;
+
+.rl-faq {
+  padding: 88px 16px;
+
+  @media (max-width: $bp-sp) {
+    padding-top: 56px;
+  }
+
+  @include section-heading;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+    max-width: 1440px;
+    margin: 0 auto;
+
+    @media (max-width: $bp-sp) {
+      gap: 32px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 24px;
+    width: 100%;
+    max-width: 1184px;
+
+    @media (max-width: $bp-sp) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__q {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    gap: 16px;
+    min-height: 48px;
+    -webkit-tap-highlight-color: rgba(96, 148, 132, 0.15);
+
+    @media (max-width: $bp-sp) {
+      align-items: center;
+    }
+  }
+
+  &__q-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: 1;
+  }
+
+  &__q-label {
+    font-family: $font-en;
+    font-weight: 600;
+    font-size: 18px;
+    color: $color-gold;
+    line-height: 1.5;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  &__q-text {
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    color: $color-main;
+    line-height: 1.5;
+  }
+
+  &__icon {
+    font-size: 20px;
+    color: $color-main;
+    flex-shrink: 0;
+    line-height: 1.5;
+    font-style: normal;
+    margin-top: 2px;
+  }
+
+  &__divider {
+    height: 1px;
+    background: $color-main;
+    opacity: 0.2;
+    margin: 0 22px;
+    transition: opacity 0.2s;
+  }
+
+  &__a {
+    padding: 16px 22px 24px;
+  }
+
+  &__a-inner {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  &__a-label {
+    font-family: $font-en;
+    font-weight: 600;
+    font-size: 16px;
+    color: $color-main;
+    line-height: 1.5;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  &__a-text {
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    color: $color-main;
+    line-height: 1.5;
+  }
+
+  &__more-btn {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    padding: 20px 40px 20px 56px;
+    background: $color-green;
+    color: $color-white;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    line-height: 1.5;
+    cursor: pointer;
+    border-radius: 9999px;
+    transition: opacity 0.2s, transform 0.1s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  &__more-arrow {
+    font-size: 14px;
+  }
+}

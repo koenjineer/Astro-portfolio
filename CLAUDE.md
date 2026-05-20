@@ -34,6 +34,23 @@
 - レビュー担当の差異リストを元に修正する
 - 完了したらPMに報告する
 
+#### 画像フォーマットルール
+Figmaから画像を取得する際は、**Figma内部のフォーマットに応じて以下を厳守する**：
+
+| Figma内部フォーマット | 主な用途 | 保存方法 |
+|---|---|---|
+| SVG（ベクター） | アイコン・線・図形・ロゴ | `.svg` のまま保存・使用 |
+| PNG / JPEG（ラスター） | 写真・背景画像・イラスト | `cwebp` コマンドで `.webp` に変換してから保存 |
+
+**変換コマンド例：**
+```bash
+cwebp 元ファイル.png -o 保存先.webp
+```
+
+**禁止事項：**
+- PNGやJPEGの中身を `.webp` という拡張子でそのまま保存しない（ブラウザで表示されない）
+- SVGを無理にラスタライズして `.webp` に変換しない（画質劣化・ファイルサイズ増加）
+
 ### レビュー担当
 - Figmaを読んで現在の実装と比較する
 - 差異を全てリストアップする（小さなズレも見逃さない）
@@ -93,6 +110,48 @@
 - 質問件数: X件 / 上限10件
 - 内訳: アニメーションX件・ホバーX件・SP挙動X件・代替案X件・その他X件
 ```
+
+---
+
+## スクリーンショット運用ルール
+
+修正作業の進捗管理にスクリーンショットを使用する。
+
+### フォルダ構成
+```
+.claude/handoff/screenshots/
+  cta/        pc.png / sp.png
+  header/     pc.png / sp.png
+  fv/         pc.png / sp.png
+  benefit/    pc.png / sp.png
+  authority/  pc.png / sp.png
+  voice/      pc.png / sp.png
+  solution/   pc.png / sp.png
+  lifestyle/  pc.png / sp.png
+  features/   pc.png / sp.png
+  how-to-use/ pc.png / sp.png
+  faq/        pc.png / sp.png
+  footer/     pc.png / sp.png
+```
+
+### ルール
+- 修正着手前に `{セクション名}/` へ `pc.png` / `sp.png` を保存する
+- 修正完了後はフォルダごと削除する
+- 残りフォルダ＝未完了セクション、空になったら全完了
+- 修正指示は「`cta/` を見て修正して」「上から順に全部やって」のように指定できる
+
+---
+
+## 共有スタイル（mock_site共通）
+
+新規mock_siteプロジェクトを作成する際は、必ず以下を `main.scss` の先頭で読み込む：
+
+```scss
+@use '../shared/reset';     // box-sizing / scroll / img / a / ul,ol / button
+@use '../shared/utilities'; // pc-only / sp-only
+```
+
+共有ファイルの置き場所: `src/styles/mock_site/shared/`
 
 ---
 

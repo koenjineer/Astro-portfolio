@@ -1,0 +1,27 @@
+---
+const items = [
+  { num: '01', img: 'benefit-01.webp', text: '交換・返却費が無料で「今」最適な空間を選べる' },
+  { num: '02', img: 'benefit-02.webp', text: '初期コスト抑え、気軽に質の良い空間を手に入れられる' },
+  { num: '03', img: 'benefit-03.webp', text: 'モノを持たずに引っ越しや模様替えを楽しめる' },
+  { num: '04', img: 'benefit-04.webp', text: 'モノをなるべく捨てない、環境に優しい暮らし' },
+  { num: '05', img: 'benefit-05.webp', text: '本当に好きなモノに囲まれる豊かな暮らし' },
+];
+---
+<section class="rl-benefit">
+  <div class="rl-benefit__inner">
+    <div class="rl-benefit__title rl-fade">
+      <h2 class="rl-benefit__title-jp">Rich-Lifeがお約束する、<br class="sp-only" />5つの暮らし</h2>
+      <img src="/mock_site/Rich-Life/images/section-line.svg" alt="" class="rl-benefit__line" loading="lazy" decoding="async" />
+      <p class="rl-benefit__title-en">REALIZATION</p>
+    </div>
+    <ul class="rl-benefit__list">
+      {items.map(item => (
+        <li class="rl-benefit__item rl-fade">
+          <div class="rl-benefit__label">reason {item.num}</div>
+          <img src={`/mock_site/Rich-Life/images/${item.img}`} alt="" class="rl-benefit__img" width="168" height="168" loading="lazy" decoding="async" />
+          <p class="rl-benefit__text">{item.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

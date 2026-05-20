@@ -1,0 +1,155 @@
+---
+const furnitureItems = ['すべて','ソファ','ベッド・寝具','チェア','ダイニング','デスク','収納用品・ケース','テレビ台','照明','カーテン','観葉植物','その他家具'];
+const applianceItems = ['すべて','洗濯機','冷蔵庫','電子レンジ','テレビ','掃除機','AV機器','空調','美容','その他家電'];
+---
+
+<header class="rl-header">
+  <!-- PC -->
+  <div class="rl-header__inner">
+    <a href="#" class="rl-header__logo">
+      <img src="/mock_site/Rich-Life/images/logo.webp" alt="Rich-Life" width="113" height="46" />
+    </a>
+    <nav class="rl-header__nav">
+      <ul class="rl-header__list">
+        <li class="rl-header__item rl-header__item--dropdown" data-dropdown="furniture">
+          <button class="rl-header__btn" aria-expanded="false">
+            家具
+            <img class="rl-header__arrow" src="/mock_site/Rich-Life/images/icon-triangle.svg" alt="" width="16" height="16" />
+          </button>
+          <div class="rl-header__dropdown">
+            <p class="rl-header__dropdown-title">家具</p>
+            <ul class="rl-header__dropdown-list">
+              {furnitureItems.map(item => (
+                <li><a href="#" class="rl-header__dropdown-link">{item}</a></li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        <li class="rl-header__item rl-header__item--dropdown" data-dropdown="appliance">
+          <button class="rl-header__btn" aria-expanded="false">
+            家電
+            <img class="rl-header__arrow" src="/mock_site/Rich-Life/images/icon-triangle.svg" alt="" width="16" height="16" />
+          </button>
+          <div class="rl-header__dropdown">
+            <p class="rl-header__dropdown-title">家電</p>
+            <ul class="rl-header__dropdown-list">
+              {applianceItems.map(item => (
+                <li><a href="#" class="rl-header__dropdown-link">{item}</a></li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        <li class="rl-header__item">
+          <a href="#" class="rl-header__link">法人のお客様へ</a>
+        </li>
+      </ul>
+      <a href="#" class="rl-header__login-btn">ログイン/会員登録</a>
+      <a href="#" class="rl-header__cart">
+        <img src="/mock_site/Rich-Life/images/icon-cart.svg" alt="カート" width="32" height="32" />
+      </a>
+    </nav>
+  </div>
+
+  <!-- SP -->
+  <div class="rl-header__sp">
+    <a href="#" class="rl-header__logo-sp">
+      <img src="/mock_site/Rich-Life/images/logo-sp.webp" alt="Rich-Life" width="52" height="21" />
+    </a>
+    <nav class="rl-header__sp-nav">
+      <ul class="rl-header__sp-list">
+        <li class="rl-header__item rl-header__item--dropdown" data-dropdown="furniture-sp">
+          <button class="rl-header__btn" aria-expanded="false">
+            家具
+            <img class="rl-header__arrow" src="/mock_site/Rich-Life/images/icon-triangle.svg" alt="" width="16" height="16" />
+          </button>
+          <div class="rl-header__dropdown">
+            <p class="rl-header__dropdown-title">家具</p>
+            <ul class="rl-header__dropdown-list">
+              {furnitureItems.map(item => (
+                <li><a href="#" class="rl-header__dropdown-link">{item}</a></li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        <li class="rl-header__item rl-header__item--dropdown" data-dropdown="appliance-sp">
+          <button class="rl-header__btn" aria-expanded="false">
+            家電
+            <img class="rl-header__arrow" src="/mock_site/Rich-Life/images/icon-triangle.svg" alt="" width="16" height="16" />
+          </button>
+          <div class="rl-header__dropdown">
+            <p class="rl-header__dropdown-title">家電</p>
+            <ul class="rl-header__dropdown-list">
+              {applianceItems.map(item => (
+                <li><a href="#" class="rl-header__dropdown-link">{item}</a></li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <div class="rl-header__sp-icons">
+      <a href="#" class="rl-header__sp-icon">
+        <img src="/mock_site/Rich-Life/images/icon-login.svg" alt="ログイン" width="24" height="24" />
+      </a>
+      <a href="#" class="rl-header__sp-icon">
+        <img src="/mock_site/Rich-Life/images/icon-cart-sp.svg" alt="カート" width="24" height="24" />
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const dropdownItems = document.querySelectorAll('.rl-header__item--dropdown');
+
+  dropdownItems.forEach(item => {
+    const btn = item.querySelector('.rl-header__btn');
+    const arrow = item.querySelector('.rl-header__arrow') as HTMLElement | null;
+
+    // PC: hover (mouseenter/mouseleave)
+    item.addEventListener('mouseenter', () => {
+      if (window.innerWidth >= 768) {
+        btn?.setAttribute('aria-expanded', 'true');
+        item.classList.add('is-open');
+        if (arrow) arrow.style.transform = 'rotate(180deg)';
+      }
+    });
+    item.addEventListener('mouseleave', () => {
+      if (window.innerWidth >= 768) {
+        btn?.setAttribute('aria-expanded', 'false');
+        item.classList.remove('is-open');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+      }
+    });
+
+    // SP: メニュー外タップで閉じる
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth < 768) {
+        const target = e.target as Element;
+        if (!target.closest('.rl-header__item--dropdown')) {
+          dropdownItems.forEach(el => {
+            el.classList.remove('is-open');
+            el.querySelector('.rl-header__btn')?.setAttribute('aria-expanded', 'false');
+            const a = el.querySelector('.rl-header__arrow') as HTMLElement;
+            if (a) a.style.transform = 'rotate(0deg)';
+          });
+        }
+      }
+    });
+
+    // PC/SP 両対応: click でトグル
+    btn?.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+      dropdownItems.forEach(el => {
+        el.classList.remove('is-open');
+        el.querySelector('.rl-header__btn')?.setAttribute('aria-expanded', 'false');
+        const a = el.querySelector('.rl-header__arrow') as HTMLElement;
+        if (a) a.style.transform = 'rotate(0deg)';
+      });
+      if (!isOpen) {
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        if (arrow) (arrow as HTMLElement).style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+</script>

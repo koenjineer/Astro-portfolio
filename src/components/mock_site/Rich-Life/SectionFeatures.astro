@@ -1,0 +1,61 @@
+---
+const features = [
+  {
+    point: '01',
+    img: 'features-desk-chair.webp',
+    firstChar: '交',
+    title: '換・返却が自由でカンタン',
+    body: '自分の生活に最適なものを使うために時間や労力をかけて選んだにも関わらず、「思っていたのと違う」と後悔した経験はありませんか？Rich-Lifeでは家具・家電のレンタルができますので取捨選択にかける時間を大幅にカットできます。また実際に使用してみて、自分に合わないと思ったらすぐに交換・返却ができるので、手軽さゆえの心の余裕が生まれるのもポイント。',
+    reversed: false,
+  },
+  {
+    point: '02',
+    img: 'features-subscription.webp',
+    firstChar: '月',
+    title: '額定額制で返却期限なし',
+    body: '1ヶ月という短期間からのレンタルが可能ですので、自分により合う家具・家電を色々試せる手軽さが最大の特徴。また、月額定額制なので費用管理がしやすいのもポイント。',
+    reversed: true,
+  },
+  {
+    point: '03',
+    img: 'features-desk-chair.webp',
+    firstChar: 'き',
+    title: 'ちんとした品質でセンスのいいものだけをセレクト',
+    body: 'きちんとしたモノは自分の生活の質を向上させてくれます。生活の質は心の余裕にも繋がりますので、それが自然と自分の気持ちをも高めてくれる好循環が生まれます。またきちんとした品質でかつセンスのいいものだけを取り揃えておりますので家具・家電の善し悪しが分からないという人でも失敗が少ないのも嬉しいポイントです。',
+    reversed: false,
+  },
+  {
+    point: '04',
+    img: 'features-family.webp',
+    firstChar: 'ラ',
+    title: 'イフステージの変化に対応',
+    body: '年齢が上がるにつれてライフステージは変遷していくもの。それと同時に、そのときの暮らしにあった家具・家電のスペックが変わりますので、購入するとなると生活スタイルが変わるたびに家具・家電の入れ替えを迫られるなんてことも。でもRich-Lifeはレンタル品なので、先の心配をすることなく「今の自分に必要なモノだけ」を置いておける気楽さを手に入れられます。また、まだまだ使えるモノを廃棄するという手間や罪悪感をも払拭してくれます。',
+    reversed: true,
+  },
+];
+---
+<section class="rl-features">
+  <div class="rl-features__inner">
+    <div class="rl-features__title rl-fade">
+      <h2 class="rl-features__title-jp">Rich-Lifeが愛される<br class="sp-only" />4つのポイント</h2>
+      <img src="/mock_site/Rich-Life/images/section-line.svg" alt="" class="rl-features__line" loading="lazy" decoding="async" />
+      <p class="rl-features__title-en">FEATURES</p>
+    </div>
+    <ul class="rl-features__list">
+      {features.map(f => (
+        <li class={`rl-features__item rl-fade ${f.reversed ? 'rl-features__item--reversed' : ''}`}>
+          <div class="rl-features__item-inner">
+          <img src={`/mock_site/Rich-Life/images/${f.img}`} alt="" class="rl-features__img" loading="lazy" decoding="async" />
+          <div class="rl-features__text">
+            <div class="rl-features__point-badge">point {f.point}</div>
+            <h3 class="rl-features__heading">
+              <span class="rl-features__first-char">{f.firstChar}</span>{f.title}
+            </h3>
+            <p class="rl-features__body">{f.body}</p>
+          </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

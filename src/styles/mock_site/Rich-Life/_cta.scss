@@ -1,0 +1,212 @@
+@use 'variables' as *;
+
+.rl-cta {
+  position: relative;
+
+  &__outer {
+    background: url('/mock_site/Rich-Life/images/cta-bg.webp') center/cover no-repeat;
+    padding: 48px 16px;
+
+  }
+
+  &__box {
+    background: $color-white;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 56px 48px;
+    max-width: 719px;
+    margin: 0 auto;
+
+    @media (max-width: $bp-sp) {
+      padding: 32px 16px;
+      max-width: 100%;
+    }
+  }
+
+  &__contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
+
+    @media (max-width: $bp-sp) {
+      gap: 32px;
+      max-width: 311px;
+      margin-inline: auto;
+    }
+  }
+
+  &__copy-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    width: 100%;
+  }
+
+  &__tag {
+    position: absolute;
+    top: -30px;
+    left: 23px;
+    transform: rotate(-29deg);
+    background: $color-main;
+    color: $color-white;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    padding: 4px 16px;
+    white-space: nowrap;
+
+    @media (max-width: $bp-sp) {
+      position: static;
+      transform: none;
+    }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  &__copy-line {
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.96px;
+    color: $color-main;
+    line-height: 1.5;
+
+    @media (max-width: $bp-sp) {
+      font-size: 16px;
+    }
+
+    &--large {
+      font-size: 28px;
+      letter-spacing: 1.12px;
+
+      @media (max-width: $bp-sp) {
+        font-size: 28px;
+      }
+    }
+  }
+
+  &__off {
+    font-size: 28px;
+    letter-spacing: 1.12px;
+  }
+
+  &__merits {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+
+    @media (max-width: $bp-sp) {
+      flex-direction: column;
+    }
+  }
+
+  &__merit {
+    flex: 1;
+    min-width: 0;
+    background: $color-main;
+    color: $color-white;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    line-height: 1.5;
+    padding: 16px;
+    border-radius: 16px;
+    text-align: center;
+    white-space: nowrap;
+
+    @media (max-width: $bp-sp) {
+      white-space: normal;
+    }
+  }
+
+  &__btn-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    @media (max-width: $bp-sp) {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  &__step-group {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $bp-sp) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__step {
+    background: #f2f4f1;
+    padding: 15px 40px;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.8px;
+    color: $color-main;
+    white-space: nowrap;
+    margin-right: -8px;
+
+    @media (max-width: $bp-sp) {
+      margin-right: 0;
+      margin-bottom: -5px;
+    }
+  }
+
+  &__step-arrow {
+    width: 18px;
+    height: auto;
+    transform: rotate(90deg);
+
+    @media (max-width: $bp-sp) {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+    padding: 20px 24px;
+    background: linear-gradient(79.55deg, #669988 2.32%, #669899 96.4%);
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.8px;
+    color: $color-white;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s, transform 0.1s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    @media (max-width: $bp-sp) {
+      width: 100%;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

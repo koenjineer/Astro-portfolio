@@ -1,0 +1,116 @@
+---
+const scenes = [
+  {
+    num: '01',
+    mainImg: 'lifestyle-s01-main.webp',
+    title: '「スキ」なものを際立たせた空間作りを。',
+    titleLines: ['「スキ」なものを', '際立たせた空間作りを。'],
+    stylePoint: 'ソファの足元にオットマンを配置すれば、カウチスタイルの出来上がり。アームレスの特徴を活かして左右どちらにでも足を降ろしやすいので、楽な姿勢を見つけてみて。',
+    stylePointImg: 'lifestyle-s01-sp-style.webp',
+    advice: 'モバイルプロジェクターをサイドテーブルに置いて、足を伸ばした状態でゆったりと映画を楽むのはどうでしょう。Rich-Lifeではターンテーブルやスピーカーなどの音楽家電も取り扱っています。',
+    adviceImg: 'lifestyle-s01-sp-advice.webp',
+    subImgLeft: { src: 'lifestyle-s01-man.webp' },
+    subImgRight: { src: 'lifestyle-s01-projector.webp' },
+    reversed: false,
+    lineup: [
+      { img: 'lineup-speaker.webp', name: 'House of Speaker', variant: 'Rich Black' },
+      { img: 'lineup-projector.webp', name: 'Mobile Projector', variant: 'Silver' },
+      { img: 'lineup-roomsofa.webp', name: 'Couch Sofa', variant: '1P' },
+    ],
+  },
+  {
+    num: '02',
+    mainImg: 'lifestyle-s02-main.webp',
+    title: '季節にあった彩りを手軽に楽しむ。',
+    titleLines: ['季節にあった彩りを', '手軽に楽しむ。'],
+    stylePoint: 'ソファの上のクッションや壁面のフレーム、ソファ横の1人掛けの椅子などをベージュ〜ブラウンのアースカラーで統一。一方で碧編の白をワゴンの上に置くことで調和をとり、全体的に落ち着いた雰囲気に。',
+    stylePointImg: 'lifestyle-s02-sp-style.webp',
+    advice: 'お部屋のコーディネートをまとめるコツの一つとして、同系色を散らして使うテクニックがあります。寒い冬の日でもどこかあたたかさと落ち着きを感じさせるベージュ〜ブラウンのアースカラーを試してみては？',
+    adviceImg: 'lifestyle-s02-sp-advice.webp',
+    subImgLeft: { src: 'lifestyle-s02-left.webp' },
+    subImgRight: { src: 'lifestyle-s02-right.webp' },
+    reversed: true,
+    lineup: [
+      { img: 'lineup-sofa.webp', name: 'Low Sofa', variant: 'ローソファ' },
+      { img: 'lineup-table.webp', name: 'Mini Table', variant: '直径45cm' },
+      { img: 'lineup-chair.webp', name: 'Single Sofa', variant: '一人掛けソファ' },
+    ],
+  },
+];
+---
+<section class="rl-lifestyle">
+  <div class="rl-lifestyle__banner rl-fade">
+    <div class="rl-lifestyle__banner-box">
+      <p class="rl-lifestyle__banner-text">Rich-Lifeの家具・家電レンタルサービスはそんな理想の暮らしをご提供いたします。</p>
+    </div>
+    <img src="/mock_site/Rich-Life/images/solution-border.svg" alt="" class="rl-lifestyle__banner-border" loading="lazy" decoding="async" />
+  </div>
+  <div class="rl-lifestyle__title rl-fade">
+    <h2 class="rl-lifestyle__title-jp">Rich-Lifeで叶える、<br class="sp-only" />理想の暮らし紹介</h2>
+    <img src="/mock_site/Rich-Life/images/section-line.svg" alt="" class="rl-lifestyle__line" loading="lazy" decoding="async" />
+    <p class="rl-lifestyle__title-en">REALIZATION</p>
+  </div>
+
+  {scenes.map(scene => (
+    <div class="rl-lifestyle__scene">
+      <div class="rl-lifestyle__scene-bg"></div>
+      <div class="rl-lifestyle__scene-inner">
+        <div class="rl-lifestyle__main-img-wrap">
+          <p class="rl-lifestyle__scene-num">SCENE {scene.num}</p>
+          <img src={`/mock_site/Rich-Life/images/${scene.mainImg}`} alt="" class="rl-lifestyle__main-img" loading="lazy" decoding="async" />
+        </div>
+
+        <div class={`rl-lifestyle__detail ${scene.reversed ? 'rl-lifestyle__detail--reversed' : ''}`}>
+          <div class="rl-lifestyle__text-box rl-fade">
+            <div class="rl-lifestyle__scene-title-group">
+              <span class="rl-lifestyle__scene-title rl-lifestyle__scene-title--pc">{scene.title}</span>
+              {scene.titleLines.map(line => (
+                <span class="rl-lifestyle__scene-title rl-lifestyle__scene-title--sp">{line}</span>
+              ))}
+            </div>
+            <div class="rl-lifestyle__point">
+              <div class="rl-lifestyle__point-header">
+                <span class="rl-lifestyle__point-label">STYLE POINT</span>
+                <span class="rl-lifestyle__point-line"></span>
+              </div>
+              <p class="rl-lifestyle__point-body">{scene.stylePoint}</p>
+              <img src={`/mock_site/Rich-Life/images/${scene.stylePointImg}`} alt="" class="rl-lifestyle__sp-img" loading="lazy" decoding="async" />
+            </div>
+            <div class="rl-lifestyle__point">
+              <div class="rl-lifestyle__point-header">
+                <span class="rl-lifestyle__point-label">ONE POINT ADVICE</span>
+                <span class="rl-lifestyle__point-line"></span>
+              </div>
+              <p class="rl-lifestyle__point-body">{scene.advice}</p>
+              <img src={`/mock_site/Rich-Life/images/${scene.adviceImg}`} alt="" class="rl-lifestyle__sp-img" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="rl-lifestyle__sub-imgs">
+            <img src={`/mock_site/Rich-Life/images/${scene.subImgLeft.src}`} alt="" class="rl-lifestyle__sub-img rl-lifestyle__sub-img--left" loading="lazy" decoding="async" />
+            <img src={`/mock_site/Rich-Life/images/${scene.subImgRight.src}`} alt="" class="rl-lifestyle__sub-img rl-lifestyle__sub-img--right" loading="lazy" decoding="async" />
+          </div>
+        </div>
+
+        <div class="rl-lifestyle__lineup rl-fade">
+          <div class="rl-lifestyle__lineup-header">
+            <img src="/mock_site/Rich-Life/images/lineup-divider.svg" alt="" class="rl-lifestyle__lineup-line" loading="lazy" decoding="async" />
+            <p class="rl-lifestyle__lineup-title">使用している家具・家電</p>
+            <img src="/mock_site/Rich-Life/images/lineup-divider.svg" alt="" class="rl-lifestyle__lineup-line" loading="lazy" decoding="async" />
+          </div>
+          <p class="rl-lifestyle__lineup-en">LINE UP</p>
+          <ul class="rl-lifestyle__lineup-grid">
+            {scene.lineup.map(item => (
+              <li class="rl-lifestyle__lineup-item">
+                <img src={`/mock_site/Rich-Life/images/${item.img}`} alt={item.name} class="rl-lifestyle__lineup-img" loading="lazy" decoding="async" />
+                <div class="rl-lifestyle__lineup-info">
+                  <p class="rl-lifestyle__lineup-name">{item.name}</p>
+                  <p class="rl-lifestyle__lineup-variant">{item.variant}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  ))}
+</section>

@@ -1,0 +1,123 @@
+@use 'variables' as *;
+
+.rl-features {
+  background: url('/mock_site/Rich-Life/images/features-bg.webp') center/cover no-repeat;
+  padding: 80px 16px;
+
+  @media (max-width: $bp-sp) {
+    padding-top: 56px;
+  }
+
+  @include section-heading;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 52px;
+    max-width: 1180px;
+    margin: 0 auto;
+
+    @media (max-width: $bp-sp) {
+      max-width: 343px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+  }
+
+  &__item {
+    background: $color-white;
+    border-radius: 16px;
+    padding: 32px 16px;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  }
+
+  &__item-inner {
+    display: flex;
+    align-items: center;
+    gap: 8%;
+    max-width: 971px;
+    margin: 0 auto;
+
+    @media (max-width: $bp-sp) {
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+
+  &__item--reversed &__item-inner {
+    flex-direction: row-reverse;
+
+    @media (max-width: $bp-sp) {
+      flex-direction: column;
+    }
+  }
+
+  &__img {
+    width: 40%;
+    max-width: 446px;
+    height: auto;
+    aspect-ratio: 446 / 275;
+    object-fit: cover;
+    flex-shrink: 0;
+
+    @media (max-width: $bp-sp) {
+      width: 100%;
+      max-width: 311px;
+      aspect-ratio: 311 / 192;
+    }
+  }
+
+  &__item:nth-child(2) &__img {
+    @media (max-width: $bp-sp) {
+      aspect-ratio: 311 / 168;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+
+  &__point-badge {
+    display: inline-block;
+    background: $color-gold;
+    color: $color-white;
+    font-family: $font-en;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.8px;
+    line-height: 1.5;
+    padding: 4px 16px;
+    align-self: flex-start;
+  }
+
+  &__heading {
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.8px;
+    color: $color-main;
+    line-height: 1.5;
+  }
+
+  &__first-char {
+    color: $color-gold;
+    font-size: 24px;
+    letter-spacing: 0.96px;
+  }
+
+  &__body {
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    color: $color-main;
+    line-height: 1.5;
+  }
+}

@@ -1,0 +1,19 @@
+---
+---
+<button class="rl-pagetop" id="rl-pagetop" aria-label="ページトップへ">
+  &#9650;
+</button>
+
+<script>
+  const btn = document.getElementById('rl-pagetop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      btn?.classList.add('is-visible');
+    } else {
+      btn?.classList.remove('is-visible');
+    }
+  });
+  btn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>

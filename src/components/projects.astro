@@ -4,6 +4,7 @@ import ohaImage from "../../public/oha.webp";
 import ravek from "../../public/ravek.webp";
 import gardensalad from "../../public/gardensalad.webp";
 import meliafitness from "../../public/meliafitness.webp";
+import richLife from "../../public/rich-life.webp";
 
 interface Project {
   title: string;
@@ -22,7 +23,8 @@ const projects: Project[] = [
     link: "",
     preview: "/mock_site/webservice/",
     status: "架空サイト",
-    intent: "BtoB SaaSを想定したWebサービスLP。信頼感と機能訴求を両立するレイアウト構成を目指しました。",
+    intent:
+      "BtoB SaaSを想定したWebサービスLP。信頼感と機能訴求を両立するレイアウト構成を目指しました。",
     tech: ["Astro", "SCSS", "JavaScript"],
   },
   {
@@ -31,7 +33,28 @@ const projects: Project[] = [
     link: "",
     preview: "/mock_site/GardenSalad/",
     status: "架空サイト",
-    intent: "飲食店向けブランドサイト。写真の迫力を活かしたフルスクリーンレイアウトで食欲を刺激するデザインを目指しました。",
+    intent:
+      "飲食店向けブランドサイト。写真の迫力を活かしたフルスクリーンレイアウトで食欲を刺激するデザインを目指しました。",
+    tech: ["Astro", "SCSS", "JavaScript"],
+  },
+  {
+    title: "MELIA FITNESS",
+    image: meliafitness as ImageMetadata,
+    link: "",
+    preview: "/mock_site/MELIAFITNESS/",
+    status: "架空サイト",
+    intent:
+      "パーソナルトレーニングジムのLP。高級感と説得力を意識したビジュアル構成で、入会への導線を強く設計しました。",
+    tech: ["Astro", "SCSS", "JavaScript"],
+  },
+  {
+    title: "Rich Life",
+    image: richLife as ImageMetadata,
+    link: "",
+    preview: "/mock_site/Rich-Life/",
+    status: "架空サイト",
+    intent:
+      "家具・家電レンタルサービスの架空LP。高級感のあるビジュアルと直感的なUXで、\"試したくなる\"体験を目指しました。",
     tech: ["Astro", "SCSS", "JavaScript"],
   },
   {
@@ -40,17 +63,9 @@ const projects: Project[] = [
     link: "",
     preview: "/mock_site/oha/",
     status: "架空サイト",
-    intent: "目覚まし×マッチングをテーマにしたアプリLP。ユーザーの共感を引き出すコピーと直感的なCTAを意識して設計しました。",
+    intent:
+      "目覚まし×マッチングをテーマにしたアプリLP。ユーザーの共感を引き出すコピーと直感的なCTAを意識して設計しました。",
     tech: ["HTML", "SCSS", "JavaScript"],
-  },
-  {
-    title: "MELIA FITNESS",
-    image: meliafitness as ImageMetadata,
-    link: "",
-    preview: "/mock_site/MELIAFITNESS/",
-    status: "架空サイト",
-    intent: "パーソナルトレーニングジムのLP。高級感と説得力を意識したビジュアル構成で、入会への導線を強く設計しました。",
-    tech: ["Astro", "SCSS", "JavaScript"],
   },
 ];
 ---
@@ -74,12 +89,20 @@ const projects: Project[] = [
                 class="project-img w-full h-48 md:h-72 object-cover"
               />
               <div class="project-overlay absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
-                <p class="text-xs text-white/60 uppercase tracking-wider mb-1">制作意図</p>
-                <p class="text-white text-sm leading-relaxed mb-4">{project.intent}</p>
-                <p class="text-xs text-white/60 uppercase tracking-wider mb-2">使用技術</p>
+                <p class="text-xs text-white/60 uppercase tracking-wider mb-1">
+                  制作意図
+                </p>
+                <p class="text-white text-sm leading-relaxed mb-4">
+                  {project.intent}
+                </p>
+                <p class="text-xs text-white/60 uppercase tracking-wider mb-2">
+                  使用技術
+                </p>
                 <div class="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
-                    <span class="text-xs bg-white/20 text-white px-2 py-1 rounded-full">{t}</span>
+                    <span class="text-xs bg-white/20 text-white px-2 py-1 rounded-full">
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>

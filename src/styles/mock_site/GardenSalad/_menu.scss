@@ -138,7 +138,7 @@
     color: $color-text;
     letter-spacing: 3px;
     text-align: center;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
 
     @media (max-width: $bp-sp) {
       font-size: 24px;
@@ -195,6 +195,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 50px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
     @media (max-width: $bp-sp) {
       grid-template-columns: 1fr;
@@ -275,7 +278,7 @@
     color: $color-text;
     letter-spacing: 3px;
     text-align: center;
-    margin-bottom: 16px;
+    margin: 0 0 16px;
 
     @media (max-width: $bp-sp) {
       font-size: 22px;

@@ -40,17 +40,17 @@ const features: FeatureItem[] = [
 ];
 ---
 
-<section class="ws-feature" id="feature">
+<section class="ws-feature" id="feature" aria-labelledby="ws-feature-heading">
   <div class="ws-feature__header">
     <p class="ws-feature__en">Feature</p>
-    <h2 class="ws-feature__heading">
+    <h2 class="ws-feature__heading" id="ws-feature-heading">
       Ravekの<span class="num">3</span>つの特長
     </h2>
   </div>
 
   {
     features.map((feature) => (
-      <div
+      <article
         class={`ws-feature__item ws-feature__item--${feature.imgPosition}-img`}
       >
         <div class="ws-feature__card">
@@ -74,7 +74,7 @@ const features: FeatureItem[] = [
             loading="lazy"
           />
         </div>
-      </div>
+      </article>
     ))
   }
 </section>

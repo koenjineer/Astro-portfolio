@@ -151,7 +151,9 @@
     display: flex;
     align-items: baseline;
     gap: 6px;
-    margin-bottom: 24px;
+    margin: 0 0 24px;
+    font-weight: inherit;
+    font-size: inherit;
     white-space: nowrap;
 
     .tf {

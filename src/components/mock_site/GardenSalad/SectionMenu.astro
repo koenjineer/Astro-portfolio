@@ -24,18 +24,18 @@ const instagramImgs = [
 ];
 ---
 
-<section class="gs-menu" id="menu">
+<section class="gs-menu" id="menu" aria-labelledby="gs-menu-title">
   <div class="gs-menu__frame">
-    <div class="gs-section-title gs-reveal">
+    <h2 class="gs-section-title gs-reveal" id="gs-menu-title">
       <span class="gs-section-title__ja gs-section-title__ja--light">メニュー</span>
       <span class="gs-section-title__en gs-section-title__en--light">Menu</span>
-      <span class="gs-section-title__line"></span>
-    </div>
+      <span class="gs-section-title__line" aria-hidden="true"></span>
+    </h2>
 
     <p class="gs-menu__note gs-reveal">P : タンパク質　F : 脂質　C : 糖質</p>
 
     <!-- 店長おすすめ（カッテージチーズとバジルのサラダ） -->
-    <div class="gs-menu__featured gs-reveal">
+    <article class="gs-menu__featured gs-reveal">
       <div class="gs-menu__featured-img">
         <img
           src="/mock_site/GardenSalad/images/menu-basil.webp"
@@ -50,7 +50,7 @@ const instagramImgs = [
           <span class="gs-menu__tag-en">Recommendation</span>
           <span class="gs-menu__tag-ja">店長おすすめ</span>
         </div>
-        <p class="gs-menu__item-name">カッテージチーズと<br />バジルのサラダ</p>
+        <h3 class="gs-menu__item-name">カッテージチーズと<br />バジルのサラダ</h3>
         <div class="gs-menu__price">
           <span class="gs-menu__price-symbol">¥</span>
           <span class="gs-menu__price-num">1,100</span>
@@ -58,18 +58,18 @@ const instagramImgs = [
         </div>
         <p class="gs-menu__nutrition">305kcal　P : 16.2g　F : 12.5g　C : 13.3g</p>
       </div>
-    </div>
+    </article>
 
     <!-- その他メニュー -->
-    <div class="gs-menu__grid">
+    <ul class="gs-menu__grid" role="list">
       {
         menuItems.map(({ img, alt, name, price, nutrition }, i) => (
-          <div class={`gs-menu__card gs-reveal gs-reveal--delay-${i + 1}`}>
+          <li class={`gs-menu__card gs-reveal gs-reveal--delay-${i + 1}`}>
             <div class="gs-menu__card-img">
               <img src={img} alt={alt} width="834" height="868" loading="lazy" />
             </div>
             <div class="gs-menu__card-info">
-              <p class="gs-menu__card-name">{name}</p>
+              <h3 class="gs-menu__card-name">{name}</h3>
               <div class="gs-menu__price">
                 <span class="gs-menu__price-symbol">¥</span>
                 <span class="gs-menu__price-num">{price}</span>
@@ -77,10 +77,10 @@ const instagramImgs = [
               </div>
               <p class="gs-menu__card-nutrition">{nutrition}</p>
             </div>
-          </div>
+          </li>
         ))
       }
-    </div>
+    </ul>
 
     <!-- Instagram -->
     <div class="gs-instagram gs-reveal">

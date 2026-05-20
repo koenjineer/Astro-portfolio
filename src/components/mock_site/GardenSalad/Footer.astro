@@ -28,21 +28,23 @@ const snsItems = [
 <footer class="gs-footer">
   <div class="gs-footer__inner">
     <!-- SNS -->
-    <div class="gs-footer__sns">
+    <ul class="gs-footer__sns" aria-label="ソーシャルメディア">
       {
         snsItems.map(({ href, label, img }) => (
-          <a
-            href={href}
-            class="gs-footer__sns-btn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-          >
-            <img src={img} alt={label} width="80" height="80" loading="lazy" />
-          </a>
+          <li>
+            <a
+              href={href}
+              class="gs-footer__sns-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+            >
+              <img src={img} alt="" width="80" height="80" loading="lazy" />
+            </a>
+          </li>
         ))
       }
-    </div>
+    </ul>
 
     <!-- Nav -->
     <nav class="gs-footer__nav" aria-label="フッターナビゲーション">

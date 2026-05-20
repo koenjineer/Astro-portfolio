@@ -53,20 +53,22 @@ const snsItems = [
     </nav>
 
     <!-- SNS -->
-    <div class="mf-footer__sns">
+    <ul class="mf-footer__sns" aria-label="ソーシャルメディア">
       {
         snsItems.map(({ href, label, img }) => (
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-          >
-            <img src={img} alt={label} width="40" height="40" loading="lazy" />
-          </a>
+          <li>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+            >
+              <img src={img} alt="" width="40" height="40" loading="lazy" />
+            </a>
+          </li>
         ))
       }
-    </div>
+    </ul>
 
     <!-- Copyright -->
     <p class="mf-footer__copyright">&copy; 2021 MELIA FITNESS</p>
@@ -77,20 +79,22 @@ const snsItems = [
     <nav class="mf-footer__nav-sp" aria-label="フッターナビゲーション（SP）">
       {navItems.map(({ href, label }) => <a href={href}>{label}</a>)}
     </nav>
-    <div class="mf-footer__sns mf-footer__sns--sp">
+    <ul class="mf-footer__sns mf-footer__sns--sp" aria-label="ソーシャルメディア（SP）">
       {
         snsItems.map(({ href, label, img }) => (
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-          >
-            <img src={img} alt={label} width="40" height="40" loading="lazy" />
-          </a>
+          <li>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+            >
+              <img src={img} alt="" width="40" height="40" loading="lazy" />
+            </a>
+          </li>
         ))
       }
-    </div>
+    </ul>
     <p class="mf-footer__note mf-footer__note--sp">
       このサイトはMELINDA様のご協力のもと作成したコーディング用の練習課題です。実在の人物・団体とは関係ありません。
     </p>

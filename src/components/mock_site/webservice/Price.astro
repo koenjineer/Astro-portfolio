@@ -12,11 +12,11 @@ const features = [
 ];
 ---
 
-<section class="ws-price" id="price">
+<section class="ws-price" id="price" aria-labelledby="ws-price-heading">
   <div class="ws-price__inner">
     <div class="ws-price__header">
       <p class="ws-price__en">Price</p>
-      <h2 class="ws-price__heading">料金プラン</h2>
+      <h2 class="ws-price__heading" id="ws-price-heading">料金プラン</h2>
     </div>
 
     <div class="ws-price__table-wrap">
@@ -25,7 +25,7 @@ const features = [
         <div class="ws-price__plan-header ws-price__plan-header--label"></div>
 
         <div class="ws-price__plan-header">
-          <p class="ws-price__plan-name">ライト</p>
+          <h3 class="ws-price__plan-name">ライト</p>
           <p class="ws-price__plan-price">
             <span class="price-label">月額</span>
             <span class="price-num"> 1,980 </span>
@@ -38,7 +38,7 @@ const features = [
 
         <div class="ws-price__plan-header ws-price__plan-header--featured">
           <span class="ws-price__featured-badge">おすすめ</span>
-          <p class="ws-price__plan-name">ベーシック</p>
+          <h3 class="ws-price__plan-name">ベーシック</p>
           <p class="ws-price__plan-price">
             <span class="price-label">月額</span>
             <span class="price-num"> 2,980 </span>
@@ -50,7 +50,7 @@ const features = [
         </div>
 
         <div class="ws-price__plan-header">
-          <p class="ws-price__plan-name">プレミアム</p>
+          <h3 class="ws-price__plan-name">プレミアム</p>
           <p class="ws-price__plan-price">
             <span class="price-label">月額</span>
             <span class="price-num"> 4,980 </span>

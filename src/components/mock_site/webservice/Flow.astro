@@ -23,17 +23,17 @@ const steps = [
 ];
 ---
 
-<section class="ws-flow" id="flow">
+<section class="ws-flow" id="flow" aria-labelledby="ws-flow-heading">
   <div class="ws-flow__inner">
     <div class="ws-flow__header">
       <p class="ws-flow__en">Flow</p>
-      <h2 class="ws-flow__heading">導入までの流れ</h2>
+      <h2 class="ws-flow__heading" id="ws-flow-heading">導入までの流れ</h2>
     </div>
-    <div class="ws-flow__steps">
+    <div class="ws-flow__steps" role="list">
       {
         steps.map((step, i) => (
           <>
-            <div class="ws-flow__step">
+            <div class="ws-flow__step" role="listitem">
               <p class="ws-flow__step-num">{step.num}</p>
               <div class="ws-flow__step-card">
                 <img

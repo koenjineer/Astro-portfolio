@@ -16,7 +16,7 @@ const navItems = [
     <a href="#" class="ws-header__logo">Ravek</a>
 
     <!-- PC nav (hidden on SP) -->
-    <nav class="ws-header__nav">
+    <nav class="ws-header__nav" aria-label="メインナビゲーション">
       {navItems.map(({ href, label }) => <a href={href}>{label}</a>)}
     </nav>
     <a href="#" class="ws-header__cta">無料で使ってみる</a>
@@ -52,7 +52,7 @@ const navItems = [
       aria-label="メニューを閉じる"></button>
   </div>
   <div class="ws-sp-menu__body">
-    <nav class="ws-sp-menu__nav">
+    <nav class="ws-sp-menu__nav" aria-label="モバイルナビゲーション">
       {
         navItems.map(({ href, label }) => (
           <a href={href} class="ws-sp-menu__nav-item">

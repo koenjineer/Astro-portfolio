@@ -53,6 +53,9 @@
     grid-template-columns: repeat(4, 213px);
     justify-content: center;
     gap: 24px 40px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
     @media (max-width: 767px) {
       grid-template-columns: repeat(4, 75px);

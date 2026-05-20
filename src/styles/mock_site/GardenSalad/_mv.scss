@@ -43,6 +43,9 @@
     left: 178px;
     top: 94px;
     z-index: 2;
+    margin: 0;
+    font-weight: inherit;
+    font-size: inherit;
 
     // SP Figma: left=16px、top=30px（FV top=0からの相対値）
     @media (max-width: $bp-sp) {

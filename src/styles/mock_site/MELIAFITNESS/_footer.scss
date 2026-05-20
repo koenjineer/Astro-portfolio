@@ -67,6 +67,8 @@
     align-items: center;
     gap: 16px;
     margin-bottom: auto;
+    list-style: none;
+    padding: 0;
 
     a {
       display: block;
@@ -165,6 +167,9 @@
         align-items: center;
         gap: 16px;
         justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
 
         a {
           display: block;

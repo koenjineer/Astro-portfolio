@@ -45,13 +45,13 @@
         <h1 class="header__logo">
           <a href=""><img src="./images/logo.png" alt="OHA!" /></a>
         </h1>
-        <nav class="header__nav">
+        <nav class="header__nav" aria-label="メインナビゲーション">
           <a href="#about" class="header__link">サービスについて</a>
           <a href="#how-to-use" class="header__link">使い方</a>
           <a href="#merit" class="header__link">メリット</a>
           <a href="#contact" class="header__button button">お問い合わせ</a>
         </nav>
-        <button id="js-drawer-icon" class="header__open drawer-icon">
+        <button id="js-drawer-icon" class="header__open drawer-icon" type="button" aria-label="メニューを開く" aria-controls="js-drawer-content" aria-expanded="false">
           <span class="drawer-icon__bar"></span>
           <span class="drawer-icon__bar"></span>
           <span class="drawer-icon__bar"></span>
@@ -59,7 +59,7 @@
       </div>
     </header>
 
-    <div id="js-drawer-content" class="drawer-content">
+    <nav id="js-drawer-content" class="drawer-content" aria-label="モバイルナビゲーション">
       <div class="drawer-content__menu">
         <a href="#about" class="drawer-content__link">サービスについて</a>
         <a href="#how-to-use" class="drawer-content__link">使い方</a>
@@ -68,9 +68,10 @@
           <a href="#contact" class="button">お問い合わせ</a>
         </div>
       </div>
-    </div>
+    </nav>
 
-    <div class="mv">
+    <main>
+    <section class="mv" aria-label="メインビジュアル">
       <div class="mv__inner">
         <div class="mv__content">
           <p class="mv__lead">
@@ -90,44 +91,44 @@
           <img src="./images/first-view-img.png " alt="" />
         </div>
       </div>
-    </div>
+    </section>
 
-    <section class="case">
+    <section class="case" aria-labelledby="case-title">
       <div class="case__inner">
-        <h2 class="case__title js-in-view fade-in-up">導入実績</h2>
-        <div class="case__items">
-          <div class="case__item">
+        <h2 class="case__title js-in-view fade-in-up" id="case-title">導入実績</h2>
+        <ul class="case__items">
+          <li class="case__item">
             <img src="./images/case-1-img.png" alt="" />
-          </div>
-          <div class="case__item">
+          </li>
+          <li class="case__item">
             <img src="./images/case-2-img.png" alt="" />
-          </div>
-          <div class="case__item">
+          </li>
+          <li class="case__item">
             <img src="./images/case-3-img.png" alt="" />
-          </div>
-          <div class="case__item">
+          </li>
+          <li class="case__item">
             <img src="./images/case-4-img.png" alt="" />
-          </div>
-          <div class="case__item">
+          </li>
+          <li class="case__item">
             <img src="./images/case-5-img.png" alt="" />
-          </div>
-          <div class="case__item">
+          </li>
+          <li class="case__item">
             <img src="./images/case-6-img.png" alt="" />
-          </div>
-          <div class="case__item">
+          </li>
+          <li class="case__item">
             <img src="./images/case-7-img.png" alt="" />
-          </div>
-          <div class="case__item">
+          </li>
+          <li class="case__item">
             <img src="./images/case-8-img.png" alt="" />
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <section class="news">
+    <section class="news" aria-labelledby="news-title">
       <div class="news__inner inner">
         <div class="news__card">
-          <h2 class="news__title js-in-view fade-in-up">NEWS</h2>
+          <h2 class="news__title js-in-view fade-in-up" id="news-title">NEWS</h2>
           <div class="news__lists">
             <a href="" class="news__list news-link">
               <div class="news-link__meta">
@@ -168,7 +169,7 @@
       </div>
     </section>
 
-    <div id="about" class="about">
+    <section id="about" class="about" aria-label="サービスについて">
       <div class="about__inner">
         <div class="about__title js-in-view fade-in-up">
           <img src="./images/about.logo.png" alt="OHA!" />
@@ -210,9 +211,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <dialog id="js-about-modal" class="about-modal">
+    <dialog id="js-about-modal" class="about-modal" aria-label="OHA!誕生ストーリー">
       <div class="about-modal__head">
         <button class="about-modal__close-icon js-modal-close">
           <img src="./images/close-icon.png" alt="モーダルを閉じる" />
@@ -458,7 +459,7 @@
       </div>
     </section>
 
-    <div class="cta">
+    <aside class="cta" aria-label="アプリダウンロードの案内">
       <div class="cta__inner inner">
         <p class="cta__text">
           どうですか？<br class="hidden-pc" /><span class="inline-block"
@@ -470,13 +471,13 @@
           <a href="#contact" class="button">今すぐダウンロード</a>
         </div>
       </div>
-    </div>
+    </aside>
 
-    <div class="compare">
+    <section class="compare" aria-labelledby="compare-title">
       <div class="compare__inner inner">
-        <div class="compare__title js-in-view fade-in-up">
+        <h2 class="compare__title js-in-view fade-in-up" id="compare-title">
           他のサービスとの違い
-        </div>
+        </h2>
         <div class="compare__content">
           <table class="compare__table">
             <thead>
@@ -511,14 +512,14 @@
         </div>
         <div class="compare__attention">横にスクロールできます</div>
       </div>
-    </div>
+    </section>
 
-    <section class="qa">
+    <section class="qa" aria-labelledby="qa-title">
       <div class="qa__inner inner">
         <div class="qa__title">
           <div class="heading js-in-view fade-in-up">
             <div class="heading__en">Q&A</div>
-            <h2 class="heading__ja">よくあるご質問</h2>
+            <h2 class="heading__ja" id="qa-title">よくあるご質問</h2>
           </div>
         </div>
         <div class="qa__boxes">
@@ -788,6 +789,8 @@
       </div>
     </section>
 
+    </main>
+
     <footer class="footer">
       <div class="footer__inner inner">
         <small class="footer__copyright"
@@ -796,7 +799,7 @@
       </div>
     </footer>
 
-    <a href="#" class="pagetop" id="js-pagetop">
+    <a href="#" class="pagetop" id="js-pagetop" aria-label="ページトップへ戻る">
       <img src="./images/pagetop-img.png" alt="" />
     </a>
 

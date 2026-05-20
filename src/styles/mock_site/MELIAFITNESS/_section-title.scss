@@ -4,17 +4,22 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
 
   &__en {
+    display: block;
     font-family: $font-en;
     font-size: 56px;
     color: $color-dark;
     letter-spacing: 4.48px;
     line-height: 1;
-    margin-right: 24px;
+    margin: 0 24px 0 0;
   }
 
   &__line {
+    display: block;
     width: 340px;
     height: 1px;
     background-color: $color-dark;
@@ -22,13 +27,14 @@
   }
 
   &__jp {
+    display: block;
     width: 100%;
     font-family: $font-jp;
     font-size: 16px;
     font-style: normal;
     color: $color-dark;
     letter-spacing: 1.6px;
-    margin-top: 16px;
+    margin: 16px 0 0;
   }
 
   &--center {

@@ -38,20 +38,22 @@ const snsLinks = [
     <div class="mf-profile__info">
       <div class="mf-profile__name-row">
         <h2 class="mf-profile__name" id="mf-profile-title">Kailani</h2>
-        <div class="mf-profile__sns">
+        <ul class="mf-profile__sns" aria-label="オーナーのソーシャルメディア">
           {
             snsLinks.map(({ href, label, img }) => (
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-              >
-                <img src={img} alt={label} width="40" height="40" loading="lazy" />
-              </a>
+              <li>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                >
+                  <img src={img} alt="" width="40" height="40" loading="lazy" />
+                </a>
+              </li>
             ))
           }
-        </div>
+        </ul>
       </div>
 
       <p class="mf-profile__bio">

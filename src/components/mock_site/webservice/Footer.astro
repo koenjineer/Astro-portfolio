@@ -31,7 +31,7 @@ const snsLinks = [
   <div class="ws-footer__inner">
     <div class="ws-footer__left">
       <a href="#" class="ws-footer__logo">Ravek</a>
-      <nav class="ws-footer__nav">
+      <nav class="ws-footer__nav" aria-label="フッターナビゲーション">
         {navLinks.map(({ href, label }) => <a href={href}>{label}</a>)}
       </nav>
       <div class="ws-footer__copy">
@@ -41,16 +41,18 @@ const snsLinks = [
     </div>
 
     <div class="ws-footer__right">
-      <p class="ws-footer__sns-label">Share on SNS</p>
-      <div class="ws-footer__sns-icons">
+      <p class="ws-footer__sns-label" id="ws-footer-sns-label">Share on SNS</p>
+      <ul class="ws-footer__sns-icons" aria-labelledby="ws-footer-sns-label">
         {
           snsLinks.map(({ href, label, icon }) => (
-            <a href={href} aria-label={label}>
-              <img src={icon} alt={label} width="24" height="24" />
-            </a>
+            <li>
+              <a href={href} aria-label={label}>
+                <img src={icon} alt="" width="24" height="24" />
+              </a>
+            </li>
           ))
         }
-      </div>
+      </ul>
     </div>
   </div>
 </footer>

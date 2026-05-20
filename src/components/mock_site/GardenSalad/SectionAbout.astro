@@ -31,19 +31,19 @@ const items = [
 ];
 ---
 
-<section class="gs-about" id="about">
+<section class="gs-about" id="about" aria-labelledby="gs-about-title">
   <div class="gs-about__inner">
     <!-- セクションタイトル -->
-    <div class="gs-section-title gs-reveal">
+    <h2 class="gs-section-title gs-reveal" id="gs-about-title">
       <span class="gs-section-title__ja">Garden Saladのこだわり</span>
       <span class="gs-section-title__en">About</span>
-      <span class="gs-section-title__line"></span>
-    </div>
+      <span class="gs-section-title__line" aria-hidden="true"></span>
+    </h2>
 
     <!-- コンテンツアイテム（DOM: テキスト → 画像） -->
     {
       items.map(({ num, img, alt, heading, text, imgLeft, imgMirror }) => (
-        <div class={`gs-about__item gs-reveal${imgLeft ? " gs-about__item--img-left" : ""}`}>
+        <article class={`gs-about__item gs-reveal${imgLeft ? " gs-about__item--img-left" : ""}`}>
 
           {/* テキスト列（DOM上は先に来る → SP時に上部表示） */}
           <div class="gs-about__content">
@@ -63,7 +63,7 @@ const items = [
               style={imgMirror ? "transform: scaleX(-1);" : undefined}
             />
           </div>
-        </div>
+        </article>
       ))
     }
   </div>

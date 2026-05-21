@@ -1,92 +1,116 @@
-# Portfolio
+# Hiroyuki Chuman | Portfolio
 
-![OscarHernandez-portfolio](https://github.com/user-attachments/assets/e284a42b-15c5-495c-99c7-ad5c1eb3bbe7)
-![Deploy Status](https://img.shields.io/badge/Deploy-Vercel-black?style=flat&logo=vercel)
+[![Deploy Status](https://img.shields.io/badge/Deploy-Vercel-black?style=flat&logo=vercel)](https://astro-portfolio-sigma-seven.vercel.app)
+
+![Portfolio Screenshot](public/ogp.webp)
 
 ---
 
-[Demo](https://oscarhernandez.vercel.app/)
+## 🔗 Demo
 
-[Astro Themes](https://astro.build/themes/details/dark-minimal/)
+[https://astro-portfolio-sigma-seven.vercel.app](https://astro-portfolio-sigma-seven.vercel.app)
 
-[ReactBits Showcase](https://www.reactbits.dev/showcase)
+---
 
-The component `<LetterGlitch \>` was taken from [ReactBits.dev](https://www.reactbits.dev/)
+## 📌 概要
 
-## **Stack**
+フロントエンドエンジニア・Hiroyuki Chumanのポートフォリオサイトです。
+ビジネスの意図を正確に汲み取り、確かな技術で形にすることをコンセプトに制作しました。
 
-### **Frontend**
+---
 
+## 🛠 Stack
+
+### Frontend
 ![Astro](https://img.shields.io/badge/Astro-FF5D01?logo=astro&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?logo=tailwind-css&logoColor=white)
+![SCSS](https://img.shields.io/badge/SCSS-CC6699?logo=sass&logoColor=white)
 
-### **Tools**
-
+### Tools
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)
-![Prettier](https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=black)
-![Canva](https://img.shields.io/badge/Canva-c900c3?logo=canva&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
 
-### **Show your favorite Spotify album (or your own)** ![Spotify](https://img.shields.io/badge/Spotify-06cc1a?logo=spotify&logoColor=white)
+---
 
-1. Choose your Spotify album
-2. Access the share options
-3. Select 'copy embed code'
-
-```
-<iframe src="https://open.spotify.com/embed/album/YOUR_ALBUM_ID_HERE" style="border-radius:12px border:0;" class="w-full h-40" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-```
-
-4. Insert the embed code on footer.astro
-
-That's it!
-
-## **Project structure**
+## 📁 Project Structure
 
 ```
 public/
-└── svg/
+├── fonts/                  # Webフォント
+├── mock_site/              # 各mock_siteの画像アセット
+├── svg/                    # 技術スタックアイコン
+├── favicon.svg / favicon.png
+├── logo-header.svg
+├── ogp.webp / og.image.png
+└── *.webp                  # 制作実績のサムネイル
 src/
-├── Components/
-|    ├── contact.astro
-|    ├── footer.astro
-|    ├── home.astro
-|    ├── logoWall.astro
-|    ├── nav.astro
-|    └── projects.astro
+├── components/
+│   ├── contact.astro
+│   ├── footer.astro
+│   ├── home.astro
+│   ├── logoWall.astro
+│   ├── nav.astro
+│   ├── projects.astro
+│   └── mock_site/          # 各mock_siteのコンポーネント
+│       ├── GardenSalad/
+│       ├── MELIAFITNESS/
+│       ├── Rich-Life/
+│       ├── oha/
+│       └── webservice/
+├── React/                  # Reactコンポーネント
+│   ├── LetterGlitch.tsx
+│   ├── LikeButton.tsx
+│   ├── SkillsList.tsx
+│   └── StatsCounter.tsx
 ├── layouts/
-|    └── Layout.astro
-├── React/
-|    ├── LetterGlitch.tsx
-|    ├── LikeButton.tsx
-|    └── SkillsList.tsx
-└── pages/
-     └── index.astro
+│   ├── Layout.astro
+│   └── mock_site/          # 各mock_siteのレイアウト
+├── pages/
+│   ├── index.astro
+│   └── mock_site/          # 各mock_siteのページ
+└── styles/
+    └── mock_site/          # 各mock_siteのSCSS
+        └── shared/         # 共通SCSS（reset / utilities）
 ```
 
-## **Local configuration**
+---
 
-1. Clone the repo:
+## 🚀 Local Setup
 
-```
-git clone https://github.com/Gothsec/Astro-portfolio
-```
+```bash
+# リポジトリをクローン
+git clone https://github.com/coder-hiro/Astro-portfolio
 
-2. Install dependencies:
-
-```
+# 依存関係をインストール
 npm install
-```
 
-3. Start the development server:
-
-```
+# 開発サーバーを起動
 npm run dev
 ```
 
-> **Important Notice:**  
-> This project is licensed under the [MIT License](https://opensource.org/licenses/mit).  
-> According to the license terms, any redistribution (including compiled or modified versions), you **must** retain the original copyright
-> notice and the full license text. Copyright © 2026 Hiroyuki Chuman . All rights reserved.
+---
 
-「CodeRabbit導入テスト」
+## 📝 制作実績
+
+| サイト名 | 種別 | 技術 |
+|---|---|---|
+| Ravek | BtoB SaaS LP（架空） | Astro / SCSS / JS |
+| Garden Salad | 飲食店サイト（架空） | Astro / SCSS / JS |
+| MELIA FITNESS | ジムLP（架空） | Astro / SCSS / JS |
+| Rich Life | 家具レンタルLP（架空） | Astro / SCSS / JS |
+| OHA! | アプリLP（架空） | HTML / SCSS / JS |
+
+---
+
+## 📬 Contact
+
+- X: [@hiro_engineerJp](https://x.com/hiro_engineerJp)
+- Zenn: [zenn.dev/koenjineer](https://zenn.dev/koenjineer)
+- Email: contact@hiroyuki-chuman.com
+
+---
+
+Copyright © 2026 Hiroyuki Chuman. All rights reserved.

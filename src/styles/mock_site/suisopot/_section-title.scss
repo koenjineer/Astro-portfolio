@@ -1,0 +1,37 @@
+@use 'variables' as *;
+
+// 左右の縦バー＋中央タイトルの共通装飾
+@mixin section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: $font-jp-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+  color: $color-gray-1;
+  text-align: center;
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1.4em;
+    background: $color-gray-1;
+  }
+
+  &::before {
+    transform: rotate(-20deg);
+  }
+  &::after {
+    transform: rotate(20deg);
+  }
+
+  @media (max-width: $bp-sp) {
+    font-size: 24px;
+    gap: 12px;
+  }
+}

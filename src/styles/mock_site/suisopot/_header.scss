@@ -1,0 +1,433 @@
+@use 'variables' as *;
+
+.sp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: $color-white;
+  width: 100%;
+  height: $header-h;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+
+  &__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 24px;
+    max-width: 1440px;
+    height: 100%;
+    margin-inline: auto;
+    padding: 0 $side-padding;
+  }
+
+  &__logo {
+    display: inline-block;
+    width: 187px;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  &__nav-list {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  &__nav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__nav-link {
+    font-family: $font-jp-sans;
+    font-weight: 500;
+    font-size: 16px;
+    color: $color-gray-2;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-gray-1;
+    }
+  }
+
+  &__nav-sep {
+    display: inline-block;
+    width: 1px;
+    height: 16px;
+    background: $color-gray-2;
+    transform: rotate(20deg);
+  }
+
+  &__contact {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__tel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__tel-num {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 24px;
+    color: $color-gray-1;
+    line-height: 1;
+  }
+
+  &__tel-time {
+    font-size: 12px;
+    color: $color-gray-1;
+    line-height: 1.5;
+  }
+
+  &__cta-list {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 56px;
+    padding: 0 24px;
+    background: $color-accent;
+    color: $color-white;
+    border-radius: 40px;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    box-shadow: 0 0 4px rgba(83, 46, 37, 0.25);
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  // SPのみ表示する新規お申込ボタン (Figma 1:2241)
+  &__sp-cta {
+    display: none;
+  }
+
+  &__hamburger {
+    display: none;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    span {
+      display: block;
+      width: 27px;
+      height: 2px;
+      background: $color-gray-1;
+    }
+  }
+
+  // SP
+  @media (max-width: $bp-sp) {
+    height: 60px;
+
+    &__inner {
+      grid-template-columns: auto 1fr auto;
+      column-gap: 8px;
+      padding: 0 12px 0 15px;
+    }
+
+    &__logo {
+      width: 151px;
+    }
+
+    // Figma SP 1:2241 準拠：accent背景 / 高さ40px / rounded 32px
+    &__sp-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 40px;
+      padding: 0 16px;
+      background: $color-accent;
+      color: $color-white;
+      border-radius: 32px;
+      font-family: $font-jp-sans;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1;
+      box-shadow: 0 0 1.5px rgba(83, 46, 37, 0.25);
+      white-space: nowrap;
+      justify-self: end;
+    }
+
+    &__sp-cta-arrow {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    // PC用ナビ・連絡先はSPでは非表示（ドロワーで代替）
+    &__nav {
+      display: none;
+    }
+
+    &__contact {
+      display: none;
+    }
+
+    &__hamburger {
+      display: flex;
+    }
+  }
+}
+
+// ===== SP ドロワーメニュー (Figma 1:2099) =====
+.sp-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+
+  &.is-open {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.25s ease, visibility 0s linear 0s;
+  }
+
+  @media (min-width: ($bp-sp + 1)) {
+    display: none;
+  }
+
+  &__panel {
+    position: relative;
+    background: $color-white;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  // Figma 1:2100 : top:60, h:464, white80% + 青→緑 グラデ
+  &__bg {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    height: 464px;
+    z-index: 0;
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%),
+      linear-gradient(180deg, #007adf 0%, #00ecbc 100%);
+    pointer-events: none;
+  }
+
+  // ヘッダー部（ロゴ＋閉じる, h:60）
+  &__head {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 60px;
+    height: 60px;
+    background: $color-white;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 0 15px;
+  }
+
+  &__logo {
+    width: 151px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__close {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    justify-self: end;
+  }
+
+  &__close-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 2px;
+    background: $color-gray-1;
+    transform-origin: center;
+
+    &--1 {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &--2 {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+
+  // ナビ (Figma 170:1604 系)：左64pxから開始 / 上下区切り線 / 各高さ約69px
+  &__nav {
+    position: relative;
+    z-index: 1;
+    padding: 7px 15px 0; // Figma 1:2128 top 22.28% × 524 ≒ 117 - 60(head) - 50(初回line) を逆算
+    flex: 0 0 auto;
+  }
+
+  &__nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 49px; // 左 64 - 15 = 49
+  }
+
+  &__nav-item {
+    border-bottom: 1px solid rgba(51, 51, 51, 0.4);
+
+    &:first-child {
+      border-top: 1px solid rgba(51, 51, 51, 0.4);
+    }
+  }
+
+  &__nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 69px; // (524 * (31.66 - 22.28)% ≒ 49 + line) Figmaの間隔 ≒ 69
+    color: $color-gray-2;
+    font-family: $font-jp-sans;
+    font-weight: 400;
+    font-size: 20px;
+    text-decoration: none;
+  }
+
+  &__nav-label {
+    flex: 1;
+  }
+
+  // 矢印「>」 (Figma 1:2134 simple-line-icons:arrow-up を 90deg 回転)
+  &__nav-arrow {
+    position: relative;
+    width: 9px;
+    height: 15px;
+    flex-shrink: 0;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 1px;
+      width: 11px;
+      height: 2px;
+      background: $color-gray-2;
+      border-radius: 1px;
+    }
+
+    &::before {
+      top: 3px;
+      transform: rotate(45deg);
+      transform-origin: left top;
+    }
+
+    &::after {
+      top: 12px;
+      transform: rotate(-45deg);
+      transform-origin: left bottom;
+    }
+  }
+
+  // 下部 contact (Figma 1:2111)
+  &__contact {
+    position: relative;
+    z-index: 2;
+    background: $color-white;
+    padding: 40px 31px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-top: auto;
+  }
+
+  &__tel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__tel-num {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 24px;
+    color: $color-gray-1;
+    line-height: 1;
+  }
+
+  &__tel-time {
+    font-size: 12px;
+    color: $color-gray-1;
+    line-height: 1.5;
+  }
+
+  &__cta-list {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  &__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 56px;
+    padding: 0 24px;
+    background: $color-accent;
+    color: $color-white;
+    border-radius: 40px;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    box-shadow: 0 0 4px rgba(83, 46, 37, 0.25);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}

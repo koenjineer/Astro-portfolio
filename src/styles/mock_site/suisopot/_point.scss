@@ -1,0 +1,149 @@
+@use 'variables' as *;
+
+.sp-point {
+  padding: 80px $side-padding;
+  background: $color-white;
+
+  &__inner {
+    max-width: $content-max;
+    margin-inline: auto;
+  }
+
+  &__title {
+    font-family: $font-jp-serif;
+    font-weight: 400;
+    font-size: 40px;
+    color: $color-gray-1;
+    text-align: center;
+    letter-spacing: 0.03em;
+    margin-bottom: 64px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 310px 1fr;
+    gap: 32px;
+    align-items: center;
+
+    &--reverse {
+      grid-template-columns: 1fr 310px;
+
+      .sp-point__image {
+        order: 2;
+      }
+
+      .sp-point__text {
+        order: 1;
+      }
+    }
+  }
+
+  &__image img {
+    width: 100%;
+    height: 284px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  &__text {
+    max-width: 650px;
+  }
+
+  &__num {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  &__num-en {
+    font-family: $font-en;
+    font-weight: 500;
+    font-size: 64px;
+    color: $color-accent-blue;
+    line-height: 1;
+  }
+
+  &__num-label {
+    font-family: $font-en;
+    font-size: 16px;
+    color: $color-gray-1;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  &__h3 {
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 24px;
+    color: $color-accent-blue-deep;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    margin-bottom: 16px;
+  }
+
+  &__body {
+    font-family: $font-jp-sans;
+    font-size: 18px;
+    line-height: 1.7;
+    color: $color-gray-1;
+    text-align: justify;
+    letter-spacing: 0.03em;
+  }
+
+  &__note {
+    margin-top: 8px;
+    font-size: 14px;
+    color: $color-gray-2;
+    line-height: 1.7;
+  }
+
+  @media (max-width: $bp-sp) {
+    padding: 40px $side-padding;
+
+    &__title {
+      font-size: 24px;
+      margin-bottom: 32px;
+    }
+
+    &__list {
+      gap: 32px;
+    }
+
+    &__item,
+    &__item--reverse {
+      grid-template-columns: 1fr;
+      gap: 16px;
+
+      .sp-point__image {
+        order: 0;
+      }
+
+      .sp-point__text {
+        order: 0;
+      }
+    }
+
+    &__image img {
+      height: 200px;
+    }
+
+    &__num-en {
+      font-size: 48px;
+    }
+
+    &__h3 {
+      font-size: 18px;
+    }
+
+    &__body {
+      font-size: 15px;
+    }
+  }
+}

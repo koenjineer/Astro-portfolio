@@ -1,0 +1,163 @@
+@use 'variables' as *;
+
+.sp-cta {
+  padding: 80px $side-padding;
+  background: $color-white;
+
+  &__card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 240px 1fr 220px;
+    align-items: center;
+    gap: 24px;
+    max-width: 860px;
+    min-height: 327px;
+    margin-inline: auto;
+    padding: 32px 40px 56px;
+    background: linear-gradient(180deg, rgba(205, 251, 243, 0.7) 0%, rgba(205, 230, 250, 0) 100%);
+    border-radius: 16px;
+    box-shadow: 0 0 4px #dae4ee;
+  }
+
+  &__visual {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  &__heading {
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 24px;
+    color: $color-gray-1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  &__heading-deco {
+    color: $color-gray-1;
+  }
+
+  &__price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid $color-accent;
+  }
+
+  &__price-label {
+    font-family: $font-jp-sans;
+    font-weight: 500;
+    font-size: 40px;
+    color: $color-gray-1;
+  }
+
+  &__price-em {
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 64px;
+    color: $color-gray-1;
+  }
+
+  &__campaign {
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 32px;
+    color: $color-gray-1;
+    letter-spacing: 0.2em;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 152px;
+    height: 152px;
+    border-radius: 50%;
+    background: $color-accent;
+    color: $color-white;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0 0 6px rgba(83, 46, 37, 0.25);
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__btn-arrow {
+    display: inline-block;
+  }
+
+  &__note {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background: $color-white;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 14px;
+    color: $color-gray-2;
+    white-space: nowrap;
+  }
+
+  @media (max-width: $bp-sp) {
+    padding: 40px $side-padding;
+
+    &__card {
+      grid-template-columns: 1fr;
+      padding: 24px 16px 64px;
+      gap: 16px;
+    }
+
+    &__visual {
+      max-width: 140px;
+      margin: 0 auto;
+    }
+
+    &__heading {
+      font-size: 18px;
+    }
+
+    &__price-label {
+      font-size: 24px;
+    }
+
+    &__price-em {
+      font-size: 44px;
+    }
+
+    &__campaign {
+      font-size: 20px;
+    }
+
+    &__btn {
+      width: 100%;
+      height: 64px;
+      border-radius: 32px;
+      font-size: 16px;
+    }
+
+    &__note {
+      font-size: 12px;
+    }
+  }
+}

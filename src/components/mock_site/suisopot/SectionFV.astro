@@ -1,0 +1,81 @@
+---
+// セクション2: fv (Figma 113:2171 / SP 1:2150)
+// Figma準拠: 左に製品画像 / 中央に見出し / 右に女性画像
+// 3つの特長円は月桂冠+リボン込みのコンポジット画像（追加SVG不要）
+// 並び順: 左→ナノバブル水素 / 中→イオン化された / 右→特許電極
+
+const features = [
+  {
+    src: '/mock_site/suisopot/images/fv-circle-1.webp',
+    alt: 'ナノバブル水素で中性還元水・酸化されていない水',
+  },
+  {
+    src: '/mock_site/suisopot/images/fv-circle-2.webp',
+    alt: 'イオン化されたマグネシウム亜鉛含有・ミネラル豊富な水',
+  },
+  {
+    src: '/mock_site/suisopot/images/fv-circle-3.webp',
+    alt: '特許電極で塩素を分解・不純物の入っていない水',
+  },
+];
+---
+
+<section class="sp-fv" aria-label="メインビジュアル">
+  <div class="sp-fv__inner">
+    <img
+      class="sp-fv__product"
+      src="/mock_site/suisopot/images/fv-product.webp"
+      alt="SUISOPOT 水素水サーバー本体"
+      width="347"
+      height="345"
+      loading="eager"
+      fetchpriority="high"
+    />
+
+    <h1 class="sp-fv__title sp-fade">
+      <span class="sp-fv__title-row">
+        <span class="sp-fv__title-strong">健康</span><span class="sp-fv__title-sub">と</span><span class="sp-fv__title-strong">美しさ</span><span class="sp-fv__title-sub sp-fv__title-sub--tight">は、</span>
+      </span>
+      <span class="sp-fv__title-row">
+        <span class="sp-fv__title-strong">自宅</span><span class="sp-fv__title-sub">で</span><span class="sp-fv__title-strong">作る時代</span>
+      </span>
+    </h1>
+
+    <img
+      class="sp-fv__main"
+      src="/mock_site/suisopot/images/fv-main.webp"
+      alt="ナノバブル水素水を飲む女性"
+      width="692"
+      height="640"
+      loading="eager"
+      fetchpriority="high"
+    />
+
+    <p class="sp-fv__vertical" aria-hidden="true">
+      <span>ナノバブル水素水で</span><span>健康習慣</span>
+    </p>
+
+    <ul class="sp-fv__dots" aria-hidden="true">
+      <li></li>
+      <li class="sp-fv__dots-active"></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+
+  <ul class="sp-fv__features">
+    {
+      features.map((f) => (
+        <li class="sp-fv__feature sp-fade">
+          <img
+            src={f.src}
+            alt={f.alt}
+            width="275"
+            height="273"
+            loading="lazy"
+          />
+        </li>
+      ))
+    }
+  </ul>
+</section>

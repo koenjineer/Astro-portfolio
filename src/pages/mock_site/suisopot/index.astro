@@ -1,0 +1,29 @@
+---
+import Layout from '../../../layouts/mock_site/suisopot/Layout.astro';
+import Header from '../../../components/mock_site/suisopot/Header.astro';
+import SectionFV from '../../../components/mock_site/suisopot/SectionFV.astro';
+import SectionCta from '../../../components/mock_site/suisopot/SectionCta.astro';
+import SectionOnayami from '../../../components/mock_site/suisopot/SectionOnayami.astro';
+import SectionKaiketu from '../../../components/mock_site/suisopot/SectionKaiketu.astro';
+import SectionPoint from '../../../components/mock_site/suisopot/SectionPoint.astro';
+import SectionCtaSecond from '../../../components/mock_site/suisopot/SectionCtaSecond.astro';
+import SectionRoom from '../../../components/mock_site/suisopot/SectionRoom.astro';
+---
+
+<Layout>
+  <Header />
+  <main>
+    <SectionFV />
+    <SectionCta
+      heading="お得にはじめるチャンス"
+      highlight="初期手数料"
+      note="初期手数料(5,000円)が無料になります"
+      btnLabel="資料請求する"
+    />
+    <SectionOnayami />
+    <SectionKaiketu />
+    <SectionPoint />
+    <SectionCtaSecond />
+    <SectionRoom />
+  </main>
+</Layout>

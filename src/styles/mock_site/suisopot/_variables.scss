@@ -1,0 +1,97 @@
+// ===== ブレイクポイント =====
+$bp-sp: 767px;
+
+// ===== カラー（Figma `get_variable_defs` で取得した値のみ。推測禁止） =====
+$color-white: #ffffff;            // Figma: White
+$color-gray-1: #333333;           // Figma: gray１ / gray（本文・見出し）
+$color-gray-2: #6c6e6f;           // Figma: gray２（サブ・ナビ）
+$color-gray-3: #b6b7b7;           // Figma: gray３
+$color-accent: #ff8b71;           // Figma: accent（CTAボタン等）
+$color-accent-blue: #82bfed;      // Figma: accent Blue
+$color-accent-green: #c6ecec;     // Figma: accent green
+$color-blue: #daf1f9;             // Figma: Blue
+$color-base-blue: #f4fbfd;        // Figma: ベース　Blue（背景用淡色）
+// NOTE: gradation 変数は Figma で空定義（実色なし）
+
+// ⚠️ TODO: 以下2つは Figma `get_variable_defs` には存在しない。
+// 既存セクションSCSSが参照しているため一旦保持。実装担当が Figma 該当ノードを
+// get_design_context で再確認し、正式な変数（または値）に置き換えること。
+$color-accent-blue-deep: #2273ae;            // kaiketu, point で使用中（実値要検証）
+$color-bg-sub: rgba(200, 223, 239, 0.25);    // onayami で使用中（実値要検証）
+
+// ===== フォント（family のみここで定義、サイズ等は mixin で） =====
+$font-jp-sans: 'Noto Sans JP', sans-serif;
+$font-jp-serif: 'Noto Serif JP', serif;
+$font-en: 'Jost', sans-serif;
+
+// ===== タイポグラフィ mixin（Figma `get_variable_defs` 準拠） =====
+// 使い方: `@include typo-h2;` のように呼ぶ
+@mixin typo-title {
+  // Figma: title — Noto Serif JP 40px / lh 100 / ls 3
+  font-family: $font-jp-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.0; // Figma raw: 100 → 1.0 (px line-height)
+  letter-spacing: 0.03em;
+}
+@mixin typo-h2 {
+  // Figma: H2　32 / 見出し — Noto Sans JP 32px / lh 1.7 / ls 3
+  font-family: $font-jp-sans;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+}
+@mixin typo-h3-bold {
+  // Figma: H3 24 / 小見出し — Noto Sans JP Bold 24px / lh 1.7 / ls 3
+  font-family: $font-jp-sans;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+}
+@mixin typo-h3-regular {
+  // Figma: H3　24 — Noto Sans JP Regular 24px / lh 1.3 / ls 3
+  font-family: $font-jp-sans;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+}
+@mixin typo-p20 {
+  // Figma: p 20 / p1 — Noto Sans JP 20px / lh 1.7 / ls 3
+  font-family: $font-jp-sans;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+}
+@mixin typo-p18-bold {
+  // Figma: p18 — Noto Sans JP Bold 18px / lh 1.7 / ls 3
+  font-family: $font-jp-sans;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+}
+@mixin typo-p16 {
+  // Figma: p16 / p3 — Noto Sans JP 16px / lh 1.7 / ls 3
+  font-family: $font-jp-sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+}
+@mixin typo-p13 {
+  // Figma: p13 — Noto Sans JP 13px / lh 1.7 / ls 3
+  font-family: $font-jp-sans;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+}
+
+// ===== レイアウト =====
+$content-max: 1200px;
+$header-h: 104px;
+$side-padding: 16px;

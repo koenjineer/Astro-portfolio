@@ -1,0 +1,90 @@
+---
+// セクション6: point (Figma 113:2477 / SP 1:2536)
+const points = [
+  {
+    no: '01',
+    title: 'ナノバブル水素で長期間活性酸素を抑える',
+    body:
+      '「ナノバブル水素水」は、1ccあたり3億3,000万個という高濃度のナノバブルを含んでいます。この微細な泡は、水素を長期間保持し、体内に浸透させることができます。長期間酸化を抑えることができるので、近年注目度が高まっています。',
+    imageRight: false,
+  },
+  {
+    no: '02',
+    title: '腸内に働きかける',
+    body:
+      'ヒトフローラマウスを用いた共同研究の試験では、腸内のビフィズス菌が増加、悪玉菌が減少した結果となりました。',
+    note: '(15日間ナノバブル水素水を飲水させた試験)',
+    imageRight: true,
+  },
+  {
+    no: '03',
+    title: 'フィルター不要で93％の塩素を除去',
+    body:
+      '塩素を93％も除去することができ、水道水を美味しく健康的なナノバブル水素水に生まれ変わらせます。',
+    note: '（SUISOPOTで120分間、電気分解した場合）※日本食品分析センターでの試験結果。',
+    imageRight: false,
+  },
+  {
+    no: '04',
+    title: 'ミネラル豊富な水',
+    body:
+      'SUISOPOT(スイソポット）に付属のミネラルプレートが生み出す、豊富なイオン化されたミネラル成分が溶け出すことにより、マグネシウムや亜鉛を含んだ味わい豊かなおいしいお水をつくりだすことができます。',
+    note: '※マグネシウム1.76倍、亜鉛1.25倍。日本食品分析センターでの試験結果。',
+    imageRight: true,
+  },
+  {
+    no: '05',
+    title: '身体への負担が少ない中性水',
+    body:
+      '一般的な水素水は、アルカリ性に傾いているものがほとんどです。アルカリ性の水素水もメリットはございますが、中性のお水の方が身体への負担は少ないと考えられており、ｐHの偏りを気にすることなくご飲用いただけます。',
+    imageRight: false,
+  },
+  {
+    no: '06',
+    title: 'お肌に優しいので洗顔にもオススメ',
+    body:
+      '水に溶け込んだ無数の小さな泡が、お肌の角質の奥にまで入り込んでキレイにしてくれます。さっと洗い流すだけですっきりとした透明肌へと導いてくれます。',
+    imageRight: true,
+  },
+];
+---
+
+<section class="sp-point" id="point">
+  <div class="sp-point__inner">
+    <h2 class="sp-point__title sp-fade">ナノバブル水素水って何が良いの？</h2>
+
+    <ol class="sp-point__list">
+      {
+        points.map((p, i) => (
+          <li
+            class:list={[
+              'sp-point__item',
+              'sp-fade',
+              p.imageRight && 'sp-point__item--reverse',
+            ]}
+          >
+            <div class="sp-point__image">
+              <img
+                src={`/mock_site/suisopot/images/point-${i + 1}.${i === 1 ? 'svg' : 'webp'}`}
+                alt={`POINT ${p.no} ${p.title}`}
+                width="310"
+                height="284"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="sp-point__text">
+              <p class="sp-point__num">
+                <span class="sp-point__num-en">{p.no}</span>
+                <span class="sp-point__num-label">POINT</span>
+              </p>
+              <h3 class="sp-point__h3">{p.title}</h3>
+              <p class="sp-point__body">{p.body}</p>
+              {p.note && <p class="sp-point__note">{p.note}</p>}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

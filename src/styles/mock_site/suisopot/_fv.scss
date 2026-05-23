@@ -1,0 +1,306 @@
+@use 'variables' as *;
+
+// Figma 113:2171 (PC) / 1:2150 (SP) 準拠
+// PC: 製品画像(左) + 見出し(中央) + 女性写真(右) + 縦書き + 右端ドット + 3つの円(下段)
+// SP: ヘッダー直下に見出し / 女性写真は背景的に配置 / 3つの円は左側に縦積みで女性写真と重ねる / 縦書きは右側
+
+.sp-fv {
+  position: relative;
+  // 背景：Figma 113:2171 (PC) のグラデーション
+  background: linear-gradient(90.15deg, #f1f9fb 0%, #dfe7e9 99.7%);
+  padding: 0 $side-padding 80px;
+  overflow: hidden;
+
+  &__inner {
+    position: relative;
+    max-width: $content-max;
+    margin-inline: auto;
+    // PC: Figma 女性画像 640px が画面下端まで広がる想定
+    height: 640px;
+  }
+
+  // 左：製品画像 (Figma 121:3741, 347.267×345.264, left:147+56.47≒203, top:39+15.32≒54)
+  &__product {
+    position: absolute;
+    left: 0;
+    top: 54px;
+    width: 347px;
+    height: 345px;
+    z-index: 2;
+    object-fit: contain;
+  }
+
+  // 中央：見出し (Figma 113:2174, top:86px / Noto Serif JP 64/48px / lh 1.5)
+  &__title {
+    position: absolute;
+    left: calc(8.33% + 249px);
+    top: 86px;
+    z-index: 3;
+    font-family: $font-jp-serif;
+    font-weight: 500;
+    color: $color-gray-2;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    writing-mode: horizontal-tb; // PCは横書きを明示
+  }
+
+  &__title-row {
+    display: block;
+  }
+
+  &__title-strong {
+    font-size: 64px;
+    font-weight: 500;
+  }
+
+  &__title-sub {
+    font-size: 48px;
+    font-weight: 500;
+  }
+
+  &__title-sub--tight {
+    letter-spacing: -24px;
+  }
+
+  // 右：女性画像 (Figma 113:2226, left:calc(41.67%+96px), top:-193, w:836, h:1020)
+  // Figma上で 1020pxまで取り画面下端を超える。CSS では FV 高さに合わせて bottom 配置。
+  &__main {
+    position: absolute;
+    left: calc(41.67% + 96px);
+    top: -193px;
+    width: 836px;
+    height: 1020px;
+    z-index: 1;
+    object-fit: cover;
+    object-position: bottom;
+    pointer-events: none;
+  }
+
+  // 右端縦書き：「ナノバブル水素水で健康習慣」(Figma 123:3803, left:calc(100%-97px), top:27px)
+  &__vertical {
+    position: absolute;
+    right: 68px;
+    top: 27px;
+    z-index: 4;
+    width: 29px;
+    writing-mode: vertical-rl;
+    font-family: 'Yomogi', $font-jp-serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 37px;
+    color: $color-gray-2;
+
+    span {
+      display: block;
+    }
+  }
+
+  // 右端縦並び4ドット (Figma 135:2559, 16×49, right:37px, top:61px)
+  &__dots {
+    position: absolute;
+    right: 37px;
+    top: 61px;
+    z-index: 5;
+    width: 16px;
+    height: 49px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $color-gray-3;
+      left: 4px;
+
+      &:nth-child(1) { top: 0; }
+      &:nth-child(2) { top: 13px; left: 0; width: 10px; height: 10px; background: $color-gray-2; }
+      &:nth-child(3) { top: 26px; left: 8px; }
+      &:nth-child(4) { top: 41px; left: 4px; }
+    }
+  }
+
+  // 下部：3つのコンポジット円 (Figma 113:2176/2193/2208, 各 271/275/271 × 273, top:335)
+  // PCは Figma 通り 「画面下寄り」かつ女性画像の上に重ねる
+  &__features {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -40px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    max-width: $content-max;
+    margin-inline: auto;
+    padding: 0 $side-padding;
+    list-style: none;
+  }
+
+  &__feature {
+    flex: 0 1 275px;
+    max-width: 275px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  // ===== SP (Figma 1:2150 / 390×570) =====
+  @media (max-width: $bp-sp) {
+    padding: 0;
+
+    &__inner {
+      // Figma frame 全体 高さ630 (header60 + 本体570)。SPでは inner = 本体 570px
+      position: relative;
+      height: 570px;
+      max-width: 100%;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    // SPでは製品画像は別レイヤー扱いだが、女性写真合成画像に含まれるため非表示
+    &__product {
+      display: none;
+    }
+
+    // 見出し (Figma 1:2179/2180): top:0(相対), 高さ123, 中央寄せ
+    // SP では横書きを明示し、`writing-mode: vertical-rl` の継承を防止
+    &__title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      transform: none;
+      z-index: 3;
+      width: 100%;
+      height: 123px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0;
+      text-align: center;
+      white-space: nowrap;
+      color: $color-gray-1;
+      font-family: $font-jp-serif;
+      line-height: 1.5;
+      writing-mode: horizontal-tb;  // ← 縦書きの誤継承を防ぐ
+      letter-spacing: 0;
+    }
+
+    &__title-row {
+      display: block;
+      writing-mode: horizontal-tb;
+    }
+
+    &__title-strong {
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+    &__title-sub {
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    &__title-sub--tight {
+      letter-spacing: -8px;
+    }
+
+    // 女性写真 (Figma 136:2637): left:71, bottom:0(-4実態), 319×378
+    &__main {
+      position: absolute;
+      left: 71px;
+      top: auto;
+      bottom: 0;
+      width: 319px;
+      height: 378px;
+      max-width: none;
+      z-index: 1;
+      object-fit: contain;
+      object-position: bottom;
+    }
+
+    // 縦書き：SPでも表示 (Figma 170:1594, left:341, top:80, w:29)
+    // 390幅基準で 341px ≒ right:20px (390-341-29)
+    &__vertical {
+      display: block;
+      position: absolute;
+      right: 20px;
+      left: auto;
+      top: 80px;
+      z-index: 4;
+      width: 29px;
+      writing-mode: vertical-rl;
+      font-family: 'Yomogi', $font-jp-serif;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1;
+      color: $color-gray-2;
+
+      span { display: block; }
+    }
+
+    // ドット (Figma 170:1595): left:369, top:99 → 390-369-16 = 5
+    &__dots {
+      display: block;
+      position: absolute;
+      right: 5px;
+      left: auto;
+      top: 99px;
+      z-index: 5;
+      width: 16px;
+      height: 49px;
+
+      li {
+        &:nth-child(1) { top: 0; left: 4px; }
+        &:nth-child(2) { top: 13px; left: 0; width: 10px; height: 10px; }
+        &:nth-child(3) { top: 26px; left: 8px; }
+        &:nth-child(4) { top: 41px; left: 4px; }
+      }
+    }
+
+    // 3つの円 (Figma 1:2181): left:13, top:183, 全体 175×383
+    // 各 175×122 / 175×122 / 175×123 を縦積み (隙間 9px と 138-122=16 想定)
+    // Figma 実値: top 0 / 131 / 260 → 1st-2nd 間 9px, 2nd-3rd 間 7px
+    &__features {
+      position: absolute;
+      left: 13px;
+      top: 183px;
+      bottom: auto;
+      right: auto;
+      width: 175px;
+      height: 383px;
+      z-index: 3;
+      display: block;
+      margin: 0;
+      padding: 0;
+      gap: 0;
+    }
+
+    &__feature {
+      position: absolute;
+      left: 0;
+      width: 175px;
+      height: 122px;
+      max-width: none;
+      flex: none;
+
+      &:nth-child(1) { top: 0; }
+      &:nth-child(2) { top: 131px; }
+      &:nth-child(3) { top: 260px; height: 123px; }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}

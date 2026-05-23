@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_metadata",
+      "mcp__figma__get_screenshot",
+      "mcp__figma__get_variable_defs",
+      "mcp__figma__whoami",
+      "Read(//Users/hiro/projects/git/Astro-portfolio/**)",
+      "Write(//Users/hiro/projects/git/Astro-portfolio/.claude/handoff/**)",
+      "Write(//Users/hiro/projects/git/Astro-portfolio/src/**)",
+      "Write(//Users/hiro/projects/git/Astro-portfolio/public/**)",
+      "Edit(//Users/hiro/projects/git/Astro-portfolio/.claude/handoff/**)",
+      "Edit(//Users/hiro/projects/git/Astro-portfolio/src/**)",
+      "Edit(//Users/hiro/projects/git/Astro-portfolio/public/**)",
+      "Edit(//Users/hiro/projects/git/Astro-portfolio/package.json)",
+      "Glob",
+      "Grep",
+      "Bash(curl *)",
+      "Bash(cwebp *)",
+      "Bash(file *)",
+      "Bash(mv *)",
+      "Bash(cp *)",
+      "Bash(ls *)",
+      "Bash(cat /tmp/*)",
+      "Bash(mkdir -p *)",
+      "Bash(rm /tmp/*)",
+      "Bash(python3 *)"
+    ]
+  }
+}

@@ -1,85 +1,73 @@
 ---
 // セクション5: kaiketu (Figma 113:2280)
-// 構成:
-//  1. title       … 「そんなお悩みや心配は [SUIREX5] が解決します」 (左右に葉アイコン)
-//  2. point_lists … 3つの円「水道水から生成できる」「コンパクトで場所を選ばない」「月額定額で使い放題」
-//  3. talk_container … 「そもそも、ナノバブル水素水って？」+ 会話形式の解説 + 泡比較 3種
+// 構成: 下向き矢印 → タイトル → サブテキスト → 3円 → 会話＋泡比較
+const expertAvatar = '/mock_site/suisopot/images/kaiketu-avatar-expert.webp';
+const userAvatar = '/mock_site/suisopot/images/kaiketu-avatar-user.webp';
 
 const points = [
-  { text1: '水道水から', text2: '生成できる' },
-  { text1: 'コンパクトで', text2: '場所を選ばない' },
-  { text1: '月額定額で', text2: '使い放題' },
-];
-
-const talks = [
-  {
-    side: 'left',
-    speaker: 'a',
-    body: [
-      'ナノバブル水素水について説明します！',
-      'まず、水素は、',
-      { bold: '悪玉な活性酸素を消去する抗酸化作用' },
-      'があります！',
-      'だから、日々の健康に役立てる事ができるんです！',
-      'しかも、様々な病気の治療への利用が始まっています！',
-    ],
-  },
-  {
-    side: 'right',
-    speaker: 'b',
-    body: ['なるほど！だから近年水素ブームが来ているんですね！'],
-  },
-  {
-    side: 'left',
-    speaker: 'a',
-    body: ['それから、ナノバブルというのは、こんなに小さな泡の事です！'],
-  },
-];
-
-const talksAfter = [
-  {
-    side: 'left',
-    speaker: 'a',
-    body: ['この泡のスゴイ所は浸透力と持続力！'],
-  },
-  {
-    side: 'left',
-    speaker: 'a',
-    body: [
-      '「ナノバブル水素水」には、この泡が1ccあたり3億3,000万個という高濃度のナノバブルを含んでいます。',
-      { bold: '大量のナノバブルが素早く体内に水素と酸素を浸透させる' },
-      '事ができるんです！',
-    ],
-  },
-  {
-    side: 'right',
-    speaker: 'b',
-    body: ['ナノバブルって凄い！普通の水素水とは全然違うのね！'],
-  },
-];
-
-const bubbles = [
-  { variant: 'normal', label: '通常の気泡', size: '約1㎜', note: '破裂', sub: '浮上' },
-  { variant: 'micro', label: 'マイクロバブル', size: '約0.05㎜', note: '破裂', sub: 'ゆっくり浮上' },
-  { variant: 'nano', label: 'ナノバブル', size: '約0.1µm (約0.0001mm)', sub: '長時間水中に滞在' },
+  { text: ['水道水から', '生成できる'] },
+  { text: ['コンパクトで', '場所を選ばない'] },
+  { text: ['月額定額で', '使い放題'] },
 ];
 ---
 
 <section class="sp-kaiketu" id="kaiketu" aria-labelledby="kaiketu-title">
+  <img
+    class="sp-kaiketu__arrow"
+    src="/mock_site/suisopot/images/kaiketu-arrow-down.svg"
+    alt=""
+    aria-hidden="true"
+    width="90"
+    height="50"
+  />
+
   <div class="sp-kaiketu__inner">
     <h2 class="sp-kaiketu__title sp-fade" id="kaiketu-title">
-      <span class="sp-kaiketu__title-leaf sp-kaiketu__title-leaf--left" aria-hidden="true"></span>
+      <img
+        class="sp-kaiketu__title-deco"
+        src="/mock_site/suisopot/images/kaiketu-deco-left.webp"
+        alt=""
+        aria-hidden="true"
+        width="33"
+        height="53"
+        loading="lazy"
+      />
       <span class="sp-kaiketu__title-text">そんなお悩みや心配は</span>
-      <span class="sp-kaiketu__title-brand">SUIREX5</span>
+      <img
+        class="sp-kaiketu__title-logo"
+        src="/mock_site/suisopot/images/kaiketu-logo.webp"
+        alt="SUISOPOT"
+        width="187"
+        height="72"
+        loading="lazy"
+      />
       <span class="sp-kaiketu__title-text">が解決します</span>
-      <span class="sp-kaiketu__title-leaf sp-kaiketu__title-leaf--right" aria-hidden="true"></span>
+      <img
+        class="sp-kaiketu__title-deco"
+        src="/mock_site/suisopot/images/kaiketu-deco-right.webp"
+        alt=""
+        aria-hidden="true"
+        width="33"
+        height="53"
+        loading="lazy"
+      />
     </h2>
+
+    <p class="sp-kaiketu__subtitle sp-fade">SUISOPOTは手軽にナノバブル水素水を作れるサーバーです</p>
 
     <ul class="sp-kaiketu__points sp-fade">
       {points.map((p) => (
         <li class="sp-kaiketu__point">
+          <img
+            src="/mock_site/suisopot/images/kaiketu-point-blue.webp"
+            alt=""
+            aria-hidden="true"
+            width="236"
+            height="236"
+            loading="lazy"
+          />
           <span class="sp-kaiketu__point-text">
-            {p.text1}<br />{p.text2}
+            {p.text[0]}<br />{p.text[1]}
           </span>
         </li>
       ))}
@@ -89,43 +77,69 @@ const bubbles = [
       <h3 class="sp-kaiketu__talk-heading">そもそも、ナノバブル水素水って？</h3>
 
       <div class="sp-kaiketu__talk-inner">
-        {talks.map((t) => (
-          <div class={`sp-kaiketu__balloon sp-kaiketu__balloon--${t.side}`}>
-            <span class={`sp-kaiketu__avatar sp-kaiketu__avatar--${t.speaker}`} aria-hidden="true"></span>
-            <p class="sp-kaiketu__balloon-body">
-              {t.body.map((seg) =>
-                typeof seg === 'string' ? <span>{seg}</span> : <strong>{seg.bold}</strong>
-              )}
-            </p>
-          </div>
-        ))}
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
+          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            ナノバブル水素水について説明します！<br />
+            まず、水素は、<strong>悪玉な活性酸素を消去する抗酸化作用</strong>があります！<br />
+            だから、日々の健康に役立てる事ができるんです！<br />
+            しかも、様々な病気の治療への利用が始まっています！
+          </p>
+        </div>
 
-        <ul class="sp-kaiketu__bubbles">
-          {bubbles.map((b) => (
-            <li class={`sp-kaiketu__bubble sp-kaiketu__bubble--${b.variant}`}>
-              <p class={`sp-kaiketu__bubble-label sp-kaiketu__bubble-label--${b.variant}`}>
-                {b.label}
-              </p>
-              <div class="sp-kaiketu__bubble-visual" aria-hidden="true">
-                {b.note && <span class="sp-kaiketu__bubble-note sp-kaiketu__bubble-note--burst">{b.note}</span>}
-                <span class="sp-kaiketu__bubble-note sp-kaiketu__bubble-note--sub">{b.sub}</span>
-              </div>
-              <p class="sp-kaiketu__bubble-size">{b.size}</p>
-            </li>
-          ))}
-        </ul>
-        <p class="sp-kaiketu__bubbles-caption">※泡はイメージです</p>
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--right">
+          <img class="sp-kaiketu__avatar" src={userAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            なるほど！だから近年水素ブームが来ているんですね！
+          </p>
+        </div>
 
-        {talksAfter.map((t) => (
-          <div class={`sp-kaiketu__balloon sp-kaiketu__balloon--${t.side}`}>
-            <span class={`sp-kaiketu__avatar sp-kaiketu__avatar--${t.speaker}`} aria-hidden="true"></span>
-            <p class="sp-kaiketu__balloon-body">
-              {t.body.map((seg) =>
-                typeof seg === 'string' ? <span>{seg}</span> : <strong>{seg.bold}</strong>
-              )}
-            </p>
-          </div>
-        ))}
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
+          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            それから、ナノバブルというのは、こんなに小さな泡の事です！
+          </p>
+        </div>
+
+        <div class="sp-kaiketu__bubble-comparison">
+          <picture>
+            <source
+              media="(max-width: 767px)"
+              srcset="/mock_site/suisopot/images/kaiketu-bubble-sp.webp"
+              width="547"
+              height="352"
+            />
+            <img
+              src="/mock_site/suisopot/images/kaiketu-bubble.webp"
+              alt="気泡サイズ比較：通常の気泡 約1mm・マイクロバブル 約0.05mm・ナノバブル 約0.1µm"
+              width="810"
+              height="422"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
+          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            この泡のスゴイ所は浸透力と持続力！
+          </p>
+        </div>
+
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
+          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            「ナノバブル水素水」には、この泡が1ccあたり3億3,000万個という高濃度のナノバブルを含んでいます。<br />
+            <strong>大量のナノバブルが素早く体内に水素と酸素を浸透させる</strong>事ができるんです！
+          </p>
+        </div>
+
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--right">
+          <img class="sp-kaiketu__avatar" src={userAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            ナノバブルって凄い！普通の水素水とは全然違うのね！
+          </p>
+        </div>
       </div>
     </div>
   </div>

@@ -1,28 +1,31 @@
 @use 'variables' as *;
 
-// Figma 113:2171 (PC) / 1:2150 (SP) 準拠
+// Figma 113:2171 (PC 1440×640) / 1:2150 (SP 390×570、ヘッダー60除く)
 // PC: 製品画像(左) + 見出し(中央) + 女性写真(右) + 縦書き + 右端ドット + 3つの円(下段)
-// SP: ヘッダー直下に見出し / 女性写真は背景的に配置 / 3つの円は左側に縦積みで女性写真と重ねる / 縦書きは右側
+// SP: 上部に見出し / 女性写真は下部に背景的に配置 / 3つの円は左側に縦積みで女性写真と重ねる / 縦書きは右側
 
 .sp-fv {
   position: relative;
-  // 背景：Figma 113:2171 (PC) のグラデーション
-  background: linear-gradient(90.15deg, #f1f9fb 0%, #dfe7e9 99.7%);
-  padding: 0 $side-padding 80px;
+  // 背景：Figma 1:2150 のグラデーション値そのまま（変数色 $color-blue → $color-base-blue 近似）
+  background: linear-gradient(90.15deg, #f1f9fb 0%, #dfe7e9 99.717%);
+  padding: 0;
   overflow: hidden;
 
   &__inner {
     position: relative;
-    max-width: $content-max;
+    max-width: 1440px;
     margin-inline: auto;
-    // PC: Figma 女性画像 640px が画面下端まで広がる想定
+    // PC: Figma FV 高さ 640px
     height: 640px;
   }
 
-  // 左：製品画像 (Figma 121:3741, 347.267×345.264, left:147+56.47≒203, top:39+15.32≒54)
+  // 左：製品画像 (Figma 121:3741) 親 121:3739 left:147 + 子 56.47=約203, top:39+15.32=約54
+  // Figma 上のサイズ：347.267×345.264
   &__product {
     position: absolute;
-    left: 0;
+    // テキスト開始位置: calc(8.33% + 249px) @ 1440px ≒ 369px
+    // 右端 = left + 347 < 369 → left < 22px でテキストと非重複
+    left: 10px;
     top: 54px;
     width: 347px;
     height: 345px;
@@ -30,19 +33,19 @@
     object-fit: contain;
   }
 
-  // 中央：見出し (Figma 113:2174, top:86px / Noto Serif JP 64/48px / lh 1.5)
+  // 中央：見出し (Figma 113:2174) left:calc(8.33%+249)=約369, top:86
+  // Noto Serif JP, 大64px / 小48px / lh 1.5, 色 #6c6e6f
   &__title {
     position: absolute;
     left: calc(8.33% + 249px);
     top: 86px;
     z-index: 3;
     font-family: $font-jp-serif;
-    font-weight: 500;
+    font-weight: 400;
     color: $color-gray-2;
     line-height: 1.5;
-    letter-spacing: 0.02em;
     white-space: nowrap;
-    writing-mode: horizontal-tb; // PCは横書きを明示
+    writing-mode: horizontal-tb;
   }
 
   &__title-row {
@@ -51,33 +54,34 @@
 
   &__title-strong {
     font-size: 64px;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   &__title-sub {
     font-size: 48px;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   &__title-sub--tight {
+    // Figma 113:2174 「、」 tracking:-24px
     letter-spacing: -24px;
   }
 
-  // 右：女性画像 (Figma 113:2226, left:calc(41.67%+96px), top:-193, w:836, h:1020)
-  // Figma上で 1020pxまで取り画面下端を超える。CSS では FV 高さに合わせて bottom 配置。
+  // 右：女性画像 (Figma 135:2558) left:calc(50%+28)=748, top:0, w:692, h:640
   &__main {
     position: absolute;
-    left: calc(41.67% + 96px);
-    top: -193px;
-    width: 836px;
-    height: 1020px;
+    left: calc(50% + 28px);
+    top: 0;
+    width: 692px;
+    height: 640px;
     z-index: 1;
     object-fit: cover;
     object-position: bottom;
     pointer-events: none;
   }
 
-  // 右端縦書き：「ナノバブル水素水で健康習慣」(Figma 123:3803, left:calc(100%-97px), top:27px)
+  // 右端縦書き「ナノバブル水素水で健康習慣」(Figma 123:3803) left:calc(100%-97), top:27, w:29
+  // → right: 97 - 29 = 68px
   &__vertical {
     position: absolute;
     right: 68px;
@@ -96,87 +100,74 @@
     }
   }
 
-  // 右端縦並び4ドット (Figma 135:2559, 16×49, right:37px, top:61px)
-  &__dots {
+  // 右端泡装飾 (Frame 1104 / 32×98)
+  // right: 37 - 32 = 5px → right: 5px 相当。top は旧 dots と合わせ 61px
+  &__bubble {
     position: absolute;
-    right: 37px;
+    right: 5px;
     top: 61px;
     z-index: 5;
-    width: 16px;
-    height: 49px;
+    width: 32px;
+    height: 98px;
+    display: block;
+  }
+
+  // 下部：3つのコンポジット円 (Figma 113:2175, top:335, h:273)
+  // 左→右順序: 113:2193(中性還元水) → 113:2208(イオン化) → 113:2176(特許電極)
+  // 各 left: 43 / calc(8.33%+200)=320 / calc(33.33%+113)=593
+  &__features {
+    position: absolute;
+    top: 335px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    height: 273px;
     list-style: none;
     padding: 0;
     margin: 0;
-
-    li {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: $color-gray-3;
-      left: 4px;
-
-      &:nth-child(1) { top: 0; }
-      &:nth-child(2) { top: 13px; left: 0; width: 10px; height: 10px; background: $color-gray-2; }
-      &:nth-child(3) { top: 26px; left: 8px; }
-      &:nth-child(4) { top: 41px; left: 4px; }
-    }
-  }
-
-  // 下部：3つのコンポジット円 (Figma 113:2176/2193/2208, 各 271/275/271 × 273, top:335)
-  // PCは Figma 通り 「画面下寄り」かつ女性画像の上に重ねる
-  &__features {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -40px;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    max-width: $content-max;
-    margin-inline: auto;
-    padding: 0 $side-padding;
-    list-style: none;
   }
 
   &__feature {
-    flex: 0 1 275px;
-    max-width: 275px;
+    position: absolute;
+    top: 0;
+    height: 273px;
 
     img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: contain;
     }
+
+    &:nth-child(1) { left: 43px;  width: 275px; }   // 113:2193 ナノバブル水素
+    &:nth-child(2) { left: calc(8.33% + 200px); width: 271px; }  // 113:2208 イオン化
+    &:nth-child(3) { left: calc(33.33% + 113px); width: 271px; } // 113:2176 特許電極
   }
 
-  // ===== SP (Figma 1:2150 / 390×570) =====
-  @media (max-width: $bp-sp) {
-    padding: 0;
-
+  // ===== SP〜タブレット：ヘッダーと同じブレークポイントで SP レイアウトを適用 =====
+  // $bp-header(1399px) 以下はハンバーガーヘッダー＋SP FV で統一。PC FV は 1400px 以上のみ
+  @media (max-width: $bp-header) {
     &__inner {
-      // Figma frame 全体 高さ630 (header60 + 本体570)。SPでは inner = 本体 570px
       position: relative;
       height: 570px;
-      max-width: 100%;
-      padding: 0;
+      // 390px 超の幅でも SP レイアウトを中央寄せにする（700px等での崩れ防止）
+      max-width: 390px;
+      margin-inline: auto;
       overflow: hidden;
     }
 
-    // SPでは製品画像は別レイヤー扱いだが、女性写真合成画像に含まれるため非表示
+    // SPでは製品画像は表示しない（Figma 1:2150 に存在しない）
     &__product {
       display: none;
     }
 
-    // 見出し (Figma 1:2179/2180): top:0(相対), 高さ123, 中央寄せ
-    // SP では横書きを明示し、`writing-mode: vertical-rl` の継承を防止
+    // 見出し (Figma 1:2179/2180) top:60(=0相対), h:123 中央配置, padding:8px
+    // Noto Serif JP, 大30px / 小25px / lh 1.5, 色 #333
     &__title {
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
-      transform: none;
       z-index: 3;
       width: 100%;
       height: 123px;
@@ -190,7 +181,7 @@
       color: $color-gray-1;
       font-family: $font-jp-serif;
       line-height: 1.5;
-      writing-mode: horizontal-tb;  // ← 縦書きの誤継承を防ぐ
+      writing-mode: horizontal-tb;
       letter-spacing: 0;
     }
 
@@ -201,19 +192,20 @@
 
     &__title-strong {
       font-size: 30px;
-      font-weight: 500;
+      font-weight: 400;
     }
 
     &__title-sub {
       font-size: 25px;
-      font-weight: 500;
+      font-weight: 400;
     }
 
-    &__title-sub--tight {
-      letter-spacing: -8px;
+    // SP では Figma 上「、」記号がないので非表示
+    &__title-comma {
+      display: none;
     }
 
-    // 女性写真 (Figma 136:2637): left:71, bottom:0(-4実態), 319×378
+    // 女性写真 (Figma 136:2637) left:71, bottom:0 (実態は -4), w:319, h:378
     &__main {
       position: absolute;
       left: 71px;
@@ -227,8 +219,8 @@
       object-position: bottom;
     }
 
-    // 縦書き：SPでも表示 (Figma 170:1594, left:341, top:80, w:29)
-    // 390幅基準で 341px ≒ right:20px (390-341-29)
+    // 縦書き (Figma 170:1594) left:341, top:80, w:29 / Yomogi 24px / 色 #6c6e6f
+    // → right: 390 - 341 - 29 = 20
     &__vertical {
       display: block;
       position: absolute;
@@ -247,28 +239,22 @@
       span { display: block; }
     }
 
-    // ドット (Figma 170:1595): left:369, top:99 → 390-369-16 = 5
-    &__dots {
+    // 泡装飾（SP）縦書きテキスト(right:20px,w:29px)との被りを避けるため
+    // 1x サイズ(16×49)で right:0 に配置
+    &__bubble {
       display: block;
       position: absolute;
-      right: 5px;
+      right: 0;
       left: auto;
-      top: 99px;
+      top: 61px;
       z-index: 5;
       width: 16px;
       height: 49px;
-
-      li {
-        &:nth-child(1) { top: 0; left: 4px; }
-        &:nth-child(2) { top: 13px; left: 0; width: 10px; height: 10px; }
-        &:nth-child(3) { top: 26px; left: 8px; }
-        &:nth-child(4) { top: 41px; left: 4px; }
-      }
     }
 
-    // 3つの円 (Figma 1:2181): left:13, top:183, 全体 175×383
-    // 各 175×122 / 175×122 / 175×123 を縦積み (隙間 9px と 138-122=16 想定)
-    // Figma 実値: top 0 / 131 / 260 → 1st-2nd 間 9px, 2nd-3rd 間 7px
+    // 3つの円 (Figma 1:2181) left:13, top:183, 全体 175×383
+    // Figma 上の縦順序: 1:2182 中性還元水(top:0) → 1:2197 イオン化(top:131) → 1:2217 特許電極(top:260)
+    // ※ features の DOM 順は SectionFV.astro 側で 中性還元水→イオン化→特許電極 になっている
     &__features {
       position: absolute;
       left: 13px;
@@ -281,7 +267,6 @@
       display: block;
       margin: 0;
       padding: 0;
-      gap: 0;
     }
 
     &__feature {
@@ -290,11 +275,11 @@
       width: 175px;
       height: 122px;
       max-width: none;
-      flex: none;
 
-      &:nth-child(1) { top: 0; }
-      &:nth-child(2) { top: 131px; }
-      &:nth-child(3) { top: 260px; height: 123px; }
+      // PC の :nth-child セレクターが left/width を上書きするため SP 側でも明示指定
+      &:nth-child(1) { left: 0; top: 0;       width: 175px; }
+      &:nth-child(2) { left: 0; top: 131px;   width: 175px; }
+      &:nth-child(3) { left: 0; top: 260px;   width: 175px; height: 123px; }
 
       img {
         width: 100%;

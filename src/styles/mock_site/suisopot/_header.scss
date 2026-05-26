@@ -145,8 +145,8 @@
     }
   }
 
-  // SP
-  @media (max-width: $bp-sp) {
+  // SP〜タブレット：ハンバーガー表示
+  @media (max-width: $bp-header) {
     height: 60px;
 
     &__inner {
@@ -218,7 +218,7 @@
     transition: opacity 0.25s ease, visibility 0s linear 0s;
   }
 
-  @media (min-width: ($bp-sp + 1)) {
+  @media (min-width: ($bp-header + 1)) {
     display: none;
   }
 
@@ -312,11 +312,9 @@
   }
 
   &__nav-item {
-    border-bottom: 1px solid rgba(51, 51, 51, 0.4);
-
-    &:first-child {
-      border-top: 1px solid rgba(51, 51, 51, 0.4);
-    }
+    // Figma に border-top（最初の項目の上）は存在しない。border-bottom のみ
+    // Figma Line42 の色は非常に淡いグレー（rgba(51,51,51,0.1)相当）
+    border-bottom: 1px solid rgba(51, 51, 51, 0.1);
   }
 
   &__nav-link {
@@ -335,35 +333,15 @@
     flex: 1;
   }
 
-  // 矢印「>」 (Figma 1:2134 simple-line-icons:arrow-up を 90deg 回転)
+  // 矢印「>」 border ベースのシェブロン
   &__nav-arrow {
-    position: relative;
-    width: 9px;
-    height: 15px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid $color-gray-2;
+    border-top: 2px solid $color-gray-2;
+    transform: rotate(45deg);
     flex-shrink: 0;
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      left: 1px;
-      width: 11px;
-      height: 2px;
-      background: $color-gray-2;
-      border-radius: 1px;
-    }
-
-    &::before {
-      top: 3px;
-      transform: rotate(45deg);
-      transform-origin: left top;
-    }
-
-    &::after {
-      top: 12px;
-      transform: rotate(-45deg);
-      transform-origin: left bottom;
-    }
+    align-self: center;
   }
 
   // 下部 contact (Figma 1:2111)

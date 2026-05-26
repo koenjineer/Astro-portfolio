@@ -1,5 +1,6 @@
 // ===== ブレイクポイント =====
 $bp-sp: 767px;
+$bp-header: 1399px; // ヘッダーナビ → ハンバーガー切り替え点（1400px以上でPC表示）
 
 // ===== カラー（Figma `get_variable_defs` で取得した値のみ。推測禁止） =====
 $color-white: #ffffff;            // Figma: White

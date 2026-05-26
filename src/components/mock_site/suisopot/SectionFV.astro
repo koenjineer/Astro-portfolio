@@ -6,15 +6,18 @@
 
 const features = [
   {
-    src: '/mock_site/suisopot/images/fv-circle-1.webp',
+    pc: '/mock_site/suisopot/images/fv-circle-1.webp',
+    sp: '/mock_site/suisopot/images/fv-circle-1-sp.webp',
     alt: 'ナノバブル水素で中性還元水・酸化されていない水',
   },
   {
-    src: '/mock_site/suisopot/images/fv-circle-2.webp',
+    pc: '/mock_site/suisopot/images/fv-circle-2.webp',
+    sp: '/mock_site/suisopot/images/fv-circle-2-sp.webp',
     alt: 'イオン化されたマグネシウム亜鉛含有・ミネラル豊富な水',
   },
   {
-    src: '/mock_site/suisopot/images/fv-circle-3.webp',
+    pc: '/mock_site/suisopot/images/fv-circle-3.webp',
+    sp: '/mock_site/suisopot/images/fv-circle-3-sp.webp',
     alt: '特許電極で塩素を分解・不純物の入っていない水',
   },
 ];
@@ -34,48 +37,65 @@ const features = [
 
     <h1 class="sp-fv__title sp-fade">
       <span class="sp-fv__title-row">
-        <span class="sp-fv__title-strong">健康</span><span class="sp-fv__title-sub">と</span><span class="sp-fv__title-strong">美しさ</span><span class="sp-fv__title-sub sp-fv__title-sub--tight">は、</span>
+        <span class="sp-fv__title-strong">健康</span><span class="sp-fv__title-sub">と</span><span class="sp-fv__title-strong">美しさ</span><span class="sp-fv__title-sub">は</span><span class="sp-fv__title-sub sp-fv__title-sub--tight sp-fv__title-comma">、</span>
       </span>
       <span class="sp-fv__title-row">
         <span class="sp-fv__title-strong">自宅</span><span class="sp-fv__title-sub">で</span><span class="sp-fv__title-strong">作る時代</span>
       </span>
     </h1>
 
-    <img
-      class="sp-fv__main"
-      src="/mock_site/suisopot/images/fv-main.webp"
-      alt="ナノバブル水素水を飲む女性"
-      width="692"
-      height="640"
-      loading="eager"
-      fetchpriority="high"
-    />
+    <picture class="sp-fv__main">
+      <source
+        media="(max-width: 767px)"
+        srcset="/mock_site/suisopot/images/fv-main-sp.webp"
+        width="319"
+        height="378"
+      />
+      <img
+        src="/mock_site/suisopot/images/fv-main.webp"
+        alt="ナノバブル水素水を飲む女性"
+        width="692"
+        height="640"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </picture>
 
     <p class="sp-fv__vertical" aria-hidden="true">
       <span>ナノバブル水素水で</span><span>健康習慣</span>
     </p>
 
-    <ul class="sp-fv__dots" aria-hidden="true">
-      <li></li>
-      <li class="sp-fv__dots-active"></li>
-      <li></li>
-      <li></li>
+    <img
+      class="sp-fv__bubble"
+      src="/mock_site/suisopot/images/fv-bubble.webp"
+      alt=""
+      aria-hidden="true"
+      width="32"
+      height="98"
+    />
+
+    <ul class="sp-fv__features">
+      {
+        features.map((f) => (
+          <li class="sp-fv__feature sp-fade">
+            <picture>
+              <source
+                media="(max-width: 767px)"
+                srcset={f.sp}
+                width="175"
+                height="122"
+              />
+              <img
+                src={f.pc}
+                alt={f.alt}
+                width="275"
+                height="273"
+                loading="lazy"
+              />
+            </picture>
+          </li>
+        ))
+      }
     </ul>
   </div>
-
-  <ul class="sp-fv__features">
-    {
-      features.map((f) => (
-        <li class="sp-fv__feature sp-fade">
-          <img
-            src={f.src}
-            alt={f.alt}
-            width="275"
-            height="273"
-            loading="lazy"
-          />
-        </li>
-      ))
-    }
-  </ul>
 </section>

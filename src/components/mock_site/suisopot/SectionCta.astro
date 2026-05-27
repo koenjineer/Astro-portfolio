@@ -2,6 +2,7 @@
 // セクション3: cta① (Figma 113:2227) / セクション14: cta③ (Figma 123:3772)
 // 共通コンポーネント - props で文言・画像を切替
 export interface Props {
+  id?: string;
   heading?: string;
   highlight?: string;
   note?: string;
@@ -11,19 +12,20 @@ export interface Props {
 }
 
 const {
+  id = 'cta',
   heading = 'お得にはじめるチャンス',
   highlight = '初期手数料',
   note = '初期手数料(5,000円)が無料になります',
   btnLabel = '資料請求する',
   href = '#',
-  imageSrc = '/mock_site/suisopot/images/cta-product.webp',
+  imageSrc = '/mock_site/suisopot/images/fv-product.webp',
 } = Astro.props as Props;
 ---
 
-<section class="sp-cta" aria-label="キャンペーンのご案内">
+<section class="sp-cta" id={id} aria-label="キャンペーンのご案内">
   <div class="sp-cta__card sp-fade">
     <div class="sp-cta__visual">
-      <img src={imageSrc} alt="SUISOPOT 製品画像" width="161" height="192" loading="lazy" decoding="async" />
+      <img src={imageSrc} alt="SUISOPOT 水素水サーバー本体" width="346" height="606" loading="lazy" decoding="async" />
     </div>
 
     <div class="sp-cta__body">

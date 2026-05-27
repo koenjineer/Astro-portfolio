@@ -22,7 +22,10 @@
   }
 
   &__title-deco {
-    color: $color-gray-1;
+    width: 33px;
+    height: 53px;
+    object-fit: contain;
+    flex-shrink: 0;
   }
 
   &__lead {

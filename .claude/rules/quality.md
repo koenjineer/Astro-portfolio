@@ -17,16 +17,14 @@ pnpm exec playwright install chromium
 
 ### 運用ルーチン
 
-```
 1. 開発担当が実装完了報告
 2. PM が `pnpm preview` でビルド済みサイトを立ち上げ
 3. PM が `pnpm screenshot {section}` 実行（自動撮影+diff）
-4. pixelmatch 差異率を確認:
+4. pixelmatch 差異率を確認：
    - 0〜2% → 自動 OK、ユーザー承認へ
    - 2〜5% → PM 目視確認、許容できれば承認、否なら差し戻し
    - 5%以上 → 開発担当に差し戻し
 5. ユーザー最終承認 → 次セクションへ
-```
 
 ### ファイル名規約
 

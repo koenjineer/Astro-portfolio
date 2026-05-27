@@ -24,13 +24,13 @@
 
 ## SCSS 既存ルール
 
-**冗長な記述を避ける**
+### 冗長な記述を避ける
 - `font-family` は **`body` への設定のみ** とし、各コンポーネントでの個別指定は禁止
 - セクション共通タイトル構造は `@mixin section-heading` を使用する
 - SPメディアクエリ内でPCと同じ値を再宣言しない（差分のみ記述）
 - センタリングは `margin-inline: auto` を使用（`margin-left: auto; margin-right: auto;` は禁止）
 
-**レスポンシブの余白パターン**
+### レスポンシブの余白パターン
 - 外側の section コンテナには **小さな padding（16px 等）** のみ設定する
 - 横幅は **内側のコンテナで `max-width` + `margin-inline: auto`** で頭打ちにする
 - 外側に大きな固定 padding（例：`padding: 0 130px`）は **禁止**

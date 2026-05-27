@@ -1,8 +1,29 @@
 @use 'variables' as *;
 
 .sp-cta-second {
-  padding: 50px $side-padding 80px;
+  position: relative;
+  overflow: hidden;
+  padding: 60px $side-padding 80px;
   background: $color-accent-green;
+
+  &__wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: block;
+    pointer-events: none;
+  }
+
+  &__product {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 200px;
+    height: auto;
+    pointer-events: none;
+  }
 
   &__inner {
     display: flex;
@@ -11,7 +32,9 @@
     gap: 32px;
     max-width: $content-max;
     margin-inline: auto;
-    padding-top: 30px;
+    padding-top: 10px;
+    // prevent overlap with right product image on PC
+    padding-right: 220px;
   }
 
   &__title {
@@ -33,8 +56,15 @@
   }
 
   &__title-deco {
-    font-size: 1.5em;
-    color: $color-gray-1;
+    width: 32px;
+    height: 98px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__title-text {
+    flex: 1;
+    min-width: 0;
   }
 
   &__btn-list {
@@ -67,40 +97,57 @@
     gap: 8px;
     width: 100%;
     height: 88px;
-    padding: 0 48px;
+    padding: 0 32px;
     background: $color-accent;
     color: $color-white;
     border-radius: 52px;
     font-family: $font-jp-sans;
     font-weight: 700;
-    font-size: 28px;
+    font-size: 26px;
+    white-space: nowrap;
     box-shadow: 0 0 1.5px rgba(83, 46, 37, 0.25);
     transition: opacity 0.2s ease;
-
-    strong {
-      font-size: 30px;
-    }
 
     &:hover {
       opacity: 0.85;
     }
   }
 
+  &__btn-text {
+    white-space: nowrap;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
   &__btn-arrow {
     display: inline-block;
+    flex-shrink: 0;
   }
 
   @media (max-width: $bp-sp) {
-    padding: 32px $side-padding 40px;
+    padding: 48px $side-padding 40px;
+    overflow: visible;
+
+    &__product {
+      display: none;
+    }
 
     &__inner {
       gap: 20px;
-      padding-top: 12px;
+      padding-top: 0;
+      padding-right: 0;
     }
 
     &__title {
       font-size: 18px;
       gap: 8px;
+    }
+
+    &__title-deco {
+      width: 20px;
+      height: 61px;
     }
 
     &__btn-list {
@@ -121,10 +168,6 @@
       height: 64px;
       font-size: 18px;
       padding: 0 24px;
-
-      strong {
-        font-size: 20px;
-      }
     }
   }
 }

@@ -2,12 +2,14 @@
 
 .sp-cta {
   padding: 80px $side-padding;
-  background: $color-white;
+  // Figma: 白背景 + きらきら装飾テクスチャ重ね
+  background: $color-white url('/mock_site/suisopot/images/cta1-bg.webp') center / cover no-repeat;
 
   &__card {
     position: relative;
     display: grid;
-    grid-template-columns: 240px 1fr 220px;
+    // 中央列を広げてテキスト折り返しを防ぐ（Figma: テキストエリア約360px）
+    grid-template-columns: 200px 1fr 160px;
     align-items: center;
     gap: 24px;
     max-width: 860px;
@@ -47,10 +49,18 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
+    white-space: nowrap; // 折り返し防止
   }
 
+  // Figma: Line67/Line66 を CSS 回転で ＼ ／ 風に再現
   &__heading-deco {
-    color: $color-gray-1;
+    display: block;
+    width: 22px;
+    height: auto;
+    flex-shrink: 0;
+
+    &--left  { transform: rotate(70deg) scaleY(-1); }
+    &--right { transform: rotate(110deg); }
   }
 
   &__price {
@@ -82,6 +92,7 @@
     font-size: 32px;
     color: $color-gray-1;
     letter-spacing: 0.2em;
+    white-space: nowrap; // 折り返し防止
   }
 
   &__btn {

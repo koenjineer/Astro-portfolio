@@ -1,0 +1,65 @@
+---
+// セクション9: use_box (Figma 113:2863)
+// スライダー → 静的4枚表示（スライダーJS後回し）
+const items = [
+  { src: 'use-1.webp', label: 'お茶やコーヒー' },
+  { src: 'use-2.webp', label: '野菜の洗浄' },
+  { src: 'use-3.webp', label: '植物の水やり' },
+  { src: 'use-4.webp', label: 'ペットの飲用水' },
+];
+// ページネーション dot 数（Figma: 7dots）
+const DOTS = 7;
+---
+
+<section class="sp-use-box" id="use">
+  <div class="sp-use-box__card sp-fade">
+
+    <div class="sp-use-box__header">
+      <img class="sp-use-box__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+      <h2 class="sp-use-box__title">使い方はいろいろ</h2>
+      <img class="sp-use-box__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+    </div>
+
+    <p class="sp-use-box__lead">
+      健康的な生活のための飲用水としてはもちろん、お茶やお料理にもお使いいただけます。<br />
+      さらに、ペットの飲用水、植物の水やり、お肌を整えるための洗顔など、<br />
+      ライフスタイルに合わせて、幅広く活用ができます。
+    </p>
+
+    <div class="sp-use-box__slider-area">
+      <!-- 左矢印（右矢印SVGをCSSでflip） -->
+      <button class="sp-use-box__arrow sp-use-box__arrow--prev" type="button" aria-label="前へ" disabled>
+        <img src="/mock_site/suisopot/images/use-arrow.svg" alt="" aria-hidden="true" width="29" height="29" />
+      </button>
+
+      <ul class="sp-use-box__list">
+        {items.map((item) => (
+          <li class="sp-use-box__item">
+            <img
+              src={`/mock_site/suisopot/images/${item.src}`}
+              alt={item.label}
+              width="236"
+              height="154"
+              loading="lazy"
+              decoding="async"
+            />
+            <p class="sp-use-box__caption">{item.label}</p>
+          </li>
+        ))}
+      </ul>
+
+      <!-- 右矢印 -->
+      <button class="sp-use-box__arrow sp-use-box__arrow--next" type="button" aria-label="次へ">
+        <img src="/mock_site/suisopot/images/use-arrow.svg" alt="" aria-hidden="true" width="29" height="29" />
+      </button>
+    </div>
+
+    <!-- ページネーション（静的） -->
+    <div class="sp-use-box__dots" aria-hidden="true">
+      {Array.from({ length: DOTS }).map((_, i) => (
+        <span class:list={['sp-use-box__dot', i === 0 && 'sp-use-box__dot--active']} />
+      ))}
+    </div>
+
+  </div>
+</section>

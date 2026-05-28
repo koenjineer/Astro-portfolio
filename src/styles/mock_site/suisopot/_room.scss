@@ -41,9 +41,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 32px;
+    gap: 80px; // Figma 113:2859: gap 80px
     flex-wrap: wrap;
-    max-width: $content-max;
+    max-width: 1300px; // 320+80+480+80+320=1280 を収める
     width: 100%;
   }
 

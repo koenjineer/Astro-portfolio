@@ -7,6 +7,7 @@
   &__inner {
     max-width: $content-max;
     margin-inline: auto;
+    position: relative; // connector の絶対配置基準
   }
 
   &__title {
@@ -19,10 +20,25 @@
     margin-bottom: 64px;
   }
 
+  // Figma: ashirai_line 接続ライン（各POINTをつなぐ曲線装飾）
+  // top: タイトル(約56px) + margin-bottom(64px) = 約120px でリスト上端に合わせる
+  &__connector {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 634px;
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
     gap: 56px;
+    position: relative;
+    z-index: 1; // connector より前面
   }
 
   &__item {

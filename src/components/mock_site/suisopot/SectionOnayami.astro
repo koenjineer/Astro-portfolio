@@ -27,9 +27,14 @@ const items = [
         {
           items.map((t) => (
             <li class="sp-onayami__item sp-fade">
-              <span class="sp-onayami__check" aria-hidden="true">
-                ✓
-              </span>
+              <img
+                class="sp-onayami__check"
+                src="/mock_site/suisopot/images/onayami-checkbox.svg"
+                alt=""
+                aria-hidden="true"
+                width="24"
+                height="24"
+              />
               <span class="sp-onayami__text">{t}</span>
             </li>
           ))

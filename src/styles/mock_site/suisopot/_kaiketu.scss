@@ -7,6 +7,20 @@
   position: relative;
   padding: 90px $side-padding 80px;
   background: $color-white;
+  overflow: hidden; // 1440px 幅の背景画像をクリップ
+
+  // 背景粒子グラデーション画像（Figma: Frame 1344 1 / RGBA で上部は透明→下部は淡青）
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1440px;
+    max-width: none;
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+  }
 
   &__arrow {
     position: absolute;
@@ -15,9 +29,12 @@
     transform: translateX(-50%);
     width: 90px;
     height: 50px;
+    z-index: 1; // 背景画像の上
   }
 
   &__inner {
+    position: relative;
+    z-index: 1; // 背景画像の上
     max-width: $content-max;
     margin-inline: auto;
   }

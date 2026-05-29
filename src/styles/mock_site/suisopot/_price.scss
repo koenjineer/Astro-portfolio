@@ -1,0 +1,202 @@
+@use 'variables' as *;
+
+// セクション13: price (Figma 113:2984)
+// 白背景 / 比較テーブル / SUISOPOT列はオレンジ枠(5px)で強調
+
+$cell-w: 199px;
+$cell-h: 60px;
+$accent-orange: $color-accent; // #ff8b71
+$border-teal: $color-accent-green; // #c6ecec
+$font-yomogi: 'Yomogi', cursive;
+
+.sp-price {
+  padding: 80px $side-padding;
+  background: $color-white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+
+  // ===== タイトル =====
+  &__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__title-deco {
+    width: 33px;
+    height: 53px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-family: $font-jp-serif;
+    font-weight: 400;
+    font-size: 40px;
+    color: $color-gray-1;
+    letter-spacing: 0.03em;
+  }
+
+  // ===== テーブルラッパー =====
+  &__table-wrap {
+    position: relative;
+    overflow-x: auto; // SP用スクロール
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+
+  // ===== 「とてもお得！」 =====
+  &__otoku {
+    position: absolute;
+    // SUISOPOT列の上（2列目の左から）: cell-w(row-header) + 少し左に
+    left: calc(#{$cell-w} - 16px);
+    top: -20px;
+    font-family: $font-yomogi;
+    font-size: 25px;
+    color: $color-gray-1;
+    letter-spacing: -0.09em;
+    transform: rotate(-5deg);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  // ===== テーブル本体 =====
+  &__table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: #{$cell-w * 5};
+    table-layout: fixed;
+    // SUISOPOT列の上にオレンジの突起（::before で擬似実装は難しいのでHTMLで対処）
+    margin-top: 15px; // オレンジ突起の高さ分
+  }
+
+  // ===== ヘッダーセル =====
+  &__th {
+    height: $cell-h;
+    width: $cell-w;
+    text-align: center;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 16px;
+    color: $color-gray-1;
+    position: relative;
+
+    &--row-header {
+      background: transparent;
+      border: none;
+    }
+
+    &--suisopot {
+      background: $accent-orange;
+      border-top: 5px solid $accent-orange;
+      border-left: 5px solid $accent-orange;
+      border-right: 5px solid $accent-orange;
+      border-radius: 8px 8px 0 0;
+      // 突起: SUISOPOT列の上に15px分の帯
+      &::before {
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: -5px;
+        right: -5px;
+        height: 15px;
+        background: $accent-orange;
+        border-radius: 8px 8px 0 0;
+      }
+    }
+
+    &--competitor {
+      background: $border-teal;
+      border: 0.5px solid $border-teal;
+    }
+
+    &--last {
+      border-radius: 0 8px 0 0;
+    }
+  }
+
+  // SUISOPOT列のロゴボックス
+  &__logo-box {
+    background: $color-white;
+    border-radius: 8px;
+    padding: 4px 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 156px;
+    height: 48px;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  // ===== データセル =====
+  &__td {
+    height: $cell-h;
+    width: $cell-w;
+    text-align: center;
+    font-family: $font-jp-sans;
+    font-size: 16px;
+    font-weight: 400;
+    color: $color-gray-1;
+    border: 0.5px solid $border-teal;
+    line-height: 1.5;
+    padding: 4px 8px;
+    vertical-align: middle;
+
+    &--suisopot {
+      font-size: 20px;
+      font-weight: 700;
+      border-left: 5px solid $accent-orange;
+      border-right: 5px solid $accent-orange;
+
+      strong { font-weight: 700; font-size: 20px; }
+    }
+
+    &--last {
+      // 最終列は特別なスタイルなし（デフォルト通り）
+    }
+  }
+
+  // 行ヘッダーセル
+  &__th--label {
+    background: $border-teal;
+    border: 0.5px solid $border-teal;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+
+    &:first-of-type { border-radius: 8px 0 0 0; }
+  }
+
+  // 最終行で角丸
+  &__tr:last-child {
+    .sp-price__th--label { border-radius: 0 0 0 8px; }
+    .sp-price__td--suisopot {
+      border-bottom: 5px solid $accent-orange;
+    }
+  }
+
+  // ===== レスポンシブ (SP) =====
+  @media (max-width: $bp-sp) {
+    padding: 48px $side-padding;
+    gap: 32px;
+
+    &__title { font-size: 24px; }
+    &__title-deco { width: 22px; height: 35px; }
+
+    &__otoku { font-size: 18px; }
+
+    // テーブルはスクロール
+    &__table {
+      width: max-content;
+    }
+  }
+}

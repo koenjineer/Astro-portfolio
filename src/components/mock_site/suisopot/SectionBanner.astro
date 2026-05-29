@@ -1,0 +1,80 @@
+---
+// セクション12: banner (Figma 113:2936)
+// 白背景 / 中央バナー画像 / 左:日付サークル+製品画像 / 右:料金テキスト+タグ
+const tags = [
+  { label: '送料無料', sub: '' },
+  { label: '解約可能', sub: 'いつでも' },
+  { label: '設置工事不要', sub: '' },
+  { label: '無料', sub: 'ミネラルプレート' },
+];
+---
+
+<section class="sp-banner" id="campaign">
+  <div class="sp-banner__inner">
+
+    <!-- ===== 左エリア: 日付サークル + 製品 ===== -->
+    <div class="sp-banner__left">
+      <div class="sp-banner__circle-wrap" aria-hidden="true">
+        <img class="sp-banner__circle-outer" src="/mock_site/suisopot/images/banner-circle1.svg" alt="" width="302" height="302" />
+        <img class="sp-banner__circle-inner" src="/mock_site/suisopot/images/banner-circle2.svg" alt="" width="264" height="264" />
+        <span class="sp-banner__date">10/1</span>
+      </div>
+      <p class="sp-banner__date-label">受付開始</p>
+      <img
+        class="sp-banner__device"
+        src="/mock_site/suisopot/images/banner-product.webp"
+        alt="SUISOPOT本体"
+        width="320"
+        height="320"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <!-- ===== 右エリア: テキスト + 料金 ===== -->
+    <div class="sp-banner__right">
+      <p class="sp-banner__catch">
+        カラダにおいしい「ナノバブル水素水」が飲み放題
+      </p>
+
+      <div class="sp-banner__promo-box">
+        ず——っと利用料金が<span class="sp-banner__promo-num">1,000</span>円引き
+      </div>
+
+      <h2 class="sp-banner__headline">新料金プラン登場</h2>
+
+      <div class="sp-banner__price-area">
+        <div class="sp-banner__price-normal">
+          <span class="sp-banner__plan-label">通常プラン</span>
+          <span class="sp-banner__price-old">¥4,800</span>
+        </div>
+        <img
+          class="sp-banner__price-arrow"
+          src="/mock_site/suisopot/images/banner-arrow.svg"
+          alt="→"
+          width="65"
+          height="58"
+          aria-hidden="true"
+        />
+        <div class="sp-banner__price-new">
+          <span class="sp-banner__new-plan-label">バリュープラン</span>
+          <span class="sp-banner__price-value">¥3,800<small class="sp-banner__price-tax">（税込）</small></span>
+        </div>
+      </div>
+
+      <div class="sp-banner__tags">
+        {tags.map((tag) => (
+          <div class="sp-banner__tag">
+            {tag.sub && <span class="sp-banner__tag-sub">{tag.sub}</span>}
+            <span class="sp-banner__tag-main">{tag.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <p class="sp-banner__note">
+        初回は初期手数料 <span class="sp-banner__note-num">5,000</span>円が別途かかります
+      </p>
+    </div>
+
+  </div>
+</section>

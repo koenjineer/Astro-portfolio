@@ -1,0 +1,87 @@
+---
+// セクション11: kenkyu (Figma 113:2908)
+// 水色背景 / 白カード(992px, 角丸40px) / 吹き出し3つ（左右交互）
+const talks = [
+  {
+    dir: 'left',
+    avatar: 'kenkyu-avatar-1.webp',
+    text: [
+      { plain: 'ナノバブル水素水に大腸菌、黄色ブドウ球菌を24時間培養。' },
+      { bold: '大腸菌を99.8％減少、黄色ブドウ球菌は99.6％減少', plain: 'するなどの' },
+      { bold: '除菌効果', plain: ' が見られました。' },
+    ],
+  },
+  {
+    dir: 'right',
+    avatar: 'kenkyu-avatar-2.webp',
+    text: [
+      { plain: 'ナノバブル水素水を肌に塗布することで、シミのもととなる' },
+      { bold: 'メラニンを生成する酵素を抑制する効果', plain: ' が確認されました。' },
+    ],
+  },
+  {
+    dir: 'left',
+    avatar: 'kenkyu-avatar-3.webp',
+    text: [
+      { plain: 'ヒト細胞内にナノバブル水素水と活性酸素（過酸化水素）を同時に添加する試験で、' },
+      { bold: '細胞内の活性酸素が減少する効果', plain: ' が確認されました。' },
+    ],
+  },
+];
+---
+
+<section class="sp-kenkyu" id="kenkyu">
+  <div class="sp-kenkyu__card sp-fade">
+
+    <div class="sp-kenkyu__head">
+      <h2 class="sp-kenkyu__title">ナノバブル水素水の有用性や新たな可能性を開拓</h2>
+      <p class="sp-kenkyu__subtitle">国内の大学や研究機関との共同研究の一例</p>
+    </div>
+
+    <div class="sp-kenkyu__talks">
+      {talks.map((talk) => (
+        <div class:list={['sp-kenkyu__talk', `sp-kenkyu__talk--${talk.dir}`]}>
+          {talk.dir === 'left' && (
+            <img
+              class="sp-kenkyu__avatar"
+              src={`/mock_site/suisopot/images/${talk.avatar}`}
+              alt=""
+              aria-hidden="true"
+              width="90"
+              height="90"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+          <div class="sp-kenkyu__bubble">
+            <p class="sp-kenkyu__bubble-text">
+              {talk.text.map((seg) => (
+                <>
+                  {seg.bold ? <strong>{seg.bold}</strong> : null}
+                  {seg.plain ?? null}
+                </>
+              ))}
+            </p>
+          </div>
+          {talk.dir === 'right' && (
+            <img
+              class="sp-kenkyu__avatar"
+              src={`/mock_site/suisopot/images/${talk.avatar}`}
+              alt=""
+              aria-hidden="true"
+              width="90"
+              height="90"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+  <div class="sp-kenkyu__dots" aria-hidden="true">
+    <img src="/mock_site/suisopot/images/kenkyu-dots.svg" alt="" width="96" height="16" />
+  </div>
+</section>

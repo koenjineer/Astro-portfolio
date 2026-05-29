@@ -192,11 +192,60 @@ $font-yomogi: 'Yomogi', cursive;
     &__title { font-size: 24px; }
     &__title-deco { width: 22px; height: 35px; }
 
-    &__otoku { font-size: 18px; }
+    &__otoku {
+      font-size: 16px;
+      // ラベル列幅分だけ右にずらす
+      left: calc(88px - 8px);
+    }
 
-    // テーブルはスクロール
+    // SP: 横スクロール + ラベル列を sticky 固定
+    &__table-wrap {
+      width: 100%;
+    }
+
     &__table {
       width: max-content;
+    }
+
+    // ラベル列・空ヘッダーを sticky 固定（常に左端に表示）
+    &__th--row-header,
+    &__th--label {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: $color-white; // 後ろのセルを隠す
+      width: 88px;
+      min-width: 88px;
+      font-size: 13px;
+    }
+
+    &__th--row-header {
+      background: $color-white; // 空セルも白で上書き
+    }
+
+    // 非ラベル列の幅を縮小（約3.5列が viewport 内に収まる）
+    &__th,
+    &__td {
+      width: 100px;
+      min-width: 100px;
+      font-size: 13px;
+      height: 52px;
+    }
+
+    &__th--suisopot {
+      // sticky ラベルより前面（z-index 調整不要、左端ではないため）
+    }
+
+    &__logo-box {
+      width: 80px;
+      height: 36px;
+      padding: 2px 4px;
+    }
+
+    &__td--suisopot {
+      font-size: 15px;
+
+      strong { font-size: 15px; }
     }
   }
 }

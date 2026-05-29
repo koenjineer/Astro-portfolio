@@ -1,0 +1,140 @@
+@use 'variables' as *;
+
+// セクション10: osusume (Figma 113:2892)
+// 白背景 / 2行×3列カード / 番号バッジ付き
+
+// バッジ数字グラデーション（Figma: linear-gradient 176.66deg, #50BFCB → rgba(80,191,203,0.42)）
+$badge-gradient: linear-gradient(176.66deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.42) 127.88%);
+
+.sp-osusume {
+  padding: 80px $side-padding;
+  background: $color-white;
+
+  // ===== タイトル =====
+  &__title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+
+  &__title-deco {
+    width: 33px;
+    height: 53px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-family: $font-jp-serif;
+    font-weight: 400;
+    font-size: 40px;
+    color: $color-gray-1;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  // ===== グリッド =====
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    max-width: 992px; // 296×3 + 52×2 = 992
+    margin-inline: auto;
+  }
+
+  &__row {
+    display: flex;
+    gap: 52px;
+    justify-content: center;
+  }
+
+  // ===== カード =====
+  &__card {
+    width: 296px;
+    flex-shrink: 0;
+  }
+
+  &__card-img-wrap {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  &__card-img {
+    display: block;
+    width: 296px;
+    height: 184px;
+    object-fit: cover;
+    border-radius: 14.8px;
+    box-shadow: 0 3.7px 1.85px rgba(0, 0, 0, 0.25);
+  }
+
+  // ===== 番号バッジ =====
+  &__badge {
+    position: absolute;
+    left: -12px;
+    top: -14px;
+    width: 64px;
+    height: 64px;
+  }
+
+  &__badge-bg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__badge-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-en; // Lato未ロードのためJostで代替
+    font-size: 30px;
+    font-weight: 500;
+    background: $badge-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  // ===== カードテキスト =====
+  &__card-title {
+    @include typo-h3-bold;
+    color: $color-gray-1;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  &__card-desc {
+    @include typo-p16;
+    color: $color-gray-1;
+    text-align: justify;
+  }
+
+  // ===== レスポンシブ (SP) =====
+  @media (max-width: $bp-sp) {
+    padding: 48px $side-padding;
+
+    &__title { font-size: 22px; white-space: normal; text-align: center; }
+    &__title-deco { width: 24px; height: 38px; }
+    &__title-wrap { gap: 8px; margin-bottom: 32px; }
+
+    &__grid { gap: 48px; max-width: 100%; }
+
+    &__row {
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+
+    &__card { width: 100%; max-width: 340px; }
+
+    &__card-img {
+      width: 100%;
+      height: 200px;
+    }
+  }
+}

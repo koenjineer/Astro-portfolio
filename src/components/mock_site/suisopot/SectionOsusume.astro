@@ -1,0 +1,102 @@
+---
+// セクション10: osusume (Figma 113:2892)
+// 2行×3列カード、各カードに番号バッジ（白丸＋グラデーション数字）
+const items = [
+  {
+    num: 1,
+    src: 'osusume-1.webp',
+    title: '水道水を注ぐだけ',
+    desc: '付属のタンクに水道水を注いでスイッチを入れるだけ！自宅でたっぷり5リットル（コップ約25杯分）のナノバブル水素水をつくれます。',
+  },
+  {
+    num: 2,
+    src: 'osusume-2.webp',
+    title: '超省エネ設計で経済的',
+    desc: '必要なときにナノバブル水素水を生成するため、電気代は月々約30円と省エネ設計。月1,000円程度の電気代がかかるウォーターサーバーと比較すると1/30のコストで済みます。',
+  },
+  {
+    num: 3,
+    src: 'osusume-3.webp',
+    title: 'コンパクトサイズ',
+    desc: '直径30cm程度でコンパクトだから置き場所も自由自在！コンセントのある場所であれば、キッチンやダイニングなどお好きな場所に設置いただけます。',
+  },
+  {
+    num: 4,
+    src: 'osusume-4.webp',
+    title: '環境に優しい',
+    desc: 'SUIREX5をご利用いただくことで、年間約3,600本分ものペットボトルを削減でき、年間350㎏の温暖化ガス削減効果があります。',
+  },
+  {
+    num: 5,
+    src: 'osusume-5.webp',
+    title: '設置工事不要',
+    desc: '設置時間も工事費も不要で経済的！プラグをコンセントに差し込むだけで届いたその日からどこでも、すぐにご使用いただけます。',
+  },
+  {
+    num: 6,
+    src: 'osusume-6.webp',
+    title: '簡単メンテナンス',
+    desc: '毎日のお手入れ不要！電極部など全ての部品がみえていますので、お手入れの際も簡単衛生的に行えます！',
+  },
+];
+
+const rows = [items.slice(0, 3), items.slice(3)];
+---
+
+<section class="sp-osusume" id="osusume">
+  <div class="sp-osusume__title-wrap sp-fade">
+    <img
+      class="sp-osusume__title-deco"
+      src="/mock_site/suisopot/images/title-deco-left.webp"
+      alt=""
+      aria-hidden="true"
+      width="33"
+      height="53"
+      loading="lazy"
+    />
+    <h2 class="sp-osusume__title">SUISOPOTがオススメな理由</h2>
+    <img
+      class="sp-osusume__title-deco"
+      src="/mock_site/suisopot/images/title-deco-right.webp"
+      alt=""
+      aria-hidden="true"
+      width="33"
+      height="53"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="sp-osusume__grid">
+    {rows.map((row) => (
+      <div class="sp-osusume__row">
+        {row.map((item) => (
+          <article class="sp-osusume__card sp-fade">
+            <div class="sp-osusume__card-img-wrap">
+              <img
+                class="sp-osusume__card-img"
+                src={`/mock_site/suisopot/images/${item.src}`}
+                alt={item.title}
+                width="296"
+                height="184"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="sp-osusume__badge" aria-hidden="true">
+                <img
+                  class="sp-osusume__badge-bg"
+                  src="/mock_site/suisopot/images/osusume-badge.svg"
+                  alt=""
+                  width="64"
+                  height="64"
+                />
+                <span class="sp-osusume__badge-num">{item.num}</span>
+              </div>
+            </div>
+            <h3 class="sp-osusume__card-title">{item.title}</h3>
+            <p class="sp-osusume__card-desc">{item.desc}</p>
+          </article>
+        ))}
+      </div>
+    ))}
+  </div>
+</section>

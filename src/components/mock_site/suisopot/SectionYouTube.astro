@@ -1,0 +1,69 @@
+---
+// セクション18: YouTube (Figma 113:3137)
+// 白背景 / 2枚の動画リンクカード（サムネ+グラデ+Yomogiラベル）
+
+const cards = [
+  {
+    thumbSrc: 'yt-thumb-1.webp',
+    thumbAlt: 'SUISOPOTご使用方法動画',
+    iconSrc: 'yt-cup.svg',
+    iconW: 17,
+    iconH: 30,
+    label: '詳しいご使用方法',
+    infoPad: 29,
+  },
+  {
+    thumbSrc: 'yt-thumb-2.webp',
+    thumbAlt: 'SUISOPOTお手入れ方法動画',
+    iconSrc: 'yt-heart.svg',
+    iconW: 36,
+    iconH: 29,
+    label: '詳しいお手入れ方法',
+    infoPad: 20,
+  },
+];
+---
+
+<section class="sp-youtube" id="youtube">
+  {cards.map((card) => (
+    <a
+      class="sp-youtube__card sp-fade"
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${card.label}の動画を見る`}
+    >
+      <div class="sp-youtube__thumb">
+        <img
+          class="sp-youtube__thumb-img"
+          src={`/mock_site/suisopot/images/${card.thumbSrc}`}
+          alt={card.thumbAlt}
+          width="226"
+          height="160"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="sp-youtube__overlay" aria-hidden="true"></div>
+        <img
+          class="sp-youtube__play"
+          src="/mock_site/suisopot/images/yt-play.svg"
+          alt=""
+          aria-hidden="true"
+          width="64"
+          height="64"
+        />
+      </div>
+      <div class="sp-youtube__info" style={`padding-left: ${card.infoPad}px; padding-right: ${card.infoPad}px`}>
+        <img
+          class="sp-youtube__icon"
+          src={`/mock_site/suisopot/images/${card.iconSrc}`}
+          alt=""
+          aria-hidden="true"
+          width={card.iconW}
+          height={card.iconH}
+        />
+        <p class="sp-youtube__label">{card.label}</p>
+      </div>
+    </a>
+  ))}
+</section>

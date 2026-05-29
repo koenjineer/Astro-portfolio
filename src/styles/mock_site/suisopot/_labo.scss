@@ -1,0 +1,167 @@
+@use 'variables' as *;
+
+// セクション19: labo (Figma 113:3168)
+// 白背景 / Yomogi タイトル / 3枚カード / CTAボタン
+
+$labo-teal: #00c2cb;             // Figma: ナノバブルLabo固有の色（#00c2cb）
+$labo-gradient: linear-gradient(179.38deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.42) 127.88%);
+$card-w: 316px;
+$card-h: 182px;
+$font-yomogi: 'Yomogi', cursive;
+
+.sp-labo {
+  padding: 80px $side-padding;
+  background: $color-white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+
+  // ===== ヘッダー（タイトル+デコ） =====
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__title-deco {
+    width: 33px;
+    height: 53px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  // タイトルブロック（タイトル＋サブタイトル）
+  &__title-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  // "ナノバブルLabo" （Yomogi / teal）
+  &__title {
+    font-family: $font-yomogi;
+    font-size: 42px;
+    color: $labo-teal;
+    letter-spacing: -0.05em;
+    line-height: 1.2;
+  }
+
+  // サブタイトル
+  &__subtitle {
+    font-family: $font-jp-sans;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    color: $color-gray-1;
+  }
+
+  // ===== カードグループ =====
+  &__cards {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  // 各カード
+  &__card {
+    position: relative;
+    width: $card-w;
+    height: $card-h;
+    border: 4px solid $labo-teal;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  // カード画像
+  &__card-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  // 薄い暗色オーバーレイ（画像のコントラスト確保）
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(108, 110, 111, 0.2); // gray2のうっすら重ね
+  }
+
+  // テキストオーバーレイ（白半透明バー）
+  &__text {
+    position: absolute;
+    top: 58px;
+    left: 4px;       // ボーダー内側
+    width: 308px;    // カード幅(316) - ボーダー(4×2) = 308
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // テキスト行
+  &__text-line {
+    font-family: $font-jp-sans;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    color: $labo-teal;
+    text-align: center;
+    letter-spacing: 0.03em;
+    width: 100%;
+  }
+
+  // ===== CTAボタン =====
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 24px;
+    border-radius: 32px;
+    background: $labo-gradient;
+    box-shadow: 0 0 4px rgba(41, 81, 86, 0.25);
+    text-decoration: none;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-white;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.85; }
+  }
+
+  // ===== レスポンシブ (SP) =====
+  @media (max-width: $bp-sp) {
+    padding: 48px $side-padding;
+    gap: 40px;
+
+    &__title { font-size: 32px; }
+    &__subtitle { font-size: 14px; text-align: center; }
+
+    &__cards {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__card {
+      width: 100%;
+      max-width: 360px;
+      height: 160px;
+    }
+
+    &__text {
+      width: calc(100% - 8px);
+      left: 4px;
+    }
+
+    &__text-line { font-size: 18px; }
+  }
+}

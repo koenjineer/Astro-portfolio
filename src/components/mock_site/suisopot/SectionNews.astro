@@ -1,0 +1,37 @@
+---
+// セクション22: news (Figma 113:3251)
+// 白背景 / ニュースリスト4件 / カテゴリバッジ / CTAボタン
+
+const newsItems = [
+  { date: '2023.6.13', badge: 'BLOG', title: '還元水素水はペットに与えても良い？おすすめの商品もご紹介' },
+  { date: '2023.6.13', badge: 'NEWS', title: '家庭用のレンタル水素水サーバーの選び方・おすすめランキング' },
+  { date: '2023.6.02', badge: 'NEWS', title: '「ウォーターサーバー比較」でSUISOPOTが紹介されました。' },
+  { date: '2023.6.01', badge: 'NEWS', title: '「ウォーターサーバー比較」でSUISOPOTが紹介されました。' },
+];
+---
+
+<section class="sp-news" id="news">
+
+  <div class="sp-news__inner">
+    <div class="sp-news__header sp-fade">
+      <img class="sp-news__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+      <h2 class="sp-news__title">ニュース・メディア掲載実績</h2>
+      <img class="sp-news__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+    </div>
+
+    <ul class="sp-news__list sp-fade">
+      {newsItems.map((item) => (
+        <li class="sp-news__item">
+          <a class="sp-news__row" href="#">
+            <time class="sp-news__date" datetime={item.date}>{item.date}</time>
+            <span class="sp-news__badge">{item.badge}</span>
+            <span class="sp-news__text">{item.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a class="sp-news__btn sp-fade" href="#">もっと見る</a>
+  </div>
+
+</section>

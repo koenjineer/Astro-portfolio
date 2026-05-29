@@ -1,0 +1,84 @@
+---
+// セクション15: voice (Figma 113:3062)
+// 背景: $color-base-blue / 3枚カードスライダー（静的）/ 9ドット
+
+const voices = [
+  {
+    src: 'voice-1.webp',
+    alt: '子供の写真',
+    heading: '子供にはいい水を飲ませたい。だからSUISOPOTを使用。',
+    name: 'T様 （東京都 40代）',
+  },
+  {
+    src: 'voice-2.webp',
+    alt: '女性の写真',
+    heading: 'ナノバブル水素水が飲み放題なマシンです。',
+    name: '田中菜々子様',
+  },
+  {
+    src: 'voice-3.webp',
+    alt: '女性の写真',
+    heading: '毎日の生活には、SUISOPOTのお水は欠かせません。',
+    name: 'Y様 （東京都 80代）',
+  },
+];
+
+const DOTS = 9;
+---
+
+<section class="sp-voice" id="voice">
+
+  <div class="sp-voice__title-wrap sp-fade">
+    <img class="sp-voice__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+    <h2 class="sp-voice__title">お客様の声</h2>
+    <img class="sp-voice__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+  </div>
+
+  <div class="sp-voice__slider sp-fade">
+    <button class="sp-voice__arrow sp-voice__arrow--prev" type="button" aria-label="前へ" disabled>
+      <img src="/mock_site/suisopot/images/use-arrow.svg" alt="" aria-hidden="true" width="29" height="29" />
+    </button>
+
+    <ul class="sp-voice__list">
+      {voices.map((v) => (
+        <li class="sp-voice__item">
+          <div class="sp-voice__photo">
+            <img
+              src={`/mock_site/suisopot/images/${v.src}`}
+              alt={v.alt}
+              width="320"
+              height="225"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="sp-voice__body">
+            <p class="sp-voice__heading">{v.heading}</p>
+            <div class="sp-voice__meta">
+              <p class="sp-voice__name">{v.name}</p>
+              <img
+                class="sp-voice__btn"
+                src="/mock_site/suisopot/images/voice-btn.svg"
+                alt=""
+                aria-hidden="true"
+                width="22"
+                height="22"
+              />
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <button class="sp-voice__arrow sp-voice__arrow--next" type="button" aria-label="次へ">
+      <img src="/mock_site/suisopot/images/use-arrow.svg" alt="" aria-hidden="true" width="29" height="29" />
+    </button>
+  </div>
+
+  <div class="sp-voice__dots sp-fade" aria-hidden="true">
+    {Array.from({ length: DOTS }).map((_, i) => (
+      <span class:list={['sp-voice__dot', i === 0 && 'sp-voice__dot--active']} />
+    ))}
+  </div>
+
+</section>

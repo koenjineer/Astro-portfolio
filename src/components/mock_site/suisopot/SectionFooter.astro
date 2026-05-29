@@ -1,0 +1,84 @@
+---
+// セクション24: footer (Figma 113:3307)
+// 白背景 / ナビリンク + ロゴ + 免責文 + Copyright + 波形デコレーション
+
+interface NavLink {
+  label: string;
+  href: string;
+  external: boolean;
+}
+
+const navLinks: NavLink[] = [
+  { label: '特長',                      href: '#point',  external: false },
+  { label: 'お客様の声',                href: '#voice',  external: false },
+  { label: 'ご利用料金',                href: '#price',  external: false },
+  { label: 'ご利用までの流れ',          href: '#3step',  external: false },
+  { label: 'よくある質問',              href: '#faq',    external: false },
+  { label: '特定商取引法に基づく表記',  href: 'https://t-mp1.net/attention', external: true },
+];
+
+// リンクとセパレーターを交互に並べる
+type NavItem =
+  | { type: 'link'; label: string; href: string; external: boolean }
+  | { type: 'sep' };
+
+const navItems: NavItem[] = navLinks.flatMap((link, i) =>
+  i < navLinks.length - 1
+    ? [{ type: 'link' as const, ...link }, { type: 'sep' as const }]
+    : [{ type: 'link' as const, ...link }]
+);
+---
+
+<footer class="sp-footer sp-fade">
+
+  <div class="sp-footer__inner">
+
+    <!-- ナビゲーション -->
+    <nav class="sp-footer__nav" aria-label="フッターナビゲーション">
+      {navItems.map((item) =>
+        item.type === 'sep'
+          ? <span class="sp-footer__sep" aria-hidden="true"></span>
+          : <a
+              class:list={['sp-footer__nav-link', { 'sp-footer__nav-link--ext': item.external }]}
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+            >{item.label}</a>
+      )}
+    </nav>
+
+    <!-- ロゴ -->
+    <div class="sp-footer__logo-wrap">
+      <img
+        class="sp-footer__logo"
+        src="/mock_site/suisopot/images/footer-logo.webp"
+        alt="SUISOPOT スイソポット"
+        width="141"
+        height="141"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <!-- 免責文 -->
+    <p class="sp-footer__disclaimer">
+      このサイトは株式会社コスモスエンタープライズ様のご協力のもと作成したコーディング用の練習課題です。実在の人物・団体とは関係ありません。
+    </p>
+
+    <!-- Copyright -->
+    <p class="sp-footer__copyright">Copyright ©SUISO POT All rights reserved.</p>
+
+  </div>
+
+  <!-- 波形デコレーション（背景色 #F4FBFD） -->
+  <div class="sp-footer__wave-wrap" aria-hidden="true">
+    <img
+      class="sp-footer__wave"
+      src="/mock_site/suisopot/images/footer-wave.svg"
+      alt=""
+      width="1440"
+      height="101"
+    />
+  </div>
+
+</footer>

@@ -1,0 +1,61 @@
+---
+// セクション19: labo (Figma 113:3168)
+// 白背景 / Yomogi タイトル / 3枚カード(ティールボーダー+画像+テキストオーバーレイ) / CTAボタン
+
+const cards = [
+  {
+    src: 'labo-1.webp',
+    alt: 'ペットの写真',
+    lines: ['還元水素水', 'ペットも飲める？'],
+  },
+  {
+    src: 'labo-2.webp',
+    alt: '医療の写真',
+    lines: ['ウルトラファインバブル', '医療分野での活用'],
+  },
+  {
+    src: 'labo-3.webp',
+    alt: '海辺の写真',
+    lines: ['還元水素水で', 'カラダの活性酸素を除去'],
+  },
+];
+---
+
+<section class="sp-labo" id="labo">
+
+  <div class="sp-labo__header sp-fade">
+    <img class="sp-labo__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+    <div class="sp-labo__title-block">
+      <p class="sp-labo__title">ナノバブルLabo</p>
+      <p class="sp-labo__subtitle">健康な暮らしのためのナノバブルとお水に関する情報サイト</p>
+    </div>
+    <img class="sp-labo__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+  </div>
+
+  <div class="sp-labo__cards sp-fade">
+    {cards.map((card) => (
+      <article class="sp-labo__card">
+        <img
+          class="sp-labo__card-img"
+          src={`/mock_site/suisopot/images/${card.src}`}
+          alt={card.alt}
+          width="316"
+          height="182"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="sp-labo__overlay" aria-hidden="true"></div>
+        <div class="sp-labo__text">
+          {card.lines.map((line, i) => (
+            <p class:list={['sp-labo__text-line', i === 0 && 'sp-labo__text-line--first']}>{line}</p>
+          ))}
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <a class="sp-labo__btn sp-fade" href="#">
+    ナノバブルLaboをもっと見る
+  </a>
+
+</section>

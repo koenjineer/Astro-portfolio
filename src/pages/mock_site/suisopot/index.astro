@@ -13,6 +13,16 @@ import SectionOsusume from '../../../components/mock_site/suisopot/SectionOsusum
 import SectionKenkyu from '../../../components/mock_site/suisopot/SectionKenkyu.astro';
 import SectionBanner from '../../../components/mock_site/suisopot/SectionBanner.astro';
 import SectionPrice from '../../../components/mock_site/suisopot/SectionPrice.astro';
+import SectionVoice from '../../../components/mock_site/suisopot/SectionVoice.astro';
+import Section3Step from '../../../components/mock_site/suisopot/Section3Step.astro';
+import Section4Step from '../../../components/mock_site/suisopot/Section4Step.astro';
+import SectionYouTube from '../../../components/mock_site/suisopot/SectionYouTube.astro';
+import SectionLabo from '../../../components/mock_site/suisopot/SectionLabo.astro';
+import SectionFaq from '../../../components/mock_site/suisopot/SectionFaq.astro';
+import SectionGuide from '../../../components/mock_site/suisopot/SectionGuide.astro';
+import SectionNews from '../../../components/mock_site/suisopot/SectionNews.astro';
+import SectionProduct from '../../../components/mock_site/suisopot/SectionProduct.astro';
+import SectionFooter from '../../../components/mock_site/suisopot/SectionFooter.astro';
 ---
 
 <Layout>
@@ -35,5 +45,22 @@ import SectionPrice from '../../../components/mock_site/suisopot/SectionPrice.as
     <SectionKenkyu />
     <SectionBanner />
     <SectionPrice />
+    <SectionCta
+      id="cta3"
+      heading="お得にはじめるチャンス"
+      highlight="初期手数料"
+      note="初期手数料(5,000円)が無料になります"
+      btnLabel="資料請求する"
+    />
+    <SectionVoice />
+    <Section3Step />
+    <Section4Step />
+    <SectionYouTube />
+    <SectionLabo />
+    <SectionFaq />
+    <SectionGuide />
+    <SectionNews />
+    <SectionProduct />
   </main>
+  <SectionFooter />
 </Layout>

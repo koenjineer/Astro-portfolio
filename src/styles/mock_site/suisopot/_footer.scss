@@ -1,0 +1,137 @@
+@use 'variables' as *;
+
+// セクション24: footer (Figma 113:3307)
+// 白背景 / ナビリンク + ロゴ + 免責テキスト + Copyright + 波形装飾
+
+.sp-footer {
+  position: relative;
+  background: $color-white;
+  padding: 64px $side-padding 0;
+  overflow: hidden;
+
+  // ===== 内側コンテナ =====
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // 波形 101px + 余白 30px 分のボトムパディング
+    padding-bottom: 131px;
+  }
+
+  // ===== ナビゲーション =====
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__nav-link {
+    font-family: $font-jp-sans;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-gray-2;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &--ext { text-decoration: underline; }
+  }
+
+  // 縦線セパレーター（Figma imgLine70 を CSS で再現）
+  &__sep {
+    display: block;
+    width: 1px;
+    height: 31px;
+    background: $color-gray-2;
+    flex-shrink: 0;
+  }
+
+  // ===== ロゴ =====
+  &__logo-wrap {
+    // nav下端からロゴ上端まで: 143px(top) - 64px(padding) - 24px(nav高さ) ≒ 55px
+    margin-top: 55px;
+    width: 141px;
+    height: 141px;
+  }
+
+  &__logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  // ===== 免責文 =====
+  &__disclaimer {
+    // ロゴ下端からの距離: 332px - (143px + 141px) = 48px
+    margin-top: 48px;
+    max-width: 788px;
+    font-family: $font-jp-sans;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-gray-2;
+    text-align: center;
+  }
+
+  // ===== Copyright =====
+  &__copyright {
+    // 免責文下端からの距離: 449px - 332px - ~48px(disclaimer高) ≒ 69px
+    margin-top: 69px;
+    font-family: $font-jp-sans;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+    color: $color-gray-2;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  // ===== 波形装飾 =====
+  &__wave-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 101px;
+  }
+
+  &__wave {
+    display: block;
+    width: 100%;
+    height: 100%;
+    // Figma: -scale-y-100 rotate-180 = scaleX(-1)（左右反転）
+    transform: scaleX(-1);
+  }
+
+  // ===== レスポンシブ (SP) =====
+  @media (max-width: $bp-sp) {
+    padding: 40px $side-padding 0;
+
+    &__inner { padding-bottom: 110px; }
+
+    &__nav-link { font-size: 13px; }
+    &__sep { height: 20px; }
+
+    &__logo-wrap {
+      margin-top: 32px;
+      width: 100px;
+      height: 100px;
+    }
+
+    &__disclaimer {
+      margin-top: 32px;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    &__copyright {
+      margin-top: 40px;
+      font-size: 12px;
+    }
+
+    &__wave-wrap { height: 70px; }
+  }
+}

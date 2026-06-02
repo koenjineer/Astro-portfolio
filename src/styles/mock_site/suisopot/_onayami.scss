@@ -30,7 +30,9 @@
   &__visual img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 50%; // Figma: 円形マスク (mask-shape circle)
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
   }
 
   &__list {
@@ -43,7 +45,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 24px 24px 24px 32px;
+    padding: 24px 24px 24px 80px; // Figma: pl-80 (80px)
     background: $color-white;
     border: 1px solid $color-gray-2;
     border-radius: 16px;
@@ -95,7 +97,7 @@
 
     &__item {
       font-size: 16px;
-      padding: 16px 16px 16px 20px;
+      padding: 16px 16px 16px 40px; // PC 80px から比例縮小
       gap: 12px;
     }
 

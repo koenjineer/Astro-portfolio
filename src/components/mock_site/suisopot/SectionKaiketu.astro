@@ -5,9 +5,9 @@ const expertAvatar = '/mock_site/suisopot/images/kaiketu-avatar-expert.webp';
 const userAvatar = '/mock_site/suisopot/images/kaiketu-avatar-user.webp';
 
 const points = [
-  { text: ['水道水から', '生成できる'] },
-  { text: ['コンパクトで', '場所を選ばない'] },
-  { text: ['月額定額で', '使い放題'] },
+  { text: ['水道水から', '生成できる'], img: 'kaiketu-point-blue.webp' },
+  { text: ['コンパクトで', '場所を選ばない'], img: 'kaiketu-point-orange.webp' },
+  { text: ['月額定額で', '使い放題'], img: 'kaiketu-point-blue.webp' },
 ];
 ---
 
@@ -69,7 +69,7 @@ const points = [
       {points.map((p) => (
         <li class="sp-kaiketu__point">
           <img
-            src="/mock_site/suisopot/images/kaiketu-point-blue.webp"
+            src={`/mock_site/suisopot/images/${p.img}`}
             alt=""
             aria-hidden="true"
             width="236"

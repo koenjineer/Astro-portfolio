@@ -14,11 +14,9 @@ $color-blue: #daf1f9;             // Figma: Blue
 $color-base-blue: #f4fbfd;        // Figma: ベース　Blue（背景用淡色）
 // NOTE: gradation 変数は Figma で空定義（実色なし）
 
-// ⚠️ TODO: 以下2つは Figma `get_variable_defs` には存在しない。
-// 既存セクションSCSSが参照しているため一旦保持。実装担当が Figma 該当ノードを
-// get_design_context で再確認し、正式な変数（または値）に置き換えること。
-$color-accent-blue-deep: #2273ae;            // kaiketu, point で使用中（実値要検証）
-$color-bg-sub: rgba(200, 223, 239, 0.25);    // onayami で使用中（実値要検証）
+// Figma 変数定義には存在しないが get_design_context で実値を確認済み
+$color-accent-blue-deep: #2273ae;            // Figma 実値確認済み (point h3 / kaiketu テキスト)
+$color-bg-sub: rgba(200, 223, 239, 0.25);    // Figma 実値確認済み (onayami 背景 Mask group overlay)
 
 // ===== フォント（family のみここで定義、サイズ等は mixin で） =====
 $font-jp-sans: 'Noto Sans JP', sans-serif;

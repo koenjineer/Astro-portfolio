@@ -35,14 +35,26 @@ const SCREENSHOTS_DIR = path.join(ROOT, '.claude/handoff/screenshots');
 // FIGMA_BBOX: テキストノードの bounding box（マスク用）。Figma metadata から手動 or 自動取得
 // 注: bboxはPNG画像座標系（Figma座標と同じ）
 const SECTIONS = {
-  header:     { hash: '',          mode: 'pc-sp' },
-  fv:         { hash: '#home',     mode: 'pc-sp' },
-  cta:        { hash: '#cta',      mode: 'pc-sp' },
-  onayami:    { hash: '#onayami',  mode: 'pc-sp' },
-  kaiketu:    { hash: '#kaiketu',  mode: 'pc-sp' },
-  point:      { hash: '#point',    mode: 'pc-sp' },
+  // Phase A
+  header:     { hash: '',              mode: 'pc-sp' },
+  fv:         { hash: '#home',         mode: 'pc-sp' },
+  cta:        { hash: '#cta',          mode: 'pc-sp' },
+  onayami:    { hash: '#onayami',      mode: 'pc-sp' },
+  kaiketu:    { hash: '#kaiketu',      mode: 'pc-sp' },
+  point:      { hash: '#point',        mode: 'pc-sp' },
   'cta-second': { hash: '#cta-second', mode: 'pc-sp' },
-  room:       { hash: '#room',     mode: 'pc-sp' },
+  room:       { hash: '#room',         mode: 'pc-sp' },
+  // Phase B
+  voice:      { hash: '#voice',        mode: 'pc-sp' },
+  '3step':    { hash: '#3step',        mode: 'pc-sp', cssSelector: '[id="3step"]' },
+  '4step':    { hash: '#4step',        mode: 'pc-sp', cssSelector: '[id="4step"]' },
+  youtube:    { hash: '#youtube',      mode: 'pc-sp' },
+  labo:       { hash: '#labo',         mode: 'pc-sp' },
+  faq:        { hash: '#faq',          mode: 'pc-sp' },
+  guide:      { hash: '#guide',        mode: 'pc-sp' },
+  news:       { hash: '#news',         mode: 'pc-sp' },
+  product:    { hash: '#product',      mode: 'pc-sp' },
+  footer:     { hash: '',              mode: 'pc-sp', cssSelector: '.sp-footer' },
 };
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:4321/mock_site/suisopot/';
@@ -176,16 +188,18 @@ async function captureSection(browser, sectionName, sectionDef, mode) {
   const page = await context.newPage();
   const url = BASE_URL + sectionDef.hash;
   await page.goto(url, { waitUntil: 'networkidle' });
+  // sp-fade を強制表示（IntersectionObserver の発火待ちを回避）
+  await page.addStyleTag({ content: '.sp-fade { opacity: 1 !important; transform: translateY(0) !important; transition: none !important; }' });
   await page.waitForTimeout(500); // フォント・画像描画安定待ち
 
   const ts = timestamp();
   const localPath = path.join(sectionDir, `local-${mode}__${ts}.png`);
 
-  // セクション要素のみキャプチャ。'fv'なら'.sp-fv'などのセレクタ運用
-  // 当面はビューポート全体（要セレクタ運用に切替予定）
-  if (sectionDef.hash) {
+  // cssSelector が定義されていればそちらを優先、なければ hash をそのまま使う
+  const cssSelector = sectionDef.cssSelector || sectionDef.hash;
+  if (cssSelector) {
     try {
-      const el = await page.$(sectionDef.hash);
+      const el = await page.$(cssSelector);
       if (el) {
         await el.screenshot({ path: localPath });
       } else {

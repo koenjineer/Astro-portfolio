@@ -14,8 +14,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    // 波形 101px + 余白 30px 分のボトムパディング
-    padding-bottom: 131px;
+    // Figma: copyright が top:449px（wave と重なる領域）に位置する設計
+    // footer 高さ 499px = 64(pt) + コンテンツ(406px) + 29px
+    padding-bottom: 29px;
   }
 
   // ===== ナビゲーション =====
@@ -107,31 +108,53 @@
   }
 
   // ===== レスポンシブ (SP) =====
+  // Figma SP: nav縦積み・sep非表示・logo95px・wave40px(フロー内)・copyright絶対配置
   @media (max-width: $bp-sp) {
-    padding: 40px $side-padding 0;
+    padding: 56px $side-padding 0;
 
-    &__inner { padding-bottom: 110px; }
+    &__inner { padding-bottom: 0; }
+
+    // SP: 縦積み・セパレーター非表示
+    &__nav {
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    &__sep { display: none; }
 
     &__nav-link { font-size: 13px; }
-    &__sep { height: 20px; }
 
     &__logo-wrap {
-      margin-top: 32px;
-      width: 100px;
-      height: 100px;
+      margin-top: 40px;
+      width: 95px;
+      height: 95px;
     }
 
     &__disclaimer {
-      margin-top: 32px;
+      margin-top: 40px;
       font-size: 13px;
       text-align: left;
     }
 
+    // copyright は wave 内に絶対配置（Figma SP 設計に合わせる）
     &__copyright {
-      margin-top: 40px;
+      position: absolute;
+      bottom: 17px;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 0;
       font-size: 12px;
+      white-space: nowrap;
     }
 
-    &__wave-wrap { height: 70px; }
+    // SP では wave をフロー内要素として配置（高さ 40px）
+    // footer の side-padding を負 margin で打ち消して全幅に広げる
+    &__wave-wrap {
+      position: static;
+      height: 40px;
+      width: calc(100% + 2 * #{$side-padding});
+      margin-left: -$side-padding;
+      margin-top: 40px;
+    }
   }
 }

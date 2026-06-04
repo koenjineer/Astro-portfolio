@@ -129,63 +129,83 @@ $font-yomogi: 'Yomogi', cursive;
   }
 
   // ===== レスポンシブ (SP) =====
+  // Figma SP: 左に円形写真(118px)、右にテキスト列（Yomogi→subtitle→desc）の横並び
   @media (max-width: $bp-sp) {
-    padding: 48px $side-padding;
+    padding: 56px $side-padding 40px;
     gap: 40px;
 
     &__title { font-size: 24px; }
-    &__title-deco { width: 22px; height: 35px; }
+    &__title-deco { width: 25px; height: 40px; }
 
-    // SP: 縦積みに切り替え
     &__list {
       flex-direction: column;
-      gap: 48px;
+      gap: 40px;
       align-items: center;
     }
 
-    // SP: 各アイテムを高さ自動にして相対配置に戻す
+    // CSS Grid: 左列=circle / 右列=label・subtitle・desc
     &__item {
-      width: 280px;
-      height: auto;
-      margin-top: 28px;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 118px 1fr;
+      grid-template-rows: auto auto auto;
+      column-gap: 24px;
       align-items: center;
-      gap: 16px;
+      width: 359px;
+      height: auto;
+      margin-top: 0;
     }
 
+    // 右列 1行目（Yomogi ラベル）
     &__label {
-      position: relative;
-      top: auto !important; // SP では静的配置
+      grid-column: 2;
+      grid-row: 1;
+      position: static;
+      top: auto !important; // インライン style を上書き
       left: auto;
       transform: rotate(-5deg);
-      margin-bottom: 4px;
+      font-size: 15px;
+      letter-spacing: -1.35px;
+      white-space: nowrap;
     }
 
+    // 左列・全行スパン（円形写真）
     &__circle {
-      position: relative;
+      grid-column: 1;
+      grid-row: 1 / 4;
+      position: static;
       top: auto;
       left: auto;
       transform: none;
-      width: 140px;
-      height: 140px;
+      width: 118px;
+      height: 118px;
+      align-self: center;
     }
 
+    // 右列 2行目（小見出し）
     &__subtitle {
-      position: relative;
+      grid-column: 2;
+      grid-row: 2;
+      position: static;
       top: auto;
       left: auto;
       transform: none;
       font-size: 20px;
+      text-align: left;
+      white-space: nowrap;
+      line-height: 1.4;
     }
 
+    // 右列 3行目（説明テキスト）
     &__desc {
-      position: relative;
+      grid-column: 2;
+      grid-row: 3;
+      position: static;
       top: auto;
       left: auto;
       transform: none;
       width: 100%;
-      font-size: 14px;
+      font-size: 16px;
+      text-align: left;
     }
   }
 }

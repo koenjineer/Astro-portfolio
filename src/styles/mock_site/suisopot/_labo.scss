@@ -139,8 +139,9 @@ $font-yomogi: 'Yomogi', cursive;
   }
 
   // ===== レスポンシブ (SP) =====
+  // Figma SP (1:3060): pt-56 pb-40 px-15 gap-40 / card h-207 / text top-66 / text-line 27px
   @media (max-width: $bp-sp) {
-    padding: 48px $side-padding;
+    padding: 56px $side-padding 40px;
     gap: 40px;
 
     &__title { font-size: 32px; }
@@ -154,14 +155,15 @@ $font-yomogi: 'Yomogi', cursive;
     &__card {
       width: 100%;
       max-width: 360px;
-      height: 160px;
+      height: 207px;
     }
 
     &__text {
-      width: calc(100% - 8px);
+      top: 66px;
+      width: calc(100% - 9px);
       left: 4px;
     }
 
-    &__text-line { font-size: 18px; }
+    &__text-line { font-size: 27px; }
   }
 }

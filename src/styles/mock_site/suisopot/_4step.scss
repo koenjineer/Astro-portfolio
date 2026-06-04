@@ -52,12 +52,12 @@ $font-yomogi: 'Yomogi', cursive;
   }
 
   // 各ステップアイテム
+  // Figma: section の py-80px がラベル overflow を吸収するため margin-top 不要
   &__item {
     position: relative;
     width: $step-item-w;
     height: $step-item-h;
-    // Yomogi ラベルが最大62px上にはみ出るため margin-top で吸収
-    margin-top: 65px;
+    margin-top: 0;
   }
 
   // Yomogi 手書きラベル（絶対配置、円の上）

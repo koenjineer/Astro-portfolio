@@ -57,11 +57,12 @@ $news-gradient: linear-gradient(179.38deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.
   }
 
   // 各ニュース行
+  // Figma: リスト h-[300px] / 4件 = 1行約75px → padding 24px 0
   &__row {
     display: flex;
     align-items: center;
     gap: 24px;
-    padding: 12px 0;
+    padding: 24px 0;
     text-decoration: none;
     transition: opacity 0.2s;
 
@@ -136,7 +137,7 @@ $news-gradient: linear-gradient(179.38deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.
     &__title-deco { width: 22px; height: 35px; }
     &__header { gap: 16px; }
 
-    &__row { gap: 12px; flex-wrap: wrap; }
+    &__row { gap: 12px; flex-wrap: wrap; padding: 12px 0; }
     &__date { font-size: 13px; }
     &__badge { font-size: 10px; }
     &__text { font-size: 14px; flex-basis: 100%; }

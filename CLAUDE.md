@@ -72,6 +72,7 @@
 ### 数値の処理（禁止）
 - ❌ 数値・色・フォントサイズ・padding/margin を推測・調整で決める
 - ❌ Figma 変数定義に存在しない色を勝手に追加
+- ❌ `_variables.scss` に `get_variable_defs` 未確認の色・数値を追加する（必ず `get_variable_defs` か `get_design_context` で実値確認し、根拠コメントを付与）
 
 ### 完了報告（禁止）
 - ❌ 視覚比較せずに「完了」と報告

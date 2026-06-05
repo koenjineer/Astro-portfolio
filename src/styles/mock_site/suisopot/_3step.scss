@@ -53,12 +53,11 @@ $font-yomogi: 'Yomogi', cursive;
   }
 
   // 各ステップアイテム
+  // section の padding-top 80px が Yomogi ラベルの overflow を吸収するため margin-top 不要
   &__item {
     position: relative;
     width: $step-item-w;
     height: $step-item-h;
-    // Yomogi ラベルが上にはみ出るため padding-top で吸収
-    margin-top: 24px;
   }
 
   // Yomogi 手書きラベル（絶対配置、円の上）

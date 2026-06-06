@@ -17,7 +17,9 @@
     transform: translateX(-50%);
     width: 1440px;
     max-width: none;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
     pointer-events: none;
     z-index: 0;
   }

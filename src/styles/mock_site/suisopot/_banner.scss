@@ -260,50 +260,124 @@ $banner-price-teal: #00c2cb; // ¥3,800 の色
     font-weight: 500; // 数字は中太
   }
 
+  // SP専用デバイス画像: PCでは非表示
+  &__device-mask { display: none; }
+
   // ===== レスポンシブ (SP) =====
+  // Figma SP node 1:2740 (360×360px カード) の実測値を反映
   @media (max-width: $bp-sp) {
     &__inner {
       min-height: auto;
-      flex-direction: column;
-      padding: 40px 24px;
-      border-radius: 8px;
-      gap: 32px;
+      flex-direction: row;   // 左:円 / 右:コンテンツ を横並び
+      align-items: flex-start;
+      padding: 20px 16px 110px; // 下部に Mask group 分の余白
+      border-radius: 21px;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
     }
 
+    // ===== 左カラム: 円のみ（デバイスは非表示） =====
     &__left {
-      width: 100%;
+      width: 80px;
+      flex-shrink: 0;
+      align-items: center;
+      align-self: flex-start;
     }
 
-    &__device {
-      position: static;
-      transform: none;
-      width: 200px;
-      height: 200px;
+    &__circle-wrap {
+      width: 80px;
+      height: 80px;
     }
 
-    &__right { padding-left: 0; }
+    &__circle-inner {
+      width: 66px;
+      height: 66px;
+    }
 
-    &__catch { font-size: 16px; }
+    &__date {
+      font-size: 14px;
+      &::after { width: 47px; }
+    }
+
+    &__date-label {
+      font-size: 13px;
+      margin-top: 2px;
+      letter-spacing: 0.1em;
+    }
+
+    // PC用デバイス非表示（SP は device-mask を使用）
+    &__device { display: none; }
+
+    // SP専用デバイス画像（Mask group）: 左下に絶対配置
+    &__device-mask {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 87px;
+      height: auto;
+      object-fit: contain;
+      z-index: 2;
+    }
+
+    // ===== 右カラム: コンテンツ =====
+    &__right {
+      flex: 1;
+      min-width: 0;
+      padding-left: 0;
+      gap: 6px;
+    }
+
+    &__catch {
+      font-size: 14px;
+      white-space: normal;
+    }
 
     &__promo-box {
-      font-size: 22px;
-      padding: 8px 24px;
-      white-space: normal;
-      text-align: center;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      align-self: flex-start;
     }
 
-    &__headline { font-size: 40px; }
+    &__headline {
+      font-size: 28px;
+      white-space: normal;
+      word-break: break-all;
+      letter-spacing: 0.08em;
+    }
 
-    &__price-area { flex-direction: column; align-items: flex-start; }
+    &__price-area {
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
 
-    &__price-value { font-size: 64px; }
+    &__price-normal { gap: 2px; }
 
-    &__tags { gap: 8px; }
+    &__plan-label     { font-size: 18px; }
+    &__price-old      { font-size: 20px; }
+    &__price-arrow    { width: 43px; height: 43px; }
+    &__new-plan-label { font-size: 19px; }
+    &__price-value    { font-size: 51px; }
+    &__price-tax      { font-size: 8px; }
 
-    &__tag { width: 140px; height: 56px; }
+    &__tags { gap: 4px; }
 
-    &__tag-main { font-size: 18px; }
+    &__tag {
+      width: 116px;
+      height: 40px;
+    }
 
-    &__note { text-align: left; }
+    &__tag-sub  { font-size: 10px; }
+    &__tag-main { font-size: 15px; letter-spacing: 0.05em; }
+
+    &__note {
+      font-size: 10px;
+      text-align: left;
+    }
   }
 }

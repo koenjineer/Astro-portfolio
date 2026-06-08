@@ -16,6 +16,7 @@
 - 写真・マスク画像の場合 `get_design_context` が返すasset URLは **空の透明PNG** になることがある
 - ファイルサイズが極端に小さい (< 5KB) ときは要疑い → `get_screenshot` で取り直す
 - 色・タイポは `get_variable_defs` を **`_variables.scss` 作成前** に必ず呼ぶ
+- `_variables.scss` に追加できるのは `get_variable_defs` か `get_design_context` で**実値確認した色・数値のみ**。追加時は根拠コメントを付与する（推測値の混入を防ぐ）
 - 親ノードの `get_metadata` が応答超過する場合：子ノード単位で分割呼び出し
 - **大セクション（高さ > 1000px）は `get_design_context` を子ノード単位で分割呼び出し**（親ノード単体では 25,000 トークン超となり実装担当が読めない）
 

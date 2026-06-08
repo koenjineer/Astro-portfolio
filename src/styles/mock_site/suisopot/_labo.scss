@@ -148,6 +148,7 @@ $font-yomogi: 'Yomogi', cursive;
     &__subtitle { font-size: 14px; text-align: center; }
 
     &__cards {
+      width: 100%; // align-items:center で幅が潰れるのを防ぐ
       flex-direction: column;
       align-items: center;
     }

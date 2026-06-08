@@ -12,7 +12,7 @@ const tags = [
 <section class="sp-banner" id="campaign">
   <div class="sp-banner__inner">
 
-    <!-- ===== 左エリア: 日付サークル + 製品 ===== -->
+    <!-- ===== 左エリア: 日付サークル（SP: 絶対配置、サイズ縮小） ===== -->
     <div class="sp-banner__left">
       <div class="sp-banner__circle-wrap" aria-hidden="true">
         <img class="sp-banner__circle-outer" src="/mock_site/suisopot/images/banner-circle1.svg" alt="" width="302" height="302" />
@@ -20,6 +20,7 @@ const tags = [
         <span class="sp-banner__date">10/1</span>
       </div>
       <p class="sp-banner__date-label">受付開始</p>
+      <!-- PC用デバイス画像 -->
       <img
         class="sp-banner__device"
         src="/mock_site/suisopot/images/banner-product.webp"
@@ -30,6 +31,18 @@ const tags = [
         decoding="async"
       />
     </div>
+
+    <!-- SP専用デバイス画像（Mask group / 透過PNG）: PCでは非表示 -->
+    <img
+      class="sp-banner__device-mask"
+      src="/mock_site/suisopot/images/mask-group.webp"
+      alt=""
+      aria-hidden="true"
+      width="87"
+      height="153"
+      loading="lazy"
+      decoding="async"
+    />
 
     <!-- ===== 右エリア: テキスト + 料金 ===== -->
     <div class="sp-banner__right">

@@ -1,6 +1,6 @@
 ---
 // セクション15: voice (Figma 113:3062)
-// 背景: $color-base-blue / 3枚カードスライダー（静的）/ 9ドット
+// 背景: $color-base-blue / Swiper スライダー（3枚/9ドット）
 
 const voices = [
   {
@@ -22,8 +22,6 @@ const voices = [
     name: 'Y様 （東京都 80代）',
   },
 ];
-
-const DOTS = 9;
 ---
 
 <section class="sp-voice" id="voice">
@@ -35,50 +33,105 @@ const DOTS = 9;
   </div>
 
   <div class="sp-voice__slider sp-fade">
-    <button class="sp-voice__arrow sp-voice__arrow--prev" type="button" aria-label="前へ" disabled>
+    <button class="sp-voice__arrow sp-voice__arrow--prev" type="button" aria-label="前へ">
       <img src="/mock_site/suisopot/images/use-arrow.svg" alt="" aria-hidden="true" width="29" height="29" />
     </button>
 
-    <ul class="sp-voice__list">
-      {voices.map((v) => (
-        <li class="sp-voice__item">
-          <div class="sp-voice__photo">
-            <img
-              src={`/mock_site/suisopot/images/${v.src}`}
-              alt={v.alt}
-              width="320"
-              height="225"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-          <div class="sp-voice__body">
-            <p class="sp-voice__heading">{v.heading}</p>
-            <div class="sp-voice__meta">
-              <p class="sp-voice__name">{v.name}</p>
+    <div class="swiper sp-voice__swiper">
+      <ul class="swiper-wrapper sp-voice__list">
+        {voices.map((v) => (
+          <li class="swiper-slide sp-voice__item">
+            <div class="sp-voice__photo">
               <img
-                class="sp-voice__btn"
-                src="/mock_site/suisopot/images/voice-btn.svg"
-                alt=""
-                aria-hidden="true"
-                width="22"
-                height="22"
+                src={`/mock_site/suisopot/images/${v.src}`}
+                alt={v.alt}
+                width="320"
+                height="225"
+                loading="lazy"
+                decoding="async"
               />
             </div>
-          </div>
-        </li>
-      ))}
-    </ul>
+            <div class="sp-voice__body">
+              <p class="sp-voice__heading">{v.heading}</p>
+              <div class="sp-voice__meta">
+                <p class="sp-voice__name">{v.name}</p>
+                <img
+                  class="sp-voice__btn"
+                  src="/mock_site/suisopot/images/voice-btn.svg"
+                  alt=""
+                  aria-hidden="true"
+                  width="22"
+                  height="22"
+                />
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
 
     <button class="sp-voice__arrow sp-voice__arrow--next" type="button" aria-label="次へ">
       <img src="/mock_site/suisopot/images/use-arrow.svg" alt="" aria-hidden="true" width="29" height="29" />
     </button>
   </div>
 
-  <div class="sp-voice__dots sp-fade" aria-hidden="true">
-    {Array.from({ length: DOTS }).map((_, i) => (
-      <span class:list={['sp-voice__dot', i === 0 && 'sp-voice__dot--active']} />
-    ))}
-  </div>
+  <div class="sp-voice__dots" aria-hidden="true"></div>
 
 </section>
+
+<script is:inline>
+  (function () {
+    function initVoiceSwiper() {
+      if (typeof Swiper === 'undefined') return;
+      new Swiper('.sp-voice__swiper', {
+        slidesPerView: 3,
+        spaceBetween: 16,
+        loop: false,
+        navigation: {
+          nextEl: '.sp-voice__arrow--next',
+          prevEl: '.sp-voice__arrow--prev',
+        },
+        pagination: {
+          el: '.sp-voice__dots',
+          clickable: true,
+          bulletClass: 'sp-voice__dot',
+          bulletActiveClass: 'sp-voice__dot--active',
+          renderBullet: function (index, className) {
+            return '<span class="' + className + '"></span>';
+          },
+        },
+        breakpoints: {
+          0: {
+            slidesPerView: 1.15,
+            spaceBetween: 12,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 16,
+          },
+        },
+        on: {
+          init: function (swiper) {
+            updateArrows(swiper);
+          },
+          slideChange: function (swiper) {
+            updateArrows(swiper);
+          },
+        },
+      });
+
+      function updateArrows(swiper) {
+        var prev = document.querySelector('.sp-voice__arrow--prev');
+        var next = document.querySelector('.sp-voice__arrow--next');
+        if (prev) prev.disabled = swiper.isBeginning;
+        if (next) next.disabled = swiper.isEnd;
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVoiceSwiper);
+    } else {
+      initVoiceSwiper();
+    }
+  })();
+</script>

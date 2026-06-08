@@ -47,6 +47,12 @@ $photo-h: 225px; // 写真エリアの高さ
     width: 100%;
   }
 
+  // Swiper コンテナ
+  &__swiper {
+    overflow: hidden;
+    width: 100%;
+  }
+
   // 矢印ボタン
   &__arrow {
     flex-shrink: 0;
@@ -71,22 +77,19 @@ $photo-h: 225px; // 写真エリアの高さ
     }
   }
 
-  // ===== カードリスト =====
+  // ===== カードリスト（Swiper wrapper） =====
   &__list {
     display: flex;
-    gap: 16px;
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  // 各カード
+  // 各カード（幅は Swiper が slidesPerView に基づいて管理）
   &__item {
     position: relative;
-    width: $card-w;
     height: $card-h;
     border-radius: 16px;
-    flex-shrink: 0;
     box-shadow: 0 4px 2px rgba(199, 218, 255, 0.25);
   }
 
@@ -185,16 +188,8 @@ $photo-h: 225px; // 写真エリアの高さ
 
     &__slider { gap: 12px; }
 
-    &__list {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      &::-webkit-scrollbar { display: none; }
-    }
-
     &__item {
-      width: 240px;
-      height: 286px; // 378 × (240/320)
+      height: 286px;
     }
 
     &__photo {

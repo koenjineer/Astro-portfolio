@@ -1,0 +1,73 @@
+---
+// セクション17: 4step (Figma 113:3104)
+// 背景: $color-base-blue / 4ステップ円形写真 + Yomogi手書きラベル
+
+const steps = [
+  {
+    src: '4step-1.webp',
+    alt: 'コンセントを挿す様子',
+    label: '挿すだけ！',
+    labelTop: -49,
+    subtitle: '電源をとる',
+    descLines: ['コンセントを挿します'],
+  },
+  {
+    src: '4step-2.webp',
+    alt: '水を入れる様子',
+    label: '入れるだけ！',
+    labelTop: -51,
+    subtitle: 'タンクに水を入れる',
+    descLines: ['水道水を入れます', '1回に5ℓまで生成できます'],
+  },
+  {
+    src: '4step-3.webp',
+    alt: 'ボタンを押す様子',
+    label: '押すだけ！',
+    labelTop: -49,
+    subtitle: 'ボタンを押す',
+    descLines: ['還元時間を設定し', 'スタートボタンを押すだけ'],
+  },
+  {
+    src: '4step-4.webp',
+    alt: '完成した水素水',
+    label: '「ピッ」となったら完成！',
+    labelTop: -62,
+    subtitle: '完成',
+    descLines: ['還元完了時は音と', '停止ランプでお知らせ'],
+  },
+];
+---
+
+<section class="sp-4step" id="4step">
+
+  <div class="sp-4step__title-wrap sp-fade">
+    <img class="sp-4step__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+    <h2 class="sp-4step__title">簡単準備4ステップ</h2>
+    <img class="sp-4step__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+  </div>
+
+  <ol class="sp-4step__list sp-fade">
+    {steps.map((step) => (
+      <li class="sp-4step__item">
+        <p class="sp-4step__label" aria-hidden="true" style={`top: ${step.labelTop}px`}>{step.label}</p>
+        <div class="sp-4step__circle">
+          <img
+            src={`/mock_site/suisopot/images/${step.src}`}
+            alt={step.alt}
+            width="174"
+            height="174"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <p class="sp-4step__subtitle">{step.subtitle}</p>
+        <p class="sp-4step__desc">
+          {step.descLines.map((line, i) => (
+            <>{line}{i < step.descLines.length - 1 && <br />}</>
+          ))}
+        </p>
+      </li>
+    ))}
+  </ol>
+
+</section>

@@ -1,0 +1,55 @@
+---
+// セクション20: faq (Figma 113:3197)
+// 白背景 / アコーディオンFAQリスト（静的・閉じた状態で表示）
+
+const questions = [
+  '利⽤料⾦について教えてください。',
+  '申し込んでから、いつ届きますか？',
+  '支払い方法には何がありますか？',
+  '更新日はどのようなサイクルになりますか？',
+  '途中で解約したいのですが費用はかかりますか？',
+  'マイクロバブルとナノバブルの違いは？',
+  'ナノバブルはなぜカラダにいいの？',
+  'タンクの容量はどのくらいですか？',
+  '本当に使い放題ですか？',
+  'お手入れは必要ですか？',
+  '衛生面が気になります。',
+  'ミネラルプレートの交換サイクルは？',
+  'どんな味ですか？',
+  '病気や妊婦さんでも飲めますか？',
+  '毎日どのくらい飲めばよいのでしょうか？',
+  '飲み水以外で使っても平気ですか？',
+];
+---
+
+<section class="sp-faq" id="faq">
+
+  <div class="sp-faq__title-wrap sp-fade">
+    <img class="sp-faq__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+    <h2 class="sp-faq__title">よくある質問</h2>
+    <img class="sp-faq__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+  </div>
+
+  <dl class="sp-faq__list sp-fade">
+    {questions.map((q) => (
+      <div class="sp-faq__item">
+        <dt class="sp-faq__question">
+          <span class="sp-faq__q-badge" aria-hidden="true">
+            <img src="/mock_site/suisopot/images/faq-qicon.svg" alt="" width="33" height="33" />
+            <span class="sp-faq__q-letter">Q</span>
+          </span>
+          <span class="sp-faq__q-text">{q}</span>
+          <img
+            class="sp-faq__arrow"
+            src="/mock_site/suisopot/images/faq-arrow.svg"
+            alt=""
+            aria-hidden="true"
+            width="24"
+            height="24"
+          />
+        </dt>
+      </div>
+    ))}
+  </dl>
+
+</section>

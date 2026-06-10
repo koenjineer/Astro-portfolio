@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="mdi:cup-full-outline" clip-path="url(#clip0_0_11)">
+<path id="Vector 105" d="M15.5 9.49992V1.67383H1.5V9.49992L3.77025 28.6738H13.2297L15.5 9.49992ZM1.5 9.49992C1.50002 8.326 1.87838 6.99557 7.93243 9.49992C13.9865 12.0043 15.5 10.5434 15.5 9.49992" stroke="var(--stroke-0, white)" stroke-width="1.5"/>
+</g>
+<defs>
+<clipPath id="clip0_0_11">
+<rect width="17" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg>

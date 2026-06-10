@@ -1,0 +1,66 @@
+---
+import Layout from '../../../layouts/mock_site/suisopot/Layout.astro';
+import Header from '../../../components/mock_site/suisopot/Header.astro';
+import SectionFV from '../../../components/mock_site/suisopot/SectionFV.astro';
+import SectionCta from '../../../components/mock_site/suisopot/SectionCta.astro';
+import SectionOnayami from '../../../components/mock_site/suisopot/SectionOnayami.astro';
+import SectionKaiketu from '../../../components/mock_site/suisopot/SectionKaiketu.astro';
+import SectionPoint from '../../../components/mock_site/suisopot/SectionPoint.astro';
+import SectionCtaSecond from '../../../components/mock_site/suisopot/SectionCtaSecond.astro';
+import SectionRoom from '../../../components/mock_site/suisopot/SectionRoom.astro';
+import SectionUseBox from '../../../components/mock_site/suisopot/SectionUseBox.astro';
+import SectionOsusume from '../../../components/mock_site/suisopot/SectionOsusume.astro';
+import SectionKenkyu from '../../../components/mock_site/suisopot/SectionKenkyu.astro';
+import SectionBanner from '../../../components/mock_site/suisopot/SectionBanner.astro';
+import SectionPrice from '../../../components/mock_site/suisopot/SectionPrice.astro';
+import SectionVoice from '../../../components/mock_site/suisopot/SectionVoice.astro';
+import Section3Step from '../../../components/mock_site/suisopot/Section3Step.astro';
+import Section4Step from '../../../components/mock_site/suisopot/Section4Step.astro';
+import SectionYouTube from '../../../components/mock_site/suisopot/SectionYouTube.astro';
+import SectionLabo from '../../../components/mock_site/suisopot/SectionLabo.astro';
+import SectionFaq from '../../../components/mock_site/suisopot/SectionFaq.astro';
+import SectionGuide from '../../../components/mock_site/suisopot/SectionGuide.astro';
+import SectionNews from '../../../components/mock_site/suisopot/SectionNews.astro';
+import SectionProduct from '../../../components/mock_site/suisopot/SectionProduct.astro';
+import SectionFooter from '../../../components/mock_site/suisopot/SectionFooter.astro';
+---
+
+<Layout>
+  <Header />
+  <main>
+    <SectionFV />
+    <SectionCta
+      heading="お得にはじめるチャンス"
+      highlight="初期手数料"
+      note="初期手数料(5,000円)が無料になります"
+      btnLabel="資料請求する"
+    />
+    <SectionOnayami />
+    <SectionKaiketu />
+    <SectionPoint />
+    <SectionCtaSecond />
+    <SectionRoom />
+    <SectionUseBox />
+    <SectionOsusume />
+    <SectionKenkyu />
+    <SectionBanner />
+    <SectionPrice />
+    <SectionCta
+      id="cta3"
+      heading="お得にはじめるチャンス"
+      highlight="初期手数料"
+      note="初期手数料(5,000円)が無料になります"
+      btnLabel="資料請求する"
+    />
+    <SectionVoice />
+    <Section3Step />
+    <Section4Step />
+    <SectionYouTube />
+    <SectionLabo />
+    <SectionFaq />
+    <SectionGuide />
+    <SectionNews />
+    <SectionProduct />
+  </main>
+  <SectionFooter />
+</Layout>

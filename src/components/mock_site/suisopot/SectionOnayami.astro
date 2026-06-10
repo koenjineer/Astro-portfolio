@@ -1,0 +1,47 @@
+---
+// セクション4: onayami (Figma 113:2255 / SP 44:2826)
+const items = [
+  '手軽に健康を手に入れたい',
+  'そろそろお水にもこだわりたい',
+  '腸活何からしたら良いかわからない',
+];
+---
+
+<section class="sp-onayami" id="onayami">
+  <div class="sp-onayami__inner">
+    <h2 class="sp-onayami__title sp-fade">こんなお悩みありませんか?</h2>
+
+    <div class="sp-onayami__main">
+      <div class="sp-onayami__visual sp-fade">
+        <img
+          src="/mock_site/suisopot/images/onayami.webp"
+          alt="悩む女性"
+          width="368"
+          height="368"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <ul class="sp-onayami__list">
+        {
+          items.map((t) => (
+            <li class="sp-onayami__item sp-fade">
+              <img
+                class="sp-onayami__check"
+                src="/mock_site/suisopot/images/onayami-checkbox.svg"
+                alt=""
+                aria-hidden="true"
+                width="24"
+                height="24"
+              />
+              <span class="sp-onayami__text">{t}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <p class="sp-onayami__message">それに、活性酸素が増えると、様々な影響が…</p>
+</section>

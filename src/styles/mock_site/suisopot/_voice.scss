@@ -1,0 +1,208 @@
+@use 'variables' as *;
+
+// セクション15: voice (Figma 113:3062)
+// 背景: $color-base-blue / カード: 白ボディ+写真上部 / スライダー静的
+
+$card-w: 320px;
+$card-h: 378px;
+$photo-h: 225px; // 写真エリアの高さ
+
+.sp-voice {
+  padding: 80px $side-padding;
+  background: $color-base-blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+
+  // ===== タイトル =====
+  &__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__title-deco {
+    width: 33px;
+    height: 53px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-family: $font-jp-serif;
+    font-weight: 400;
+    font-size: 40px;
+    color: $color-gray-1;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  // ===== スライダーエリア =====
+  &__slider {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  // Swiper コンテナ
+  &__swiper {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  // 矢印ボタン
+  &__arrow {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    line-height: 0;
+
+    img {
+      display: block;
+      width: 29px;
+      height: 29px;
+    }
+
+    // 左矢印: 右矢印SVGを水平反転
+    &--prev img { transform: scaleX(-1); }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
+
+  // ===== カードリスト（Swiper wrapper） =====
+  &__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  // 各カード（幅は Swiper が slidesPerView に基づいて管理）
+  &__item {
+    position: relative;
+    height: $card-h;
+    border-radius: 16px;
+    box-shadow: 0 4px 2px rgba(199, 218, 255, 0.25);
+  }
+
+  // 写真エリア（カード上部）
+  &__photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $photo-h;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px 16px 0 0;
+    }
+  }
+
+  // テキストボディ（写真の下）
+  &__body {
+    position: absolute;
+    top: $photo-h;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $color-white;
+    border-radius: 0 0 16px 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    overflow: hidden;
+  }
+
+  // カード見出し
+  &__heading {
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    color: $color-gray-1;
+  }
+
+  // 氏名＋矢印ボタン行
+  &__meta {
+    display: flex;
+    align-items: flex-start;
+    gap: 21px;
+  }
+
+  &__name {
+    font-family: $font-jp-sans;
+    font-size: 16px;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    color: $color-gray-1;
+    flex: 1;
+  }
+
+  &__btn {
+    display: block;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  // ===== ページネーションドット =====
+  &__dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $color-gray-3; // 非アクティブ: #b6b7b7
+
+    &--active {
+      background: $color-gray-2; // アクティブ: #6c6e6f
+    }
+  }
+
+  // ===== レスポンシブ (SP) =====
+  @media (max-width: $bp-sp) {
+    padding: 48px $side-padding;
+    gap: 40px;
+
+    &__title { font-size: 24px; }
+    &__title-deco { width: 22px; height: 35px; }
+
+    &__slider { gap: 12px; }
+
+    &__item {
+      height: 286px;
+    }
+
+    &__photo {
+      height: 169px; // 225 × (240/320)
+    }
+
+    &__body {
+      top: 169px;
+      gap: 16px;
+    }
+
+    &__heading { font-size: 14px; }
+    &__name { font-size: 13px; }
+    &__btn { width: 18px; height: 18px; }
+  }
+}

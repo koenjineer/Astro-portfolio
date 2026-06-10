@@ -1,0 +1,53 @@
+---
+// セクション3: cta① (Figma 113:2227) / セクション14: cta③ (Figma 123:3772)
+// 共通コンポーネント - props で文言・画像を切替
+export interface Props {
+  id?: string;
+  heading?: string;
+  highlight?: string;
+  note?: string;
+  btnLabel?: string;
+  href?: string;
+  imageSrc?: string;
+}
+
+const {
+  id = 'cta',
+  heading = 'お得にはじめるチャンス',
+  highlight = '初期手数料',
+  note = '初期手数料(5,000円)が無料になります',
+  btnLabel = '資料請求する',
+  href = '#',
+  imageSrc = '/mock_site/suisopot/images/fv-product.webp',
+} = Astro.props as Props;
+---
+
+<section class="sp-cta" id={id} aria-label="キャンペーンのご案内">
+  <div class="sp-cta__card sp-fade">
+    <div class="sp-cta__visual">
+      <img src={imageSrc} alt="SUISOPOT 水素水サーバー本体" width="346" height="606" loading="lazy" decoding="async" />
+    </div>
+
+    <div class="sp-cta__body">
+      <h2 class="sp-cta__heading">
+        <img class="sp-cta__heading-deco sp-cta__heading-deco--left" src="/mock_site/suisopot/images/cta1-deco-left.svg" alt="" aria-hidden="true" width="22" height="2" />
+        {heading}
+        <img class="sp-cta__heading-deco sp-cta__heading-deco--right" src="/mock_site/suisopot/images/cta1-deco-right.svg" alt="" aria-hidden="true" width="22" height="2" />
+      </h2>
+
+      <p class="sp-cta__price">
+        <span class="sp-cta__price-label">{highlight}</span>
+        <span class="sp-cta__price-em">無料</span>
+      </p>
+
+      <p class="sp-cta__campaign">キャンペーン実施中</p>
+    </div>
+
+    <a href={href} class="sp-cta__btn">
+      <span>{btnLabel}</span>
+      <span class="sp-cta__btn-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <p class="sp-cta__note">{note}</p>
+  </div>
+</section>

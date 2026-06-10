@@ -1,0 +1,43 @@
+@use 'variables' as *;
+
+body {
+  font-family: $font-jp-sans;
+  color: $color-gray-1;
+  line-height: 1.7;
+  background: $color-white;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+// アンカー先のヘッダー裏隠れ防止
+section[id] {
+  scroll-margin-top: $header-h;
+
+  @media (max-width: $bp-sp) {
+    scroll-margin-top: 60px;
+  }
+}
+
+// フェードイン初期状態
+.sp-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// アクセシビリティ：モーション低減
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

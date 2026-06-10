@@ -1,0 +1,291 @@
+@use 'variables' as *;
+
+// Figma 113:2171 (PC 1440×640) / 1:2150 (SP 390×570、ヘッダー60除く)
+// PC: 製品画像(左) + 見出し(中央) + 女性写真(右) + 縦書き + 右端ドット + 3つの円(下段)
+// SP: 上部に見出し / 女性写真は下部に背景的に配置 / 3つの円は左側に縦積みで女性写真と重ねる / 縦書きは右側
+
+.sp-fv {
+  position: relative;
+  // 背景：Figma 1:2150 のグラデーション値そのまま（変数色 $color-blue → $color-base-blue 近似）
+  background: linear-gradient(90.15deg, #f1f9fb 0%, #dfe7e9 99.717%);
+  padding: 0;
+  overflow: hidden;
+
+  &__inner {
+    position: relative;
+    max-width: 1440px;
+    margin-inline: auto;
+    // PC: Figma FV 高さ 640px
+    height: 640px;
+  }
+
+  // 左：製品画像 (Figma 121:3741) 親 121:3739 left:147 + 子 56.47=約203, top:39+15.32=約54
+  // Figma 上のサイズ：347.267×345.264
+  &__product {
+    position: absolute;
+    // テキスト開始位置: calc(8.33% + 249px) @ 1440px ≒ 369px
+    // 右端 = left + 347 < 369 → left < 22px でテキストと非重複
+    left: 10px;
+    top: 54px;
+    width: 347px;
+    height: 345px;
+    z-index: 2;
+    object-fit: contain;
+  }
+
+  // 中央：見出し (Figma 113:2174) left:calc(8.33%+249)=約369, top:86
+  // Noto Serif JP, 大64px / 小48px / lh 1.5, 色 #6c6e6f
+  &__title {
+    position: absolute;
+    left: calc(8.33% + 249px);
+    top: 86px;
+    z-index: 3;
+    font-family: $font-jp-serif;
+    font-weight: 400;
+    color: $color-gray-2;
+    line-height: 1.5;
+    white-space: nowrap;
+    writing-mode: horizontal-tb;
+  }
+
+  &__title-row {
+    display: block;
+  }
+
+  &__title-strong {
+    font-size: 64px;
+    font-weight: 400;
+  }
+
+  &__title-sub {
+    font-size: 48px;
+    font-weight: 400;
+  }
+
+  &__title-sub--tight {
+    // Figma 113:2174 「、」 tracking:-24px
+    letter-spacing: -24px;
+  }
+
+  // 右：女性画像 (Figma 135:2558) left:calc(50%+28)=748, top:0, w:692, h:640
+  &__main {
+    position: absolute;
+    left: calc(50% + 28px);
+    top: 0;
+    width: 692px;
+    height: 640px;
+    z-index: 1;
+    object-fit: cover;
+    object-position: bottom;
+    pointer-events: none;
+  }
+
+  // 右端縦書き「ナノバブル水素水で健康習慣」(Figma 123:3803) left:calc(100%-97), top:27, w:29
+  // → right: 97 - 29 = 68px
+  &__vertical {
+    position: absolute;
+    right: 68px;
+    top: 27px;
+    z-index: 4;
+    width: 29px;
+    writing-mode: vertical-rl;
+    font-family: 'Yomogi', $font-jp-serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 37px;
+    color: $color-gray-2;
+
+    span {
+      display: block;
+    }
+  }
+
+  // 右端泡装飾 (Frame 1104 / 32×98)
+  // right: 37 - 32 = 5px → right: 5px 相当。top は旧 dots と合わせ 61px
+  &__bubble {
+    position: absolute;
+    right: 5px;
+    top: 61px;
+    z-index: 5;
+    width: 32px;
+    height: 98px;
+    display: block;
+  }
+
+  // 下部：3つのコンポジット円 (Figma 113:2175, top:335, h:273)
+  // 左→右順序: 113:2193(中性還元水) → 113:2208(イオン化) → 113:2176(特許電極)
+  // 各 left: 43 / calc(8.33%+200)=320 / calc(33.33%+113)=593
+  &__features {
+    position: absolute;
+    top: 335px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    height: 273px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__feature {
+    position: absolute;
+    top: 0;
+    height: 273px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    &:nth-child(1) { left: 43px;  width: 275px; }   // 113:2193 ナノバブル水素
+    &:nth-child(2) { left: calc(8.33% + 200px); width: 271px; }  // 113:2208 イオン化
+    &:nth-child(3) { left: calc(33.33% + 113px); width: 271px; } // 113:2176 特許電極
+  }
+
+  // ===== SP〜タブレット：ヘッダーと同じブレークポイントで SP レイアウトを適用 =====
+  // $bp-header(1399px) 以下はハンバーガーヘッダー＋SP FV で統一。PC FV は 1400px 以上のみ
+  @media (max-width: $bp-header) {
+    &__inner {
+      position: relative;
+      height: 570px;
+      // 390px 超の幅でも SP レイアウトを中央寄せにする（700px等での崩れ防止）
+      max-width: 390px;
+      margin-inline: auto;
+      overflow: hidden;
+    }
+
+    // SPでは製品画像は表示しない（Figma 1:2150 に存在しない）
+    &__product {
+      display: none;
+    }
+
+    // 見出し (Figma 1:2179/2180) top:60(=0相対), h:123 中央配置, padding:8px
+    // Noto Serif JP, 大30px / 小25px / lh 1.5, 色 #333
+    &__title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 3;
+      width: 100%;
+      height: 123px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0;
+      text-align: center;
+      white-space: nowrap;
+      color: $color-gray-1;
+      font-family: $font-jp-serif;
+      line-height: 1.5;
+      writing-mode: horizontal-tb;
+      letter-spacing: 0;
+    }
+
+    &__title-row {
+      display: block;
+      writing-mode: horizontal-tb;
+    }
+
+    &__title-strong {
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    &__title-sub {
+      font-size: 25px;
+      font-weight: 400;
+    }
+
+    // SP では Figma 上「、」記号がないので非表示
+    &__title-comma {
+      display: none;
+    }
+
+    // 女性写真 (Figma 136:2637) left:71, bottom:0 (実態は -4), w:319, h:378
+    &__main {
+      position: absolute;
+      left: 71px;
+      top: auto;
+      bottom: 0;
+      width: 319px;
+      height: 378px;
+      max-width: none;
+      z-index: 1;
+      object-fit: contain;
+      object-position: bottom;
+    }
+
+    // 縦書き (Figma 170:1594) left:341, top:80, w:29 / Yomogi 24px / 色 #6c6e6f
+    // → right: 390 - 341 - 29 = 20
+    &__vertical {
+      display: block;
+      position: absolute;
+      right: 20px;
+      left: auto;
+      top: 80px;
+      z-index: 4;
+      width: 29px;
+      writing-mode: vertical-rl;
+      font-family: 'Yomogi', $font-jp-serif;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1;
+      color: $color-gray-2;
+
+      span { display: block; }
+    }
+
+    // 泡装飾（SP）縦書きテキスト(right:20px,w:29px)との被りを避けるため
+    // 1x サイズ(16×49)で right:0 に配置
+    &__bubble {
+      display: block;
+      position: absolute;
+      right: 0;
+      left: auto;
+      top: 61px;
+      z-index: 5;
+      width: 16px;
+      height: 49px;
+    }
+
+    // 3つの円 (Figma 1:2181) left:13, top:183, 全体 175×383
+    // Figma 上の縦順序: 1:2182 中性還元水(top:0) → 1:2197 イオン化(top:131) → 1:2217 特許電極(top:260)
+    // ※ features の DOM 順は SectionFV.astro 側で 中性還元水→イオン化→特許電極 になっている
+    &__features {
+      position: absolute;
+      left: 13px;
+      top: 183px;
+      bottom: auto;
+      right: auto;
+      width: 175px;
+      height: 383px;
+      z-index: 3;
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    &__feature {
+      position: absolute;
+      left: 0;
+      width: 175px;
+      height: 122px;
+      max-width: none;
+
+      // PC の :nth-child セレクターが left/width を上書きするため SP 側でも明示指定
+      &:nth-child(1) { left: 0; top: 0;       width: 175px; }
+      &:nth-child(2) { left: 0; top: 131px;   width: 175px; }
+      &:nth-child(3) { left: 0; top: 260px;   width: 175px; height: 123px; }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}

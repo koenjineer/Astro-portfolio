@@ -1,0 +1,173 @@
+@use 'variables' as *;
+
+.sp-cta-second {
+  position: relative;
+  overflow: hidden;
+  padding: 60px $side-padding 80px;
+  background: $color-accent-green;
+
+  &__wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: block;
+    pointer-events: none;
+  }
+
+  &__product {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 200px;
+    height: auto;
+    pointer-events: none;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    max-width: $content-max;
+    margin-inline: auto;
+    padding-top: 10px;
+    // prevent overlap with right product image on PC
+    padding-right: 220px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-family: $font-jp-sans;
+    font-weight: 400;
+    font-size: 32px;
+    color: $color-gray-1;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    text-align: center;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  &__title-deco {
+    width: 32px;
+    height: 98px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__title-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__btn-list {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__btn-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 400px;
+  }
+
+  &__btn-lead {
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 24px;
+    color: $color-gray-1;
+    letter-spacing: 0.03em;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 88px;
+    padding: 0 32px;
+    background: $color-accent;
+    color: $color-white;
+    border-radius: 52px;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 26px;
+    white-space: nowrap;
+    box-shadow: 0 0 1.5px rgba(83, 46, 37, 0.25);
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__btn-text {
+    white-space: nowrap;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  &__btn-arrow {
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: $bp-sp) {
+    padding: 48px $side-padding 40px;
+    overflow: visible;
+
+    &__product {
+      display: none;
+    }
+
+    &__inner {
+      gap: 20px;
+      padding-top: 0;
+      padding-right: 0;
+    }
+
+    &__title {
+      font-size: 18px;
+      gap: 8px;
+    }
+
+    &__title-deco {
+      width: 20px;
+      height: 61px;
+    }
+
+    &__btn-list {
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
+
+    &__btn-item {
+      width: 100%;
+    }
+
+    &__btn-lead {
+      font-size: 16px;
+    }
+
+    &__btn {
+      height: 64px;
+      font-size: 18px;
+      padding: 0 24px;
+    }
+  }
+}

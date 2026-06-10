@@ -1,0 +1,306 @@
+@use 'variables' as *;
+
+// セクション5: kaiketu (Figma 113:2280)
+// Figma 寸法: 1440×2035 / talk_container 992×1368 / point_lists 824×236
+
+.sp-kaiketu {
+  position: relative;
+  padding: 90px $side-padding 80px;
+  background: $color-white;
+  overflow: hidden; // 1440px 幅の背景画像をクリップ
+
+  // 背景粒子グラデーション画像（Figma: Frame 1344 1 / RGBA で上部は透明→下部は淡青）
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1440px;
+    max-width: none;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 50px;
+    z-index: 1; // 背景画像の上
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1; // 背景画像の上
+    max-width: $content-max;
+    margin-inline: auto;
+  }
+
+  // ===== タイトル =====
+  &__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: $font-jp-serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.4;
+    color: $color-gray-1;
+    letter-spacing: 0.03em;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  &__title-text {
+    color: $color-gray-1;
+  }
+
+  &__title-deco {
+    width: 33px;
+    height: 53px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__title-logo {
+    width: 187px;
+    height: 72px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  // ===== サブタイトル =====
+  &__subtitle {
+    font-family: $font-jp-sans;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: 0.03em;
+    color: $color-gray-1;
+    text-align: center;
+    margin: 0 0 80px;
+  }
+
+  // ===== ポイント円 3つ =====
+  &__points {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 80px;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__point {
+    position: relative;
+    width: 236px;
+    height: 236px;
+    flex-shrink: 0;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__point-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+    color: $color-white;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  // ===== 解説ボックス (talk_container) =====
+  &__talk {
+    max-width: 992px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    background: $color-white;
+    border-radius: 40px;
+    box-shadow: 0 4px 2px rgba(180, 221, 232, 0.25);
+  }
+
+  &__talk-heading {
+    font-family: $font-jp-sans;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    color: $color-gray-1;
+    text-align: center;
+    margin: 0 0 40px;
+  }
+
+  &__talk-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  // ----- 吹き出し -----
+  &__balloon {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+
+    &--right {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__balloon-body {
+    position: relative;
+    flex: 1;
+    margin: 0;
+    padding: 16px;
+    background: $color-white;
+    border-radius: 24px;
+    box-shadow: 0 0 2px rgba(0, 29, 104, 0.25);
+    font-family: $font-jp-sans;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    color: $color-gray-1;
+
+    strong {
+      font-weight: 700;
+      background: linear-gradient(transparent 60%, $color-accent-green 60%);
+    }
+  }
+
+  &__balloon--left &__balloon-body::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: -16px;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    border-right-color: $color-white;
+    filter: drop-shadow(-1px 0 1px rgba(0, 29, 104, 0.15));
+  }
+
+  &__balloon--right &__balloon-body::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    right: -16px;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    border-left-color: $color-white;
+    filter: drop-shadow(1px 0 1px rgba(0, 29, 104, 0.15));
+  }
+
+  // ----- 泡の比較（画像） -----
+  &__bubble-comparison {
+    picture {
+      display: block;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 0 4px rgba(0, 29, 104, 0.25);
+    }
+  }
+
+  // ===== レスポンシブ (SP) =====
+  @media (max-width: $bp-sp) {
+    padding: 48px $side-padding;
+
+    &__title {
+      font-size: 24px;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    &__title-deco {
+      width: 20px;
+      height: 32px;
+    }
+
+    &__title-logo {
+      width: 120px;
+      height: auto;
+    }
+
+    &__subtitle {
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+
+    &__points {
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    &__point {
+      width: 140px;
+      height: 140px;
+    }
+
+    &__point-text {
+      font-size: 16px;
+    }
+
+    &__talk {
+      padding: 24px 16px;
+      border-radius: 24px;
+    }
+
+    &__talk-heading {
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+
+    &__talk-inner {
+      gap: 16px;
+    }
+
+    &__balloon {
+      gap: 12px;
+    }
+
+    &__avatar {
+      width: 56px;
+      height: 56px;
+    }
+
+    &__balloon-body {
+      font-size: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+    }
+  }
+}

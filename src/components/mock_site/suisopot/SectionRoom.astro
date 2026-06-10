@@ -1,0 +1,54 @@
+---
+// セクション8: room (Figma 113:2853 / SP 1:2582)
+const images = [
+  { src: 'room-1.webp', w: 320, h: 209, alt: 'お部屋に置いたSUISOPOTの設置例1' },
+  { src: 'room-2.webp', w: 480, h: 313, alt: 'お部屋に置いたSUISOPOTの設置例2 (メイン)' },
+  { src: 'room-3.webp', w: 320, h: 209, alt: 'お部屋に置いたSUISOPOTの設置例3' },
+];
+---
+
+<section class="sp-room" id="room">
+  <h2 class="sp-room__title sp-fade">
+    <img
+      class="sp-room__title-deco"
+      src="/mock_site/suisopot/images/title-deco-left.webp"
+      alt=""
+      aria-hidden="true"
+      width="50"
+      height="80"
+      loading="lazy"
+    />
+    どんなお部屋にもピッタリ
+    <img
+      class="sp-room__title-deco"
+      src="/mock_site/suisopot/images/title-deco-right.webp"
+      alt=""
+      aria-hidden="true"
+      width="50"
+      height="80"
+      loading="lazy"
+    />
+  </h2>
+
+  <p class="sp-room__lead sp-fade">
+    ホワイトとシルバーを基調にしたデザイン＆コンパクトサイズ<br />
+    どんなインテリアにも馴染むシンプルなデザイン
+  </p>
+
+  <ul class="sp-room__gallery">
+    {
+      images.map((img) => (
+        <li class="sp-room__gallery-item sp-fade">
+          <img
+            src={`/mock_site/suisopot/images/${img.src}`}
+            alt={img.alt}
+            width={img.w}
+            height={img.h}
+            loading="lazy"
+            decoding="async"
+          />
+        </li>
+      ))
+    }
+  </ul>
+</section>

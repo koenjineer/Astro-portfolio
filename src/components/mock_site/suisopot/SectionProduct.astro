@@ -1,0 +1,49 @@
+---
+// セクション23: product (Figma 113:3288)
+// 背景: $color-base-blue / 製品写真 + 仕様テーブル
+
+const specs = [
+  { label: '商品名',      value: 'SUISOPOT（スイソポット）' },
+  { label: '型番',        value: 'ＳＷ-800' },
+  { label: 'サイズ',      value: '約幅288×奥行356×高さ316(㎜)' },
+  { label: '本体質量',    value: '約3.3kg' },
+  { label: '電源',        value: 'AC/DCアダプター入力AC100V 50/60Hz 出力DC24V 0.7A' },
+  { label: '生成モード',  value: '60分　90分　120分' },
+  { label: '容量',        value: '5リットル' },
+  { label: '使用する水質', value: 'ミネラルウォーター、水道水' },
+  { label: '付属品',      value: 'ミネラルプレート2個、ミネラルプレートケース2個、電極ホルダー2個' },
+];
+---
+
+<section class="sp-product" id="product">
+
+  <div class="sp-product__title-wrap sp-fade">
+    <img class="sp-product__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+    <h2 class="sp-product__title">製品仕様</h2>
+    <img class="sp-product__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+  </div>
+
+  <div class="sp-product__body sp-fade">
+    <div class="sp-product__img-wrap">
+      <img
+        class="sp-product__img"
+        src="/mock_site/suisopot/images/product.webp"
+        alt="SUISOPOTスイソポット本体"
+        width="226"
+        height="396"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <dl class="sp-product__specs">
+      {specs.map((spec) => (
+        <div class="sp-product__row">
+          <dt class="sp-product__label">{spec.label}</dt>
+          <dd class="sp-product__value">{spec.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+
+</section>

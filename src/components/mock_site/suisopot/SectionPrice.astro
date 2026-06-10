@@ -1,0 +1,71 @@
+---
+// セクション13: price (Figma 113:2984)
+// 白背景 / 比較テーブル（SUISOPOT vs 3競合）/ オレンジ枠でSUISOPOT列強調
+
+const rows = [
+  { label: '電気代',     suisopot: { text: '30円', bold: true },  pet: '不要',      server: '1,000円', filter: '0円' },
+  { label: 'メンテナス費用', suisopot: { text: '不要', bold: true }, pet: '不要',      server: '月一回', filter: ['2〜4ヶ月で', 'フィルターを交換'] },
+  { label: '水道料金',   suisopot: { text: '約25円/月', bold: true }, pet: '3,000/月〜', server: '3,000/月〜', filter: '約25円/月' },
+  { label: '解約のしやすさ', suisopot: { text: 'いつでも可能', bold: true }, pet: '不要', server: '定期契約', filter: '不要' },
+  { label: '健康志向',   suisopot: { text: '◎', bold: true },    pet: '◯',         server: '不要',    filter: '△' },
+];
+---
+
+<section class="sp-price" id="price">
+
+  <div class="sp-price__title-wrap sp-fade">
+    <img class="sp-price__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+    <h2 class="sp-price__title">他のお水との比較</h2>
+    <img class="sp-price__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+  </div>
+
+  <div class="sp-price__table-wrap sp-fade">
+    <!-- 「とてもお得！」ラベル（SUISOPOT列上部に配置） -->
+    <p class="sp-price__otoku" aria-hidden="true">とてもお得！</p>
+
+    <table class="sp-price__table">
+      <thead>
+        <tr>
+          <th class="sp-price__th sp-price__th--row-header" scope="col"></th>
+          <th class="sp-price__th sp-price__th--suisopot" scope="col">
+            <div class="sp-price__logo-box">
+              <img
+                src="/mock_site/suisopot/images/price-logo.webp"
+                alt="SUISOPOT"
+                width="156"
+                height="40"
+                loading="lazy"
+              />
+            </div>
+          </th>
+          <th class="sp-price__th sp-price__th--competitor" scope="col">ペットボトル</th>
+          <th class="sp-price__th sp-price__th--competitor" scope="col">ウォーターサーバー</th>
+          <th class="sp-price__th sp-price__th--competitor sp-price__th--last" scope="col">
+            浄水器<br />（蛇口貯血型）
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row, i) => (
+          <tr class="sp-price__tr">
+            <th class="sp-price__th sp-price__th--label" scope="row">{row.label}</th>
+            <td class="sp-price__td sp-price__td--suisopot">
+              {row.suisopot.bold
+                ? <strong>{row.suisopot.text}</strong>
+                : row.suisopot.text
+              }
+            </td>
+            <td class="sp-price__td">{row.pet}</td>
+            <td class="sp-price__td">{row.server}</td>
+            <td class="sp-price__td sp-price__td--last">
+              {Array.isArray(row.filter)
+                ? row.filter.map((line) => <>{line}<br /></>)
+                : row.filter
+              }
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

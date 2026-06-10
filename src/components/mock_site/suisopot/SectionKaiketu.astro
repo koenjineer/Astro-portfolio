@@ -1,0 +1,156 @@
+---
+// セクション5: kaiketu (Figma 113:2280)
+// 構成: 下向き矢印 → タイトル → サブテキスト → 3円 → 会話＋泡比較
+const expertAvatar = '/mock_site/suisopot/images/kaiketu-avatar-expert.webp';
+const userAvatar = '/mock_site/suisopot/images/kaiketu-avatar-user.webp';
+
+const points = [
+  { text: ['水道水から', '生成できる'], img: 'kaiketu-point-blue.webp' },
+  { text: ['コンパクトで', '場所を選ばない'], img: 'kaiketu-point-orange.webp' },
+  { text: ['月額定額で', '使い放題'], img: 'kaiketu-point-blue.webp' },
+];
+---
+
+<section class="sp-kaiketu" id="kaiketu" aria-labelledby="kaiketu-title">
+  <!-- 背景グラデーション粒子画像（Figma: Frame 1344 1） -->
+  <img
+    class="sp-kaiketu__bg"
+    src="/mock_site/suisopot/images/kaiketu-bg.webp"
+    alt=""
+    aria-hidden="true"
+    width="1440"
+    height="2035"
+  />
+
+  <img
+    class="sp-kaiketu__arrow"
+    src="/mock_site/suisopot/images/kaiketu-arrow-down.svg"
+    alt=""
+    aria-hidden="true"
+    width="90"
+    height="50"
+  />
+
+  <div class="sp-kaiketu__inner">
+    <h2 class="sp-kaiketu__title sp-fade" id="kaiketu-title">
+      <img
+        class="sp-kaiketu__title-deco"
+        src="/mock_site/suisopot/images/title-deco-left.webp"
+        alt=""
+        aria-hidden="true"
+        width="50"
+        height="80"
+        loading="lazy"
+      />
+      <span class="sp-kaiketu__title-text">そんなお悩みや心配は</span>
+      <img
+        class="sp-kaiketu__title-logo"
+        src="/mock_site/suisopot/images/kaiketu-logo.webp"
+        alt="SUISOPOT"
+        width="187"
+        height="72"
+        loading="lazy"
+      />
+      <span class="sp-kaiketu__title-text">が解決します</span>
+      <img
+        class="sp-kaiketu__title-deco"
+        src="/mock_site/suisopot/images/title-deco-right.webp"
+        alt=""
+        aria-hidden="true"
+        width="50"
+        height="80"
+        loading="lazy"
+      />
+    </h2>
+
+    <p class="sp-kaiketu__subtitle sp-fade">SUISOPOTは手軽にナノバブル水素水を作れるサーバーです</p>
+
+    <ul class="sp-kaiketu__points sp-fade">
+      {points.map((p) => (
+        <li class="sp-kaiketu__point">
+          <img
+            src={`/mock_site/suisopot/images/${p.img}`}
+            alt=""
+            aria-hidden="true"
+            width="236"
+            height="236"
+            loading="lazy"
+          />
+          <span class="sp-kaiketu__point-text">
+            {p.text[0]}<br />{p.text[1]}
+          </span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="sp-kaiketu__talk sp-fade">
+      <h3 class="sp-kaiketu__talk-heading">そもそも、ナノバブル水素水って？</h3>
+
+      <div class="sp-kaiketu__talk-inner">
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
+          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            ナノバブル水素水について説明します！<br />
+            まず、水素は、<strong>悪玉な活性酸素を消去する抗酸化作用</strong>があります！<br />
+            だから、日々の健康に役立てる事ができるんです！<br />
+            しかも、様々な病気の治療への利用が始まっています！
+          </p>
+        </div>
+
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--right">
+          <img class="sp-kaiketu__avatar" src={userAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            なるほど！だから近年水素ブームが来ているんですね！
+          </p>
+        </div>
+
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
+          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            それから、ナノバブルというのは、こんなに小さな泡の事です！
+          </p>
+        </div>
+
+        <div class="sp-kaiketu__bubble-comparison">
+          <picture>
+            <source
+              media="(max-width: 767px)"
+              srcset="/mock_site/suisopot/images/kaiketu-bubble-sp.webp"
+              width="547"
+              height="352"
+            />
+            <img
+              src="/mock_site/suisopot/images/kaiketu-bubble.webp"
+              alt="気泡サイズ比較：通常の気泡 約1mm・マイクロバブル 約0.05mm・ナノバブル 約0.1µm"
+              width="810"
+              height="422"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
+          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            この泡のスゴイ所は浸透力と持続力！
+          </p>
+        </div>
+
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
+          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            「ナノバブル水素水」には、この泡が1ccあたり3億3,000万個という高濃度のナノバブルを含んでいます。<br />
+            <strong>大量のナノバブルが素早く体内に水素と酸素を浸透させる</strong>事ができるんです！
+          </p>
+        </div>
+
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--right">
+          <img class="sp-kaiketu__avatar" src={userAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+          <p class="sp-kaiketu__balloon-body">
+            ナノバブルって凄い！普通の水素水とは全然違うのね！
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

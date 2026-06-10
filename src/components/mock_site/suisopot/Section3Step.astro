@@ -1,0 +1,64 @@
+---
+// セクション16: 3step (Figma 113:3088)
+// 白背景 / 3ステップ円形写真 + Yomogi手書きラベル + 説明テキスト
+
+const steps = [
+  {
+    src: 'step-1.webp',
+    alt: 'スマートフォンを操作する女性',
+    label: 'たったの５分で完結！',
+    subtitle: 'お申込',
+    desc: 'ネットもしくはお電話からお申し込みいただけます',
+    descBold: true,
+    labelTop: -16,
+  },
+  {
+    src: 'step-2.webp',
+    alt: '配送の様子',
+    label: '早い！',
+    subtitle: 'ご自宅に届きます',
+    desc: 'お申込から通常1〜3営業日にて製品が発送されます。',
+    descBold: false,
+    labelTop: -4,
+  },
+  {
+    src: 'step-3.webp',
+    alt: 'SUISOPOTサーバー',
+    label: 'すぐ使える！',
+    subtitle: 'ご利用開始',
+    desc: 'ご自身で簡単に設置可能',
+    descBold: false,
+    labelTop: -9,
+  },
+];
+---
+
+<section class="sp-3step" id="3step">
+
+  <div class="sp-3step__title-wrap sp-fade">
+    <img class="sp-3step__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+    <h2 class="sp-3step__title">ご利用までの3ステップ</h2>
+    <img class="sp-3step__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
+  </div>
+
+  <ol class="sp-3step__list sp-fade">
+    {steps.map((step) => (
+      <li class="sp-3step__item">
+        <p class="sp-3step__label" aria-hidden="true" style={`top: ${step.labelTop}px`}>{step.label}</p>
+        <div class="sp-3step__circle">
+          <img
+            src={`/mock_site/suisopot/images/${step.src}`}
+            alt={step.alt}
+            width="174"
+            height="174"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <p class="sp-3step__subtitle">{step.subtitle}</p>
+        <p class:list={['sp-3step__desc', step.descBold && 'sp-3step__desc--bold']}>{step.desc}</p>
+      </li>
+    ))}
+  </ol>
+
+</section>

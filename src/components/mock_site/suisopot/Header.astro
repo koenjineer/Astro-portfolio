@@ -1,0 +1,164 @@
+---
+// セクション1: header (Figma 113:2148 / SP 1:2234 / Hamburger 1:2099)
+// PC: ロゴ + ナビ + 電話 + 2 CTA
+// SP: ロゴ + 新規お申込 + ハンバーガーボタン
+// SP メニュー: グラデ背景 (青→緑) / 5項目 各矢印付き / 下部に電話 + 2 CTA
+const navItems = [
+  { label: '特長', href: '#point' },
+  { label: 'お客様の声', href: '#voice' },
+  { label: 'ご利用料金', href: '#price' },
+  { label: 'ご利用までの流れ', href: '#step' },
+  { label: 'よくある質問', href: '#faq' },
+];
+---
+
+<header class="sp-header">
+  <div class="sp-header__inner">
+    <a href="#" class="sp-header__logo" aria-label="SUIREX5">
+      <img
+        src="/mock_site/suisopot/images/logo.webp"
+        alt="SUIREX5"
+        width="187"
+        height="72"
+        loading="eager"
+      />
+    </a>
+
+    <nav class="sp-header__nav" aria-label="メインナビゲーション">
+      <ul class="sp-header__nav-list">
+        {
+          navItems.map((item, i) => (
+            <li class="sp-header__nav-item">
+              <a href={item.href} class="sp-header__nav-link">
+                {item.label}
+              </a>
+              {i < navItems.length - 1 && <span class="sp-header__nav-sep" aria-hidden="true" />}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="sp-header__contact">
+      <div class="sp-header__tel">
+        <p class="sp-header__tel-num">
+          <img class="sp-header__tel-icon" src="/mock_site/suisopot/images/tel-icon.svg" alt="" aria-hidden="true" width="16" height="16" />
+          03-1234-5678
+        </p>
+        <p class="sp-header__tel-time">平日受付 9:00-17:00(祝日を除く)</p>
+      </div>
+      <div class="sp-header__cta-list">
+        <a href="#" class="sp-header__cta-btn">資料請求</a>
+        <a href="#" class="sp-header__cta-btn">新規お申込</a>
+      </div>
+    </div>
+
+    <a href="#" class="sp-header__sp-cta" aria-label="新規お申込">
+      新規お申込
+      <span class="sp-header__sp-cta-arrow" aria-hidden="true">›</span>
+    </a>
+
+    <button
+      type="button"
+      class="sp-header__hamburger"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="sp-header-drawer"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+
+  {/* ===== SP ドロワーメニュー (Figma 1:2099) ===== */}
+  <div
+    id="sp-header-drawer"
+    class="sp-drawer"
+    aria-hidden="true"
+  >
+    <div class="sp-drawer__panel">
+      {/* グラデ背景 (青→緑 / 上に白80% 重ね) */}
+      <div class="sp-drawer__bg" aria-hidden="true"></div>
+
+      {/* ヘッダー：ロゴ + 閉じる */}
+      <div class="sp-drawer__head">
+        <a href="#" class="sp-drawer__logo" aria-label="SUIREX5">
+          <img
+            src="/mock_site/suisopot/images/logo.webp"
+            alt="SUIREX5"
+            width="151"
+            height="58"
+          />
+        </a>
+        <button
+          type="button"
+          class="sp-drawer__close"
+          aria-label="メニューを閉じる"
+        >
+          <span class="sp-drawer__close-bar sp-drawer__close-bar--1" aria-hidden="true"></span>
+          <span class="sp-drawer__close-bar sp-drawer__close-bar--2" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      {/* ナビ本体 (Figma 170:1604 ほか): 5項目 / 各 20px gray2 / 右に矢印 / 区切り線 */}
+      <nav class="sp-drawer__nav" aria-label="モバイルナビゲーション">
+        <ul class="sp-drawer__nav-list">
+          {
+            navItems.map((item) => (
+              <li class="sp-drawer__nav-item">
+                <a href={item.href} class="sp-drawer__nav-link">
+                  <span class="sp-drawer__nav-label">{item.label}</span>
+                  <span class="sp-drawer__nav-arrow" aria-hidden="true"></span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      {/* 下部：電話 + 2 CTA (Figma 1:2111) */}
+      <div class="sp-drawer__contact">
+        <div class="sp-drawer__tel">
+          <p class="sp-drawer__tel-num">
+            <img class="sp-drawer__tel-icon" src="/mock_site/suisopot/images/tel-icon.svg" alt="" aria-hidden="true" width="16" height="16" />
+            03-1234-5678
+          </p>
+          <p class="sp-drawer__tel-time">平日受付 9:00-17:00(祝日を除く)</p>
+        </div>
+        <div class="sp-drawer__cta-list">
+          <a href="#" class="sp-drawer__cta-btn">資料請求</a>
+          <a href="#" class="sp-drawer__cta-btn">新規お申込</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const btn = document.querySelector('.sp-header__hamburger');
+    const drawer = document.getElementById('sp-header-drawer');
+    const closeBtn = document.querySelector('.sp-drawer__close');
+    if (!btn || !drawer) return;
+
+    function setOpen(open) {
+      btn.setAttribute('aria-expanded', String(open));
+      drawer.setAttribute('aria-hidden', String(!open));
+      drawer.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => setOpen(false));
+    }
+    // ナビリンククリックで閉じる
+    drawer.querySelectorAll('.sp-drawer__nav-link').forEach((a) => {
+      a.addEventListener('click', () => setOpen(false));
+    });
+  })();
+</script>

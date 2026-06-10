@@ -1,0 +1,321 @@
+@use 'variables' as *;
+
+// セクション12: banner (Figma 113:2936)
+// Figma固有のティールカラー: #50BFCB (グラデーション変数の実値)
+$banner-teal: #50bfcb;
+$banner-price-teal: #00c2cb; // ¥3,800 の色
+
+.sp-banner {
+  background: $color-white;
+  padding: 0 $side-padding;
+
+  // ===== バナー内コンテナ（背景画像） =====
+  &__inner {
+    max-width: 1281px;
+    margin-inline: auto;
+    min-height: 675px;
+    background: url('/mock_site/suisopot/images/banner-bg.webp') center / cover no-repeat;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    padding: 40px 56px 40px 420px; // 左420pxは絶対配置の__leftが占有
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  // ===== 左エリア =====
+  &__left {
+    position: absolute;
+    bottom: 330px;
+    left: 0;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__circle-badge {
+    width: 302px;
+    height: 302px;
+    flex-shrink: 0;
+  }
+
+  &__device {
+    position: absolute;
+    top: 230px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 211px;
+    height: auto;
+  }
+
+  // ===== 右エリア =====
+  &__right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 32px;
+  }
+
+  &__catch {
+    font-family: $font-jp-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: $color-white;
+    letter-spacing: 0.02em;
+  }
+
+  // 白い帯ボックス「ず——っと…」
+  &__promo-box {
+    display: inline-flex;
+    align-items: center;
+    background: $color-white;
+    border-radius: 24px;
+    padding: 8px 48px;
+    font-family: $font-jp-serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: $color-gray-1;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  &__promo-num {
+    font-family: $font-en; // 数字部分
+  }
+
+  &__headline {
+    font-family: $font-jp-serif;
+    font-weight: 700;
+    font-size: 72px;
+    color: $color-white;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    line-height: 1.1;
+  }
+
+  // ===== 料金エリア =====
+  &__price-area {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__price-normal {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__plan-label {
+    font-family: $font-jp-serif;
+    font-weight: 500;
+    font-size: 34px;
+    color: $color-gray-1;
+    letter-spacing: -0.01em;
+  }
+
+  &__price-old {
+    font-family: $font-jp-serif;
+    font-weight: 700;
+    font-size: 34px;
+    color: $color-gray-1;
+    text-decoration: line-through;
+    text-decoration-color: $color-gray-1;
+    text-decoration-thickness: 2px;
+  }
+
+  &__price-arrow {
+    width: 65px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  &__price-new {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__new-plan-label {
+    font-family: $font-jp-serif;
+    font-weight: 500;
+    font-size: 34px;
+    color: $color-gray-1;
+    letter-spacing: 0.14em;
+  }
+
+  &__price-value {
+    font-family: $font-jp-serif;
+    font-weight: 700;
+    font-size: 96px;
+    color: $banner-price-teal;
+    line-height: 1;
+    letter-spacing: -0.06em;
+  }
+
+  &__price-tax {
+    font-size: 26px;
+    font-weight: 400;
+    color: $color-gray-2;
+    letter-spacing: -0.01em;
+  }
+
+  // ===== タグ群 =====
+  &__tags {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 184px;
+    height: 68px;
+    background: $color-white;
+    border: 0.5px solid $banner-teal;
+    border-radius: 32px;
+    gap: 2px;
+  }
+
+  &__tag-sub {
+    font-family: $font-jp-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: $color-gray-1;
+    line-height: 1;
+  }
+
+  &__tag-main {
+    font-family: $font-jp-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: $color-gray-1;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  // ===== 注記 =====
+  &__note {
+    font-family: $font-jp-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-gray-2;
+    letter-spacing: 0.09em;
+    text-align: right;
+  }
+
+  &__note-num {
+    font-weight: 500; // 数字は中太
+  }
+
+  // SP専用デバイス画像: PCでは非表示
+  &__device-mask { display: none; }
+
+  // ===== レスポンシブ (SP) =====
+  // Figma SP node 1:2740 (360×360px カード) の実測値を反映
+  @media (max-width: $bp-sp) {
+    &__inner {
+      min-height: auto;
+      flex-direction: row;   // 左:円 / 右:コンテンツ を横並び
+      align-items: flex-start;
+      padding: 20px 16px 110px; // 下部に Mask group 分の余白
+      border-radius: 21px;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    // ===== 左カラム: 円のみ（デバイスは非表示） =====
+    &__left {
+      position: static;
+      width: 80px;
+      flex-shrink: 0;
+      align-items: center;
+      align-self: flex-start;
+    }
+
+    &__circle-badge {
+      width: 80px;
+      height: 80px;
+    }
+
+    // PC用デバイス非表示（SP は device-mask を使用）
+    &__device { display: none; }
+
+    // SP専用デバイス画像（Mask group）: 左下に絶対配置
+    &__device-mask {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 87px;
+      height: auto;
+      object-fit: contain;
+      z-index: 2;
+    }
+
+    // ===== 右カラム: コンテンツ =====
+    &__right {
+      flex: 1;
+      min-width: 0;
+      padding-left: 0;
+      gap: 6px;
+    }
+
+    &__catch {
+      font-size: 14px;
+      white-space: normal;
+    }
+
+    &__promo-box {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      align-self: flex-start;
+    }
+
+    &__headline {
+      font-size: 28px;
+      white-space: normal;
+      word-break: break-all;
+      letter-spacing: 0.08em;
+    }
+
+    &__price-area {
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    &__price-normal { gap: 2px; }
+
+    &__plan-label     { font-size: 18px; }
+    &__price-old      { font-size: 20px; }
+    &__price-arrow    { width: 43px; height: 43px; }
+    &__new-plan-label { font-size: 19px; }
+    &__price-value    { font-size: 51px; }
+    &__price-tax      { font-size: 8px; }
+
+    &__tags { gap: 4px; }
+
+    &__tag {
+      width: 116px;
+      height: 40px;
+    }
+
+    &__tag-sub  { font-size: 10px; }
+    &__tag-main { font-size: 15px; letter-spacing: 0.05em; }
+
+    &__note {
+      font-size: 10px;
+      text-align: left;
+    }
+  }
+}

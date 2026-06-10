@@ -1,0 +1,188 @@
+@use 'variables' as *;
+
+// セクション17: 4step (Figma 113:3104)
+// 背景: $color-base-blue / 4ステップ円形写真 + Yomogi手書きラベル
+
+$step-item-w: 235px;
+$step-item-h: 290px;
+$circle-size: 174px;
+$subtitle-top: 198px;
+$desc-top: 247px;
+$font-yomogi: 'Yomogi', cursive;
+
+.sp-4step {
+  padding: 80px $side-padding;
+  background: $color-base-blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+
+  // ===== タイトル =====
+  &__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__title-deco {
+    width: 33px;
+    height: 53px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-family: $font-jp-serif;
+    font-weight: 400;
+    font-size: 40px;
+    color: $color-gray-1;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  // ===== ステップリスト =====
+  &__list {
+    display: flex;
+    gap: 31px;
+    align-items: flex-start;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  // 各ステップアイテム
+  // Figma: section の py-80px がラベル overflow を吸収するため margin-top 不要
+  &__item {
+    position: relative;
+    width: $step-item-w;
+    height: $step-item-h;
+    margin-top: 0;
+  }
+
+  // Yomogi 手書きラベル（絶対配置、円の上）
+  &__label {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+    font-family: $font-yomogi;
+    font-size: 23px;
+    color: $color-gray-1;
+    text-align: center;
+    letter-spacing: -0.09em;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  // 円形写真（top: 0 = 3stepと異なる点）
+  &__circle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: $circle-size;
+    height: $circle-size;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  // 小見出し
+  &__subtitle {
+    position: absolute;
+    top: $subtitle-top;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    font-family: $font-jp-sans;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    color: $color-gray-1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  // 説明テキスト
+  &__desc {
+    position: absolute;
+    top: $desc-top;
+    left: 50%;
+    transform: translateX(-50%);
+    width: $step-item-w;
+    font-family: $font-jp-sans;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    color: $color-gray-1;
+    text-align: center;
+  }
+
+  // ===== レスポンシブ (SP) =====
+  @media (max-width: $bp-sp) {
+    padding: 48px $side-padding;
+    gap: 40px;
+
+    &__title { font-size: 24px; }
+    &__title-deco { width: 22px; height: 35px; }
+
+    // SP: 2列グリッドに変更
+    &__list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 24px;
+    }
+
+    &__item {
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    &__label {
+      position: relative;
+      top: auto !important;
+      left: auto;
+      transform: rotate(-5deg);
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    &__circle {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      width: 120px;
+      height: 120px;
+    }
+
+    &__subtitle {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      font-size: 18px;
+      white-space: normal;
+    }
+
+    &__desc {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      width: 100%;
+      font-size: 13px;
+    }
+  }
+}

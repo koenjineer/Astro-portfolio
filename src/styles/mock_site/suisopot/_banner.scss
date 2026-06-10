@@ -18,7 +18,7 @@ $banner-price-teal: #00c2cb; // ¥3,800 の色
     border-radius: 16px;
     display: flex;
     align-items: center;
-    padding: 40px 56px 40px 0; // 左側は画像で埋まるため0
+    padding: 40px 56px 40px 420px; // 左420pxは絶対配置の__leftが占有
     gap: 0;
     position: relative;
     overflow: hidden;
@@ -26,75 +26,28 @@ $banner-price-teal: #00c2cb; // ¥3,800 の色
 
   // ===== 左エリア =====
   &__left {
-    position: relative;
+    position: absolute;
+    bottom: 330px;
+    left: 0;
     width: 420px;
-    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  &__circle-wrap {
-    position: relative;
+  &__circle-badge {
     width: 302px;
     height: 302px;
-  }
-
-  &__circle-outer {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  &__circle-inner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 264px;
-    height: 264px;
-  }
-
-  &__date {
-    position: absolute;
-    top: 48%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: $font-jp-serif;
-    font-size: 40px;
-    font-weight: 400;
-    color: $color-gray-1;
-    white-space: nowrap;
-    // ラインSVGをデコレーションとして下に配置
-    &::after {
-      content: '';
-      display: block;
-      width: 80%;
-      height: 1px;
-      background: $color-gray-2;
-      margin: 4px auto 0;
-    }
-  }
-
-  &__date-label {
-    font-family: $font-jp-serif;
-    font-weight: 700;
-    font-size: 32px;
-    color: $color-gray-1;
-    letter-spacing: 0.1em;
-    margin-top: -60px; // circle内に配置
-    text-align: center;
+    flex-shrink: 0;
   }
 
   &__device {
     position: absolute;
-    bottom: -60px;
+    top: 230px;
     left: 50%;
-    transform: translateX(-20%);
-    width: 320px;
-    height: 320px;
-    object-fit: contain;
+    transform: translateX(-50%);
+    width: 211px;
+    height: auto;
   }
 
   // ===== 右エリア =====
@@ -279,31 +232,16 @@ $banner-price-teal: #00c2cb; // ¥3,800 の色
 
     // ===== 左カラム: 円のみ（デバイスは非表示） =====
     &__left {
+      position: static;
       width: 80px;
       flex-shrink: 0;
       align-items: center;
       align-self: flex-start;
     }
 
-    &__circle-wrap {
+    &__circle-badge {
       width: 80px;
       height: 80px;
-    }
-
-    &__circle-inner {
-      width: 66px;
-      height: 66px;
-    }
-
-    &__date {
-      font-size: 14px;
-      &::after { width: 47px; }
-    }
-
-    &__date-label {
-      font-size: 13px;
-      margin-top: 2px;
-      letter-spacing: 0.1em;
     }
 
     // PC用デバイス非表示（SP は device-mask を使用）

@@ -40,17 +40,17 @@
 
 - `.claude/handoff/spec.md` を読んで構造・方針を把握
 - **実装着手前に Figma スクショを視覚把握**（事前視覚把握）
-- **数値は Figmaから取得**（推測禁止）
 - **画像はPMが配置済みのアセットを使用**（curl が必要な場合はPMに依頼）
 - セクション単位で実装
 - 実装不可能な要素があれば即停止 → PMに報告
 - 完了したら（視覚比較は PM が実施）PM に報告
 
-### 数値はFigmaから取得する（最重要）
+### 数値の取得元
 
-- padding・width・gap・font-size・position等の数値は `get_design_context` でFigmaから正確な値を取得
-- 取得した値をそのままコードに反映、**推測・調整は禁止**
-- Figmaから取得できない値のみ、その旨を明示してPMに確認
+> 推測・調整・代替の禁止は CLAUDE.md 2-1（実値主義）に集約。ここでは取得元のみ定義する。
+
+- padding・width・gap・font-size・position 等は `get_design_context` で取得する
+- Figmaから取得できない値のみ、その旨を明示して PM に確認する
 
 ### セマンティックHTMLセルフチェック
 

@@ -8,7 +8,10 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "screenshot": "node scripts/screenshot.mjs"
+    "screenshot": "node scripts/screenshot.mjs",
+    "lint": "eslint . && stylelint \"src/**/*.scss\"",
+    "lint:js": "eslint .",
+    "lint:scss": "stylelint \"src/**/*.scss\""
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
@@ -26,12 +29,24 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^25.6.0",
+    "astro-eslint-parser": "^3.1.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-astro": "^3.1.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.11.0",
     "pixelmatch": "^7.2.0",
     "playwright": "^1.60.0",
     "pngjs": "^7.0.0",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
-    "sass": "^1.99.0"
+    "sass": "^1.99.0",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-scss": "^7.2.0",
+    "typescript-eslint": "^8.67.0"
   }
 }

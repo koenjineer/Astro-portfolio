@@ -14,8 +14,10 @@
 ### Figma 全情報取得
 - [ ] `get_variable_defs` で全カラー・タイポ取得 → spec.md「Figma変数辞書」に記載
 - [ ] 親ノード（PC・SP）の `get_metadata` で全セクションのノードID取得 → spec.md「セクション構造」に記載
+- [ ] **PC と SP のセクション構造を spec.md に併記し、構造が異なるセクションに印を付ける**（カルーセル化・横スクロール化・要素の有無など）。SP を「PC の縦積み」と決めつけない
 - [ ] 大セクション（高さ >1000px）は子ノードまで把握 → spec.md に記載
 - [ ] 全セクションの Figma スクショ取得 → `handoff/screenshots/{section}/figma-{pc|sp}__{timestamp}.png` 配置
+  - **`maxDimension` をフレーム実寸以上で明示する**（既定 1024px のままだと PC 1440px が縮小される）
 
 #### Figma 変数取得時の context 管理
 

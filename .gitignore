@@ -28,5 +28,8 @@ pnpm-debug.log*
 .claude/worktrees/
 .claude/settings.local.json
 
+# 使い捨ての比較・撮影スクリプト置き場（ルート直下に置かないこと）
+scripts/tmp/
+
 # lock file (using pnpm)
 package-lock.json

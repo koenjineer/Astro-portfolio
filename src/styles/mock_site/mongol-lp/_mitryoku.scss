@@ -1,0 +1,223 @@
+@use 'variables' as *;
+
+$mitryoku-max: 950px;
+
+.ml-mitryoku {
+  padding: 80px $side-padding 100px;
+
+  &__inner {
+    max-width: $mitryoku-max;
+    margin-inline: auto;
+  }
+
+  &__section-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 24px;
+    margin-bottom: 4px;
+    letter-spacing: 0.1em;
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+    margin-bottom: 60px;
+
+    &-text {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  &__block {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 80px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__photos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  &__photo {
+    border-radius: 15px;
+    object-fit: cover;
+    display: block;
+
+    &--main {
+      width: 450px;
+      height: 280px;
+    }
+  }
+
+  &__photo-subs {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__photo-sub {
+    width: 220px;
+    height: 150px;
+    border-radius: 15px;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 10px;
+  }
+
+  &__text-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__num {
+    font-family: $font-en;
+    font-size: 64px;
+    font-weight: 700;
+    color: $color-teal;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  &__separator {
+    width: 2px;
+    height: 56px;
+    background-color: $color-teal;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  &__body {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: $color-teal;
+    color: $color-white;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    align-self: flex-start;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  @media (max-width: $bp-sp) {
+    // Figma SP(104:85): 小見出し y=10, 魅力1 y=181, section bottom 2274-(1563+651)=60
+    padding: 10px 20px 60px; // Figma SP 小見出し y=10 / 左右20px（PC 80 が残存）
+
+    &__block {
+      flex-direction: column;
+      gap: 20px; // Figma SP photo(330) → text(y=350) = 20px
+      margin-bottom: 40px; // Figma SP card1 end 832 → card2 start 872 = 40
+
+      &--reverse {
+        flex-direction: column;
+      }
+    }
+
+    &__section-title {
+      font-size: 18px; // Figma SP モンゴルバルーンキャンプ 263幅相当
+      margin-top: 10px; // Figma SP 小見出し end50 → title y60 = 10（PC 24 が残存）
+      margin-bottom: 0;
+    }
+
+    &__heading {
+      margin-bottom: 30px; // Figma SP 見出し(96,h55) end 151 → 魅力1 y181 = 30
+      gap: 8px;
+
+      &-text {
+        font-size: 28px; // Figma SP 3つの魅力 106幅/h55
+      }
+    }
+
+    &__photos {
+      width: 100%;
+      gap: 10px; // Figma SP main(200) → sub(y=210) = 10
+    }
+
+    &__photo--main {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 350 / 200; // Figma SP main 350x200
+    }
+
+    &__photo-subs {
+      width: 100%;
+      gap: 10px; // Figma SP sub間 180-170=10
+    }
+
+    &__photo-sub {
+      width: calc(50% - 5px);
+      height: auto;
+      aspect-ratio: 170 / 120; // Figma SP sub 170x120
+    }
+
+    &__text {
+      gap: 20px; // Figma SP title block end 54 → body y=74 = 20
+      padding-top: 0;
+    }
+
+    &__num {
+      font-size: 45px; // Figma SP get_design_context 104:117 Oswald 45px
+    }
+
+    &__separator {
+      height: 50px; // Figma SP Line1 height 50
+    }
+
+    &__title {
+      font-size: 18px; // Figma SP 104:115 18px lh1.5（2行）
+    }
+
+    &__body {
+      font-size: 14px;
+      line-height: 1.5; // Figma SP get_design_context 104:114（PC 1.9, 暫定1.75 が過大）
+    }
+
+    &__btn {
+      margin-top: 20px; // Figma SP frame end 571 → button y=591 = 20
+      width: 100%;
+      justify-content: center;
+      padding: 18px 28px; // Figma SP button h60
+    }
+  }
+}

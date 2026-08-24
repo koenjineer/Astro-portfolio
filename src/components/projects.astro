@@ -5,6 +5,7 @@ import ravek from "../../public/ravek.webp";
 import gardensalad from "../../public/gardensalad.webp";
 import meliafitness from "../../public/meliafitness.webp";
 import richLife from "../../public/rich-life.webp";
+import mongolLp from "../../public/mongol-lp.webp";
 
 interface Project {
   title: string;
@@ -55,6 +56,16 @@ const projects: Project[] = [
     status: "架空サイト",
     intent:
       "家具・家電レンタルサービスの架空LP。高級感のあるビジュアルと直感的なUXで、\"試したくなる\"体験を目指しました。",
+    tech: ["Astro", "SCSS", "JavaScript"],
+  },
+  {
+    title: "Mongol LP",
+    image: mongolLp as ImageMetadata,
+    link: "",
+    preview: "/mock_site/mongol-lp/",
+    status: "架空サイト",
+    intent:
+      "モンゴルのキャンプ場の魅力をテーマにした架空LP。現地の文化や風景を活かしたビジュアルで、ユーザーの興味を引くデザインを目指しました。",
     tech: ["Astro", "SCSS", "JavaScript"],
   },
   {

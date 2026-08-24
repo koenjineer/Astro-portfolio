@@ -1,0 +1,474 @@
+@use 'variables' as *;
+
+$tour-max: 1000px;
+$tour-comment-w: 740px; // Figma 1:293
+$tour-comment-h: 130px;
+$tour-horse-overhang: 76px; // 馬(top32+174) が枠(130) 下へはみ出す量
+$tour-comment-w-sp: 352px; // Figma SP 124:229
+$tour-comment-text-w-sp: 324px; // Figma SP 27:474
+$tour-animal-headroom-sp: 120px; // SP は動物が枠上へはみ出す
+
+.ml-tour {
+  padding: 80px $side-padding 100px;
+  overflow-x: clip; // SPで羊が画面右にはみ出す分をFigmaのフレーム同様に切る
+
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 24px;
+  }
+
+  &__illust {
+    position: relative;
+    max-width: 600px;
+    margin-inline: auto;
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  &__bubble {
+    position: absolute;
+    background-color: $color-white;
+    border: 2px solid $color-teal;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    padding: 10px;
+
+    &--left-lg {
+      width: 130px;
+      height: 130px;
+      left: 20px;
+      top: 10px;
+    }
+
+    &--right-sm {
+      width: 100px;
+      height: 100px;
+      right: 30px;
+      top: 0;
+    }
+
+    &--right-md {
+      width: 120px;
+      height: 120px;
+      right: 80px;
+      bottom: 20px;
+    }
+  }
+
+  &__woman {
+    position: relative;
+    z-index: 1;
+    width: 109px;
+    height: 154px;
+    flex-shrink: 0;
+    align-self: flex-end;
+    display: block;
+  }
+
+  &__lead {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    max-width: $tour-max;
+    margin-inline: auto;
+  }
+
+  &__inner {
+    max-width: $tour-max;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__carousel-track {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__dots {
+    display: none;
+  }
+
+  &__card {
+    display: flex;
+    background-color: $color-white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px rgba(51, 51, 51, 0.3);
+    overflow: hidden;
+
+    &-photo {
+      flex-shrink: 0;
+      width: 330px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    &-body {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    &-title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    &-price {
+      font-size: 22px;
+      font-weight: 700;
+      color: $color-price-red;
+    }
+
+    &-text {
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    &-note {
+      font-size: 13px;
+      font-weight: 700;
+      color: $color-teal;
+    }
+  }
+
+  &__sub-heading {
+    text-align: center;
+    padding: 20px 0 0;
+  }
+
+  &__sub-title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  &__tags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  &__tag {
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-teal;
+    background-color: $color-cream;
+    border: 2px solid $color-teal;
+    padding: 6px 20px;
+    border-radius: 4px;
+    transform: rotate(-3deg);
+    display: inline-block;
+  }
+
+  // 座標は Figma ツアーフレーム基準（teal枠 1:293 の x=349 / y=1832 を原点に換算）
+  &__comment {
+    position: relative;
+    width: $tour-comment-w;
+    max-width: 100%;
+    margin-inline: auto;
+    margin-bottom: $tour-horse-overhang; // 馬が枠下にはみ出す分
+  }
+
+  &__comment-box {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: $tour-comment-h;
+    background-color: $color-white; // Figma 1:292（白矩形は teal 枠から +2px ずれる）
+
+    // Figma 1:293: teal 1px 枠を -2px 位置に重ねて二重枠にする
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px 2px 2px -2px;
+      border: 1px solid $color-teal;
+      pointer-events: none;
+    }
+  }
+
+  &__comment-text {
+    font-size: 20px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  &__animal {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  // 画像はカットアウト全体。トリミング枠は PC/SP で別なので CSS で切る。
+  // img の％は Figma のノード実レンダリング（15:78 / 15:77 / 27:484 / 27:483）から逆算した実測値。
+  &__horse,
+  &__sheep {
+    position: absolute;
+    display: block;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      max-width: none; // reset の max-width:100% を打ち消す
+    }
+  }
+
+  &__horse {
+    left: -79px; // Figma 15:78 x=270
+    top: 32px;
+    width: 128px;
+    height: 174px;
+
+    img {
+      width: 344.62%;
+      height: 169.5%;
+      left: -41.89%;
+      top: -52.22%;
+    }
+  }
+
+  &__sheep {
+    left: 636px; // Figma 15:77 x=985
+    top: 52px;
+    width: 176px;
+    height: 146px;
+
+    img {
+      width: 177.1%;
+      height: 141.06%;
+      left: -42.1%;
+      top: -27.42%;
+    }
+  }
+
+  // Figma はラベルを固定高の箱に上下中央寄せして回転させる（1:300 / 1:304）。
+  // display を宣言すると .pc-only / .sp-only（同詳細度・先行読み込み）を打ち消してしまうため、
+  // 箱の中央に来る位置へ直接置いて同じ見た目にする。
+  &__animal-speech {
+    position: absolute;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    color: #000;
+
+    &--horse {
+      left: -152px; // Figma 1:300 中心 x=261.57
+      top: 67px; // 箱 y=1874.75 / 高72 の中央
+      width: 126px;
+      transform: rotate(-25deg);
+    }
+
+    &--sheep {
+      left: 737px; // Figma 1:304 中心 x=1165.65
+      top: 69px; // 箱 y=1871 / 高84 の中央
+      width: 154px;
+      transform: rotate(24.96deg);
+    }
+  }
+
+  @media (max-width: $bp-sp) {
+    padding: 10px 20px 40px; // Figma SP 小見出し y=10 / 左右20px（PC 60/100 が残存）
+
+    &__title {
+      font-size: 22px; // Figma SP とっておきの遊牧民体験ツアー 305幅/h32
+      margin-top: 10px; // Figma SP 小見出し end50 → title y60 = 10
+      margin-bottom: 16px;
+    }
+
+    &__illust {
+      height: 174px; // Figma SP イラスト 27:385 y122→296 = 174
+      margin-bottom: 20px;
+    }
+
+    &__lead {
+      font-size: 13px; // Figma SP 27:402 308幅/60高 3行
+      line-height: 1.6;
+      margin-bottom: 20px; // Figma SP lead end376 → card2 y396 = 20
+    }
+
+    &__bubble {
+      font-size: 10px;
+
+      &--left-lg {
+        width: 100px;
+        height: 100px;
+      }
+
+      &--right-sm {
+        width: 78px;
+        height: 78px;
+      }
+
+      &--right-md {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    &__inner {
+      gap: 24px; // Figma SPはカード間が密（PC 40px → 縮小）
+    }
+
+    &__card {
+      flex-direction: column;
+      padding: 10px; // Figma SP: カード外周余白（node 27:404 photo left30=card left20+10）
+      gap: 10px; // Figma SP: 写真と本文の間（node I106:90;116:75 gap-[10px]）
+
+      &-photo {
+        width: 100%;
+        height: 220px; // Figma SP node 27:405 / I106:90;106:79（330×220）
+      }
+    }
+
+    &__card-body {
+      padding: 0; // 余白は &__card の padding 10px に集約
+      gap: 8px; // Figma SP: 本文要素間（title/price/text/note を密に）
+    }
+
+    &__card-title {
+      font-size: 18px; // Figma SP node 27:408 / I106:90;106:81
+      line-height: 1.5; // Figma SP get_design_context 27:408
+    }
+
+    &__card-price {
+      font-size: 18px; // Figma SP node 27:409 / I106:90;106:82
+    }
+
+    &__card-text {
+      line-height: 1.5; // Figma SP get_design_context 27:406（PC 1.9 が残存）
+    }
+
+    &__card-note {
+      font-size: 13px; // Figma SP 27:407
+    }
+
+    // 多彩なツアープラン（card3〜5）は SP で1枚表示の横スライドカルーセル
+    &__carousel {
+      overflow: hidden;
+    }
+
+    &__carousel-track {
+      flex-direction: row;
+      gap: 0;
+      transition: transform 0.3s ease;
+    }
+
+    &__carousel .ml-tour__card {
+      flex: 0 0 100%;
+    }
+
+    &__dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    &__dot {
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background-color: $color-dot-inactive;
+      cursor: pointer;
+
+      &.is-active {
+        background-color: $color-teal;
+      }
+    }
+
+    &__sub-heading {
+      padding: 10px 0 0; // Figma SP 小見出し y=921, title y=930
+    }
+
+    &__sub-title {
+      font-size: 22px; // Figma SP 27:410 242幅/66高
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    // SP は動物が枠の上（左右端）に乗る。座標は Figma SP コメント枠 124:229（x=19 / y=1628）基準
+    &__comment {
+      width: 100%;
+      max-width: $tour-comment-w-sp;
+      margin-top: $tour-animal-headroom-sp; // 動物が枠上へはみ出す分
+      margin-bottom: 0;
+    }
+
+    // SP の 27:484 / 27:483 は Figma が報告するノード境界より実際の描画がはみ出すため、
+    // 座標は Figma のレンダリング実測に合わせている（ノード値そのままだと本文に被る）
+    &__horse {
+      left: -15px;
+      top: -83px;
+      width: 77px;
+      height: 102px;
+
+      img {
+        width: 333.65%;
+        height: 161.47%;
+        left: -34.69%;
+        top: -49.34%;
+      }
+    }
+
+    &__sheep {
+      left: 270px;
+      top: -72px;
+      width: 92px;
+      height: 88px;
+
+      img {
+        width: 189.75%;
+        height: 136.35%;
+        left: -52.31%;
+        top: -29.61%;
+      }
+    }
+
+    &__animal-speech--sp {
+      left: 74px; // Figma SP 27:476 x=93
+      top: -50px; // y=1580（白枠上端 1630 基準）
+      width: 204px;
+      font-size: 12px;
+    }
+
+    // SP は teal 枠が白矩形の +2px 右 / -2px 上（Figma 27:472 x=19,y=1630 / 27:473 x=21,y=1628）
+    &__comment-box::before {
+      inset: -2px -2px 2px 2px;
+      border-width: 0.7px; // Figma SP 27:473
+    }
+
+    // Figma SP 27:474: 324幅 / 14px / lh1.5 / 左揃え（PCのみ中央揃え）
+    &__comment-text {
+      width: $tour-comment-text-w-sp;
+      font-size: 14px;
+      text-align: left;
+    }
+  }
+}

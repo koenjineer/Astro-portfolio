@@ -1,0 +1,182 @@
+@use 'variables' as *;
+
+$balloon-max: 1000px;
+$sched-max: 852px;
+$balloon-lead-w-sp: 336px; // Figma SP 25:246
+$balloon-card-w-sp: 350px; // Figma SP 25:248
+
+.ml-balloon {
+  position: relative;
+  overflow: hidden;
+  padding: 80px $side-padding 100px;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: $balloon-max;
+    margin-inline: auto;
+  }
+
+  &__title {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  &__lead {
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &__card {
+    display: flex;
+    background-color: $color-white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px rgba(51, 51, 51, 0.3);
+    overflow: hidden;
+    margin-bottom: 60px;
+
+    &-photo {
+      flex-shrink: 0;
+      width: 330px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    &-body {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    &-title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    &-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: $color-price-red;
+    }
+
+    &-text {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+  }
+
+  &__sched-heading {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  &__sched-wrap {
+    max-width: $sched-max;
+    margin-inline: auto;
+  }
+
+  &__sched-img {
+    width: 100%;
+    height: auto;
+
+    &--sp {
+      display: none;
+    }
+  }
+
+  // 値・座標はすべて Figma SP 25:241 の実測
+  @media (max-width: $bp-sp) {
+    padding: 10px $side-padding 60px; // 小見出し y=10
+
+    &__title {
+      font-size: 22px; // 25:242 y=60
+      margin-bottom: 0;
+    }
+
+    &__lead {
+      width: $balloon-lead-w-sp; // 25:246 y=123 / 336幅
+      max-width: 100%;
+      margin-block: 30px 0;
+      margin-inline: auto;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    &__card {
+      flex-direction: column;
+      width: $balloon-card-w-sp; // 25:248 y=227 / 350x450
+      max-width: 100%;
+      margin-block: 20px 0;
+      margin-inline: auto;
+      padding: 10px;
+      border-radius: 0;
+
+      &-photo {
+        width: 100%;
+        height: 220px; // 25:249 330x220
+      }
+
+      &-body {
+        padding: 10px 0 0;
+        gap: 0;
+      }
+
+      &-title {
+        font-size: 18px; // 25:251
+      }
+
+      &-price {
+        align-self: flex-end; // 25:250 は右寄せ
+        margin-top: 5px;
+        font-size: 18px;
+      }
+
+      &-text {
+        margin-top: 9px;
+        font-size: 14px; // 25:252
+        line-height: 1.5;
+      }
+    }
+
+    &__sched-heading {
+      margin-block: 40px 10px;
+      font-size: 22px; // 25:253 y=717
+    }
+
+    &__sched-wrap {
+      max-width: $balloon-card-w-sp; // スケジュールも 350幅
+    }
+
+    &__sched-img {
+      &--pc {
+        display: none;
+      }
+
+      &--sp {
+        display: block;
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+---
+---
+
+<section class="ml-voice">
+  <div class="ml-voice__heading ml-section-hdg">
+    <div class="ml-section-hdg__deco">
+      <img src="/mock_site/mongol-lp/images/section-pattern.webp" alt="" aria-hidden="true" width="35" height="46" loading="lazy" />
+      <img src="/mock_site/mongol-lp/images/section-design1.webp" alt="" aria-hidden="true" width="35" height="46" loading="lazy" />
+      <img src="/mock_site/mongol-lp/images/section-pattern.webp" alt="" aria-hidden="true" width="35" height="46" loading="lazy" />
+    </div>
+    <h2 class="ml-section-hdg__text">お客様の声</h2>
+    <div class="ml-section-hdg__deco">
+      <img src="/mock_site/mongol-lp/images/section-design1.webp" alt="" aria-hidden="true" width="35" height="46" loading="lazy" />
+      <img src="/mock_site/mongol-lp/images/section-pattern.webp" alt="" aria-hidden="true" width="35" height="46" loading="lazy" />
+      <img src="/mock_site/mongol-lp/images/section-pattern.webp" alt="" aria-hidden="true" width="35" height="46" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="ml-voice__inner" data-voice-carousel>
+    <div class="ml-voice__track" data-voice-track>
+    <article class="ml-voice__card">
+      <p class="ml-voice__card-title">家畜たちの真ん中に</p>
+      <p class="ml-voice__card-name">鈴木様</p>
+      <div class="ml-voice__card-body">
+        <img class="ml-voice__card-deco" src="/mock_site/mongol-lp/images/voice-line.svg" alt="" aria-hidden="true" loading="lazy" />
+        <p class="ml-voice__card-text">街を離れ大自然そして家畜たちの中へそんな旅が数時間で叶うのがウンドゥルシレットリバーサイドキャンプだ。宿泊ゲル目の前には驚くほど流れがないトーラ川。そう！ここは大平原、陸に高低差がないのだ。泊まれば毎朝水を飲みにくるたくさんの家畜。羊や山羊はベーベーメーメー言いながら群れから離れまいと歩き、時に走る。ここは野生の王国ならぬ家畜の王国だ。夏なら馬の群れがいくつも川に浸かり涼んでいる。ボートに乗れば、珍しいもの（人が乗った船）と私たちを凝視する群れなす馬たちと・・・</p>
+      </div>
+      <a href="#" class="ml-voice__card-btn">続きを読む
+        <img src="/mock_site/mongol-lp/images/arrow.svg" alt="" aria-hidden="true" width="13" height="13" />
+      </a>
+    </article>
+
+    <article class="ml-voice__card">
+      <p class="ml-voice__card-title">心を洗いに行く場所。</p>
+      <p class="ml-voice__card-name">長田様</p>
+      <div class="ml-voice__card-body">
+        <img class="ml-voice__card-deco" src="/mock_site/mongol-lp/images/voice-line.svg" alt="" aria-hidden="true" loading="lazy" />
+        <p class="ml-voice__card-text">かれこれ10年以上はお世話になっています。遊牧民の方が用意してくださった馬で、初心者ながら乗馬を楽しんでみたり、時にはおうちにご招待いただくこともあります。<br />
+          遮るもののない雄大な空を「つながれていない」気球に乗ってお散歩したり（地上の気球運搬用トラックとのカーチェイスもなかなかオツなものです）。蛇行するトーラ川で川遊びや釣りを楽しむこともあれば上流までボートを運んで川下りをすることも。夜にはまさに「降るような」星空を楽しめます。</p>
+      </div>
+      <a href="#" class="ml-voice__card-btn">続きを読む
+        <img src="/mock_site/mongol-lp/images/arrow.svg" alt="" aria-hidden="true" width="13" height="13" />
+      </a>
+    </article>
+    </div>
+
+    <div class="ml-voice__dots" data-voice-dots aria-hidden="true">
+      <button type="button" class="ml-voice__dot is-active" data-voice-dot="0" aria-label="1枚目を表示"></button>
+      <button type="button" class="ml-voice__dot" data-voice-dot="1" aria-label="2枚目を表示"></button>
+    </div>
+  </div>
+
+  <script>
+    const carousels = document.querySelectorAll<HTMLElement>('[data-voice-carousel]');
+    carousels.forEach((carousel) => {
+      const track = carousel.querySelector<HTMLElement>('[data-voice-track]');
+      const dots = carousel.querySelectorAll<HTMLButtonElement>('[data-voice-dot]');
+      if (!track) return;
+
+      const goTo = (index: number): void => {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+      };
+
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    });
+  </script>
+</section>

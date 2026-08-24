@@ -1,0 +1,147 @@
+@use 'variables' as *;
+
+// スライド2（気球）・スライド3（星空）のオーバーレイテキスト。
+// 座標は Figma 実測（PC 1440×700 / SP 390×580）。
+
+.ml-fv {
+  // 追加スライドはコンテンツをスライド全面に敷き、子を絶対座標で配置
+  &__content--fv2,
+  &__content--fv3 {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__deco {
+    position: absolute;
+    inset: 0;
+  }
+
+  // 背景クロップは Figma の image-rect 実測値で再現。
+  // FV_2 は 116% ズーム＋左上シフト＋水平反転（Figma node 1:665）。
+  &__bg--fv2 {
+    inset: auto;
+    left: -10.93%;
+    top: -67.38%;
+    width: 116.26%;
+    max-width: none; // reset の max-width:100% がズーム幅を潰すのを解除
+    height: 179.37%;
+    transform: scaleX(-1);
+  }
+
+  &__line {
+    position: absolute;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: $color-white;
+    letter-spacing: 0.96px;
+    white-space: nowrap;
+    text-shadow: 2px 2px 3px rgba($color-text, 0.5);
+  }
+
+  &__accent {
+    position: absolute;
+    font-weight: 700;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  &__swoosh {
+    position: absolute;
+    width: 243px;
+    height: 25px;
+  }
+
+  &__star {
+    position: absolute;
+  }
+
+  // ===== スライド2: 空の散歩 =====
+  &__line--fv2-top { left: 670px; top: 200px; }
+  &__line--fv2-bottom { left: 670px; top: 263px; }
+
+  &__swoosh--outer,
+  &__swoosh--inner { left: 980px; top: 222px; }
+
+  &__accent--sora-1,
+  &__accent--sora-2,
+  &__accent--sora-3,
+  &__accent--sora-4 {
+    color: #1939a9;
+    text-shadow: 2px 2px 3px rgba($color-text, 0.3);
+  }
+  &__accent--sora-1 { left: 994px; top: 180px; font-size: 42px; transform: rotate(-5.44deg); }
+  &__accent--sora-2 { left: 1049px; top: 195px; font-size: 32px; }
+  &__accent--sora-3 { left: 1088px; top: 179px; font-size: 42px; transform: rotate(6.68deg); }
+  &__accent--sora-4 { left: 1139px; top: 174px; font-size: 42px; transform: rotate(-7.41deg); }
+
+  // ===== スライド3: 満天の星空 =====
+  &__line--fv3-top,
+  &__line--fv3-bottom {
+    text-shadow: 2px 2px 3px rgba($color-cream, 0.3);
+  }
+  &__line--fv3-top { left: 670px; top: 200px; }
+  &__line--fv3-bottom { left: 670px; top: 269px; }
+
+  &__num {
+    font-family: $font-en;
+    font-weight: 500;
+    font-size: 36px;
+    letter-spacing: 1.8px;
+  }
+
+  &__star { left: 1075px; top: 274px; width: 38px; height: 40px; }
+  &__accent--hoshi {
+    left: 1122px;
+    top: 260px;
+    font-size: 42px;
+    color: #c0ba33;
+    text-shadow: 2px 2px 3px rgba($color-cream, 0.3);
+  }
+  &__accent--hoshi-wo {
+    left: 1173px;
+    top: 269px;
+    font-size: 32px;
+    color: $color-white;
+    text-shadow: 2px 2px 3px rgba($color-cream, 0.3);
+  }
+
+  // ===== SP =====
+  @media (max-width: $bp-sp) {
+    // SP FV_2 は 198% ズーム＋左シフト＋水平反転（Figma node 23:75）
+    &__bg--fv2 {
+      inset: auto;
+      left: -23%; // 気球を下部中央に収める（Figma SP の見え方に合わせて微調整）
+      top: 0;
+      width: 198.29%;
+      max-width: none;
+      height: 100%;
+      transform: scaleX(-1);
+    }
+    // SP FV_3 は素の cover（Figma node 23:76）
+    &__bg--fv3 {
+      object-position: center;
+    }
+
+    &__line { font-size: 20px; letter-spacing: 0.4px; }
+    &__swoosh { width: 146px; height: 15px; }
+
+    // スライド2
+    &__line--fv2-top { left: 20px; top: 140px; }
+    &__line--fv2-bottom { left: 20px; top: 185px; }
+    &__swoosh--outer,
+    &__swoosh--inner { left: 208px; top: 156px; }
+    &__accent--sora-1 { left: 213px; top: 125px; font-size: 28px; }
+    &__accent--sora-2 { left: 249px; top: 136px; font-size: 22px; }
+    &__accent--sora-3 { left: 275px; top: 127px; font-size: 28px; }
+    &__accent--sora-4 { left: 309px; top: 123px; font-size: 28px; }
+
+    // スライド3
+    &__line--fv3-top { left: 20px; top: 140px; }
+    &__line--fv3-bottom { left: 20px; top: 183px; }
+    &__num { font-size: 22px; letter-spacing: 1.1px; }
+    &__star { left: 270px; top: 186px; width: 25px; height: 25px; }
+    &__accent--hoshi { left: 300px; top: 176px; font-size: 28px; }
+    &__accent--hoshi-wo { left: 331px; top: 183px; font-size: 20px; }
+  }
+}

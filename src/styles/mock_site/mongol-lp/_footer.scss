@@ -1,0 +1,168 @@
+@use 'variables' as *;
+
+$footer-max: 950px;
+
+.ml-footer {
+  background-color: $color-teal;
+  color: $color-white;
+  padding: 60px $side-padding 40px;
+
+  &__inner {
+    max-width: $footer-max;
+    margin-inline: auto;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  // PC ではグループを透過し、5カラムを nav 直下の flex 子として横並び維持
+  &__group {
+    display: contents;
+  }
+
+  &__col {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  // DOM順は 左グループ(アクティビティ,旅行例)→右グループ(キャンプ,ギャラリー,ぼるふ)。
+  // PC の視覚順を Figma（アクティビティ/キャンプ/旅行例/ギャラリー/ぼるふ）に固定する。
+  // この order は SP でも各グループ内の相対順として有効（左:1<3 / 右:2<4<5）。
+  &__col--activity { order: 1; }
+  &__col--camp { order: 2; }
+  &__col--trips { order: 3; }
+  &__col--gallery { order: 4; }
+  &__col--bolf { order: 5; }
+
+  &__col-arrow {
+    margin-bottom: 6px;
+
+    img {
+      filter: brightness(0) invert(1);
+      display: block;
+      // footer-arrow.svg は上向き三角 → Figmaは右向き(▶)。90deg回転で向きを一致
+      transform: rotate(90deg);
+    }
+  }
+
+  &__col-heading {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+
+    a {
+      color: $color-white;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__col-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    li a {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+      text-decoration: none;
+      line-height: 1.5;
+      display: block;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__disclaimer {
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 644px;
+    margin-inline: auto;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  &__separator {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    margin: 24px 0;
+  }
+
+  &__copyright {
+    font-size: 12px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  @media (max-width: $bp-sp) {
+    padding: 40px 20px; // Figma SP contents y=40 / bottom 40（PC 60/40 残存）
+
+    // Figma SP(116:74): 2カラム固定。左=アクティビティ+旅行例 / 右=キャンプ+ギャラリー+ぼるふ
+    // グループを縦カラム化して左右に振り分ける（multicol の自動バランスを排除）
+    &__nav {
+      display: flex;
+      flex-direction: row;
+      gap: 40px; // Figma SP 左col(0..164) 右col(204..) = 約40
+      margin-bottom: 24px; // Figma SP contents end394 → disclaimer y424 = 30
+    }
+
+    &__group {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+      gap: 18px; // Figma SP グループ内の見出しブロック間（アクティビティ end99 → 旅行例 y124 = 25）
+    }
+
+    &__col {
+      min-width: 0;
+    }
+
+    &__col-arrow {
+      margin-bottom: 4px;
+
+      img {
+        width: 13px; // Figma SP Group26 = 13x13（PC原寸が残存）
+        height: 13px;
+      }
+    }
+
+    &__col-heading {
+      font-size: 13px; // Figma SP 見出し 18高
+      margin-bottom: 6px;
+    }
+
+    &__col-list {
+      gap: 6px; // Figma SP リンク行間（26px間隔 − 行高）
+
+      li a {
+        font-size: 12px;
+        line-height: 1.4; // Figma SP 旅行例の2行リンクを詰める（PC 1.5 が残存）
+      }
+    }
+
+    &__disclaimer {
+      font-size: 12px;
+      line-height: 1.6; // Figma SP 31:419 350幅/54高 3行
+      margin-bottom: 0;
+    }
+
+    &__separator {
+      margin: 16px 0; // Figma SP disclaimer end478 → Line2 y493 = 15
+    }
+  }
+}

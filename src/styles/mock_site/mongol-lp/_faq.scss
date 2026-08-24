@@ -1,0 +1,180 @@
+@use 'variables' as *;
+
+$faq-max: 1000px;
+
+.ml-faq {
+  position: relative;
+  padding: 0 $side-padding 100px;
+  overflow: hidden;
+
+  &__deco {
+    position: absolute;
+    top: 120px;
+    z-index: 0;
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
+    }
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: $faq-max;
+    margin-inline: auto;
+    padding-top: 40px;
+  }
+
+  &__item {
+    border-bottom: 1px solid #ddd;
+
+    // qa-chevron.svg は上向き(^)。Figmaは閉=▼下向き / 開=^上向き
+    // → 既定(閉)で180deg回転して下向きにし、[open]で0degに戻す
+    &[open] .ml-faq__chevron img {
+      transform: rotate(0deg);
+    }
+  }
+
+  &__question {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 16px;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::marker {
+      display: none;
+    }
+  }
+
+  &__q-icon {
+    flex-shrink: 0;
+  }
+
+  &__q-text {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+
+    img {
+      display: block;
+      transform: rotate(180deg); // 既定(閉)＝▼下向き
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &__answer {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 0 16px 20px;
+  }
+
+  &__a-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  &__a-text {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  &__btn-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: $faq-max;
+    margin-inline: auto;
+    padding-top: 40px;
+    text-align: center;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: $color-teal;
+    color: $color-white;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 40px;
+    border-radius: 10px;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  @media (max-width: $bp-sp) {
+    padding-bottom: 40px; // Figma SP ボタン end472 → section513 = 41（PC 100 が残存）
+
+    &__deco {
+      display: none;
+    }
+
+    &__inner {
+      padding-top: 40px; // Figma SP 見出し y=40 → Q1 y=97
+      display: flex;
+      flex-direction: column;
+      gap: 15px; // Figma SP Q1 end218 → Q2 y233 = 15
+    }
+
+    &__question {
+      gap: 12px;
+      padding: 9px 8px; // Figma SP 質問行 高さ40（icon22/text21）→ PC 20px が残存
+    }
+
+    &__q-icon img,
+    &__a-icon img {
+      width: 22px; // Figma SP Q/A バッジ 22x22（PC 37 が残存）
+      height: 22px;
+    }
+
+    &__chevron img {
+      width: 12px; // Figma SP 31:177 等 11px相当
+      height: 12px;
+    }
+
+    &__q-text {
+      font-size: 14px; // Figma SP 31:119 等
+      line-height: 1.4;
+    }
+
+    &__answer {
+      gap: 12px;
+      padding: 0 8px 12px; // Figma SP Aボックス内 余白
+    }
+
+    &__a-text {
+      font-size: 13px; // Figma SP 31:113 286幅/63高
+      line-height: 1.6; // PC 1.8 が残存
+    }
+
+    &__btn-wrap {
+      padding-top: 20px; // Figma SP Q4 end383 → ボタン y413 = 30
+    }
+
+    &__btn {
+      width: 300px; // Figma SP ボタン 300x60
+      justify-content: center;
+      padding: 18px 0;
+    }
+  }
+}

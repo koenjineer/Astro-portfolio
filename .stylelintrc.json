@@ -1,0 +1,11 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "defaultSeverity": "warning",
+  "ignoreFiles": ["dist/**", ".astro/**", "node_modules/**"],
+  "rules": {
+    "max-nesting-depth": 3,
+    "declaration-no-important": true,
+    "selector-class-pattern": null,
+    "scss/dollar-variable-pattern": null
+  }
+}

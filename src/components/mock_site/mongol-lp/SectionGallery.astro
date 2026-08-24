@@ -1,0 +1,114 @@
+---
+const base = '/mock_site/mongol-lp/images';
+
+const photos = [
+  { src: `${base}/gallery-1.webp`, alt: '大空に浮かぶ気球' },
+  { src: `${base}/gallery-2.webp`, alt: '大草原と遠くの山並み' },
+  { src: `${base}/gallery-3.webp`, alt: '草原を流れる川' },
+  { src: `${base}/gallery-4.webp`, alt: '馬とともに過ごす遊牧民' },
+  { src: `${base}/gallery-5.webp`, alt: '並んで浮かぶ2つの気球' },
+  { src: `${base}/gallery-6.webp`, alt: '夕暮れのゲル' },
+  { src: `${base}/gallery-7.webp`, alt: '草原を歩く羊の群れ' },
+  { src: `${base}/gallery-8.webp`, alt: '青空に映えるカラフルな気球' },
+];
+---
+
+<section
+  class="ml-gallery"
+  data-gallery-slider
+  aria-roledescription="カルーセル"
+  aria-label="フォトギャラリー"
+>
+  <div class="ml-gallery__viewport" data-gallery-viewport>
+    <div class="ml-gallery__track" data-gallery-track>
+      {photos.map((photo) => (
+        <figure class="ml-gallery__item">
+          <img src={photo.src} alt={photo.alt} width="360" height="250" loading="lazy" />
+        </figure>
+      ))}
+    </div>
+  </div>
+
+  <button type="button" class="ml-gallery__arrow ml-gallery__arrow--prev" data-gallery-prev aria-label="前の写真を表示">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="ml-gallery__arrow ml-gallery__arrow--next" data-gallery-next aria-label="次の写真を表示">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <div class="ml-gallery__dots" data-gallery-dots></div>
+
+  <script>
+    const AUTOPLAY_MS = 4000;
+
+    document.querySelectorAll<HTMLElement>('[data-gallery-slider]').forEach((slider) => {
+      const track = slider.querySelector<HTMLElement>('[data-gallery-track]');
+      const viewport = slider.querySelector<HTMLElement>('[data-gallery-viewport]');
+      const dotsWrap = slider.querySelector<HTMLElement>('[data-gallery-dots]');
+      const prev = slider.querySelector<HTMLButtonElement>('[data-gallery-prev]');
+      const next = slider.querySelector<HTMLButtonElement>('[data-gallery-next]');
+      const items = track ? (Array.from(track.children) as HTMLElement[]) : [];
+      if (!track || !viewport || items.length === 0) return;
+
+      const count = items.length;
+      let index = 0;
+      let maxIndex = 0;
+      let step = 0; // 1枚分の幅(px)
+      let timer: number | undefined;
+
+      const render = (): void => {
+        track.style.transform = `translateX(${-index * step}px)`;
+        dotsWrap?.querySelectorAll('button').forEach((dot, i) =>
+          dot.classList.toggle('is-active', i === index)
+        );
+      };
+      const goTo = (target: number): void => {
+        const pages = maxIndex + 1;
+        index = ((target % pages) + pages) % pages;
+        render();
+      };
+      const stop = (): void => {
+        if (timer !== undefined) window.clearInterval(timer);
+      };
+      const start = (): void => {
+        stop();
+        timer = window.setInterval(() => goTo(index + 1), AUTOPLAY_MS);
+      };
+      const jump = (target: number): void => {
+        goTo(target);
+        start();
+      };
+
+      const buildDots = (): void => {
+        if (!dotsWrap) return;
+        dotsWrap.replaceChildren();
+        for (let i = 0; i <= maxIndex; i++) {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'ml-gallery__dot';
+          dot.setAttribute('aria-label', `${i + 1}枚目を表示`);
+          dot.addEventListener('click', () => jump(i));
+          dotsWrap.appendChild(dot);
+        }
+      };
+
+      const layout = (): void => {
+        step = items[0].getBoundingClientRect().width;
+        const visible = Math.max(1, Math.round(viewport.clientWidth / step));
+        maxIndex = Math.max(0, count - visible);
+        if (index > maxIndex) index = maxIndex;
+        buildDots();
+        render();
+      };
+
+      prev?.addEventListener('click', () => jump(index - 1));
+      next?.addEventListener('click', () => jump(index + 1));
+      slider.addEventListener('mouseenter', stop);
+      slider.addEventListener('mouseleave', start);
+      window.addEventListener('resize', layout);
+
+      layout();
+      start();
+    });
+  </script>
+</section>

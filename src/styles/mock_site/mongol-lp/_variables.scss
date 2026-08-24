@@ -1,0 +1,18 @@
+// ===== ブレイクポイント =====
+$bp-sp: 767px;
+
+// ===== カラー（Figma get_variable_defs 確認済み） =====
+$color-teal: #4fabbf;         // accent / footer bg / schedule header bg
+$color-text: #333333;         // 本文・見出し
+$color-cream: #fff9eb;        // ページ背景
+$color-price-red: #d91621;    // 料金テキスト
+$color-white: #ffffff;
+$color-dot-inactive: #cfcfcf; // カルーセル非アクティブドット（voice / tour 共通）
+
+// ===== フォント =====
+$font-jp: 'Noto Sans JP', sans-serif;
+$font-en: 'Oswald', sans-serif;
+
+// ===== レイアウト =====
+$content-max: 1200px;
+$side-padding: 16px;

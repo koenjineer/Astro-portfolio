@@ -1,0 +1,95 @@
+@use 'variables' as *;
+
+$omoi-max: 1000px;
+$omoi-box-w: 864px;
+
+.ml-omoi {
+  position: relative;
+  overflow: hidden;
+  padding: 0 $side-padding 100px;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  &__heading {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: $omoi-max;
+    margin-inline: auto;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__box {
+    position: relative;
+    width: $omoi-box-w;
+    border: 1px solid $color-teal;
+    padding: 40px;
+  }
+
+  &__box-deco {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__text {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    p {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  @media (max-width: $bp-sp) {
+    padding-bottom: 40px; // Figma SP セクション下余白（PC 100 が残存）
+
+    &__inner {
+      padding-top: 30px; // Figma SP 見出し → box
+    }
+
+    &__box {
+      width: 100%;
+      padding: 20px 16px;
+    }
+
+    &__text {
+      gap: 12px;
+
+      p {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      strong {
+        line-height: 1.7;
+      }
+    }
+  }
+}

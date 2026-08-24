@@ -1,0 +1,189 @@
+---
+const base = '/mock_site/mongol-lp/images';
+---
+
+<section
+  class="ml-fv"
+  data-fv-slider
+  aria-roledescription="カルーセル"
+  aria-label="メインビジュアル"
+>
+  <div class="ml-fv__viewport">
+    <div class="ml-fv__track" data-fv-track>
+      {/* Slide 1: 夕景キャンプ */}
+      <div
+        class="ml-fv__slide"
+        role="group"
+        aria-roledescription="スライド"
+        aria-label="1 / 3"
+      >
+        <img
+          class="ml-fv__bg"
+          src={`${base}/fv-bg.webp`}
+          alt="モンゴルバルーンキャンプの夕景"
+          width="1440"
+          height="700"
+          loading="eager"
+        />
+
+        <div class="ml-fv__content">
+          <p class="ml-fv__sub-heading">オープンから20年</p>
+          <div class="ml-fv__main-wrap">
+            <img
+              class="ml-fv__vector"
+              src={`${base}/fv-vector.svg`}
+              alt=""
+              aria-hidden="true"
+              width="60"
+              height="38"
+            />
+            <span class="ml-fv__kanji ml-fv__kanji--sai" aria-hidden="true">最</span>
+            <span class="ml-fv__kanji ml-fv__kanji--kou" aria-hidden="true">高</span>
+            <p class="ml-fv__main-heading">
+              伝統あるキャンプ場で<span class="ml-fv__sr-only">最高</span>のモンゴル旅を
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Slide 2: 大草原と気球 */}
+      <div
+        class="ml-fv__slide"
+        role="group"
+        aria-roledescription="スライド"
+        aria-label="2 / 3"
+      >
+        <img
+          class="ml-fv__bg ml-fv__bg--fv2"
+          src={`${base}/fv2-bg.webp`}
+          alt="大草原の空に浮かぶ気球"
+          width="1440"
+          height="700"
+          loading="lazy"
+        />
+
+        <div class="ml-fv__content ml-fv__content--fv2">
+          <p class="ml-fv__line ml-fv__line--fv2-top">
+            大草原を眺めながら<span class="ml-fv__sr-only">空の散歩</span>
+          </p>
+          <p class="ml-fv__line ml-fv__line--fv2-bottom">
+            モンゴルでここでしか出来ない体験を
+          </p>
+
+          <div class="ml-fv__deco ml-fv__deco--sora" aria-hidden="true">
+            <img class="ml-fv__swoosh ml-fv__swoosh--outer" src={`${base}/fv2-swoosh-outer.svg`} alt="" width="243" height="25" />
+            <img class="ml-fv__swoosh ml-fv__swoosh--inner" src={`${base}/fv2-swoosh-inner.svg`} alt="" width="243" height="25" />
+            <span class="ml-fv__accent ml-fv__accent--sora-1">空</span>
+            <span class="ml-fv__accent ml-fv__accent--sora-2">の</span>
+            <span class="ml-fv__accent ml-fv__accent--sora-3">散</span>
+            <span class="ml-fv__accent ml-fv__accent--sora-4">歩</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Slide 3: 満天の星空とゲル */}
+      <div
+        class="ml-fv__slide"
+        role="group"
+        aria-roledescription="スライド"
+        aria-label="3 / 3"
+      >
+        <img
+          class="ml-fv__bg ml-fv__bg--fv3"
+          src={`${base}/fv3-bg.webp`}
+          alt="満天の星空とゲル"
+          width="1440"
+          height="700"
+          loading="lazy"
+        />
+
+        <div class="ml-fv__content ml-fv__content--fv3">
+          <p class="ml-fv__line ml-fv__line--fv3-top">
+            <span class="ml-fv__num">360</span>度大パノラマの草原で
+          </p>
+          <p class="ml-fv__line ml-fv__line--fv3-bottom">
+            息を呑むほど美しい満天の<span class="ml-fv__sr-only">星空を</span>
+          </p>
+
+          <div class="ml-fv__deco ml-fv__deco--hoshi" aria-hidden="true">
+            <img class="ml-fv__star" src={`${base}/fv3-star.svg`} alt="" width="38" height="40" />
+            <span class="ml-fv__accent ml-fv__accent--hoshi">空</span>
+            <span class="ml-fv__accent ml-fv__accent--hoshi-wo">を</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* 全スライド共通の予約バッジ */}
+  <a href="#contact" class="ml-fv__cta" aria-label="ご予約・お問い合わせはこちら">
+    <img
+      src={`${base}/fv-cta.webp`}
+      alt=""
+      aria-hidden="true"
+      width="221"
+      height="339"
+    />
+  </a>
+
+  <button type="button" class="ml-fv__arrow ml-fv__arrow--prev" data-fv-prev aria-label="前のスライドを表示">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="ml-fv__arrow ml-fv__arrow--next" data-fv-next aria-label="次のスライドを表示">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <div class="ml-fv__dots" data-fv-dots>
+    <button type="button" class="ml-fv__dot is-active" data-fv-dot="0" aria-label="1枚目を表示"></button>
+    <button type="button" class="ml-fv__dot" data-fv-dot="1" aria-label="2枚目を表示"></button>
+    <button type="button" class="ml-fv__dot" data-fv-dot="2" aria-label="3枚目を表示"></button>
+  </div>
+
+  <script>
+    const AUTOPLAY_MS = 5000;
+
+    document.querySelectorAll<HTMLElement>('[data-fv-slider]').forEach((slider) => {
+      const track = slider.querySelector<HTMLElement>('[data-fv-track]');
+      const dots = Array.from(slider.querySelectorAll<HTMLButtonElement>('[data-fv-dot]'));
+      const prev = slider.querySelector<HTMLButtonElement>('[data-fv-prev]');
+      const next = slider.querySelector<HTMLButtonElement>('[data-fv-next]');
+      if (!track || dots.length === 0) return;
+
+      const count = dots.length;
+      let index = 0;
+      let timer: number | undefined;
+
+      const render = (): void => {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+      };
+
+      const goTo = (next: number): void => {
+        index = (next + count) % count;
+        render();
+      };
+
+      const start = (): void => {
+        stop();
+        timer = window.setInterval(() => goTo(index + 1), AUTOPLAY_MS);
+      };
+      const stop = (): void => {
+        if (timer !== undefined) window.clearInterval(timer);
+      };
+      // 手動操作したら自動再生を仕切り直す（体感が自然）
+      const jump = (target: number): void => {
+        goTo(target);
+        start();
+      };
+
+      dots.forEach((dot, i) => dot.addEventListener('click', () => jump(i)));
+      prev?.addEventListener('click', () => jump(index - 1));
+      next?.addEventListener('click', () => jump(index + 1));
+      slider.addEventListener('mouseenter', stop);
+      slider.addEventListener('mouseleave', start);
+
+      render();
+      start();
+    });
+  </script>
+</section>

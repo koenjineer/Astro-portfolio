@@ -1,0 +1,117 @@
+@use 'variables' as *;
+
+// FVスライダーのナビ類（全スライド共通の予約バッジ・矢印・ドット）。
+
+$fv-cta-left: 1179px;
+$fv-cta-top: 321px;
+$fv-cta-w: 221px;
+$fv-cta-h: 339px;
+
+.ml-fv {
+  // ===== 全スライド共通の予約バッジ =====
+  &__cta {
+    position: absolute;
+    left: $fv-cta-left;
+    top: $fv-cta-top;
+    z-index: 3;
+    width: $fv-cta-w;
+    height: $fv-cta-h;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  // ===== 矢印ナビ =====
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    color: $color-white;
+    background-color: rgba($color-text, 0.35);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgba($color-text, 0.6);
+    }
+
+    &--prev {
+      left: 24px;
+    }
+
+    &--next {
+      right: 24px;
+    }
+  }
+
+  // ===== ドット =====
+  &__dots {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    z-index: 3;
+    display: flex;
+    gap: 12px;
+    transform: translateX(-50%);
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba($color-white, 0.6);
+    box-shadow: 0 0 2px rgba($color-text, 0.4);
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &.is-active {
+      background-color: $color-teal;
+    }
+  }
+
+  @media (max-width: $bp-sp) {
+    &__cta {
+      display: none;
+    }
+
+    &__arrow {
+      width: 36px;
+      height: 36px;
+
+      &--prev {
+        left: 8px;
+      }
+
+      &--next {
+        right: 8px;
+      }
+    }
+
+    &__dots {
+      bottom: 16px;
+    }
+  }
+}

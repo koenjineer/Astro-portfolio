@@ -1,0 +1,35 @@
+@use 'variables' as *;
+
+// SP専用CTAバー（Figma 37:568）。PCはFV内縦長CTAを使うため非表示。
+$cta-bar-h: 60px;
+$cta-bar-inner-h: 50px;
+
+.ml-cta-bar {
+  display: none;
+
+  @media (max-width: $bp-sp) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: $cta-bar-h;
+    padding: 0 5px;
+    background-color: $color-teal;
+    text-decoration: none;
+    box-sizing: border-box;
+
+    &__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: $cta-bar-inner-h;
+      background-color: $color-white;
+      color: $color-teal;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+}

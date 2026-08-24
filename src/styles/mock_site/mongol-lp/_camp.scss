@@ -1,0 +1,187 @@
+@use 'variables' as *;
+
+$camp-max: 1000px;
+$camp-band-h-sp: 200px; // Figma SP 27:521 ヒーロー帯
+$camp-card-w-sp: 300px; // Figma SP 28:556
+
+.ml-camp {
+  position: relative;
+  overflow: hidden;
+  min-height: 1000px;
+  padding: 0 $side-padding 200px;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  &__heading {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: $camp-max;
+    margin-inline: auto;
+    padding-top: 40px;
+  }
+
+  &__tabs {
+    position: absolute;
+    bottom: 72px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 220px;
+  }
+
+  &__tab {
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+  }
+
+  &__cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  &__card {
+    width: 320px;
+    background-color: $color-white;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-shrink: 0;
+
+    &-photo {
+      img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+        border-radius: 4px;
+      }
+    }
+
+    &-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    &-text {
+      font-size: 13px;
+      line-height: 1.8;
+
+      small {
+        font-size: 11px;
+      }
+    }
+  }
+
+  // SP は上部200pxの写真帯に見出し+タブを乗せ、下はクリーム地にカード縦積み（Figma 27:486）
+  @media (max-width: $bp-sp) {
+    min-height: 0; // PC min-height:1000px がSPに残存 → 解除
+    padding: $camp-band-h-sp + 10px $side-padding 40px; // 帯200 + card top210 / 下40
+
+    &__bg {
+      height: $camp-band-h-sp; // 全面ではなく上部帯のみ
+      object-position: center bottom;
+    }
+
+    &__heading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 2; // 帯の上に重ねる
+
+      .ml-section-hdg__text {
+        font-size: 18px; // Figma SP 27:497（共有の24pxを camp だけ上書き）
+      }
+    }
+
+    // タブは帯の上に絶対配置（Figma 施設 116:102：left20/140/250, top109, h20, 12px bold）
+    &__tabs {
+      position: absolute;
+      inset: 109px 0 auto 0;
+      z-index: 2;
+      display: block;
+      padding: 0;
+    }
+
+    &__tab {
+      position: absolute;
+      top: 0;
+      height: 20px;
+      padding: 3px;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 0;
+
+      &--restaurant { left: 20px; width: 70px; }
+      &--ger { left: 140px; width: 60px; }
+      &--shower { left: 250px; width: 120px; }
+    }
+
+    &__inner {
+      padding-top: 0; // card top210 は section padding-top で確保済み
+    }
+
+    &__cards {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px; // Figma SP card間（card1 top210→569, card2 →950）
+    }
+
+    &__card {
+      width: 100%;
+      max-width: $camp-card-w-sp; // Figma SP card 300幅
+      gap: 10px; // Figma py/gap 10
+      padding: 10px 15px; // Figma px15 py10
+
+      &-photo img {
+        height: 160px; // Figma SP Rectangle13 = 160（PC 180 が残存）
+      }
+    }
+
+    // 宿泊ゲルの写真だけ Figma はズームクロップ（28:544 image-rect 実測）
+    &__card--ger &__card-photo {
+      position: relative;
+      height: 160px;
+      overflow: hidden;
+      border-radius: 4px;
+
+      img {
+        position: absolute;
+        width: 156.1%;
+        height: 176.29%;
+        left: -3.29%;
+        top: -71.19%;
+        border-radius: 0;
+      }
+
+      &-text {
+        font-size: 14px; // Figma SP 27:538（PC 13px が残存）
+        line-height: 1.5;
+      }
+    }
+  }
+}

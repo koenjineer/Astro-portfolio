@@ -25,7 +25,16 @@
       "Bash(cat /tmp/*)",
       "Bash(mkdir -p *)",
       "Bash(rm /tmp/*)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(pnpm *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git branch *)",
+      "Bash(node *)",
+      "Bash(echo *)",
+      "Bash(for *)"
     ]
   }
 }

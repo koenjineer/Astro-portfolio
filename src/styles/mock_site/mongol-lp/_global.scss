@@ -1,0 +1,122 @@
+@use 'variables' as *;
+
+body {
+  background-color: $color-cream;
+  color: $color-text;
+  font-family: $font-jp;
+}
+
+// ===== 共通セクション見出し（装飾付き） =====
+.ml-section-hdg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 90px;
+
+  &__text {
+    font-size: 30px;
+    font-weight: 700;
+    color: $color-text;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  &__deco {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    img {
+      opacity: 0.8;
+      display: block;
+    }
+  }
+
+  @media (max-width: $bp-sp) {
+    // Figma SP 見出し(例 67:44)は y=40 起点・text27px・あしらい16x20。PC 90px/30px/35x46 が残存
+    padding-top: 40px;
+    gap: 12px;
+
+    &__text {
+      font-size: 24px;
+    }
+
+    &__deco {
+      gap: 5px;
+
+      img {
+        width: 16px; // Figma SP あしらい 16.24x20
+        height: 20px;
+      }
+    }
+  }
+}
+
+// ===== 小見出し（斜め帯） =====
+.ml-small-hdg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+
+  &__text {
+    font-size: 20px;
+    font-weight: 500;
+    color: $color-text;
+    transform: rotate(-13.9deg) skewX(-0.04deg);
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  &__line {
+    display: block;
+    width: 176px;
+    height: auto;
+  }
+
+  @media (max-width: $bp-sp) {
+    // Figma SP 小見出し(例 104:153)は 110px 幅・50px 高に収まる。PC 176px が残存していた
+    &__text {
+      font-size: 16px;
+    }
+
+    &__line {
+      width: 110px;
+    }
+  }
+}
+
+// ===== 共通CTAボタン =====
+.ml-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: $color-teal;
+  color: $color-white;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &--round {
+    border-radius: 10px;
+  }
+
+  &--arrow::after {
+    content: '';
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-top: 2px solid $color-white;
+    border-right: 2px solid $color-white;
+    transform: rotate(45deg);
+  }
+}

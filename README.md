@@ -82,7 +82,7 @@ src/
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/coder-hiro/Astro-portfolio
+git clone https://github.com/koenjineer/Astro-portfolio
 
 # 依存関係をインストール
 npm install

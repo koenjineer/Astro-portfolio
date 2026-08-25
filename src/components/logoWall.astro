@@ -11,6 +11,9 @@ const technologies = [
   "wordpress",
   "figma",
   "github",
+  "claudeCode",
+  "chatGPT",
+  "cursor",
   // "tailwindcss",
   // "nodejs",
   // "next",
@@ -19,6 +22,14 @@ const technologies = [
   // "mysql",
   // "bash",
 ];
+
+const labelOverrides: Record<string, string> = {
+  claudeCode: "Claude Code",
+};
+
+function label(tech: string) {
+  return labelOverrides[tech] ?? tech.charAt(0).toUpperCase() + tech.slice(1);
+}
 ---
 
 <div class="relative overflow-x-hidden py-8">
@@ -48,7 +59,7 @@ const technologies = [
             decoding="async"
           />
           <span class="text-lg font-medium text-[var(--white)] whitespace-nowrap">
-            {tech.charAt(0).toUpperCase() + tech.slice(1)}
+            {label(tech)}
           </span>
         </div>
       ))

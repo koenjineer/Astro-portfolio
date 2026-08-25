@@ -2,29 +2,24 @@
 import StatsCounter from "../React/StatsCounter.tsx";
 import LogoWall from "../components/logoWall.astro";
 import SkillsList from "../React/SkillsList.tsx";
+import HeroVisual from "../React/HeroVisual.tsx";
 ---
 
 <section class="text-[var(--white)] mt-12 md:mt-0" id="home">
   <div class="max-w-5xl mx-auto space-y-8 md:pt-36 md:pb-16 pb-8">
+    <div class="flex items-center justify-between gap-6">
     <div class="text-left space-y-4">
       <p class="text-md md:text-lg text-[var(--white-icon)] shiny-white">
         Hi, I'm Hiroyuki Chuman
+        <span class="text-[var(--white)]">— Front-end Engineer</span>
       </p>
-      <div
-        class="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-8 md:gap-4"
+      <h1
+        class="text-[var(--white)] text-3xl md:text-4xl lg:text-5xl font-medium text-pretty leading-tight"
       >
-        <h1
-          class="text-[var(--white)] text-5xl md:text-6xl font-medium text-pretty leading-none"
-        >
-          Front-end <br /> Engineer
-        </h1>
-        <p class="text-md md:text-2xl text-[var(--white-icon)]">
-          ビジネスの意図を正確に汲み取り、<br class="hidden md:block" />
-          確かな技術で形にする <span class="text-[var(--sec)] shiny-sec"
-            >フロントエンド</span
-          > エンジニア。
-        </p>
-      </div>
+        <span class="text-[var(--sec)] font-semibold shiny-sec">AI</span
+        >を羅針盤に、<br class="hidden md:block" />
+        アイデアに輪郭を与える。
+      </h1>
       <div class="flex justify-start gap-2 pt-3 md:pt-6">
         <a
           target="_blank"
@@ -116,6 +111,9 @@ import SkillsList from "../React/SkillsList.tsx";
           </svg>
         </a>
       </div>
+    </div>
+
+    <HeroVisual client:load />
     </div>
 
     <LogoWall />

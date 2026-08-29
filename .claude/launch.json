@@ -4,7 +4,7 @@
     {
       "name": "astro-dev",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev"],
+      "runtimeArgs": ["--dir", "apps/astro-portfolio", "dev"],
       "port": 4321,
       "autoPort": false
     }

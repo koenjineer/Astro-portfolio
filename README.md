@@ -2,7 +2,7 @@
 
 [![Deploy Status](https://img.shields.io/badge/Deploy-Vercel-black?style=flat&logo=vercel)](https://astro-portfolio-sigma-seven.vercel.app)
 
-![Portfolio Screenshot](public/ogp.webp)
+![Portfolio Screenshot](apps/astro-portfolio/public/ogp.webp)
 
 ---
 
@@ -37,43 +37,48 @@
 
 ## 📁 Project Structure
 
+本リポジトリはモノレポ構成です。本サイトの実体は `apps/astro-portfolio/` 配下にあります。
+
 ```
-public/
-├── fonts/                  # Webフォント
-├── mock_site/              # 各mock_siteの画像アセット
-├── svg/                    # 技術スタックアイコン
-├── favicon.svg / favicon.png
-├── logo-header.svg
-├── ogp.webp / og.image.png
-└── *.webp                  # 制作実績のサムネイル
-src/
-├── components/
-│   ├── contact.astro
-│   ├── footer.astro
-│   ├── home.astro
-│   ├── logoWall.astro
-│   ├── nav.astro
-│   ├── projects.astro
-│   └── mock_site/          # 各mock_siteのコンポーネント
-│       ├── GardenSalad/
-│       ├── MELIAFITNESS/
-│       ├── Rich-Life/
-│       ├── oha/
-│       └── webservice/
-├── React/                  # Reactコンポーネント
-│   ├── LetterGlitch.tsx
-│   ├── LikeButton.tsx
-│   ├── SkillsList.tsx
-│   └── StatsCounter.tsx
-├── layouts/
-│   ├── Layout.astro
-│   └── mock_site/          # 各mock_siteのレイアウト
-├── pages/
-│   ├── index.astro
-│   └── mock_site/          # 各mock_siteのページ
-└── styles/
-    └── mock_site/          # 各mock_siteのSCSS
-        └── shared/         # 共通SCSS（reset / utilities）
+apps/astro-portfolio/
+├── public/
+│   ├── fonts/                  # Webフォント
+│   ├── mock_site/              # 各mock_siteの画像アセット
+│   ├── svg/                    # 技術スタックアイコン
+│   ├── favicon.svg / favicon.png
+│   ├── logo-header.svg
+│   ├── ogp.webp / og.image.png
+│   └── *.webp                  # 制作実績のサムネイル
+└── src/
+    ├── components/
+    │   ├── contact.astro
+    │   ├── footer.astro
+    │   ├── home.astro
+    │   ├── logoWall.astro
+    │   ├── nav.astro
+    │   ├── projects.astro
+    │   └── mock_site/          # 各mock_siteのコンポーネント
+    │       ├── GardenSalad/
+    │       ├── MELIAFITNESS/
+    │       ├── Rich-Life/
+    │       ├── mongol-lp/
+    │       ├── suisopot/
+    │       └── webservice/
+    ├── React/                  # Reactコンポーネント
+    │   ├── HeroVisual.tsx
+    │   ├── LetterGlitch.tsx
+    │   ├── LikeButton.tsx
+    │   ├── SkillsList.tsx
+    │   └── StatsCounter.tsx
+    ├── layouts/
+    │   ├── Layout.astro
+    │   └── mock_site/          # 各mock_siteのレイアウト
+    ├── pages/
+    │   ├── index.astro
+    │   └── mock_site/          # 各mock_siteのページ（oha/はプレーンHTML）
+    └── styles/
+        └── mock_site/          # 各mock_siteのSCSS
+            └── shared/         # 共通SCSS（reset / utilities）
 ```
 
 ---
@@ -83,12 +88,13 @@ src/
 ```bash
 # リポジトリをクローン
 git clone https://github.com/koenjineer/Astro-portfolio
+cd Astro-portfolio/apps/astro-portfolio
 
 # 依存関係をインストール
-npm install
+pnpm install
 
 # 開発サーバーを起動
-npm run dev
+pnpm dev
 ```
 
 ---
@@ -101,6 +107,7 @@ npm run dev
 | Garden Salad | 飲食店サイト（架空） | Astro / SCSS / JS |
 | MELIA FITNESS | ジムLP（架空） | Astro / SCSS / JS |
 | Rich Life | 家具レンタルLP（架空） | Astro / SCSS / JS |
+| Mongol LP | 観光LP（架空） | Astro / SCSS / JS |
 | OHA! | アプリLP（架空） | HTML / SCSS / JS |
 
 ---

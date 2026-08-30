@@ -137,10 +137,20 @@ Next.js側の実装には直接関係ないが、WP側を追加で触る場合�
 - 次に共通レイアウト（header/footer/breadcrumb）→残り7ページ→Swiper→Formspree→デプロイ
 - 実装を始める前に、Planモードで作業内容を提示し、承認を得てから進める
 
+## Figmaデザイン参照
+
+### サービスページ
+
+- PC版: https://www.figma.com/design/PTtMblDobjSLBSz9HlUEn9/%E6%9E%B6%E7%A9%BA%E3%82%B3%E3%83%BC%E3%83%9B%E3%82%9A%E3%83%AC%E3%83%BC%E3%83%88%E3%82%B5%E3%82%A4%E3%83%88_20250715--%E3%82%B3%E3%83%94%E3%83%BC-?node-id=14591-2032&m=dev
+- SP版: https://www.figma.com/design/PTtMblDobjSLBSz9HlUEn9/%E6%9E%B6%E7%A9%BA%E3%82%B3%E3%83%BC%E3%83%9B%E3%82%9A%E3%83%AC%E3%83%BC%E3%83%88%E3%82%B5%E3%82%A4%E3%83%88_20250715--%E3%82%B3%E3%83%94%E3%83%BC-?node-id=14591-2023&m=dev
+
+レイヤー構成（PC/SP共通）：`header`, `lower-mainvisual`, `breadcrumb`,
+`Frame`（サービス紹介セクション、01/02/03の3コース）, `flow`（導入の流れ）,
+`faq`（よくある質問、ACF `serviceFaqFields` の16項目に対応）, `footer`
+
+（このFigma参照URLは、サービスページの実装が完了しても個別には削除しない。
+プロジェクト完了時にルートCLAUDE.mdの「有効性」原則に従い一括棚卸しする）
+
 ## 次のアクション
 
-1. `apps/global-standard-next/`ディレクトリで `create-next-app`（TypeScript・App Router・Tailwind CSS選択）
-2. `next.config.js`に`output: 'export'`を追記
-3. `graphql-request`等の軽量GraphQLクライアントを導入
-4. `.env.local`にWPGraphQLエンドポイントを設定
-5. 「サービス」ページのデータ取得から実装開始
+1. 「サービス」ページのデータ取得・実装（Figma参照URLに基づく）

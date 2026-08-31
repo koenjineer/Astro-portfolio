@@ -21,15 +21,33 @@ export function ServiceHero() {
         <p className="font-fira-sans text-2xl text-main italic lg:text-4xl">
           Global standard
         </p>
-        <nav aria-label="グローバルナビゲーション" className="hidden lg:block">
-          <ul className="flex items-center gap-4 text-sm font-medium text-contrast">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.label}>
-                <Link href={item.href}>{item.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="hidden items-center gap-8 lg:flex">
+          <nav aria-label="グローバルナビゲーション">
+            <ul className="flex items-center gap-4 text-sm font-medium text-contrast">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href}>{item.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* 遷移先ページ未実装のため#（本格的な共通レイアウト実装は別タスク） */}
+          <div className="flex">
+            <a
+              href="#"
+              className="flex h-[68px] w-[176px] items-center justify-center border border-main bg-white text-sm font-medium text-main"
+            >
+              資料ダウンロード
+            </a>
+            <a
+              href="#"
+              className="flex h-[68px] w-[176px] items-center justify-center bg-main text-sm font-medium text-white"
+            >
+              お問い合わせ
+            </a>
+          </div>
+        </div>
       </header>
 
       <div className="relative flex h-[180px] items-center bg-main px-5 lg:h-[250px] lg:px-[90px]">

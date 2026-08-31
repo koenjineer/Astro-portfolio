@@ -27,7 +27,7 @@ const SERVICE_PROGRAMS: ServiceProgram[] = [
     ],
     cost: "時間内容要相談",
     target: "ビジネスの中で使える英語コミュニケーション能力が必要な方",
-    imageSrc: "/images/service/card-01.png",
+    imageSrc: "/images/service/card-01.webp",
     reverseOnDesktop: true,
   },
   {
@@ -42,7 +42,7 @@ const SERVICE_PROGRAMS: ServiceProgram[] = [
     ],
     cost: "時間内容要相談",
     target: "海外へのビジネス展開を検討されている方",
-    imageSrc: "/images/service/card-02.png",
+    imageSrc: "/images/service/card-02.webp",
     reverseOnDesktop: false,
   },
   {
@@ -56,7 +56,7 @@ const SERVICE_PROGRAMS: ServiceProgram[] = [
     ],
     cost: "時間内容要相談",
     target: "英語コミュニケーション能力を習得し、将来的に海外で働きたい方",
-    imageSrc: "/images/service/card-03.png",
+    imageSrc: "/images/service/card-03.webp",
     reverseOnDesktop: true,
   },
 ];

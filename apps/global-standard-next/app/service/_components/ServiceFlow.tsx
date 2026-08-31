@@ -41,7 +41,7 @@ export function ServiceFlow() {
       className="relative flex flex-col items-center gap-10 overflow-hidden px-5 py-16 lg:gap-16 lg:px-[90px] lg:py-20"
     >
       <Image
-        src="/images/service/flow-bg.png"
+        src="/images/service/flow-bg.webp"
         alt=""
         aria-hidden="true"
         fill

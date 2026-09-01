@@ -31,7 +31,7 @@ export function ServiceFooter() {
           <a
             key={cta.label}
             href={cta.href}
-            className="relative z-0 flex flex-1 flex-col items-center justify-center gap-6 overflow-hidden border-2 border-accent-1 px-6 py-12 text-center lg:gap-8 lg:py-16"
+            className="relative z-0 flex flex-1 flex-col items-center justify-center gap-6 overflow-hidden px-6 py-12 text-center lg:gap-8 lg:py-16"
           >
             <Image
               src={cta.imageSrc}

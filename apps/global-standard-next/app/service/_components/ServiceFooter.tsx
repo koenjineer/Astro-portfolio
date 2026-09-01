@@ -11,7 +11,7 @@ interface FooterCta {
 const FOOTER_CTAS: FooterCta[] = [
   {
     href: "#",
-    englishLabel: "Download",
+    englishLabel: "download",
     label: "資料ダウンロード",
     imageSrc: "/images/service/footer-download.webp",
   },
@@ -25,13 +25,13 @@ const FOOTER_CTAS: FooterCta[] = [
 
 export function ServiceFooter() {
   return (
-    <footer className="flex flex-col gap-8 bg-contrast px-5 py-12 text-white lg:px-[90px] lg:py-16">
+    <footer className="relative flex flex-col gap-8 bg-contrast px-5 py-12 text-white lg:px-[90px] lg:py-16">
       <div className="flex flex-col gap-6 lg:flex-row lg:justify-center lg:gap-16">
         {FOOTER_CTAS.map((cta) => (
           <a
             key={cta.label}
             href={cta.href}
-            className="relative z-0 flex flex-1 flex-col items-center justify-center gap-1 overflow-hidden border-2 border-accent-1 py-8 text-center"
+            className="relative z-0 flex flex-1 flex-col items-center justify-center gap-6 overflow-hidden border-2 border-accent-1 px-6 py-12 text-center lg:gap-8 lg:py-16"
           >
             <Image
               src={cta.imageSrc}
@@ -42,10 +42,31 @@ export function ServiceFooter() {
               loading="lazy"
               className="-z-10 object-cover"
             />
-            <span className="font-fira-sans text-xl italic">
-              {cta.englishLabel}
+
+            <div className="flex flex-col gap-1">
+              <span className="font-fira-sans text-3xl uppercase italic lg:text-[60px]">
+                {cta.englishLabel}
+              </span>
+              <span className="text-sm font-bold">{cta.label}</span>
+            </div>
+
+            <span className="flex items-center gap-3 border-2 border-accent-1 px-6 py-3 font-fira-sans text-sm text-accent-1 italic lg:border-3 lg:px-8 lg:py-4 lg:text-2xl">
+              View more
+              <Image
+                src="/images/service/icon-arrow-right-sp.svg"
+                alt=""
+                width={18}
+                height={12}
+                className="lg:hidden"
+              />
+              <Image
+                src="/images/service/icon-arrow-right-pc.svg"
+                alt=""
+                width={20}
+                height={14}
+                className="hidden lg:block"
+              />
             </span>
-            <span className="text-sm font-bold">{cta.label}</span>
           </a>
         ))}
       </div>
@@ -64,6 +85,14 @@ export function ServiceFooter() {
       <p className="text-center text-xs">
         ©︎2021 Global Standard. All Rights Reserved.
       </p>
+
+      <a
+        href="#"
+        aria-label="ページトップへ戻る"
+        className="absolute right-4 bottom-4 size-10 lg:right-5 lg:bottom-10"
+      >
+        <Image src="/images/service/icon-top-pc.svg" alt="" fill />
+      </a>
     </footer>
   );
 }

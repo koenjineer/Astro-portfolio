@@ -25,8 +25,8 @@ const FOOTER_CTAS: FooterCta[] = [
 
 export function ServiceFooter() {
   return (
-    <footer className="relative flex flex-col gap-8 bg-contrast px-5 py-12 text-white lg:px-[90px] lg:py-16">
-      <div className="flex flex-col gap-6 lg:flex-row lg:justify-center lg:gap-16">
+    <footer className="relative flex flex-col gap-8 bg-contrast p-0 text-white">
+      <div className="flex flex-col gap-0 lg:flex-row lg:justify-center">
         {FOOTER_CTAS.map((cta) => (
           <a
             key={cta.label}

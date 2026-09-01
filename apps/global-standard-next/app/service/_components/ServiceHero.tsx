@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 interface NavItem {
@@ -50,8 +51,49 @@ export function ServiceHero() {
         </div>
       </header>
 
-      <div className="relative flex h-[180px] items-center bg-main px-5 lg:h-[250px] lg:px-[90px]">
-        <div className="flex flex-col gap-2">
+      <div className="relative h-[250px] overflow-hidden bg-main">
+        <Image
+          src="/images/service/hero-sp.webp"
+          alt=""
+          aria-hidden="true"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover lg:hidden"
+        />
+        <Image
+          src="/images/service/hero-pc.webp"
+          alt=""
+          aria-hidden="true"
+          fill
+          priority
+          sizes="100vw"
+          className="hidden object-cover lg:block"
+        />
+
+        {/* Figmaの"filter"レイヤー：写真全体にかかる薄い黒フィルター */}
+        <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
+
+        {/* Figmaの"lower-mv-decoration"：三角(台形)にマスクされた紺色オーバーレイ */}
+        <div
+          className="absolute inset-y-0 left-0 w-[44.17%] lg:w-[28.57%]"
+          aria-hidden="true"
+        >
+          <Image
+            src="/images/service/hero-decoration-sp.svg"
+            alt=""
+            fill
+            className="object-fill lg:hidden"
+          />
+          <Image
+            src="/images/service/hero-decoration-pc.svg"
+            alt=""
+            fill
+            className="hidden object-fill lg:block"
+          />
+        </div>
+
+        <div className="absolute top-1/2 left-[5.33%] flex -translate-y-1/2 flex-col gap-2 lg:left-[17.19%]">
           <p className="font-fira-sans text-3xl text-white italic lg:text-6xl">
             SERVICE
           </p>

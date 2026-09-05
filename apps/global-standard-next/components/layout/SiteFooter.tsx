@@ -13,17 +13,17 @@ const FOOTER_CTAS: FooterCta[] = [
     href: "#",
     englishLabel: "download",
     label: "資料ダウンロード",
-    imageSrc: "/images/service/footer-download.webp",
+    imageSrc: "/images/common/footer-download.webp",
   },
   {
     href: "#",
     englishLabel: "contact",
     label: "お問い合わせ",
-    imageSrc: "/images/service/footer-contact.webp",
+    imageSrc: "/images/common/footer-contact.webp",
   },
 ];
 
-export function ServiceFooter() {
+export function SiteFooter() {
   return (
     <footer className="relative flex flex-col gap-8 bg-contrast p-0 text-white">
       <div className="flex flex-col gap-0 lg:flex-row lg:justify-center">
@@ -53,14 +53,14 @@ export function ServiceFooter() {
             <span className="flex items-center gap-3 border-2 border-accent-1 px-6 py-3 font-fira-sans text-sm text-accent-1 italic lg:border-3 lg:px-8 lg:py-4 lg:text-2xl">
               View more
               <Image
-                src="/images/service/icon-arrow-right-sp.svg"
+                src="/images/common/icon-arrow-right-sp.svg"
                 alt=""
                 width={18}
                 height={12}
                 className="lg:hidden"
               />
               <Image
-                src="/images/service/icon-arrow-right-pc.svg"
+                src="/images/common/icon-arrow-right-pc.svg"
                 alt=""
                 width={20}
                 height={14}
@@ -91,7 +91,7 @@ export function ServiceFooter() {
         aria-label="ページトップへ戻る"
         className="absolute right-4 bottom-4 size-10 lg:right-5 lg:bottom-10"
       >
-        <Image src="/images/service/icon-top-pc.svg" alt="" fill />
+        <Image src="/images/common/icon-top-pc.svg" alt="" fill />
       </a>
     </footer>
   );

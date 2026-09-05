@@ -151,6 +151,19 @@ Next.js側の実装には直接関係ないが、WP側を追加で触る場合�
 （このFigma参照URLは、サービスページの実装が完了しても個別には削除しない。
 プロジェクト完了時にルートCLAUDE.mdの「有効性」原則に従い一括棚卸しする）
 
+## コンポーネント配置のルール
+
+Figmaの「コンポーネント置き場」（node-id=14662-3153）に定義された共通部品に対応する。
+
+- **2ページ以上で使う部品** → `components/`（`@/components/...` で参照）
+  - `components/layout/`：SiteHeader / SiteFooter / PageHero / Breadcrumb
+- **1ページでしか使わない部品** → `app/<page>/_components/`
+- PC/SPはFigmaでは別コンポーネントだが、コードでは**1コンポーネント内でTailwindのレスポンシブクラスで出し分ける**
+- 共通部品が使う画像は `public/images/common/`、ページ固有の画像は `public/images/<page>/`
+
 ## 次のアクション
 
-1. 「サービス」ページのデータ取得・実装（Figma参照URLに基づく）
+1. 残り7ページの実装（共通レイアウトは `components/layout/` を使う）
+2. Swiper・Formspree・デプロイ
+
+（完了済み：サービスページ実装、共通レイアウト切り出し、SPハンバーガーメニュー）

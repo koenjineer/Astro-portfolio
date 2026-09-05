@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { getServiceFaqItems } from "@/lib/queries/service";
-import { ServiceHero } from "./_components/ServiceHero";
+import { Breadcrumb } from "@/components/layout/Breadcrumb";
+import { PageHero } from "@/components/layout/PageHero";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ServicePrograms } from "./_components/ServicePrograms";
 import { ServiceFlow } from "./_components/ServiceFlow";
 import { ServiceFaq } from "./_components/ServiceFaq";
-import { ServiceFooter } from "./_components/ServiceFooter";
 
 export const metadata: Metadata = {
   title: "サービス | Global Standard",
@@ -15,11 +17,13 @@ export default async function ServicePage() {
 
   return (
     <main className="flex flex-col">
-      <ServiceHero />
+      <SiteHeader />
+      <PageHero eyebrow="SERVICE" title="サービス" />
+      <Breadcrumb items={[{ label: "サービス" }]} />
       <ServicePrograms />
       <ServiceFlow />
       <ServiceFaq items={faqItems} />
-      <ServiceFooter />
+      <SiteFooter />
     </main>
   );
 }

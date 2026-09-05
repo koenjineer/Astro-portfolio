@@ -23,8 +23,8 @@ interface ServiceProgram {
 const DIAGONAL_BACKGROUND_CLIP_PATH =
   "polygon(0 0, 100% 17.57vw, 100% 100%, 0 calc(100% - 17.57vw))";
 
-// このタスクの時点ではFigma上の固定テキストをそのまま実装する
-// （動的化の要否は別途ユーザーに確認する）
+// コース内容は頻繁に変わらないため、意図的に固定テキストで持つ。
+// WordPressから取得するのはFAQ（lib/queries/service.ts）だけに留める
 const SERVICE_PROGRAMS: ServiceProgram[] = [
   {
     number: "01",

@@ -48,8 +48,11 @@ Astro-portfolio/（リポジトリルート）
     │   └── CLAUDE.md
     └── global-standard-next/    ← 本プロジェクト
         ├── CLAUDE.md            ← このファイル
-        ├── src/
-        └── next.config.js
+        ├── docs/design-rules.md ← デザインの決まりごと
+        ├── app/                 ← ページ本体（+ ページ固有の_components/）
+        ├── components/          ← 共通部品（layout/ · icons/）
+        ├── lib/                 ← WPGraphQL接続・クエリ
+        └── public/images/       ← common/ とページ別ディレクトリ
 ```
 
 Vercelは本プロジェクト用に新規プロジェクトとして追加し、Root Directoryを
@@ -133,9 +136,9 @@ Next.js側の実装には直接関係ないが、WP側を追加で触る場合�
 ## 進め方の合意事項
 
 - 1ページずつ、データ取得→表示→確認のサイクルで進める（一括で雛形だけ先に作らない）
-- 着手順は「サービス」ページから（ACFのQ&Aが完全に動作確認済みのため、最初の「動くページ」を作りやすい）
-- 次に共通レイアウト（header/footer/breadcrumb）→残り7ページ→Swiper→Formspree→デプロイ
 - 実装を始める前に、Planモードで作業内容を提示し、承認を得てから進める
+- WordPressから取得するのは、更新頻度が高く管理画面で直したい情報だけに絞る。
+  サービスページではFAQのみを取得し、3コースの紹介文は固定テキストで持つ（2026-09-06 決定）
 
 ## Figmaデザイン参照
 
@@ -162,13 +165,25 @@ Figmaの「コンポーネント置き場」（node-id=14662-3153）に定義さ
 
 - **2ページ以上で使う部品** → `components/`（`@/components/...` で参照）
   - `components/layout/`：SiteHeader / SiteFooter / PageHero / Breadcrumb
+  - `components/icons/`：ArrowRightIcon（塗りは`currentColor`。親の文字色に追従させる）
 - **1ページでしか使わない部品** → `app/<page>/_components/`
 - PC/SPはFigmaでは別コンポーネントだが、コードでは**1コンポーネント内でTailwindのレスポンシブクラスで出し分ける**
 - 共通部品が使う画像は `public/images/common/`、ページ固有の画像は `public/images/<page>/`
 
+## 進捗
+
+**サービスページ完了（2026-09-06）**：
+実装・共通レイアウト切り出し・SPハンバーガーメニュー・デザインルールセット反映まで完了。
+以降このページは、残りページの実装で共通部品を触った時だけ確認する。
+
+積み残し（サービスページ側の作業ではなく、他ページ・機能の実装で解消する）：
+
+- ヘッダー・フッター・申込ボタンの `href="#"` 6か所は、遷移先ページとFormspreeの実装時に差し替える
+- ルールセットのうち、トップページの「View more」と導入事例カードのホバーは未実装
+  （仕様は `docs/design-rules.md` に記載済み）
+
 ## 次のアクション
 
-1. 残り7ページの実装（共通レイアウトは `components/layout/` を使う）
+1. 残り7ページの実装（共通レイアウトは `components/layout/`、
+   カラー・フォント・ホバーは `docs/design-rules.md` に従う）
 2. Swiper・Formspree・デプロイ
-
-（完了済み：サービスページ実装、共通レイアウト切り出し、SPハンバーガーメニュー）

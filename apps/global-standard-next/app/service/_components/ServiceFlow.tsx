@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const FLOW_ALT_TEXT =
   "導入の流れ。" +
   "STEP1 お問い合わせ：お問い合わせフォームより必要事項をご入力の上、お申し込みください。" +
@@ -9,11 +11,30 @@ export function ServiceFlow() {
   return (
     <section
       aria-labelledby="service-flow-heading"
-      className="flex flex-col items-center gap-10 px-5 py-16 lg:gap-16 lg:px-[90px] lg:py-20"
+      className="relative isolate flex flex-col items-center gap-10 overflow-hidden px-5 py-16 lg:gap-16 lg:px-[90px] lg:pt-20 lg:pb-[119px]"
     >
+      <Image
+        src="/images/service/flow-bg-sp.webp"
+        alt=""
+        aria-hidden="true"
+        fill
+        sizes="100vw"
+        loading="lazy"
+        className="-z-10 object-cover lg:hidden"
+      />
+      <Image
+        src="/images/service/flow-bg-pc.webp"
+        alt=""
+        aria-hidden="true"
+        fill
+        sizes="100vw"
+        loading="lazy"
+        className="-z-10 hidden object-cover lg:block"
+      />
+
       <h2
         id="service-flow-heading"
-        className="text-xl font-bold text-contrast lg:text-2xl"
+        className="text-xl font-bold text-white lg:text-2xl"
       >
         導入の流れ
       </h2>

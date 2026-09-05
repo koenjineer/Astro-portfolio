@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: "Global Standard",
   description:
     "グローバルな人材を育てる研修サービス「Global Standard」のコーポレートサイト",
+  // 架空の会社のポートフォリオ用サイトのため、検索結果に出ないようにする。
+  // 下層ページのmetadataはこの設定を引き継ぐ
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

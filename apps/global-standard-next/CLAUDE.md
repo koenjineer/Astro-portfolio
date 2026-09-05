@@ -139,6 +139,11 @@ Next.js側の実装には直接関係ないが、WP側を追加で触る場合�
 
 ## Figmaデザイン参照
 
+### ルールセット（カラー・フォント・ホバー）
+
+サイト全体の決まりごとは `docs/design-rules.md` にまとめている（Figma node-id=14592-6198）。
+新しいページを実装する際は先にこれを読む。
+
 ### サービスページ
 
 - PC版: https://www.figma.com/design/PTtMblDobjSLBSz9HlUEn9/%E6%9E%B6%E7%A9%BA%E3%82%B3%E3%83%BC%E3%83%9B%E3%82%9A%E3%83%AC%E3%83%BC%E3%83%88%E3%82%B5%E3%82%A4%E3%83%88_20250715--%E3%82%B3%E3%83%94%E3%83%BC-?node-id=14591-2032&m=dev

@@ -60,15 +60,17 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex">
+          {/* ルールセット「枠線+白背景」：ホバーで背景を塗りつぶす */}
           <a
             href="#"
-            className="flex h-[68px] w-[176px] items-center justify-center border border-main bg-white text-sm font-medium text-main"
+            className="flex h-[68px] w-[176px] items-center justify-center border border-main bg-white text-sm font-medium text-main transition-colors duration-300 hover:bg-main hover:text-white focus-visible:bg-main focus-visible:text-white motion-reduce:transition-none"
           >
             資料ダウンロード
           </a>
+          {/* ルールセット「背景塗りつぶし」：ホバーで背景色を濃くする */}
           <a
             href="#"
-            className="flex h-[68px] w-[176px] items-center justify-center bg-main text-sm font-medium text-white"
+            className="flex h-[68px] w-[176px] items-center justify-center bg-main text-sm font-medium text-white transition-colors duration-300 hover:bg-main-dark focus-visible:bg-main-dark motion-reduce:transition-none"
           >
             お問い合わせ
           </a>

@@ -23,7 +23,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col gap-6 p-16">
-      <h1 className="text-2xl font-semibold">WPGraphQL疎通確認</h1>
+      <h1 className="text-2xl font-bold">WPGraphQL疎通確認</h1>
       <ul className="list-disc pl-6">
         {data.cases.nodes.map((node) => (
           <li key={node.title}>{node.title}</li>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowRightIcon } from "@/components/icons/ArrowRightIcon";
 
 interface FooterCta {
   href: string;
@@ -31,7 +32,7 @@ export function SiteFooter() {
           <a
             key={cta.label}
             href={cta.href}
-            className="relative z-0 flex flex-1 flex-col items-center justify-center gap-6 overflow-hidden px-6 py-12 text-center lg:gap-8 lg:py-16"
+            className="group relative z-0 flex flex-1 flex-col items-center justify-center gap-6 overflow-hidden px-6 py-12 text-center lg:gap-8 lg:py-16"
           >
             <Image
               src={cta.imageSrc}
@@ -50,22 +51,11 @@ export function SiteFooter() {
               <span className="text-sm font-bold">{cta.label}</span>
             </div>
 
-            <span className="flex items-center gap-3 border-2 border-accent-1 px-6 py-3 font-fira-sans text-sm text-accent-1 italic lg:border-3 lg:px-8 lg:py-4 lg:text-2xl">
+            {/* ルールセット「矢印つき」：ホバーで黄色に塗りつぶし、文字とアイコン色を反転 */}
+            <span className="flex items-center gap-3 border-2 border-accent-1 px-6 py-3 font-fira-sans text-sm text-accent-1 italic transition-colors duration-300 group-hover:bg-accent-1 group-hover:text-main group-focus-visible:bg-accent-1 group-focus-visible:text-main motion-reduce:transition-none lg:border-3 lg:px-8 lg:py-4 lg:text-2xl">
               View more
-              <Image
-                src="/images/common/icon-arrow-right-sp.svg"
-                alt=""
-                width={18}
-                height={12}
-                className="lg:hidden"
-              />
-              <Image
-                src="/images/common/icon-arrow-right-pc.svg"
-                alt=""
-                width={20}
-                height={14}
-                className="hidden lg:block"
-              />
+              {/* 8px: Figmaのホバー時、矢印がx=250→258へ移動する分 */}
+              <ArrowRightIcon className="h-3 w-[18px] shrink-0 transition-transform duration-300 group-hover:translate-x-[8px] group-focus-visible:translate-x-[8px] motion-reduce:transition-none lg:h-[14px] lg:w-5" />
             </span>
           </a>
         ))}

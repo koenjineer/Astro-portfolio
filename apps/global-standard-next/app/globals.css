@@ -12,14 +12,20 @@
   --font-sans: var(--font-noto-sans-jp);
   --font-fira-sans: var(--font-fira-sans);
   --color-main: #023e78;
+  --color-main-dark: #002a52;
+  --color-main-light: #edf3f8;
   --color-contrast: #1a1a1a;
   --color-contrast-light: #888888;
   --color-accent-1: #fff400;
   --color-accent-2: #e61264;
+  /* Figmaのcolor-base(#ffffff)は登録しない。--color-baseを足すとtext-base(文字色)が
+     生成され、文字サイズを指す既存のtext-baseと衝突するため、白はtext-white/bg-whiteを使う */
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  /* ルールセットの日本語フォントはMedium/Boldの2種のみ。既定をMediumにする */
+  font-weight: 500;
 }

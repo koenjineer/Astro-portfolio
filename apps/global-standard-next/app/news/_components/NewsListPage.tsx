@@ -1,12 +1,8 @@
-import { Breadcrumb } from "@/components/layout/Breadcrumb";
-import { PageHero } from "@/components/layout/PageHero";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SiteHeader } from "@/components/layout/SiteHeader";
 import { newsListHref } from "@/lib/news";
 import type { NewsCategory, NewsPost } from "@/lib/queries/news";
 import { NewsListItem } from "./NewsListItem";
+import { NewsPageShell } from "./NewsPageShell";
 import { NewsPagination } from "./NewsPagination";
-import { NewsSidebar } from "./NewsSidebar";
 
 interface NewsListPageProps {
   /** このページに並べる記事（ページ送り・カテゴリ絞り込み済み） */
@@ -36,50 +32,32 @@ export function NewsListPage({
     : [{ label: "お知らせ" }];
 
   return (
-    <main className="flex flex-col">
-      <SiteHeader />
-      <PageHero
-        eyebrow="NEWS"
-        title="お知らせ"
-        imagePcSrc="/images/news/hero-pc.webp"
-        imageSpSrc="/images/news/hero-sp.webp"
-      />
-      <Breadcrumb items={breadcrumbItems} />
+    <NewsPageShell
+      breadcrumbItems={breadcrumbItems}
+      allPosts={allPosts}
+      categories={categories}
+      currentCategorySlug={currentCategory?.slug}
+    >
+      <div className="flex flex-col items-center gap-10 lg:gap-[60px]">
+        <section className="flex w-full flex-col gap-[25px] lg:gap-5">
+          <h2 className="text-xl leading-[1.2] font-bold text-contrast lg:text-[32px] lg:leading-10">
+            {heading}
+          </h2>
+          <ul className="flex flex-col gap-5 lg:gap-10">
+            {posts.map((post) => (
+              <li key={post.slug}>
+                <NewsListItem post={post} />
+              </li>
+            ))}
+          </ul>
+        </section>
 
-      <div className="px-5 pt-[60px] pb-[100px] lg:px-[90px] lg:pt-[70px] lg:pb-40">
-        <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-[100px] lg:flex-row lg:items-start lg:gap-10">
-          {/* PCは本文760px＋サイドバー300pxだが、1280px未満でも収まるよう本文側を可変にする */}
-          <div className="flex flex-col items-center gap-10 lg:min-w-0 lg:flex-1 lg:gap-[60px]">
-            <section className="flex w-full flex-col gap-[25px] lg:gap-5">
-              <h2 className="text-xl leading-[1.2] font-bold text-contrast lg:text-[32px] lg:leading-10">
-                {heading}
-              </h2>
-              <ul className="flex flex-col gap-5 lg:gap-10">
-                {posts.map((post) => (
-                  <li key={post.slug}>
-                    {/* 詳細ページが未実装のため、いまはリンクにしない */}
-                    <NewsListItem post={post} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <NewsPagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              buildHref={(page) => newsListHref(page, currentCategory?.slug)}
-            />
-          </div>
-
-          <NewsSidebar
-            posts={allPosts}
-            categories={categories}
-            currentCategorySlug={currentCategory?.slug}
-          />
-        </div>
+        <NewsPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          buildHref={(page) => newsListHref(page, currentCategory?.slug)}
+        />
       </div>
-
-      <SiteFooter />
-    </main>
+    </NewsPageShell>
   );
 }

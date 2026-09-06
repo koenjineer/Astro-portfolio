@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { NewsPost } from "@/lib/queries/news";
 
 /**
@@ -35,40 +36,46 @@ export function NewsListItem({ post, variant = "main" }: NewsListItemProps) {
   return (
     // 高さはFigmaどおり固定せず、行内の要素で決める。タイトルを3行で打ち切るため
     // 結果的にFigmaと同じ高さ（SP90px / PC156px）に収まる
-    <article className={`flex items-start ${styles.row}`}>
-      {/* タイトルがすぐ隣にあり、サムネイル自体は情報を足さないのでaltは空にする */}
-      <Image
-        src={post.thumbnailSrc}
-        alt=""
-        width={styles.imageWidth}
-        height={styles.imageHeight}
-        loading="lazy"
-        className={`shrink-0 object-cover ${styles.thumbnail}`}
-      />
+    <article>
+      {/* 行のどこを押しても記事が開くよう、カード全体をリンクにする */}
+      <Link
+        href={`/news/${post.slug}`}
+        className={`group flex items-start ${styles.row}`}
+      >
+        {/* タイトルがすぐ隣にあり、サムネイル自体は情報を足さないのでaltは空にする */}
+        <Image
+          src={post.thumbnailSrc}
+          alt=""
+          width={styles.imageWidth}
+          height={styles.imageHeight}
+          loading="lazy"
+          className={`shrink-0 object-cover ${styles.thumbnail}`}
+        />
 
-      <div className={`flex min-w-0 flex-1 flex-col ${styles.body}`}>
-        <div className="flex items-center justify-between gap-2">
-          {post.category && (
-            <span className="shrink-0 border border-accent-2 px-[10px] py-[4.5px] text-xs text-accent-2 lg:py-[5px] lg:text-sm">
-              {post.category.name}
-            </span>
-          )}
-          {/* ml-auto：カテゴリ未設定の記事でも日付を右端に置く */}
-          <time
-            dateTime={post.isoDate}
-            className="ml-auto shrink-0 text-sm text-contrast-light"
+        <div className={`flex min-w-0 flex-1 flex-col ${styles.body}`}>
+          <div className="flex items-center justify-between gap-2">
+            {post.category && (
+              <span className="shrink-0 border border-accent-2 px-[10px] py-[4.5px] text-xs text-accent-2 lg:py-[5px] lg:text-sm">
+                {post.category.name}
+              </span>
+            )}
+            {/* ml-auto：カテゴリ未設定の記事でも日付を右端に置く */}
+            <time
+              dateTime={post.isoDate}
+              className="ml-auto shrink-0 text-sm text-contrast-light"
+            >
+              {post.displayDate}
+            </time>
+          </div>
+
+          {/* Figmaでは長いタイトルが3行目の末尾で「…」になる */}
+          <h3
+            className={`line-clamp-3 font-bold text-contrast transition-colors duration-300 group-hover:text-main group-focus-visible:text-main motion-reduce:transition-none ${styles.title}`}
           >
-            {post.displayDate}
-          </time>
+            {post.title}
+          </h3>
         </div>
-
-        {/* Figmaでは長いタイトルが3行目の末尾で「…」になる */}
-        <h3
-          className={`line-clamp-3 font-bold text-contrast ${styles.title}`}
-        >
-          {post.title}
-        </h3>
-      </div>
+      </Link>
     </article>
   );
 }

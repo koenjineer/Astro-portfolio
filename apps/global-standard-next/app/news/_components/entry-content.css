@@ -1,0 +1,96 @@
+/* WordPressが組み立てた本文HTMLに、Figmaの「ブロック指示書」
+   （PC node-id=14584-8638 / SP node-id=14584-3661）の見た目を当てる。
+   管理画面で追加されるブロックにクラスを付けて回ることはできないので、
+   Tailwindのユーティリティではなくタグ名を狙ったCSSで書く。
+   色は app/globals.css の @theme inline が出すトークンをそのまま使う。 */
+
+/* Figmaの「セクション」の間隔。ブロック同士は14px、見出しの前だけ30px空ける */
+.entry-content > * + * {
+  margin-top: 14px;
+}
+
+.entry-content > * + :is(h2, h3, h4, h5, h6) {
+  margin-top: 30px;
+}
+
+.entry-content :is(p, ul, ol) {
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--color-contrast);
+}
+
+.entry-content :is(ul, ol) {
+  /* Figmaのリストは行頭記号ぶんだけ字下げされている（li の margin-inline-start 21px） */
+  padding-left: 21px;
+}
+
+.entry-content ul {
+  list-style: disc;
+}
+
+.entry-content ol {
+  list-style: decimal;
+}
+
+.entry-content h2 {
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8;
+  border-left: 6px solid var(--color-main);
+  padding: 10px 20px 10px 26px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-main);
+}
+
+.entry-content h3 {
+  border-bottom: 1px solid var(--color-main);
+  padding-bottom: 10px;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 700;
+  color: var(--color-main);
+}
+
+.entry-content :is(h4, h5, h6) {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--color-main);
+}
+
+.entry-content a {
+  color: var(--color-main);
+  text-decoration: underline;
+  transition: color 300ms;
+}
+
+.entry-content a:hover,
+.entry-content a:focus-visible {
+  color: var(--color-main-dark);
+}
+
+.entry-content blockquote {
+  position: relative;
+  background-color: #f8f8f8;
+  border-left: 4px solid var(--color-main);
+  padding: 30px 35px;
+}
+
+/* Figmaの飾りの引用符。文字の背面に薄いグレーで敷くだけなので、
+   本文HTMLに要素を足さずCSSで描く（読み上げにも乗らない） */
+.entry-content blockquote::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 16px;
+  width: 55px;
+  height: 48px;
+  background: url("/images/news/quote-mark.svg") no-repeat center / contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry-content a {
+    transition: none;
+  }
+}

@@ -159,3 +159,71 @@ export function paginateNews(posts: NewsPost[], page: number): NewsPage {
     totalPages,
   };
 }
+
+interface NewsPostQueryResult {
+  post: (PostNode & { content: string }) | null;
+}
+
+/**
+ * 1記事分。本文は一覧では使わないので、一覧用のクエリには足さず個別に取る。
+ * `idType: SLUG` を付けないと、WordPressはslugをIDとして解釈して見つけられない。
+ */
+const NEWS_POST_QUERY = `
+  query NewsPost($slug: ID!) {
+    post(id: $slug, idType: SLUG) {
+      title
+      slug
+      date
+      content
+      categories {
+        nodes {
+          name
+          slug
+        }
+      }
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+`;
+
+export interface NewsPostDetail extends NewsPost {
+  /** WordPressが組み立て済みのHTML。`entry-content.css` がタグ名で見た目を当てる */
+  contentHtml: string;
+}
+
+export async function getNewsPost(slug: string): Promise<NewsPostDetail> {
+  const data = await graphqlClient.request<NewsPostQueryResult>(
+    NEWS_POST_QUERY,
+    { slug }
+  );
+
+  if (!data.post) {
+    throw new Error(`お知らせ（slug: ${slug}）が見つかりませんでした`);
+  }
+
+  return { ...toNewsPost(data.post), contentHtml: data.post.content };
+}
+
+export interface AdjacentNewsPosts {
+  /** 1つ古い記事。WordPressの「前の記事」にあたる */
+  older: NewsPost | null;
+  /** 1つ新しい記事 */
+  newer: NewsPost | null;
+}
+
+/** `posts`は新しい順。配列の後ろほど古い記事になる */
+export function getAdjacentNewsPosts(
+  posts: NewsPost[],
+  slug: string
+): AdjacentNewsPosts {
+  const index = posts.findIndex((post) => post.slug === slug);
+
+  return {
+    older: posts[index + 1] ?? null,
+    newer: index > 0 ? posts[index - 1] : null,
+  };
+}

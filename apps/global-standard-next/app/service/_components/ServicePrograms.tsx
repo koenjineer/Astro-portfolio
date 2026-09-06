@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { ArrowRightIcon } from "@/components/icons/ArrowRightIcon";
+import { COURSES, type Course } from "@/lib/courses";
 
 interface ServiceProgram {
   number: string;
-  englishName: string;
-  title: string;
+  /** 見出しの文言とページ内アンカーのid。導入事例ページと共有する（lib/courses.ts） */
+  course: Course;
   /** 空行で区切られたブロック。ブロック内の文はデザインどおり行を詰めて並べる */
   paragraphBlocks: string[][];
   cost: string;
@@ -28,8 +29,7 @@ const DIAGONAL_BACKGROUND_CLIP_PATH =
 const SERVICE_PROGRAMS: ServiceProgram[] = [
   {
     number: "01",
-    englishName: "Business English Training",
-    title: "ビジネス英語研修",
+    course: COURSES[0],
     paragraphBlocks: [
       [
         "ビジネス英会話はこれからの時代、すべてのビジネスパーソンが学ぶべき必須スキルと考えおります。",
@@ -49,8 +49,7 @@ const SERVICE_PROGRAMS: ServiceProgram[] = [
   },
   {
     number: "02",
-    englishName: "Cross-cultural communication",
-    title: "異文化コミュニケーション",
+    course: COURSES[1],
     paragraphBlocks: [
       [
         "急速にグローバル化が進んでおり、ビジネスの場面に限らず様々な文化的背景を持つ者同士の交流はもはや日常的な光景となりました。",
@@ -70,8 +69,7 @@ const SERVICE_PROGRAMS: ServiceProgram[] = [
   },
   {
     number: "03",
-    englishName: "Business study abroad program",
-    title: "ビジネス留学プログラム",
+    course: COURSES[2],
     paragraphBlocks: [
       [
         "将来的に海外で働きたい方に向けた講座をご用意しております。一般的には3ヶ月〜1年の期間で基本的な英会話スキルと、海外でのビジネスマナー習得を目指します。",
@@ -108,9 +106,12 @@ export function ServicePrograms() {
 
       <ul className="flex w-full max-w-[1100px] flex-col gap-16 lg:gap-20">
         {SERVICE_PROGRAMS.map((program) => (
+          // scroll-mt: 導入事例からアンカーで着地したとき、白い箱の上辺からはみ出す番号が
+          // 画面上端で切れないよう、番号の高さ（SP44px / PC53px）ぶんの余白を空ける
           <li
             key={program.number}
-            className={`relative isolate flex flex-col lg:flex-row lg:items-start ${
+            id={program.course.slug}
+            className={`relative isolate scroll-mt-14 flex flex-col lg:scroll-mt-20 lg:flex-row lg:items-start ${
               program.reverseOnDesktop ? "lg:flex-row-reverse" : ""
             }`}
           >
@@ -132,7 +133,7 @@ export function ServicePrograms() {
             >
               <Image
                 src={program.imageSrc}
-                alt={`${program.title}のイメージ`}
+                alt={`${program.course.title}のイメージ`}
                 fill
                 loading="lazy"
                 className="object-cover"
@@ -158,10 +159,10 @@ export function ServicePrograms() {
 
               <header className="flex flex-col gap-1">
                 <h3 className="text-[28px] font-bold text-contrast lg:text-[40px]">
-                  {program.title}
+                  {program.course.title}
                 </h3>
                 <p className="font-fira-sans text-sm text-main italic lg:text-base">
-                  {program.englishName}
+                  {program.course.englishName}
                 </p>
               </header>
 

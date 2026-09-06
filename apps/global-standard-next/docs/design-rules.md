@@ -50,6 +50,25 @@ Figma「ルールセット」（[node-id=14592-6198](https://www.figma.com/desig
 矢印は `components/icons/ArrowRightIcon.tsx`（塗りが `currentColor`）を使う。
 親の文字色に追従するので、色反転のために色違いのSVGファイルを増やさなくてよい。
 
+## トップへ戻るボタン
+
+`components/layout/BackToTop.tsx`。Figmaではフッター内に置かれているが、実装では
+**画面右下に追従**させ、300px以上スクロールすると現れる（`SiteFooter` から描画）。
+
+アイコン `icon-top-pc.svg` は輪も矢印も白一色で、暗いフッター専用に作られている。
+追従させると本文の白地や写真の上に乗って見えなくなるため、`rounded-full bg-main` で
+紺の丸を敷いている。ホバーは「背景塗りつぶし」パターン（`main-dark`）。
+
+`z-30`：SPメニュー（`z-40`、ヘッダー `z-50` の内側）より下に潜らせ、メニューを開いている
+間はボタンが上に乗らないようにする。
+
+## ページ内リンクのスクロール
+
+ページ内アンカー（導入事例のカテゴリーボタン等）は、`app/layout.tsx` の `<html>` に付けた
+`motion-safe:scroll-smooth` でなめらかにスクロールする。
+`motion-safe:` なので、OSで「視差効果を減らす」を有効にしている人には従来どおり瞬時に移動する
+（ホバーに `motion-reduce:transition-none` を添えるのと同じ考え方）。
+
 **SPメニュー内のボタンにはホバーを付けない。** タッチ端末では発火せず、
 かつ `lg:hidden` でPC幅では表示されないため。
 

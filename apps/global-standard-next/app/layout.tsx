@@ -43,9 +43,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
+    // motion-safe:scroll-smooth：ページ内アンカー（導入事例のカテゴリーボタン等）を
+    // なめらかにスクロールさせる。動きを減らす設定の人には従来どおり瞬時に移動する
     <html
       lang="ja"
-      className={`${notoSansJp.variable} ${firaSans.variable} h-full antialiased`}
+      className={`${notoSansJp.variable} ${firaSans.variable} h-full antialiased motion-safe:scroll-smooth`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

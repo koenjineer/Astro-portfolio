@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BackToTop } from "@/components/layout/BackToTop";
 import { ArrowRightIcon } from "@/components/icons/ArrowRightIcon";
 
 interface FooterCta {
@@ -26,7 +27,7 @@ const FOOTER_CTAS: FooterCta[] = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative flex flex-col gap-8 bg-contrast p-0 text-white">
+    <footer className="flex flex-col gap-8 bg-contrast p-0 text-white">
       <div className="flex flex-col gap-0 lg:flex-row lg:justify-center">
         {FOOTER_CTAS.map((cta) => (
           <a
@@ -76,13 +77,9 @@ export function SiteFooter() {
         ©︎2021 Global Standard. All Rights Reserved.
       </p>
 
-      <a
-        href="#"
-        aria-label="ページトップへ戻る"
-        className="absolute right-4 bottom-4 size-10 lg:right-5 lg:bottom-10"
-      >
-        <Image src="/images/common/icon-top-pc.svg" alt="" fill />
-      </a>
+      {/* 全ページにこのフッターがあるため、ここに置けば各ページを触らずに
+          画面追従の「トップへ戻る」を出せる（表示位置はfixedでフッターに依存しない） */}
+      <BackToTop />
     </footer>
   );
 }

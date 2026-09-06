@@ -59,6 +59,20 @@ Next.js側の実装だけを進める場合は読まなくてよい。
 エンドポイント: `http://global-standard-cms.local/graphql`
 GraphiQL IDE: `http://global-standard-cms.local/wp-admin/admin.php?page=graphiql-ide`
 
+## お知らせのアイキャッチ画像の扱い
+
+投稿15件のうち11件にアイキャッチ画像を設定してある（ファイル名は `thumb-01.webp` 〜 `thumb-11.webp`）。
+残り4件は未設定で、Figmaどおり「Global Standard」のプレースホルダー画像が出る。
+
+Next.js側は **アイキャッチのURLをそのまま使わず、ファイル名だけを取り出して
+`public/images/news/<ファイル名>` を読む**（`lib/queries/news.ts` の `toThumbnailSrc`）。
+WordPressはユーザーのMac内にしか無く、Vercelに置いた静的サイトの閲覧者からは
+`global-standard-cms.local` の画像に到達できないため。
+
+つまり **「どの記事にどの画像か」だけをWordPressに持たせ、画像の実体はリポジトリから配る**。
+画像を差し替えるときは、同じファイル名の画像を `public/images/news/` にも置くこと。
+新しいファイル名でアップロードした場合も同様（置き忘れると画像が404になる）。
+
 ## ハマりどころ（同じミスを繰り返さないための記録）
 
 WordPress管理画面での作業中、以下の設定漏れ・不具合が発生し修正した。

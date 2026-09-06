@@ -45,10 +45,16 @@ Figma「ルールセット」（[node-id=14592-6198](https://www.figma.com/desig
 | 背景塗りつぶし | 背景を `main-dark` に濃くする | `components/layout/SiteHeader.tsx`「お問い合わせ」 |
 | 矢印つき（白背景） | 背景を `main` で塗りつぶし、文字とアイコンを白に反転。矢印を右へ+10px | `app/service/_components/ServicePrograms.tsx`「お申し込みはこちら」 |
 | 矢印つき（画像上・黄枠） | 背景を `accent-1` で塗りつぶし、文字とアイコンを `main` に反転。矢印を右へ+8px | `components/layout/SiteFooter.tsx`「View more」 |
+| ページ送りの数字 | 背景 `#f8f8f8` を `main` で塗りつぶし、文字を白に | `app/news/_components/NewsPagination.tsx` |
+| サイドバーのカテゴリ | 文字を `main` に。シェブロンを右へ+4px | `app/news/_components/NewsSidebar.tsx` |
 | トップページ「View more」 | 矢印が右に伸びる | **未実装**（トップページ実装時に対応） |
 
-矢印は `components/icons/ArrowRightIcon.tsx`（塗りが `currentColor`）を使う。
+下2つはFigmaに指定が無く、上の4パターンの考え方を当てはめて決めたもの。
+
+矢印は `components/icons/ArrowRightIcon.tsx`、シェブロンは
+`components/icons/ChevronRightIcon.tsx`（どちらも塗りが `currentColor`）を使う。
 親の文字色に追従するので、色反転のために色違いのSVGファイルを増やさなくてよい。
+シェブロンはページ送りの「次へ」と「前へ」でも使い、「前へ」は `rotate-180` で向きを変える。
 
 ## トップへ戻るボタン
 

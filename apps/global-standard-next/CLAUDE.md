@@ -108,6 +108,15 @@ WordPress側の状態・確認済みクエリ・管理画面のハマりどこ�
 カテゴリーボタン3つはページ内アンカー、各セクション末尾のボタンは
 サービスページの該当コース（`/service#<コースslug>`）へ飛ぶ。
 
+### お知らせページ
+
+一覧のPC版は空フレーム（node-id=14592-6194）が重なっているので、中身のある方を見る。
+
+- 一覧 PC版: node-id=14502-3023 ／ 一覧 SP版: node-id=14662-8527
+- 詳細 PC版: node-id=14662-3124 ／ 詳細 SP版: node-id=14662-3144
+- 詳細のブロック指示書: PC node-id=14584-8638 ／ SP node-id=14584-3661
+- 記事15件の原稿: node-id=14724-4127 ／ サムネイル11枚: node-id=14724-4272
+
 （このFigma参照URLは、該当ページの実装が完了しても個別には削除しない。
 プロジェクト完了時にルートCLAUDE.mdの「有効性」原則に従い一括棚卸しする）
 
@@ -117,7 +126,8 @@ Figmaの「コンポーネント置き場」（node-id=14662-3153）に定義さ
 
 - **2ページ以上で使う部品** → `components/`（`@/components/...` で参照）
   - `components/layout/`：SiteHeader / SiteFooter / PageHero / Breadcrumb
-  - `components/icons/`：ArrowRightIcon（塗りは`currentColor`。親の文字色に追従させる）
+  - `components/icons/`：ArrowRightIcon / ChevronRightIcon
+    （塗りは`currentColor`。親の文字色に追従させる）
 - **1ページでしか使わない部品** → `app/<page>/_components/`
 - PC/SPはFigmaでは別コンポーネントだが、コードでは**1コンポーネント内でTailwindのレスポンシブクラスで出し分ける**
 - 共通部品が使う画像は `public/images/common/`、ページ固有の画像は `public/images/<page>/`
@@ -143,11 +153,20 @@ Figmaの「コンポーネント置き場」（node-id=14662-3153）に定義さ
 箱に内側余白は無く、文字の行送りがそのまま箱の高さになる。
 ロゴ画像は投稿のslugと一致（`logo-aaa.webp` ⇔ slug `aaa`）。
 
-以降この2ページは、残りページの実装で共通部品を触った時だけ確認する。
+**お知らせ一覧ページ完了（2026-09-06）**：`/news`。WPの投稿15件を新しい順に1ページ9件で出す。
+ページ送りと絞り込みはURLを分ける（`/news/page/2`、`/news/category/<slug>`、
+`/news/category/<slug>/page/2`）。4ルートとも `app/news/_components/NewsListPage.tsx` を呼ぶだけ。
+`generateStaticParams` は**1ページ目も含めて**返す。`output: export` では空配列を返すとビルドが
+止まるため（記事が9件以下だと2ページ目が生まれず空になる）。`/news/page/1` はどこからもリンクしない。
+カテゴリの並びと1ページの件数は `lib/news.ts` に集約。WP既定の `uncategorized` はここで弾く。
+サムネイルはWPのアイキャッチで管理するが、画像の実体はリポジトリから配る（理由は `docs/wordpress.md`）。
+
+以降この3ページは、残りページの実装で共通部品を触った時だけ確認する。
 
 積み残し（他ページ・機能の実装で解消する）：
 
-- ヘッダー・フッター・申込ボタンの `href="#"` 残り5か所は、遷移先ページとFormspreeの実装時に差し替える
+- 一覧の各行は**まだリンクにしていない**。詳細ページを作るときに `/news/<slug>` へのリンクにする
+- ヘッダー・フッター・申込ボタンの `href="#"` 残り4か所は、遷移先ページとFormspreeの実装時に差し替える
 - OGP画像のURLが `localhost` のまま。デプロイ時に環境変数 `NEXT_PUBLIC_SITE_URL` に本番ドメインを入れる
 - ルールセットのうち、トップページの「View more」と導入事例カードのホバーは未実装
   （仕様は `docs/design-rules.md` に記載済み）
@@ -159,8 +178,8 @@ Figmaの「コンポーネント置き場」（node-id=14662-3153）に定義さ
 残りのページを、下の順番で実装する。共通レイアウトは `components/layout/`、
 カラー・フォント・ホバーは `docs/design-rules.md` に従う。画像は配置済み。
 
-1. **お知らせ（一覧＋詳細）** — 導入事例に詳細ページが無かったため、
-   「一覧→詳細」の型はここで作る。静的書き出しなので詳細ページには `generateStaticParams` が要る
+1. **お知らせ詳細** — `/news/<slug>` を `generateStaticParams` で書き出し、
+   一覧の各行からリンクする。本文の見せ方はFigmaの「ブロック指示書」に従う
 2. **当社について** — データ連携なし、レイアウトのみ
 3. **資料ダウンロード・お問い合わせ** — Formspree連携
 4. **トップページ（最後）** — トップは他ページの部品（導入事例カード・お知らせ一覧・Swiper）を

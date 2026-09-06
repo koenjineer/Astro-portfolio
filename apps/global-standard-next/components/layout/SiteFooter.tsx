@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { ArrowRightIcon } from "@/components/icons/ArrowRightIcon";
 
@@ -9,10 +10,10 @@ interface FooterCta {
   imageSrc: string;
 }
 
-// 遷移先ページ未実装のため#（本格的な共通レイアウト実装は別タスク）
+// お問い合わせページは未実装のため#のまま（実装時に実リンクへ差し替える）
 const FOOTER_CTAS: FooterCta[] = [
   {
-    href: "#",
+    href: "/download",
     englishLabel: "download",
     label: "資料ダウンロード",
     imageSrc: "/images/common/footer-download.webp",
@@ -30,7 +31,7 @@ export function SiteFooter() {
     <footer className="flex flex-col gap-8 bg-contrast p-0 text-white">
       <div className="flex flex-col gap-0 lg:flex-row lg:justify-center">
         {FOOTER_CTAS.map((cta) => (
-          <a
+          <Link
             key={cta.label}
             href={cta.href}
             className="group relative z-0 flex flex-1 flex-col items-center justify-center gap-6 overflow-hidden px-6 py-12 text-center lg:gap-8 lg:py-16"
@@ -58,7 +59,7 @@ export function SiteFooter() {
               {/* 8px: Figmaのホバー時、矢印がx=250→258へ移動する分 */}
               <ArrowRightIcon className="h-3 w-[18px] shrink-0 transition-transform duration-300 group-hover:translate-x-[8px] group-focus-visible:translate-x-[8px] motion-reduce:transition-none lg:h-[14px] lg:w-5" />
             </span>
-          </a>
+          </Link>
         ))}
       </div>
 

@@ -48,7 +48,7 @@ Astro-portfolio/（リポジトリルート）
     │   └── CLAUDE.md
     └── global-standard-next/    ← 本プロジェクト
         ├── CLAUDE.md            ← このファイル
-        ├── docs/design-rules.md ← デザインの決まりごと
+        ├── docs/                ← design-rules.md（デザイン）/ wordpress.md（WP側）
         ├── app/                 ← ページ本体（+ ページ固有の_components/）
         ├── components/          ← 共通部品（layout/ · icons/）
         ├── lib/                 ← WPGraphQL接続・クエリ
@@ -58,80 +58,20 @@ Astro-portfolio/（リポジトリルート）
 Vercelは本プロジェクト用に新規プロジェクトとして追加し、Root Directoryを
 `apps/global-standard-next`に指定する。既存Astroのデプロイ設定には触れない。
 
-## WordPress側の状態（完成済み）
+WordPress側の状態・確認済みクエリ・管理画面のハマりどころは `docs/wordpress.md`。
 
-- カスタム投稿タイプ「研修事例」（スラッグ: `case`、GraphQL名: `case`/`cases`）
-- タクソノミー「研修コース」（スラッグ: `business`、GraphQL名: `businessCourse`/`businessCourses`、階層型）
-  - ターム3件: ビジネス英語研修 / 異文化コミュニケーション / ビジネス留学プログラム
-- ACFフィールドグループ「導入事例」（GraphQL Type Name: `CaseFields`）
-  - `businessField`, `before`, `reason`, `after`
-- ACFフィールドグループ「サービス」（GraphQL Type Name: `ServiceFaqFields`、固定ページ「サービス」に紐付け）
-  - `question1`〜`question8`, `answer1`〜`answer8`（全16フィールド）
-- 固定ページ「サービス」、投稿15件（お知らせ）、研修事例9社分のデータ投入済み
+## ⚠️ デプロイの制約（未解決）
 
-## WPGraphQL疎通確認済みのクエリ例
+**Vercel上でビルドすることはできない。**
+`output: "export"` はビルド時にWordPressからデータを取りに行くが、WordPressは
+ユーザーのMac内（`global-standard-cms.local`）にしかなく、Vercelのビルドサーバーからは見えないため。
 
-### 研修事例一覧
-```graphql
-{
-  cases(first: 5) {
-    nodes {
-      title
-      caseFields {
-        businessField
-        before
-        reason
-        after
-      }
-      businessCourses {
-        nodes {
-          name
-        }
-      }
-    }
-  }
-}
-```
+対応案（デプロイ着手時に決める。現時点の推奨は1）：
 
-### サービスページのFAQ
-```graphql
-{
-  pages(where: {title: "サービス"}) {
-    nodes {
-      title
-      serviceFaqFields {
-        question1
-        answer1
-        question2
-        answer2
-        # ... question8/answer8まで同様
-      }
-    }
-  }
-}
-```
-
-エンドポイント: `http://global-standard-cms.local/graphql`
-GraphiQL IDE: `http://global-standard-cms.local/wp-admin/admin.php?page=graphiql-ide`
-
-## ハマりどころ（同じミスを繰り返さないための記録）
-
-WordPress管理画面での作業中、以下の設定漏れ・不具合が発生し修正した。
-Next.js側の実装には直接関係ないが、WP側を追加で触る場合は要注意。
-
-1. **CPT UIでカスタムタクソノミー作成時**、「階層（Hierarchical）」が既定でFalseになっており、
-   投稿編集画面でチェックボックス式の選択UIにならず自由入力のタグ形式になっていた。
-   → Trueに変更して解決。
-
-2. **CPT UI・ACFとも「GraphQLに表示する」設定と「GraphQL用の名前」が、
-   日本語ラベルとは別に明示的な設定が必要**。日本語のまま放置すると、
-   投稿タイプ自体やACFフィールドグループがGraphQLスキーマに登録されない、
-   またはフィールド名が数字だけの壊れた値になる不具合が起きた。
-   → 投稿タイプ・タクソノミー・ACFフィールドグループそれぞれで、GraphQL名を英数字に設定する。
-
-3. **ACFの個別フィールドのGraphQL Field Name欄は、JavaScriptでのDOM直接操作（`input.value`書き換え）では
-   保存時に反映されない**（Reactのcontrolled component仕様のため）。
-   実際のUI操作（クリック→選択→タイプ）でないと変更が保存されないことを確認済み。
+1. ローカルで `pnpm build` し、できた `out/` をVercelに上げる（無料・WPを公開しなくてよい。
+   記事を直すたびにローカルでビルドし直す運用になる）
+2. WordPressを公開サーバーへ移す（費用と手間がかかる）
+3. ビルド時にWPのデータをJSONへ書き出し、リポジトリに含める
 
 ## 進め方の合意事項
 
@@ -192,6 +132,17 @@ Figmaの「コンポーネント置き場」（node-id=14662-3153）に定義さ
 
 ## 次のアクション
 
-1. 残り7ページの実装（共通レイアウトは `components/layout/`、
-   カラー・フォント・ホバーは `docs/design-rules.md` に従う）
-2. Swiper・Formspree・デプロイ
+残り7ページを、下の順番で実装する。共通レイアウトは `components/layout/`、
+カラー・フォント・ホバーは `docs/design-rules.md` に従う。画像は配置済み。
+
+1. **導入事例（一覧＋詳細）** — WP側（CPT `case`・タクソノミー・ACF）が完成済みなので、
+   ここで「一覧→詳細」の型を作る。静的書き出しなので詳細ページには `generateStaticParams` が要る
+2. **お知らせ（一覧＋詳細）** — 1で作った型をほぼそのまま使える
+3. **当社について** — データ連携なし、レイアウトのみ
+4. **資料ダウンロード・お問い合わせ** — Formspree連携
+5. **トップページ（最後）** — トップは他ページの部品（導入事例カード・お知らせ一覧・Swiper）を
+   並べたページ。先に作ると同じ部品を2度作ることになるため、必ず最後に回す
+
+その後：デプロイ（上の「デプロイの制約」を参照）。
+
+`href="#"` の6か所は、遷移先ページが揃った段階でまとめて差し替える。

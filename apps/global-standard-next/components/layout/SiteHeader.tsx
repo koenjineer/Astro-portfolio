@@ -15,7 +15,7 @@ interface NavItem {
 // 遷移先ページ未実装のため#
 const NAV_ITEMS: NavItem[] = [
   { label: "トップ", href: "/" },
-  { label: "当社について", href: "#" },
+  { label: "当社について", href: "/about" },
   { label: "サービス", href: "/service" },
   { label: "導入事例", href: "/case" },
   { label: "お知らせ", href: "/news" },

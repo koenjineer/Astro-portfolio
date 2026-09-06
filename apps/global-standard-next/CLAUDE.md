@@ -172,6 +172,9 @@ Figmaの「コンポーネント置き場」（node-id=14662-3153）に定義さ
 - **1ページでしか使わない部品** → `app/<page>/_components/`
 - PC/SPはFigmaでは別コンポーネントだが、コードでは**1コンポーネント内でTailwindのレスポンシブクラスで出し分ける**
 - 共通部品が使う画像は `public/images/common/`、ページ固有の画像は `public/images/<page>/`
+  - 記事・事例と対になる画像（`case/` のロゴ、`news/` のサムネイル）は、
+    トップページからも読むが**元のページのディレクトリに置く**。common/ は共通部品用に保つ
+- favicon は `app/icon.png`、OGP画像は `app/opengraph-image.png`（Next.jsの規約名）
 
 ## 進捗
 
@@ -182,6 +185,8 @@ Figmaの「コンポーネント置き場」（node-id=14662-3153）に定義さ
 積み残し（サービスページ側の作業ではなく、他ページ・機能の実装で解消する）：
 
 - ヘッダー・フッター・申込ボタンの `href="#"` 6か所は、遷移先ページとFormspreeの実装時に差し替える
+- OGP画像のURLが `localhost` のまま。デプロイ時に環境変数 `NEXT_PUBLIC_SITE_URL` に本番ドメインを入れる
+- `case/logo-aaa`〜`logo-iii` と研修事例9社の対応付けは、導入事例ページの実装時に決める
 - ルールセットのうち、トップページの「View more」と導入事例カードのホバーは未実装
   （仕様は `docs/design-rules.md` に記載済み）
 

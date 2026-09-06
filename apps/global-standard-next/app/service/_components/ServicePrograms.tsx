@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRightIcon } from "@/components/icons/ArrowRightIcon";
 import { COURSES, type Course } from "@/lib/courses";
 
@@ -193,14 +194,14 @@ export function ServicePrograms() {
               </dl>
 
               {/* ルールセット「矢印つき」：ホバーで背景塗りつぶし＋文字とアイコン色を反転 */}
-              <a
-                href="#"
+              <Link
+                href="/contact"
                 className="group relative flex h-[72px] w-full items-center justify-center border border-main bg-white text-sm font-medium text-main transition-colors duration-300 hover:bg-main hover:text-white focus-visible:bg-main focus-visible:text-white motion-reduce:transition-none lg:mx-auto lg:w-[304px] lg:text-base"
               >
                 お申し込みはこちら
                 {/* 10px: Figmaのホバー時、矢印がx=293.89→303.89へ移動する分 */}
                 <ArrowRightIcon className="absolute right-3 h-3 w-[18px] transition-transform duration-300 group-hover:translate-x-[10px] group-focus-visible:translate-x-[10px] motion-reduce:transition-none lg:right-5 lg:h-[14px] lg:w-5" />
-              </a>
+              </Link>
             </article>
           </li>
         ))}

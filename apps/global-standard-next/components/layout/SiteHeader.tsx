@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const MOBILE_MENU_ID = "site-header-mobile-menu";
@@ -12,7 +13,6 @@ interface NavItem {
   href: string;
 }
 
-// 遷移先ページ未実装のため#
 const NAV_ITEMS: NavItem[] = [
   { label: "トップ", href: "/" },
   { label: "当社について", href: "/about" },
@@ -21,8 +21,18 @@ const NAV_ITEMS: NavItem[] = [
   { label: "お知らせ", href: "/news" },
 ];
 
+/**
+ * 現在地の判定。トップだけは完全一致で見る（"/" は全パスの先頭に一致してしまうため）。
+ * 下層（/news/<slug> や /news/page/2）でも親のナビ項目を現在地として光らせる。
+ */
+function isCurrentNavItem(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -48,18 +58,37 @@ export function SiteHeader() {
         Global standard
       </p>
 
-      <div className="hidden items-center gap-8 lg:flex">
+      <div className="hidden items-center gap-[30px] lg:flex">
         <nav aria-label="グローバルナビゲーション">
           <ul className="flex items-center gap-4 text-sm font-medium text-contrast">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.label}>
-                <Link href={item.href}>{item.label}</Link>
-              </li>
-            ))}
+            {NAV_ITEMS.map((item, index) => {
+              const isCurrent = isCurrentNavItem(pathname, item.href);
+
+              return (
+                <li key={item.label} className="flex items-center gap-4">
+                  {/* Figmaは項目のあいだを「／」で区切る。読み上げには意味が無いので飾り扱い */}
+                  {index > 0 && <span aria-hidden="true">／</span>}
+                  {/* 現在地は常時2pxの下線、ホバーは1pxの下線。太さを変えて
+                      「今いるページ」と「指しているだけのページ」を見分けられるようにする。
+                      現在地にはホバーのclassを当てない（後から来る方が勝って細くなるため） */}
+                  <Link
+                    href={item.href}
+                    aria-current={isCurrent ? "page" : undefined}
+                    className={
+                      isCurrent
+                        ? "text-main underline decoration-2 underline-offset-8"
+                        : "underline-offset-8 transition-colors duration-300 hover:text-main hover:underline focus-visible:text-main focus-visible:underline motion-reduce:transition-none"
+                    }
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
-        <div className="flex">
+        <div className="flex gap-[10px]">
           {/* ルールセット「枠線+白背景」：ホバーで背景を塗りつぶす */}
           <Link
             href="/download"
@@ -116,13 +145,25 @@ export function SiteHeader() {
       >
         {/* leading-[23px]: Figmaの行高。既定の24pxだと5項目で画面からはみ出す */}
         <ul className="flex flex-col items-center gap-[41px] text-base leading-[23px] text-white">
-          {NAV_ITEMS.map((item) => (
-            <li key={item.label}>
-              <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const isCurrent = isCurrentNavItem(pathname, item.href);
+
+            return (
+              <li key={item.label}>
+                {/* ホバーは付けない（タッチでは発火しない）。現在地の下線だけ出す */}
+                <Link
+                  href={item.href}
+                  aria-current={isCurrent ? "page" : undefined}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={
+                    isCurrent ? "underline decoration-2 underline-offset-8" : ""
+                  }
+                >
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex w-full max-w-[295px] flex-col gap-8">

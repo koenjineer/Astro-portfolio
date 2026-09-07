@@ -39,6 +39,12 @@ export interface CaseItem {
   outcome: string;
 }
 
+export interface CaseListItem extends CaseItem {
+  /** この事例が属する研修コース。コース別にまとめない一覧で1件ずつが持つ */
+  courseTitle: string;
+  courseSlug: string;
+}
+
 export interface CaseCourseGroup {
   slug: string;
   title: string;
@@ -81,6 +87,43 @@ function toCaseItem(node: CaseNode): CaseItem {
   };
 }
 
+/** 事例の取得はここ1か所。コース別（/case）と平ら（トップページ）で同じ結果を組み替える */
+async function fetchCaseNodes(): Promise<CaseNode[]> {
+  const data = await graphqlClient.request<CasesQueryResult>(CASE_LIST_QUERY);
+
+  if (data.cases.nodes.length === 0) {
+    throw new Error("導入事例（case）が1件も見つかりませんでした");
+  }
+
+  return data.cases.nodes;
+}
+
+/** WordPressのタクソノミーが複数付いていても、表示に使うコースは先頭の1つに絞る */
+function findCourse(node: CaseNode) {
+  return COURSES.find((course) =>
+    node.businessCourses.nodes.some(
+      (businessCourse) => businessCourse.slug === course.slug
+    )
+  );
+}
+
+/**
+ * 導入事例を投稿日の昇順（Figmaのカード順 AAA→III）で平らに返す。
+ * トップページは先頭6件だけを出す。仕様書は「最新の6件」だが9件とも投稿日が同じで
+ * 新旧を決められないため、Figmaのモックおよび /case の並びと揃えて先頭から取る。
+ */
+export async function getCaseItems(): Promise<CaseListItem[]> {
+  const caseNodes = await fetchCaseNodes();
+
+  return caseNodes.flatMap((node) => {
+    const course = findCourse(node);
+
+    return course
+      ? [{ ...toCaseItem(node), courseTitle: course.title, courseSlug: course.slug }]
+      : [];
+  });
+}
+
 /**
  * 導入事例をコース別にまとめて返す。
  * 並び順はWordPressの返却順ではなくlib/courses.tsのCOURSESの順に固定する。
@@ -88,8 +131,7 @@ function toCaseItem(node: CaseNode): CaseItem {
  * 作るので、飛び先の無いアンカーが生まれないようにするため。
  */
 export async function getCaseCourseGroups(): Promise<CaseCourseGroup[]> {
-  const data = await graphqlClient.request<CasesQueryResult>(CASE_LIST_QUERY);
-  const caseNodes = data.cases.nodes;
+  const caseNodes = await fetchCaseNodes();
 
   const groups = COURSES.map((course) => ({
     slug: course.slug,
@@ -105,7 +147,7 @@ export async function getCaseCourseGroups(): Promise<CaseCourseGroup[]> {
   })).filter((group) => group.cases.length > 0);
 
   if (groups.length === 0) {
-    throw new Error("導入事例（case）が1件も見つかりませんでした");
+    throw new Error("導入事例（case）にコースが1つも紐づいていませんでした");
   }
 
   return groups;

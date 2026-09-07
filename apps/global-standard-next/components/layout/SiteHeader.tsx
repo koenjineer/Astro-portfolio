@@ -18,7 +18,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "当社について", href: "#" },
   { label: "サービス", href: "/service" },
   { label: "導入事例", href: "/case" },
-  { label: "お知らせ", href: "#" },
+  { label: "お知らせ", href: "/news" },
 ];
 
 export function SiteHeader() {

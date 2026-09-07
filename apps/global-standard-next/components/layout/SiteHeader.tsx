@@ -15,7 +15,7 @@ interface NavItem {
 // 遷移先ページ未実装のため#
 const NAV_ITEMS: NavItem[] = [
   { label: "トップ", href: "/" },
-  { label: "当社について", href: "#" },
+  { label: "当社について", href: "/about" },
   { label: "サービス", href: "/service" },
   { label: "導入事例", href: "/case" },
   { label: "お知らせ", href: "/news" },
@@ -61,12 +61,12 @@ export function SiteHeader() {
 
         <div className="flex">
           {/* ルールセット「枠線+白背景」：ホバーで背景を塗りつぶす */}
-          <a
-            href="#"
+          <Link
+            href="/download"
             className="flex h-[68px] w-[176px] items-center justify-center border border-main bg-white text-sm font-medium text-main transition-colors duration-300 hover:bg-main hover:text-white focus-visible:bg-main focus-visible:text-white motion-reduce:transition-none"
           >
             資料ダウンロード
-          </a>
+          </Link>
           {/* ルールセット「背景塗りつぶし」：ホバーで背景色を濃くする */}
           <a
             href="#"
@@ -126,13 +126,13 @@ export function SiteHeader() {
         </ul>
 
         <div className="flex w-full max-w-[295px] flex-col gap-8">
-          <a
-            href="#"
+          <Link
+            href="/download"
             onClick={() => setIsMenuOpen(false)}
             className="flex h-[68px] items-center justify-center border border-white text-base font-medium text-white"
           >
             資料ダウンロード
-          </a>
+          </Link>
           <a
             href="#"
             onClick={() => setIsMenuOpen(false)}

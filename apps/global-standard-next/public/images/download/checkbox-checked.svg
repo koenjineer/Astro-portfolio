@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Checkbox">
+<rect id="Area" x="0.5" y="0.5" width="31" height="31" fill="white" stroke="#3E3E3E"/>
+<g id="Check">
+<path d="M10 16.2075L14.4966 20.7041L22.7041 12.4966" fill="#F9F9F9"/>
+<path d="M10 16.2075L14.4966 20.7041L22.7041 12.4966" stroke="#3E3E3E" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

@@ -10,7 +10,6 @@ interface FooterCta {
   imageSrc: string;
 }
 
-// お問い合わせページは未実装のため#のまま（実装時に実リンクへ差し替える）
 const FOOTER_CTAS: FooterCta[] = [
   {
     href: "/download",
@@ -19,7 +18,7 @@ const FOOTER_CTAS: FooterCta[] = [
     imageSrc: "/images/common/footer-download.webp",
   },
   {
-    href: "#",
+    href: "/contact",
     englishLabel: "contact",
     label: "お問い合わせ",
     imageSrc: "/images/common/footer-contact.webp",

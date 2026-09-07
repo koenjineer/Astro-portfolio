@@ -13,7 +13,7 @@
 | フロントエンド | Next.js（SSG、`output: 'export'`） |
 | バックエンド | WordPress（ローカルのみ、DB非公開） |
 | API連携 | WPGraphQL + WPGraphQL for ACF |
-| フォーム | Formspree（無料枠） |
+| フォーム | 送信しない（架空の会社なので送信先を作らない。詳細は `docs/progress.md`） |
 | デプロイ先 | Vercel |
 | スタイリング | Tailwind CSS（既存Astroポートフォリオと統一） |
 | ローカルWP環境 | Local（旧Local by Flywheel） |
@@ -50,7 +50,7 @@ Astro-portfolio/（リポジトリルート）
         ├── CLAUDE.md            ← このファイル
         ├── docs/                ← progress.md（進捗）/ design-rules.md（デザイン）/ wordpress.md（WP側）
         ├── app/                 ← ページ本体（+ ページ固有の_components/）
-        ├── components/          ← 共通部品（layout/ · icons/）
+        ├── components/          ← 共通部品（layout/ · icons/ · form/）
         ├── lib/                 ← WPGraphQL接続・クエリ
         └── public/images/       ← common/ とページ別ディレクトリ
 ```
@@ -90,6 +90,12 @@ WordPress側の状態・確認済みクエリ・管理画面のハマりどこ�
 サイト全体の決まりごとは `docs/design-rules.md` にまとめている（Figma node-id=14592-6198）。
 新しいページを実装する際は先にこれを読む。
 
+### トップページ
+
+- PC版: node-id=14562-1943 ／ SP版: node-id=14623-4771
+- ファーストビュー背景画像: PC node-id=14676-5344 ／ SP node-id=14676-5381
+  → `public/images/home/fv-0{1,2,3}-{pc,sp}.webp` として格納済み（PC3枚・SP3枚）
+
 ### サービスページ
 
 - PC版: https://www.figma.com/design/PTtMblDobjSLBSz9HlUEn9/%E6%9E%B6%E7%A9%BA%E3%82%B3%E3%83%BC%E3%83%9B%E3%82%9A%E3%83%AC%E3%83%BC%E3%83%88%E3%82%B5%E3%82%A4%E3%83%88_20250715--%E3%82%B3%E3%83%94%E3%83%BC-?node-id=14591-2032&m=dev
@@ -126,6 +132,14 @@ WordPress側の状態・確認済みクエリ・管理画面のハマりどこ�
 - 入力 PC版: node-id=14592-4744 ／ 入力 SP版: node-id=14592-4735
 - 完了 PC版: node-id=14592-5331 ／ 完了 SP版: node-id=14592-5270
 
+### お問い合わせページ
+
+- 入力 PC版: node-id=14592-5542 ／ 入力 SP版: node-id=14592-5533
+- 完了 PC版: node-id=14592-5968 ／ 完了 SP版: node-id=14592-5883
+
+「ご用件」のプルダウンは**閉じた状態しか描かれていない**（選択肢はFigmaに無い）。
+中身は3コース＋その他で作った（`app/contact/_components/ContactForm.tsx`）。
+
 （このFigma参照URLは、該当ページの実装が完了しても個別には削除しない。
 プロジェクト完了時にルートCLAUDE.mdの「有効性」原則に従い一括棚卸しする）
 
@@ -135,8 +149,10 @@ Figmaの「コンポーネント置き場」（node-id=14662-3153）に定義さ
 
 - **2ページ以上で使う部品** → `components/`（`@/components/...` で参照）
   - `components/layout/`：SiteHeader / SiteFooter / PageHero / Breadcrumb
-  - `components/icons/`：ArrowRightIcon / ChevronRightIcon
+  - `components/icons/`：ArrowRightIcon / ChevronRightIcon / SelectArrowIcon
     （塗りは`currentColor`。親の文字色に追従させる）
+  - `components/form/`：FormField（ラベル＋入力欄。`control`でinput/select/textareaを出し分ける）
+    / AgreementCheckbox
 - **1ページでしか使わない部品** → `app/<page>/_components/`
 - PC/SPはFigmaでは別コンポーネントだが、コードでは**1コンポーネント内でTailwindのレスポンシブクラスで出し分ける**
 - 共通部品が使う画像は `public/images/common/`、ページ固有の画像は `public/images/<page>/`

@@ -68,12 +68,12 @@ export function SiteHeader() {
             資料ダウンロード
           </Link>
           {/* ルールセット「背景塗りつぶし」：ホバーで背景色を濃くする */}
-          <a
-            href="#"
+          <Link
+            href="/contact"
             className="flex h-[68px] w-[176px] items-center justify-center bg-main text-sm font-medium text-white transition-colors duration-300 hover:bg-main-dark focus-visible:bg-main-dark motion-reduce:transition-none"
           >
             お問い合わせ
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -133,13 +133,13 @@ export function SiteHeader() {
           >
             資料ダウンロード
           </Link>
-          <a
-            href="#"
+          <Link
+            href="/contact"
             onClick={() => setIsMenuOpen(false)}
             className="flex h-[68px] items-center justify-center bg-white text-base font-medium text-main"
           >
             お問い合わせ
-          </a>
+          </Link>
         </div>
       </nav>
     </header>

@@ -43,7 +43,11 @@ interface CaseCardProps {
 
 export function CaseCard({ caseItem, courseTitle }: CaseCardProps) {
   return (
-    <article className="flex h-full w-full flex-col rounded-xl bg-white shadow-[0px_3px_6px_0px_rgba(0,0,0,0.16)]">
+    // idはトップページの導入事例カードからのアンカー（/case#<slug>）の着地点
+    <article
+      id={caseItem.slug}
+      className="flex h-full w-full flex-col rounded-xl bg-white shadow-[0px_3px_6px_0px_rgba(0,0,0,0.16)]"
+    >
       <header className="relative flex items-center justify-between gap-4 rounded-t-xl bg-main px-5 py-[6px] lg:h-[100px] lg:px-10 lg:py-[18px]">
         <div className="flex flex-col gap-[3px] font-bold text-white lg:gap-2">
           <p className="text-xs lg:text-sm lg:leading-[17px]">

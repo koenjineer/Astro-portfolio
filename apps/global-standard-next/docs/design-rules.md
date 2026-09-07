@@ -50,9 +50,10 @@ Figma「ルールセット」（[node-id=14592-6198](https://www.figma.com/desig
 | お知らせ一覧の行 | タイトルの文字を `main` に（行全体がリンク） | `app/news/_components/NewsListItem.tsx` |
 | 前後の記事ボタン | 背景を `main` で塗りつぶし、文字を白に | `app/news/_components/NewsArticleNav.tsx` |
 | 記事本文中のリンク | 文字を `main-dark` に濃くする | `app/news/_components/entry-content.css` |
-| トップページ「View more」 | 矢印が右に伸びる | **未実装**（トップページ実装時に対応） |
+| トップページ「View more」 | 線が丸を突き抜けて右へ伸びる（SPは丸の右端から16px、PCは20px） | `app/_components/ViewMoreLink.tsx` |
 
-下5つはFigmaに指定が無く、上の4パターンの考え方を当てはめて決めたもの。
+「ページ送りの数字」から「記事本文中のリンク」までの5つはFigmaに指定が無く、
+上の4パターンの考え方を当てはめて決めたもの。
 
 矢印は `components/icons/ArrowRightIcon.tsx`、シェブロンは
 `components/icons/ChevronRightIcon.tsx`（どちらも塗りが `currentColor`）を使う。
@@ -81,7 +82,13 @@ Figma「ルールセット」（[node-id=14592-6198](https://www.figma.com/desig
 **SPメニュー内のボタンにはホバーを付けない。** タッチ端末では発火せず、
 かつ `lg:hidden` でPC幅では表示されないため。
 
-## 導入事例カードのホバー（未実装）
+## 導入事例カードのホバー
 
-トップページの導入事例カードは、ホバーで**矢印アイコンが黄色に変わり、右にズレる**。
-トップページ実装時に対応する。
+トップページの導入事例カードは、ホバーで**矢印アイコンが `accent-1` に変わり、右へ10pxズレる**
+（`app/_components/HomeCaseCard.tsx`）。
+
+移す対象は `transition-[color,translate]` と書く。Tailwind v4の `translate-x-*` は
+`transform` ではなく `translate` プロパティを使うため、`transform` と書くと動かない。
+
+「View more」の線が伸びる方も同じ理由で `transition-[right]`。丸・線・矢先を
+別々の要素で描いているのは、1枚のSVGでは線だけを伸ばせないため。

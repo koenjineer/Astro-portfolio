@@ -51,9 +51,25 @@ Figma「ルールセット」（[node-id=14592-6198](https://www.figma.com/desig
 | 前後の記事ボタン | 背景を `main` で塗りつぶし、文字を白に | `app/news/_components/NewsArticleNav.tsx` |
 | 記事本文中のリンク | 文字を `main-dark` に濃くする | `app/news/_components/entry-content.css` |
 | トップページ「View more」 | 線が丸を突き抜けて右へ伸びる（SPは丸の右端から16px、PCは20px） | `app/_components/ViewMoreLink.tsx` |
+| グローバルナビ | 文字を `main` に。1pxの下線を出す | `components/layout/SiteHeader.tsx` |
 
-「ページ送りの数字」から「記事本文中のリンク」までの5つはFigmaに指定が無く、
-上の4パターンの考え方を当てはめて決めたもの。
+「ページ送りの数字」から「記事本文中のリンク」までの5つと「グローバルナビ」は
+Figmaに指定が無く、上の4パターンの考え方を当てはめて決めたもの。
+
+## グローバルナビの現在地
+
+今いるページのナビ項目は、文字を `main` にして**2pxの下線**を常時出す
+（`aria-current="page"` も付ける）。ホバーの下線は1pxなので、太さで
+「今いるページ」と「指しているだけのページ」を見分けられる。
+現在地の項目にはホバーのclassを当てない。あとから来る `hover:` が勝って細くなるため。
+
+下層ページ（`/news/<slug>`、`/news/page/2` など）でも親の項目を現在地として光らせる。
+トップだけは完全一致で判定する（`/` はすべてのパスの先頭に一致してしまうため）。
+
+SPメニューでも同じ下線を出す（白）。ホバーは付けない。
+
+資料ダウンロード・お問い合わせはナビではなくCTAボタンなので、その2ページでは
+どの項目も光らない。
 
 矢印は `components/icons/ArrowRightIcon.tsx`、シェブロンは
 `components/icons/ChevronRightIcon.tsx`（どちらも塗りが `currentColor`）を使う。

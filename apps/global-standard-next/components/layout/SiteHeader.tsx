@@ -12,7 +12,6 @@ interface NavItem {
   href: string;
 }
 
-// 遷移先ページ未実装のため#
 const NAV_ITEMS: NavItem[] = [
   { label: "トップ", href: "/" },
   { label: "当社について", href: "/about" },
@@ -48,18 +47,20 @@ export function SiteHeader() {
         Global standard
       </p>
 
-      <div className="hidden items-center gap-8 lg:flex">
+      <div className="hidden items-center gap-[30px] lg:flex">
         <nav aria-label="グローバルナビゲーション">
           <ul className="flex items-center gap-4 text-sm font-medium text-contrast">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.label}>
+            {NAV_ITEMS.map((item, index) => (
+              <li key={item.label} className="flex items-center gap-4">
+                {/* Figmaは項目のあいだを「／」で区切る。読み上げには意味が無いので飾り扱い */}
+                {index > 0 && <span aria-hidden="true">／</span>}
                 <Link href={item.href}>{item.label}</Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        <div className="flex">
+        <div className="flex gap-[10px]">
           {/* ルールセット「枠線+白背景」：ホバーで背景を塗りつぶす */}
           <Link
             href="/download"

@@ -61,9 +61,11 @@ export function ViewMoreLink({
         <span
           className={`absolute left-0 h-0.5 ${styles.line} ${LINE_POSITION} ${LINE_HOVER_POSITION} ${LINE_TRANSITION}`}
         />
-        {/* 矢先。線の右端を軸に斜めへ倒した1本の棒（Figmaも1本線の矢印） */}
+        {/* 矢先。線の右端を軸に、左上へ跳ね上げた1本の棒。
+            FigmaのSVGは M0 31.5 H95 L81.9367 21.5 で、先端(95,31.5)から
+            左上(81.9,21.5)へ戻る＝長さ16.4px・上へ37.4度 */}
         <span
-          className={`absolute h-0.5 w-[16.4px] origin-right rotate-[-37.6deg] ${styles.line} ${LINE_POSITION} ${LINE_HOVER_POSITION} ${LINE_TRANSITION}`}
+          className={`absolute h-0.5 w-[16.4px] origin-right rotate-[37.4deg] ${styles.line} ${LINE_POSITION} ${LINE_HOVER_POSITION} ${LINE_TRANSITION}`}
         />
       </span>
     </Link>

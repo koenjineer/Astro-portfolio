@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { COURSES } from "@/lib/courses";
 import { SectionHeading } from "./SectionHeading";
 import { ViewMoreLink } from "./ViewMoreLink";
 
@@ -19,12 +18,13 @@ interface ServiceCard {
   offsetClass: string;
 }
 
-// コース紹介文はサービスページと同じく固定テキストで持つ。
-// 見出しはlib/courses.tsのコース名をFigmaの2行組みに割って使う
+// コース紹介文もコース名もFigmaのモックどおりの固定テキスト。
+// コース名はlib/courses.tsより長い（「異文化コミュニケーション研修」「ビジネス留学
+// サポートプログラム」）が、トップはFigmaの文言をそのまま出す
 const SERVICE_CARDS: ServiceCard[] = [
   {
     number: "01",
-    titleLines: [COURSES[0].title],
+    titleLines: ["ビジネス英語研修"],
     paragraphs: [
       "ビジネス英会話はこれからの時代、すべてのビジネスパーソンが学ぶべき必須スキルと考えおります。海外にビジネス展開する際にはもちろんのこと、日本国内でも英会話コミュニケーションができることによってチャンスが掴める場面があります。",
     ],
@@ -33,7 +33,7 @@ const SERVICE_CARDS: ServiceCard[] = [
   },
   {
     number: "02",
-    titleLines: ["異文化", "コミュニケーション"],
+    titleLines: ["異文化", "コミュニケーション研修"],
     paragraphs: [
       "急速にグローバル化が進んでおり、ビジネスの場面に限らず様々な文化的背景を持つ者同士の交流はもはや日常的な光景となりました。",
       "言語や文化が異なる相手を理解することで世界が広がり、新たなビジネスチャンスに巡り会うことは少なくありません。",
@@ -43,7 +43,7 @@ const SERVICE_CARDS: ServiceCard[] = [
   },
   {
     number: "03",
-    titleLines: ["ビジネス留学", "プログラム"],
+    titleLines: ["ビジネス留学", "サポートプログラム"],
     paragraphs: [
       "将来的に海外で働きたい方に向けた講座をご用意しております。一般的には3ヶ月〜1年の期間で基本的な英会話スキルと、海外でのビジネスマナー習得を目指します。",
       "通常の語学留学では得られないビジネスの場で通用するコミュニケーションスキル習得に重点をおいておりますので、海外でビジネス展開する際に自信を持って活動することができるようになります。",
@@ -78,10 +78,11 @@ export function HomeService() {
               key={card.number}
               className={`relative flex flex-col lg:w-[calc((100%-140px)/3)] ${card.offsetClass}`}
             >
-              {/* 白いずらし影つきの番号。写真の上辺からはみ出す（サービスページと同じ） */}
+              {/* 白いずらし影つきの番号。Figmaでは写真の手前に重なるので、
+                  あとに続く写真より前へ出す（z-10が無いとDOM順で写真に隠れる） */}
               <p
                 aria-hidden="true"
-                className="absolute top-0 right-0 font-fira-sans text-[100px] leading-[1.23] text-main italic [text-shadow:4px_4px_0_#fff]"
+                className="absolute top-0 right-0 z-10 font-fira-sans text-[100px] leading-[1.23] text-main italic [text-shadow:4px_4px_0_#fff]"
               >
                 {card.number}
               </p>

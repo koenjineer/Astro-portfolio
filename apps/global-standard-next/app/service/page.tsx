@@ -18,7 +18,12 @@ export default async function ServicePage() {
   return (
     <main className="flex flex-col">
       <SiteHeader />
-      <PageHero eyebrow="SERVICE" title="サービス" />
+      <PageHero
+        eyebrow="SERVICE"
+        title="サービス"
+        imagePcSrc="/images/service/hero-pc.webp"
+        imageSpSrc="/images/service/hero-sp.webp"
+      />
       <Breadcrumb items={[{ label: "サービス" }]} />
       <ServicePrograms />
       <ServiceFlow />

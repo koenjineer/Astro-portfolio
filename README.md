@@ -23,10 +23,15 @@
 
 ### Frontend
 ![Astro](https://img.shields.io/badge/Astro-FF5D01?logo=astro&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?logo=tailwind-css&logoColor=white)
 ![SCSS](https://img.shields.io/badge/SCSS-CC6699?logo=sass&logoColor=white)
+
+### CMS
+![WordPress](https://img.shields.io/badge/WordPress-21759B?logo=wordpress&logoColor=white)
+![WPGraphQL](https://img.shields.io/badge/WPGraphQL-E10098?logo=graphql&logoColor=white)
 
 ### Tools
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)
@@ -37,7 +42,15 @@
 
 ## 📁 Project Structure
 
-本リポジトリはモノレポ構成です。本サイトの実体は `apps/astro-portfolio/` 配下にあります。
+本リポジトリはモノレポ構成で、`apps/` 配下に2つのプロジェクトが入っています。
+
+```
+apps/
+├── astro-portfolio/            # このポートフォリオサイト本体
+└── global-standard-next/       # 制作実績のひとつ（Next.js + ヘッドレスWordPress）
+```
+
+ポートフォリオサイト本体の構成：
 
 ```
 apps/astro-portfolio/
@@ -103,6 +116,7 @@ pnpm dev
 
 | サイト名 | 種別 | 技術 |
 |---|---|---|
+| [Global Standard](https://global-standard-next.vercel.app) | コーポレートサイト（架空） | Next.js / TypeScript / Tailwind CSS / WordPress |
 | Ravek | BtoB SaaS LP（架空） | Astro / SCSS / JS |
 | Garden Salad | 飲食店サイト（架空） | Astro / SCSS / JS |
 | MELIA FITNESS | ジムLP（架空） | Astro / SCSS / JS |

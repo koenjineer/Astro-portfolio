@@ -53,19 +53,22 @@ export function SiteHeader() {
   }, [isMenuOpen]);
 
   return (
+    // Figmaの寸法（ロゴ36px・区切り線の前後16px・ナビとボタンの間30px）は
+    // カンプと同じ1280px以上だけに当てる。そのまま1024pxから当てると
+    // ロゴ・ナビ・ボタンの合計が画面幅を超えて、ナビが折り返してしまうため
     <header className="relative z-50 flex h-[60px] items-center justify-between gap-4 border-b border-contrast-light/20 bg-white px-5 lg:h-auto lg:px-8 lg:py-4">
-      <p className="font-fira-sans text-2xl text-main italic lg:text-4xl">
+      <p className="font-fira-sans text-2xl text-main italic lg:text-3xl xl:text-4xl">
         Global standard
       </p>
 
-      <div className="hidden items-center gap-[30px] lg:flex">
+      <div className="hidden items-center gap-4 lg:flex xl:gap-[30px]">
         <nav aria-label="グローバルナビゲーション">
-          <ul className="flex items-center gap-4 text-sm font-medium text-contrast">
+          <ul className="flex items-center gap-2 text-sm font-medium text-contrast xl:gap-4">
             {NAV_ITEMS.map((item, index) => {
               const isCurrent = isCurrentNavItem(pathname, item.href);
 
               return (
-                <li key={item.label} className="flex items-center gap-4">
+                <li key={item.label} className="flex items-center gap-2 xl:gap-4">
                   {/* Figmaは項目のあいだを「／」で区切る。読み上げには意味が無いので飾り扱い */}
                   {index > 0 && <span aria-hidden="true">／</span>}
                   {/* 現在地は常時2pxの下線、ホバーは1pxの下線。太さを変えて

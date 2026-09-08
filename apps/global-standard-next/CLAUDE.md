@@ -29,7 +29,11 @@
 
 ## 詳細ルール
 
+プロジェクトを横断する決まりごとは `/rules/` にある。**着手前に読む。**
+
 - TypeScriptの書き方：`/rules/typescript.md`
+- ヘッドレスWordPress（WP側の設定と罠）：`/rules/headless-wordpress.md`
+- 静的書き出しとVercelへの手元ビルド：`/rules/nextjs-static-export.md`
 
 ## リポジトリ構成
 
@@ -41,7 +45,9 @@ Astro-portfolio/（リポジトリルート）
 ├── CLAUDE.md                    ← 運用ルールのみ
 ├── rules/
 │   ├── scss.md                  ← Astro専用
-│   └── typescript.md            ← 両プロジェクト共通
+│   ├── typescript.md            ← 両プロジェクト共通
+│   ├── headless-wordpress.md    ← WP側の設定と罠
+│   └── nextjs-static-export.md  ← 静的書き出しとVercelへの手元ビルド
 │
 └── apps/
     ├── astro-portfolio/         ← 既存Astro
@@ -76,15 +82,13 @@ npx vercel@latest build --prod
 npx vercel@latest deploy --prebuilt --prod
 ```
 
-引っかかりやすいところが3つある。
+このやり方の引っかかりどころ（ルートで実行する理由・`--prebuilt` が読む場所・
+`NEXT_PUBLIC_SITE_URL` を手元に置く理由）は `/rules/nextjs-static-export.md` にまとめた。
 
-- **リポジトリのルートで実行する。** Vercelプロジェクトの Root Directory が
-  `apps/global-standard-next` なので、アプリのディレクトリで叩くとパスが二重になって落ちる
-- `--prebuilt` が読むのは `out/` ではなく **`.vercel/output/`**。
-  `pnpm build` ではなく `vercel build` を使う理由がこれ
-- **`NEXT_PUBLIC_SITE_URL` は手元の `.env.local` に置く。** OGP画像の絶対URLを作る
-  `metadataBase` はビルド時に読まれるが、そのビルドが手元で走るため、
-  Vercelの管理画面に入れても効かない
+このプロジェクト固有の値：
+
+- Vercelプロジェクト名 `global-standard-next` / Root Directory `apps/global-standard-next`
+- `.env.local` に `NEXT_PUBLIC_WORDPRESS_API_URL` と `NEXT_PUBLIC_SITE_URL` の2つが必要
 
 ## 進め方の合意事項
 

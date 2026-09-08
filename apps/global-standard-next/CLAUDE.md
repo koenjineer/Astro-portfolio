@@ -60,18 +60,31 @@ Vercelは本プロジェクト用に新規プロジェクトとして追加し�
 
 WordPress側の状態・確認済みクエリ・管理画面のハマりどころは `docs/wordpress.md`。
 
-## ⚠️ デプロイの制約（未解決）
+## デプロイ
+
+公開URL: <https://global-standard-next.vercel.app>（2026-09-08 初回公開）
 
 **Vercel上でビルドすることはできない。**
 `output: "export"` はビルド時にWordPressからデータを取りに行くが、WordPressは
-ユーザーのMac内（`global-standard-cms.local`）にしかなく、Vercelのビルドサーバーからは見えないため。
+ユーザーのMac内（`global-standard-cms.local`）にしかなく、Vercelのビルドサーバーからは
+見えないため。そこで**手元でビルドし、できた成果物だけを上げる**運用にした。
 
-対応案（デプロイ着手時に決める。現時点の推奨は1）：
+記事や事例を直したら、**リポジトリのルートで**この2つを叩く（Localの起動が必須）。
 
-1. ローカルで `pnpm build` し、できた `out/` をVercelに上げる（無料・WPを公開しなくてよい。
-   記事を直すたびにローカルでビルドし直す運用になる）
-2. WordPressを公開サーバーへ移す（費用と手間がかかる）
-3. ビルド時にWPのデータをJSONへ書き出し、リポジトリに含める
+```
+npx vercel@latest build --prod
+npx vercel@latest deploy --prebuilt --prod
+```
+
+引っかかりやすいところが3つある。
+
+- **リポジトリのルートで実行する。** Vercelプロジェクトの Root Directory が
+  `apps/global-standard-next` なので、アプリのディレクトリで叩くとパスが二重になって落ちる
+- `--prebuilt` が読むのは `out/` ではなく **`.vercel/output/`**。
+  `pnpm build` ではなく `vercel build` を使う理由がこれ
+- **`NEXT_PUBLIC_SITE_URL` は手元の `.env.local` に置く。** OGP画像の絶対URLを作る
+  `metadataBase` はビルド時に読まれるが、そのビルドが手元で走るため、
+  Vercelの管理画面に入れても効かない
 
 ## 進め方の合意事項
 

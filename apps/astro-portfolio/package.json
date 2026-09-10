@@ -44,7 +44,7 @@
     "pngjs": "^7.0.0",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
-    "sass": "^1.99.0",
+    "sass": "^1.104.0",
     "stylelint": "^17.14.1",
     "stylelint-config-standard-scss": "^17.0.0",
     "stylelint-scss": "^7.2.0",

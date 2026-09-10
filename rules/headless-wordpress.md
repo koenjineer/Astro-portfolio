@@ -17,6 +17,9 @@ WordPressをデータの入れ物としてだけ使い、表示はNext.js等の�
 ローカル環境は Local（旧 Local by Flywheel）。GraphiQL IDE が
 `/wp-admin/admin.php?page=graphiql-ide` に入るので、クエリはまずここで通す。
 
+Next.jsから読むエンドポイントは **`http://<サイト名>.local/graphql`**（httpsにしない）。
+Localのhttpsは自己署名証明書なので、Node.jsのビルドが接続を拒否しうる。
+
 ## ハマりどころ（毎回ここで詰まる）
 
 ### 1. タクソノミーの「階層」が既定でFalse

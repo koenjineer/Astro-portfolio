@@ -62,7 +62,7 @@ npx vercel@latest build --prod
 npx vercel@latest deploy --prebuilt --prod
 ```
 
-引っかかる3点：
+引っかかる4点：
 
 - **リポジトリのルートで実行する。** Vercelプロジェクトの Root Directory が
   `apps/<name>` のとき、アプリのディレクトリで叩くとパスが二重になって落ちる
@@ -72,6 +72,13 @@ npx vercel@latest deploy --prebuilt --prod
 - **`.vercel` を `.gitignore` に入れる。** `vercel pull` で**本番の環境変数**が
   ここに降りてくる。`.gitignore` は**ディレクトリが作られる前に**直すこと。
   追跡が始まってから足しても外れない（`git rm -r --cached` が必要になる）
+- **Git連携の自動デプロイを `vercel.json` で止める。** 止めないと、プッシュやPRのたびに
+  VercelがビルドしようとしてCMSに届かず失敗し、PRに赤い失敗表示が出続ける。
+  本番は直前の成功デプロイが残るので実害は無いが、**本物の失敗と見分けられなくなる**。
+  Root Directory側（`apps/<name>/vercel.json`）に置く。手元の `vercel build` / `deploy --prebuilt` は止まらない
+  ```json
+  { "$schema": "https://openapi.vercel.sh/vercel.json", "git": { "deploymentEnabled": false } }
+  ```
 
 初回は本番URLが分からないので、**プレビュー→URL確定→`.env.local`に記入→
 ビルドし直し→本番**の順に回す。プレビューは `--prod` を外して

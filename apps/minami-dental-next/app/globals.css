@@ -1,11 +1,22 @@
 @import "tailwindcss";
 
-/* カラーなどのデザイントークンはFigmaを見るページ実装時に足す。今はフォントだけ */
+/* Figmaデザインのカラートークン（var(--color-main,#1391e6)等）に対応 */
 @theme inline {
-  --font-sans: var(--font-noto-sans-jp);
+  --font-sans: var(--font-m-plus-rounded);
+  --color-main: #1391e6;
+  --color-main-dark: #0060a0;
+  --color-main-light: #dff1fd;
+  --color-accent: #ee5a6d;
+  --color-contrast: #393939;
+  --color-contrast-light: #888888;
+  /* Figmaのcolor-base(#ffffff)は登録しない。--color-baseを足すとtext-base(文字色)が
+     生成され、文字サイズを指す既存のtext-baseと衝突するため、白はtext-white/bg-whiteを使う */
+  --shadow-default: 0 3px 6px #00000029;
 }
 
 body {
+  color: var(--color-contrast);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  /* ルールセットのフォントはMedium/Boldの2種のみ。既定をMediumにする */
   font-weight: 500;
 }

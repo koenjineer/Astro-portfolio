@@ -14,6 +14,13 @@
       "runtimeArgs": ["--dir", "apps/global-standard-next", "dev"],
       "port": 3000,
       "autoPort": false
+    },
+    {
+      "name": "minami-dental-next",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "apps/minami-dental-next", "dev", "--port", "3001"],
+      "port": 3001,
+      "autoPort": false
     }
   ]
 }

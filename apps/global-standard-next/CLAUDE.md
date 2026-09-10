@@ -85,6 +85,9 @@ npx vercel@latest deploy --prebuilt --prod
 このやり方の引っかかりどころ（ルートで実行する理由・`--prebuilt` が読む場所・
 `NEXT_PUBLIC_SITE_URL` を手元に置く理由）は `/rules/nextjs-static-export.md` にまとめた。
 
+`vercel.json` でGit連携の自動デプロイを止めてある（2026-09-10）。Vercel上のビルドは必ず失敗し、
+PRのたびに赤い失敗表示が出て本物の失敗と見分けられなくなっていたため。
+
 このプロジェクト固有の値：
 
 - Vercelプロジェクト名 `global-standard-next` / Root Directory `apps/global-standard-next`

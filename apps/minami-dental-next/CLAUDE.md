@@ -44,14 +44,25 @@ apps/minami-dental-next/
 ├── CLAUDE.md            ← このファイル
 ├── docs/                ← progress.md（進捗）/ wordpress.md（WP側）/ design-rules.md（色・フォント・ホバー）
 ├── app/                 ← ページ本体（今は疎通確認用の仮ホームだけ）
+│   ├── opengraph-image.png ← OGP画像（＋ opengraph-image.alt.txt）
+│   └── icon.png         ← favicon。どちらもNext.jsの決まった名前なので自動で <head> に入る
 ├── lib/
 │   ├── graphql-client.ts
 │   ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス
 │   ├── pagination.ts    ← ページ送り・前後記事・一覧URL（お知らせ・ブログ共通）
 │   ├── dates.ts         ← WPの日付 → 表示用／datetime用
 │   └── queries/         ← news / blog / medical / staff
-└── public/images/       ← blog/ · medical/ · staff/（WPのアイキャッチと同じファイル名）
+└── public/images/
+    ├── blog/            ← WPのアイキャッチ（WPと同じファイル名）
+    ├── medical/ · staff/ ← WPのアイキャッチ ＋ ページ上部の hero-{pc,sp}.webp
+    ├── about/ · contact/ · home/ ← ページ固有の画像
+    ├── archive/         ← お知らせ・ブログ共通の下層ページ上部
+    └── common/          ← 全ページ共通の飾り（SVG）
 ```
+
+画像の置き場所の決まり：ページ固有はページ名のフォルダ、2ページ以上で使う下層ページ上部は `archive/`
+（お知らせ・ブログ共通のため、ページ名にしない）、全ページ共通の飾りは `common/`。
+OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` への記述は不要）。
 
 共通部品（ヘッダー等）の置き場所は、最初のページを実装するときに決めて追記する。
 

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
+import { M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
 
-// フォントはFigmaを見るまでの仮置き。確定したら差し替える
-const notoSansJp = Noto_Sans_JP({
-  variable: "--font-noto-sans-jp",
+// ルールセットの太さはMedium/Boldの2種だけ。使わない太さを読むと転送量が増えるだけなので2つに絞る
+const mPlusRounded = M_PLUS_Rounded_1c({
+  variable: "--font-m-plus-rounded",
   subsets: ["latin"],
   weight: ["500", "700"],
 });
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ja" className={`${notoSansJp.variable} h-full antialiased`}>
+    <html lang="ja" className={`${mPlusRounded.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

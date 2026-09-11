@@ -3,11 +3,11 @@
 import { useRouter } from "next/navigation";
 import type { FormEvent, ReactNode } from "react";
 import { FIELD_BORDER_COLOR_CLASS } from "@/components/form/FormField";
-import { FormHeading } from "@/components/form/FormHeading";
 import { SubmitButton } from "@/components/form/SubmitButton";
+import { SectionHeading } from "@/components/heading/SectionHeading";
 
 interface NoSendFormProps {
-  /** 見出しの中身。FormHeading の children と同じ（改行の入れ方は FormHeading に書いてある） */
+  /** 見出しの中身。SectionHeading の children と同じ（改行の入れ方は SectionHeading に書いてある） */
   heading: ReactNode;
   /** 送信ボタンを押した後に移る完了ページ（末尾スラッシュ付き） */
   thanksHref: string;
@@ -35,7 +35,7 @@ export function NoSendForm({ heading, thanksHref, children }: NoSendFormProps) {
 
   return (
     <section className="flex flex-col items-center gap-10 lg:gap-[70px]">
-      <FormHeading>{heading}</FormHeading>
+      <SectionHeading>{heading}</SectionHeading>
 
       <form
         onSubmit={handleSubmit}

@@ -101,7 +101,7 @@
 やったこと：
 
 - お問い合わせ（入力 `/contact/`・完了 `/contact/thanks/`）を実装。WEB予約と同じく送信せず、完了ページへ移るだけ
-- WEB予約と共用にした部品：見出し `FormHeading`・送信ボタン `SubmitButton`（`components/form/`）、
+- WEB予約と共用にした部品：見出し `FormHeading`（のちに `components/heading/SectionHeading.tsx` へ移動）・送信ボタン `SubmitButton`（`components/form/`）、
   ページの外枠 `FormPageShell`（`components/layout/`。旧 `ReservationPageShell` をページ上部の見出しだけ引数にして一般化）。
   WEB予約の見た目は変えていない
 
@@ -156,3 +156,22 @@
 - 一覧4ルートの「記事とカテゴリーの取得→カテゴリーの確認→ページ分け→無ければ404」は `NewsListPage` の中の1か所にまとめ、
   各ルートはページ番号とカテゴリーのslugを渡すだけにした。記事1件の取得（`getNewsPost`）は React の `cache()` で包み、
   詳細ページの `<title>` 用と本体で2回取りに行かないようにした
+
+## 2026-09-12 スタッフブログ（ブランチ `feat/minami-blog`）
+
+やったこと：
+
+- スタッフブログ3画面を実装：一覧（`/blog/`・`/blog/page/2/`）・カテゴリー別（`/blog/category/column/` など）・詳細（`/blog/blog-01/` など）。
+  ルートはお知らせと同じ5ファイル（`app/blog/`）。見た目は `components/archive/` の部品のままで、新しいスタイルは足していない
+- 一覧の組み立て（カテゴリーの確認→ページ分け→無ければ404→画面）を `NewsListPage` から `components/archive/ArchiveListPage.tsx` に移し、
+  お知らせ・ブログは記事とカテゴリーを取って渡すだけにした。`<title>` の並べ方も `archiveMetaTitle.ts` の1か所にした
+- ブログの写真11枚を600×315に縮めて同じ名前で差し替え（合計 約1.6MB → 284KB）
+- レビュー指摘で、カテゴリーの絞り込みを `lib/pagination.ts` の `filterByCategory` に、サイト名を `lib/clinic.ts` の `SITE_NAME` にまとめた
+
+判断したこと：
+
+- 1ページ9件（`BLOG_PER_PAGE`）。サイドバーはお知らせと同じ組みなので `ArchiveSidebar` をそのまま使う
+- カテゴリーの並びはFigmaどおり「歯科コラム→患者様の声→小児歯科」をコードに持つ（ユーザー決定。詳細は `docs/wordpress.md`）
+- 写真は一覧のカードでしか使わないので、PCの表示264×153の2倍が収まる600×315にした（ユーザー決定）
+- blog-10・11 の日付はFigmaでは「2024.06.19」で、写し間違いとみてWordPressの日付のまま表示している
+- 開発サーバーの「1 Issue」（hydrationの不一致）は、Chrome拡張（ColorZilla）が `<body>` に足す属性が原因。サイトのコードとは無関係

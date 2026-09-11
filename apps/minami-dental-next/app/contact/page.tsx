@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { FormPageShell } from "@/components/layout/FormPageShell";
+import {
+  FormPageSections,
+  FormPageShell,
+} from "@/components/layout/FormPageShell";
 import { ContactForm } from "./_components/ContactForm";
 import { ContactGuide } from "./_components/ContactGuide";
 
@@ -14,10 +17,10 @@ export default function ContactPage() {
       eyebrow="CONTACT"
       breadcrumbItems={[{ label: "お問い合わせ" }]}
     >
-      <div className="flex flex-col gap-[100px] lg:gap-[150px]">
+      <FormPageSections>
         <ContactGuide />
         <ContactForm />
-      </div>
+      </FormPageSections>
     </FormPageShell>
   );
 }

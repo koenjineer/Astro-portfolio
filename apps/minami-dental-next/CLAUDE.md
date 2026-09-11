@@ -75,11 +75,13 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
 - **2ページ以上で使う部品** → `components/`（`@/components/...` で参照）
   - `components/layout/`：SiteHeader（＋SpMenu・spMenuInert）/ SiteFooter（＋FooterSitemap）/ PageHero / Breadcrumb /
     ReserveFixedButton（PC右端）/ SpReserveBar（SP下端）/ BackToTop / TelNumber /
-    FormPageShell（WEB予約・お問い合わせの外枠。ページ上部の見出しだけ引数）。ナビ6項目は navItems.ts
+    FormPageShell（WEB予約・お問い合わせの外枠。ページ上部の見出しだけ引数）。
+    案内とフォームの並び FormPageSections も同じファイル。ナビ6項目は navItems.ts
   - 電話番号は発信リンクにしない（架空の番号が実在した場合の誤発信を避けるため。表示だけの TelNumber を使う）
   - `components/icons/`：塗り・線は `currentColor`（親の文字色に追従させ、色違いのSVGを増やさない）
   - `components/form/`：FormField（`control` でinput/select/textareaを出し分け）/ ChoiceGroup / FieldLabel /
-    FormHeading（斜線の飾り付き見出し）/ SubmitButton（「送　信」ボタン）
+    FormHeading（斜線の飾り付き見出し）/ SubmitButton（「送　信」ボタン）/
+    NoSendForm（送信しないフォームの外側：見出し＋区切り線の枠＋送信ボタン）/ ContactInfoFields（お名前〜メールの4項目）
 - **1ページでしか使わない部品** → `app/<page>/_components/`
 - PC/SPはFigmaでは別コンポーネントだが、コードでは1つの部品の中でTailwindのレスポンシブクラスで出し分ける
 - 画面幅の切り替えは、ヘッダー（ナビ・SPメニュー）と固定ボタン類が `xl`（1280px）、それ以外は `lg`（1024px）。
@@ -136,7 +138,8 @@ npx vercel@latest deploy --prebuilt --prod
   デプロイ後もこの設定は外さない。robots.txtでのブロックはしない
   （クロール自体を止めるとnoindexが読まれず逆効果になるため）
 - お問い合わせ・WEB予約とも**送信しない**。`onSubmit` で `preventDefault()` して完了ページへ移るだけで、
-  入力内容はブラウザの外へ一切出ない（`action` + `method="get"` はURLに入力が残るので使わない）
+  入力内容はブラウザの外へ一切出ない（`action` + `method="get"` はURLに入力が残るので使わない）。
+  実装は `components/form/NoSendForm.tsx` の1か所だけ
 
 ## Figmaデザイン参照
 

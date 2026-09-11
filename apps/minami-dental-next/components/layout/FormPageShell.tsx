@@ -41,3 +41,18 @@ export function FormPageShell({
     </main>
   );
 }
+
+interface FormPageSectionsProps {
+  /** 上から「案内」「フォーム」の順に並べる */
+  children: ReactNode;
+}
+
+/**
+ * 入力ページの本文の並び（案内とフォームの縦並び）。
+ * 間の余白（SP 100px / PC 150px）はFigmaで両ページ同じなので、ページごとに数字を書かず1か所で持つ
+ */
+export function FormPageSections({ children }: FormPageSectionsProps) {
+  return (
+    <div className="flex flex-col gap-[100px] lg:gap-[150px]">{children}</div>
+  );
+}

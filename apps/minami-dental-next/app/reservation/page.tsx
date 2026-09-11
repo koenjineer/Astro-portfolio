@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { FormPageShell } from "@/components/layout/FormPageShell";
+import {
+  FormPageSections,
+  FormPageShell,
+} from "@/components/layout/FormPageShell";
 import { ReservationForm } from "./_components/ReservationForm";
 import { ReservationGuide } from "./_components/ReservationGuide";
 
@@ -14,10 +17,10 @@ export default function ReservationPage() {
       eyebrow="RESERVE"
       breadcrumbItems={[{ label: "WEB予約" }]}
     >
-      <div className="flex flex-col gap-[100px] lg:gap-[150px]">
+      <FormPageSections>
         <ReservationGuide />
         <ReservationForm />
-      </div>
+      </FormPageSections>
     </FormPageShell>
   );
 }

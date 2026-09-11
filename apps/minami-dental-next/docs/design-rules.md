@@ -67,8 +67,8 @@ Figma「ルールセット」（[node-id=25322-13320](https://www.figma.com/desi
 | お知らせの行（`news-link-pc`、日付＋タイトル＋右矢印） | 色が変わり、矢印が少し右に移動 | 文字が `main` に | 未実装 |
 | 診療案内カード（写真＋白文字） | フィルターが濃くなり、画像が少し拡大、枠線を表示 | — | 未実装 |
 | トップのブログカード（`top-blog-card-pc`） | 文字の色が変化し、サムネイル画像が少し拡大 | 文字が `main` に | 未実装 |
-| ブログ一覧のカード（`archive-blog-card-pc`） | 同上 | 同上＋サムネイル1.1倍（ホバーの絵の 290.4/264） | `components/archive/ArchiveCard.tsx`（お知らせの一覧で実装済み。ブログも同じ部品を使う） |
-| サイドバーのブログカード（`sidebar-blog-card-pc`） | 同上 | 同上＋サムネイル1.1倍（132/120） | 同上の `variant="sidebar"`（お知らせのサイドバーで実装済み） |
+| ブログ一覧のカード（`archive-blog-card-pc`） | 同上 | 同上＋サムネイル1.1倍（ホバーの絵の 290.4/264） | `components/archive/ArchiveCard.tsx`（お知らせ・ブログの一覧） |
+| サイドバーのブログカード（`sidebar-blog-card-pc`） | 同上 | 同上＋サムネイル1.1倍（132/120） | 同上の `variant="sidebar"`（お知らせ・ブログのサイドバー） |
 | グローバルナビ（`header-nav`、アイコン＋文字の6項目） | 文字とアイコンの色が変化し下線を表示（ホバーと現在地で共通） | 文字・アイコンが `main` に | `components/layout/SiteHeader.tsx`（下線は `::after`） |
 | フォームの送信ボタン（フォームコンポーネント内の `button-contact-pc`） | （注記なし。「通常」「ホバー」の見出しのみ） | 白地・`main` 枠 → `main` 塗り・白文字 | `components/form/SubmitButton.tsx`（WEB予約・お問い合わせ） |
 

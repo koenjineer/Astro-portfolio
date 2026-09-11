@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { toPostDate, type PostDate } from "@/lib/dates";
 import { graphqlClient } from "@/lib/graphql-client";
 import { toLocalImageSrc, type FeaturedImageNode } from "@/lib/images";
@@ -5,9 +6,12 @@ import { toLocalImageSrc, type FeaturedImageNode } from "@/lib/images";
 // 15件の投稿だが、管理画面で増やされても取りこぼさないよう多めに取る
 const NEWS_FETCH_LIMIT = 100;
 
+/** 一覧（全件・カテゴリ別とも）の1ページの件数。Figmaの一覧がPC・SPとも9件 */
+export const NEWS_PER_PAGE = 9;
+
 const NEWS_THUMBNAIL_DIR = "/images/news";
 // お知らせは全件アイキャッチ無しなので、実際には全記事がこの画像になる。
-// 画像ファイルはFigmaから書き出して後から置く
+// Figmaのカードの青地＋ロゴ（元は1200×630の画像）を、PCの表示264×153の2倍が収まる600×315で書き出した
 export const NEWS_FALLBACK_THUMBNAIL = `${NEWS_THUMBNAIL_DIR}/thumb-fallback.webp`;
 
 // WordPress既定のカテゴリ。記事の分類としては使っていないので、表示にも絞り込みにも出さない
@@ -115,10 +119,11 @@ interface NewsCategoriesQueryResult {
 }
 
 // hideEmpty：記事が1件も無いカテゴリは返さない。行き先の無いリンクを作らないため。
-// 並びはWordPressの既定（名前順）のまま。表示順はFigmaを見るページ実装時に決める
+// 並びは作った順（TERM_ID昇順＝診療日→その他）。Figmaのサイドバーがこの順で、
+// WordPressの既定（名前順）だと「その他→診療日」と逆になるため
 const NEWS_CATEGORIES_QUERY = `
   {
-    categories(first: ${NEWS_FETCH_LIMIT}, where: {hideEmpty: true}) {
+    categories(first: ${NEWS_FETCH_LIMIT}, where: {hideEmpty: true, orderby: TERM_ID, order: ASC}) {
       nodes {
         name
         slug
@@ -180,7 +185,8 @@ export interface NewsPostDetail extends NewsPost {
   contentHtml: string;
 }
 
-export async function getNewsPost(slug: string): Promise<NewsPostDetail> {
+// 詳細ページの generateMetadata と本体の両方で呼ばれる。cache() で同じページの書き出し中は1回だけ取りに行く
+export const getNewsPost = cache(async (slug: string): Promise<NewsPostDetail> => {
   const data = await graphqlClient.request<NewsPostQueryResult>(
     NEWS_POST_QUERY,
     { slug }
@@ -191,4 +197,4 @@ export async function getNewsPost(slug: string): Promise<NewsPostDetail> {
   }
 
   return { ...toNewsPost(data.post), contentHtml: data.post.content };
-}
+});

@@ -44,6 +44,9 @@
 - 診療案内・スタッフは投稿日が入力順で意味を持たないので、**slugの昇順**（`orderby: {field: SLUG, order: ASC}`）
 - グループの並びはslug順で最初に出てくる順（一般診療→特殊診療、歯科衛生士→歯科助手）。
   WordPressのターム一覧は名前順で返り、歯科助手が先に来るので使わない
+- お知らせのカテゴリーは**作った順**（`orderby: TERM_ID, order: ASC`＝診療日（ID 10）→その他（ID 11））。
+  Figmaのサイドバーがこの順で、名前順の既定だと「その他→診療日」と逆になる。WPGraphQLで効くことを確認済み（2026-09-11）。
+  ブログのカテゴリーでも同じ決め方がFigmaと合うかは、ブログの実装時に確かめる
 
 データ上の注意：
 
@@ -53,6 +56,8 @@
   **別の診療の説明文が入っている**ように見える（入れ歯・矯正・ホワイトニングの文）。
   ページ実装前に管理画面で直すかを決める
 - 記事本文（`content`）に `minami-dental-cms.local` へのリンク・画像は含まれていない（2026-09-10確認）
+- お知らせの本文は全記事「h2・h3・段落」だけで、空の段落（`<p></p>`）が3〜4個ずつ残っている（表示ではCSSで消す）。
+  本文の文章が見出し（h3）に入っている箇所と誤字は、ユーザーが管理画面で直す（コードでは書き換えない）
 
 ## 疎通確認できたクエリ
 
@@ -77,7 +82,7 @@ query BlogPost($slug: ID!) {
 カテゴリ（`hideEmpty: true` で `uncategorized` のような0件のタームが消える）：
 
 ```graphql
-{ categories(first: 100, where: {hideEmpty: true}) { nodes { name slug } } }
+{ categories(first: 100, where: {hideEmpty: true, orderby: TERM_ID, order: ASC}) { nodes { name slug } } }
 ```
 
 診療案内（スタッフは `staffs` / `staffFields` / `jobs` に置き換える）：
@@ -103,7 +108,7 @@ WordPressには「どの記事にどの画像か」だけを持たせ、実体�
 | ブログ | `public/images/blog/` | image1〜11.webp | 1800×945 |
 | 診療案内 | `public/images/medical/` | medical_1.webp, medical_11〜17.webp | 630×473 |
 | スタッフ | `public/images/staff/` | staff21〜27.webp | 420×420 |
-| お知らせ | 未作成 | アイキャッチ無し。代わりの画像1枚をFigmaから書き出して置く予定 | — |
+| お知らせ | `public/images/news/` | アイキャッチ無し。全記事共通の代わりの画像 thumb-fallback.webp（Figmaのカードの青地＋ロゴ） | 1200×630（600×315に縮めて書き出し） |
 
 差し替え時の注意：
 

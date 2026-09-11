@@ -1,0 +1,98 @@
+/* WordPressが組み立てた記事本文のHTMLに、Figma「WordPress連携 ブロック指示書」（node-id=25458-7443）と
+   見出しの部品（h2 25322-13310 / h3 25322-13313 / h4 25322-13316）の見た目を当てる。
+   管理画面で足されるブロックにクラスを付けて回ることはできないので、Tailwindのクラスではなくタグ名を狙って書く。
+   色は app/globals.css の @theme inline が出すトークンを使う。
+   SPの値を先に書き、PCの値は他の部品と同じ境目（Tailwindの lg＝64rem＝1024px）から上書きする */
+
+/* ブロック同士は14px（Figmaの section の中の間隔）。
+   margin ではなく gap にしているのは、下で消す空の段落が間隔を二重に作らないようにするため
+   （display:none の要素は gap の数に入らない） */
+.entry-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* WordPressは空の段落（<p></p>）を残す（2026-09時点で全記事に3〜4個）。そのままだと隙間だけが並ぶので消す */
+.entry-content p:empty {
+  display: none;
+}
+
+/* 見出しで始まるまとまり（Figmaの section）同士は28px。gap の14pxに足りない分を足す */
+.entry-content > :is(h2, h3, h4, h5, h6):not(:first-child) {
+  margin-top: 14px;
+}
+
+.entry-content :is(p, ul, ol) {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-contrast);
+}
+
+.entry-content :is(ul, ol) {
+  /* Figmaのリストは行頭記号ぶんだけ字下げされている（li の margin-inline-start 21px） */
+  padding-left: 21px;
+}
+
+.entry-content ul {
+  list-style: disc;
+}
+
+.entry-content ol {
+  list-style: decimal;
+}
+
+.entry-content :is(h2, h3, h4, h5, h6) {
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  color: var(--color-main);
+}
+
+.entry-content h2 {
+  border-left: 6px solid var(--color-main);
+  padding-left: 22px;
+  font-size: 18px;
+}
+
+.entry-content h3 {
+  border-bottom: 1px solid var(--color-main);
+  padding-bottom: 5px;
+  font-size: 16px;
+}
+
+.entry-content :is(h4, h5, h6) {
+  font-size: 14px;
+}
+
+.entry-content a {
+  color: var(--color-main);
+  text-decoration: underline;
+  transition: color 300ms;
+}
+
+/* Figmaにリンクのホバーの指定は無い。本文と同じ青のままだと変化が見えないので、塗りボタンのホバーと同じ濃い青にする */
+.entry-content a:is(:hover, :focus-visible) {
+  color: var(--color-main-dark);
+}
+
+@media (min-width: 64rem) {
+  .entry-content h2 {
+    font-size: 24px;
+  }
+
+  .entry-content h3 {
+    padding-bottom: 6px;
+    font-size: 20px;
+  }
+
+  .entry-content :is(h4, h5, h6) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry-content a {
+    transition: none;
+  }
+}

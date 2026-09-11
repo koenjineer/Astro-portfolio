@@ -44,11 +44,12 @@ apps/minami-dental-next/
 ├── CLAUDE.md            ← このファイル
 ├── docs/                ← progress.md（進捗）/ wordpress.md（WP側）/ design-rules.md（色・フォント・ホバー）
 ├── app/                 ← ページ本体（＋ページ固有の _components/）。ホームはまだ疎通確認用の仮ページ
+│   ├── news/            ← お知らせ（一覧・page/・category/・記事）。お知らせ専用の組み立ては _components/
 │   ├── contact/         ← お問い合わせ（入力／thanks/ が完了）
 │   ├── reservation/     ← WEB予約（入力／thanks/ が完了）
 │   ├── opengraph-image.png ← OGP画像（＋ opengraph-image.alt.txt）
 │   └── icon.png         ← favicon。どちらもNext.jsの決まった名前なので自動で <head> に入る
-├── components/          ← 共通部品（layout/ · icons/ · form/）。置き場所の決まりは下の「共通部品の置き場所」
+├── components/          ← 共通部品（layout/ · icons/ · form/ · archive/）。置き場所の決まりは下の「共通部品の置き場所」
 ├── lib/
 │   ├── clinic.ts        ← 医院の住所・電話番号（ヘッダー・フッター・SP固定バー・WEB予約・お問い合わせで共通）
 │   ├── graphql-client.ts
@@ -60,7 +61,8 @@ apps/minami-dental-next/
     ├── blog/            ← WPのアイキャッチ（WPと同じファイル名）
     ├── medical/ · staff/ ← WPのアイキャッチ ＋ ページ上部の hero-{pc,sp}.webp
     ├── about/ · contact/ · home/ ← ページ固有の画像
-    ├── archive/         ← お知らせ・ブログ共通の下層ページ上部
+    ├── news/            ← お知らせの代わりのサムネイル（全記事共通。お知らせはアイキャッチ無し）
+    ├── archive/         ← お知らせ・ブログ共通の下層ページ上部・サイドバーの診察室の写真
     └── common/          ← 全ページ共通の飾り・ロゴ・フッターの地図と診療時間表
 ```
 
@@ -82,6 +84,9 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
   - `components/form/`：FormField（`control` でinput/select/textareaを出し分け）/ ChoiceGroup / FieldLabel /
     FormHeading（斜線の飾り付き見出し）/ SubmitButton（「送　信」ボタン）/
     NoSendForm（送信しないフォームの外側：見出し＋区切り線の枠＋送信ボタン）/ ContactInfoFields（お名前〜メールの4項目）
+  - `components/archive/`：お知らせ・ブログ共通。ArchivePageShell（外枠・2段組み）/ ArchiveCard（一覧と新着記事のカード）/
+    CategoryTag / ArchiveSidebar / ArchivePagination / ArticleNav（前後の記事）/ ArchiveArticle（記事の本体＋ entry-content.css）。
+    記事・カテゴリー・URLの作り方は引数（`types.ts` の `ArchiveRoutes`）で受け取り、お知らせ・ブログ固有の名前やパスを中に持たない
 - **1ページでしか使わない部品** → `app/<page>/_components/`
 - PC/SPはFigmaでは別コンポーネントだが、コードでは1つの部品の中でTailwindのレスポンシブクラスで出し分ける
 - 画面幅の切り替えは、ヘッダー（ナビ・SPメニュー）と固定ボタン類が `xl`（1280px）、それ以外は `lg`（1024px）。
@@ -100,6 +105,7 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
 | `/staff/` | スタッフ紹介 | staff（職種でグループ。詳細ページなし） |
 | `/news/`・`/news/page/2/` | お知らせ一覧 | posts |
 | `/news/category/{slug}/` | お知らせ カテゴリ別 | posts |
+| `/news/category/{slug}/page/2/` | お知らせ カテゴリ別の2ページ目以降 | posts |
 | `/news/{slug}/` | お知らせ詳細 | posts |
 | `/blog/`・`/blog/page/2/` | スタッフブログ一覧 | blog |
 | `/blog/category/{slug}/` | スタッフブログ カテゴリ別 | blog |
@@ -107,7 +113,7 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
 | `/contact/`・`/contact/thanks/` | お問い合わせ（入力／完了） | — |
 | `/reservation/`・`/reservation/thanks/` | WEB予約（入力／完了） | — |
 
-1ページの件数はFigmaを見て、各ページの実装時に決める。
+1ページの件数：お知らせは9件（`lib/queries/news.ts` の `NEWS_PER_PAGE`）。ブログは実装時に決める。
 
 ## デプロイ
 
@@ -150,7 +156,7 @@ npx vercel@latest deploy --prebuilt --prod
 |---|---|---|
 | ルールセット / ホバーデザイン / フォームコンポーネント | 25322-13320 / 25307-6855 / 25329-14929 | — |
 | 共通レイアウト | 25356-15205 | 25356-16791 |
-| メインコンポーネント置き場（**未受領だが同じセクションにある**） | 25356-16203 | — |
+| メインコンポーネント置き場 | 25356-16203 | — |
 | ホーム | 25322-22876 | 25324-7238 |
 | 当院について | 25324-8031 | 25326-8423 |
 | 診療案内 | 25327-8728 | 25328-11259 |

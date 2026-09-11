@@ -42,19 +42,21 @@ WordPress側の状態（投稿タイプ・GraphQL名・件数・確認済みク�
 ```
 apps/minami-dental-next/
 ├── CLAUDE.md            ← このファイル
-├── docs/                ← progress.md（進捗）/ wordpress.md（WP側）/ design-rules.md（色・フォント・ホバー）
+├── docs/                ← progress.md（最新の記録・次のアクション）/ progress-log.md（完了分の記録）/
+│                          wordpress.md（WP側）/ design-rules.md（色・フォント・ホバー）
 ├── app/                 ← ページ本体（＋ページ固有の _components/）。ホームはまだ疎通確認用の仮ページ
 │   ├── news/            ← お知らせ（一覧・page/・category/・記事）。お知らせ専用の組み立ては _components/
+│   ├── blog/            ← スタッフブログ（news/ と同じ5ルート）。ブログ専用の組み立ては _components/
 │   ├── contact/         ← お問い合わせ（入力／thanks/ が完了）
 │   ├── reservation/     ← WEB予約（入力／thanks/ が完了）
 │   ├── opengraph-image.png ← OGP画像（＋ opengraph-image.alt.txt）
 │   └── icon.png         ← favicon。どちらもNext.jsの決まった名前なので自動で <head> に入る
 ├── components/          ← 共通部品（layout/ · icons/ · form/ · archive/）。置き場所の決まりは下の「共通部品の置き場所」
 ├── lib/
-│   ├── clinic.ts        ← 医院の住所・電話番号（ヘッダー・フッター・SP固定バー・WEB予約・お問い合わせで共通）
+│   ├── clinic.ts        ← 医院の名前・住所・電話番号・サイト名（`<title>` 用の短い名前 SITE_NAME）
 │   ├── graphql-client.ts
 │   ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス
-│   ├── pagination.ts    ← ページ送り・前後記事・一覧URL（お知らせ・ブログ共通）
+│   ├── pagination.ts    ← ページ送り・カテゴリーの絞り込み・前後記事・一覧URL（お知らせ・ブログ共通）
 │   ├── dates.ts         ← WPの日付 → 表示用／datetime用
 │   └── queries/         ← news / blog / medical / staff
 └── public/images/
@@ -84,7 +86,8 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
   - `components/form/`：FormField（`control` でinput/select/textareaを出し分け）/ ChoiceGroup / FieldLabel /
     FormHeading（斜線の飾り付き見出し）/ SubmitButton（「送　信」ボタン）/
     NoSendForm（送信しないフォームの外側：見出し＋区切り線の枠＋送信ボタン）/ ContactInfoFields（お名前〜メールの4項目）
-  - `components/archive/`：お知らせ・ブログ共通。ArchivePageShell（外枠・2段組み）/ ArchiveCard（一覧と新着記事のカード）/
+  - `components/archive/`：お知らせ・ブログ共通。ArchiveListPage（一覧・カテゴリー別の組み立て。取得は各セクション側）/
+    archiveMetaTitle（`<title>` の並べ方）/ ArchivePageShell（外枠・2段組み）/ ArchiveCard（一覧と新着記事のカード）/
     CategoryTag / ArchiveSidebar / ArchivePagination / ArticleNav（前後の記事）/ ArchiveArticle（記事の本体＋ entry-content.css）。
     記事・カテゴリー・URLの作り方は引数（`types.ts` の `ArchiveRoutes`）で受け取り、お知らせ・ブログ固有の名前やパスを中に持たない
 - **1ページでしか使わない部品** → `app/<page>/_components/`
@@ -109,11 +112,12 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
 | `/news/{slug}/` | お知らせ詳細 | posts |
 | `/blog/`・`/blog/page/2/` | スタッフブログ一覧 | blog |
 | `/blog/category/{slug}/` | スタッフブログ カテゴリ別 | blog |
+| `/blog/category/{slug}/page/2/` | スタッフブログ カテゴリ別の2ページ目以降 | blog |
 | `/blog/{slug}/` | スタッフブログ詳細 | blog |
 | `/contact/`・`/contact/thanks/` | お問い合わせ（入力／完了） | — |
 | `/reservation/`・`/reservation/thanks/` | WEB予約（入力／完了） | — |
 
-1ページの件数：お知らせは9件（`lib/queries/news.ts` の `NEWS_PER_PAGE`）。ブログは実装時に決める。
+1ページの件数：お知らせ・ブログとも9件（`lib/queries/news.ts` の `NEWS_PER_PAGE`、`lib/queries/blog.ts` の `BLOG_PER_PAGE`）。
 
 ## デプロイ
 
@@ -173,4 +177,4 @@ npx vercel@latest deploy --prebuilt --prod
 
 ## 進捗
 
-経緯・判断・次のアクションは `docs/progress.md`。
+最新の記録と次のアクションは `docs/progress.md`、完了済みの作業の経緯・判断は `docs/progress-log.md`。

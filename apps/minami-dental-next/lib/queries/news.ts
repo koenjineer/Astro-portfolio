@@ -143,13 +143,6 @@ export async function getNewsCategories(): Promise<NewsCategory[]> {
     .map((node) => ({ name: node.name, slug: node.slug }));
 }
 
-export function filterNewsByCategory(
-  posts: NewsPost[],
-  categorySlug: string
-): NewsPost[] {
-  return posts.filter((post) => post.category?.slug === categorySlug);
-}
-
 interface NewsPostQueryResult {
   post: (PostNode & { content: string }) | null;
 }

@@ -1,31 +1,31 @@
 import type { Metadata } from "next";
 import { filterByCategory, paginate } from "@/lib/pagination";
 import {
-  getNewsCategories,
-  getNewsPosts,
-  NEWS_PER_PAGE,
-} from "@/lib/queries/news";
+  BLOG_PER_PAGE,
+  getBlogCategories,
+  getBlogPosts,
+} from "@/lib/queries/blog";
 import {
-  findNewsCategory,
-  NewsListPage,
-} from "../../../../_components/NewsListPage";
-import { newsMetaTitle } from "../../../../_components/newsConfig";
+  BlogListPage,
+  findBlogCategory,
+} from "../../../../_components/BlogListPage";
+import { blogMetaTitle } from "../../../../_components/blogConfig";
 
 /**
- * カテゴリー×ページ番号の組み合わせを書き出す。`/news/page/[page]` と同じ理由で1ページ目も含める
+ * カテゴリー×ページ番号の組み合わせを書き出す。`/blog/page/[page]` と同じ理由で1ページ目も含める
  * （今はどのカテゴリーも9件以下で2ページ目が1つも無く、1ページ目を外すと空配列になりビルドが止まる）
  */
 export async function generateStaticParams() {
   const [allPosts, categories] = await Promise.all([
-    getNewsPosts(),
-    getNewsCategories(),
+    getBlogPosts(),
+    getBlogCategories(),
   ]);
 
   return categories.flatMap((category) => {
     const { totalPages } = paginate(
       filterByCategory(allPosts, category.slug),
       1,
-      NEWS_PER_PAGE
+      BLOG_PER_PAGE
     );
 
     return Array.from({ length: totalPages }, (_, index) => ({
@@ -37,22 +37,22 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: PageProps<"/news/category/[slug]/page/[page]">): Promise<Metadata> {
+}: PageProps<"/blog/category/[slug]/page/[page]">): Promise<Metadata> {
   const { slug, page } = await params;
-  const category = await findNewsCategory(slug);
+  const category = await findBlogCategory(slug);
   const pageLabel = `${page}ページ目`;
 
   return {
     title: category
-      ? newsMetaTitle(pageLabel, category.name)
-      : newsMetaTitle(pageLabel),
+      ? blogMetaTitle(pageLabel, category.name)
+      : blogMetaTitle(pageLabel),
   };
 }
 
-export default async function NewsCategoryPagedPage({
+export default async function BlogCategoryPagedPage({
   params,
-}: PageProps<"/news/category/[slug]/page/[page]">) {
+}: PageProps<"/blog/category/[slug]/page/[page]">) {
   const { slug, page } = await params;
 
-  return <NewsListPage page={Number(page)} categorySlug={slug} />;
+  return <BlogListPage page={Number(page)} categorySlug={slug} />;
 }

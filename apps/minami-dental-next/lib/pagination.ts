@@ -21,6 +21,17 @@ export function paginate<Item>(
   };
 }
 
+/**
+ * カテゴリー別一覧に並べる記事。「書き出すページ数」（generateStaticParams）と「そのページに並ぶ記事」
+ * （ArchiveListPage）の条件をこの1か所にし、片方だけ直してページ数と中身がずれるのを防ぐ
+ */
+export function filterByCategory<Item extends { category: { slug: string } | null }>(
+  items: Item[],
+  categorySlug: string
+): Item[] {
+  return items.filter((item) => item.category?.slug === categorySlug);
+}
+
 export interface AdjacentItems<Item> {
   /** 1つ古い記事。WordPressの「前の記事」にあたる */
   older: Item | null;

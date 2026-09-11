@@ -60,17 +60,21 @@ Figma「ルールセット」（[node-id=25322-13320](https://www.figma.com/desi
 | 部品（Figmaの名前） | Figmaの注記 | カンプから読んだ見た目 | 実装した場所 |
 |---|---|---|---|
 | ボタン・矢印つき（`button-utility-pc`） | 色が変わり、矢印が少し右に移動 | 白地・`main` 枠 → `main` 塗り・白文字 | 未実装 |
-| お問い合わせボタン（`button-contact-pc`、封筒アイコン） | 色が変わる | 白地・`main` 枠 → `main` 塗り・白文字 | 未実装 |
-| WEB予約ボタン（`button-reserve-pc`、車アイコン） | 色が変わる | `main` 塗り → `main-dark` 塗り | 未実装 |
+| お問い合わせボタン（`button-contact-pc`、封筒アイコン） | 色が変わる | 白地・`main` 枠 → `main` 塗り・白文字 | フッター（`components/layout/SiteFooter.tsx`） |
+| WEB予約ボタン（`button-reserve-pc`、パソコンとスマホのアイコン） | 色が変わる | `main` 塗り → `main-dark` 塗り | フッター（同上） |
 | 下向き矢印ボタン（`button-arrow-down-pc`、「一般歯科」など） | 色が変わり、下向きの矢印を表示 | 白地・`main` 枠 → `main-light` 地 | 未実装 |
-| PC右端固定の予約ボタン（`button-reserve-fixed`、縦長） | 色が変わる | `main` 塗り → `main-dark` 塗り | 未実装 |
+| PC右端固定の予約ボタン（`button-reserve-fixed`、縦長） | 色が変わる | `main` 塗り → `main-dark` 塗り | `components/layout/ReserveFixedButton.tsx` |
 | お知らせの行（`news-link-pc`、日付＋タイトル＋右矢印） | 色が変わり、矢印が少し右に移動 | 文字が `main` に | 未実装 |
 | 診療案内カード（写真＋白文字） | フィルターが濃くなり、画像が少し拡大、枠線を表示 | — | 未実装 |
 | トップのブログカード（`top-blog-card-pc`） | 文字の色が変化し、サムネイル画像が少し拡大 | 文字が `main` に | 未実装 |
 | ブログ一覧のカード（`archive-blog-card-pc`） | 同上 | 同上 | 未実装 |
 | サイドバーのブログカード（`sidebar-blog-card-pc`） | 同上 | 同上 | 未実装 |
-| グローバルナビ（`header-nav`、アイコン＋文字の6項目） | 文字とアイコンの色が変化し下線を表示（ホバーと現在地で共通） | 文字・アイコンが `main` に | 未実装 |
-| フォームの送信ボタン（フォームコンポーネント内の `button-contact-pc`） | （注記なし。「通常」「ホバー」の見出しのみ） | 白地・`main` 枠 → `main` 塗り・白文字 | 未実装 |
+| グローバルナビ（`header-nav`、アイコン＋文字の6項目） | 文字とアイコンの色が変化し下線を表示（ホバーと現在地で共通） | 文字・アイコンが `main` に | `components/layout/SiteHeader.tsx`（下線は `::after`） |
+| フォームの送信ボタン（フォームコンポーネント内の `button-contact-pc`） | （注記なし。「通常」「ホバー」の見出しのみ） | 白地・`main` 枠 → `main` 塗り・白文字 | `app/reservation/_components/ReservationForm.tsx` |
+
+Figmaにホバーの無い部品：ページトップへ戻る（`BackToTop`）は、「枠線＋白地」のボタンに合わせて
+`main` で塗り矢印を白にした。パンくず・フッターのサイトマップは色を変えない（指定が無いため）。
+電話番号は発信リンクにしていない（架空の番号の誤発信を避けるため）ので、ホバーも付けない。
 
 画像の拡大は、はみ出しを隠すため画像の外側の枠に `overflow-hidden` を付ける。
 アイコンは塗りを `currentColor` にしておくと親の文字色に追従するので、
@@ -89,7 +93,11 @@ Figma「フォームコンポーネント」にあるもの：入力欄（入力
 
 Figmaには「バリデーションエラー時の見栄えは Contact Form 7 の標準で問題ない」とあるが、
 このサイトはフォームを**送信しない**構成で Contact Form 7 も使わないため当てはまらない。
-**エラー表示の見た目はお問い合わせページの実装時に決める。**
+**入力漏れの表示はブラウザ標準の吹き出し**（`required`）にする（2026-09-11 ユーザー確定）。独自のエラー表示は作らない。
+
+- チェックボックスの「1つ以上必須」はHTMLに標準の指定が無い。`required` を全部に付けると「全部必須」になるので、
+  1つも選ばれていない間だけ先頭の1つに `setCustomValidity` で文言を渡し、同じ吹き出しで止める（`ChoiceGroup`）
+- 入力欄の地 `#f6f6f6`・線とplaceholderの `#c2c2c2` はFigmaの色変数ではない生の色なので、トークンに足さず部品の中で持つ
 
 ## SP
 

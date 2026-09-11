@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { M_PLUS_Rounded_1c } from "next/font/google";
+import { BackToTop } from "@/components/layout/BackToTop";
+import { ReserveFixedButton } from "@/components/layout/ReserveFixedButton";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SpReserveBar } from "@/components/layout/SpReserveBar";
 import "./globals.css";
 
 // ルールセットの太さはMedium/Boldの2種だけ。使わない太さを読むと転送量が増えるだけなので2つに絞る
@@ -34,8 +39,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ja" className={`${mPlusRounded.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    // motion-safe:scroll-smooth：「ページトップへ戻る」をなめらかに動かす（視差効果を減らす設定なら動かさない）。
+    // data-scroll-behavior：ページ移動のときまでなめらかにスクロールしないよう、Next.jsに移動中だけ切らせる
+    <html
+      lang="ja"
+      data-scroll-behavior="smooth"
+      className={`${mPlusRounded.variable} h-full antialiased motion-safe:scroll-smooth`}
+    >
+      <body className="min-h-full flex flex-col">
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+        <ReserveFixedButton />
+        <SpReserveBar />
+        <BackToTop />
+      </body>
     </html>
   );
 }

@@ -43,10 +43,13 @@ WordPress側の状態（投稿タイプ・GraphQL名・件数・確認済みク�
 apps/minami-dental-next/
 ├── CLAUDE.md            ← このファイル
 ├── docs/                ← progress.md（進捗）/ wordpress.md（WP側）/ design-rules.md（色・フォント・ホバー）
-├── app/                 ← ページ本体（今は疎通確認用の仮ホームだけ）
+├── app/                 ← ページ本体（＋ページ固有の _components/）。ホームはまだ疎通確認用の仮ページ
+│   ├── reservation/     ← WEB予約（入力／thanks/ が完了）
 │   ├── opengraph-image.png ← OGP画像（＋ opengraph-image.alt.txt）
 │   └── icon.png         ← favicon。どちらもNext.jsの決まった名前なので自動で <head> に入る
+├── components/          ← 共通部品（layout/ · icons/ · form/）。置き場所の決まりは下の「共通部品の置き場所」
 ├── lib/
+│   ├── clinic.ts        ← 医院の住所・電話番号（ヘッダー・フッター・SP固定バー・WEB予約で共通）
 │   ├── graphql-client.ts
 │   ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス
 │   ├── pagination.ts    ← ページ送り・前後記事・一覧URL（お知らせ・ブログ共通）
@@ -57,14 +60,28 @@ apps/minami-dental-next/
     ├── medical/ · staff/ ← WPのアイキャッチ ＋ ページ上部の hero-{pc,sp}.webp
     ├── about/ · contact/ · home/ ← ページ固有の画像
     ├── archive/         ← お知らせ・ブログ共通の下層ページ上部
-    └── common/          ← 全ページ共通の飾り（SVG）
+    └── common/          ← 全ページ共通の飾り・ロゴ・フッターの地図と診療時間表
 ```
 
 画像の置き場所の決まり：ページ固有はページ名のフォルダ、2ページ以上で使う下層ページ上部は `archive/`
 （お知らせ・ブログ共通のため、ページ名にしない）、全ページ共通の飾りは `common/`。
 OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` への記述は不要）。
 
-共通部品（ヘッダー等）の置き場所は、最初のページを実装するときに決めて追記する。
+## 共通部品の置き場所
+
+姉妹サイト `apps/global-standard-next` と同じ決まり。
+
+- **2ページ以上で使う部品** → `components/`（`@/components/...` で参照）
+  - `components/layout/`：SiteHeader（＋SpMenu・spMenuInert）/ SiteFooter（＋FooterSitemap）/ PageHero / Breadcrumb /
+    ReserveFixedButton（PC右端）/ SpReserveBar（SP下端）/ BackToTop / TelNumber。ナビ6項目は navItems.ts
+  - 電話番号は発信リンクにしない（架空の番号が実在した場合の誤発信を避けるため。表示だけの TelNumber を使う）
+  - `components/icons/`：塗り・線は `currentColor`（親の文字色に追従させ、色違いのSVGを増やさない）
+  - `components/form/`：FormField（`control` でinput/select/textareaを出し分け）/ ChoiceGroup / FieldLabel
+- **1ページでしか使わない部品** → `app/<page>/_components/`
+- PC/SPはFigmaでは別コンポーネントだが、コードでは1つの部品の中でTailwindのレスポンシブクラスで出し分ける
+- 画面幅の切り替えは、ヘッダー（ナビ・SPメニュー）と固定ボタン類が `xl`（1280px）、それ以外は `lg`（1024px）。
+  ヘッダーはナビ6項目＋電話番号で約1115px必要で、1024pxでは入らないため
+- ヘッダー・フッター・固定ボタン類は `app/layout.tsx` で全ページに入る（各ページでは置かない）
 
 ## URL設計
 

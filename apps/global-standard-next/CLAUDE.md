@@ -34,6 +34,7 @@
 - TypeScriptの書き方：`/rules/typescript.md`
 - ヘッドレスWordPress（WP側の設定と罠）：`/rules/headless-wordpress.md`
 - 静的書き出しとVercelへの手元ビルド：`/rules/nextjs-static-export.md`
+- プルリクエストの自動チェック（CI）とGitHubの安全設定：`/rules/ci.md`
 
 ## リポジトリ構成
 

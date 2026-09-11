@@ -44,12 +44,13 @@ apps/minami-dental-next/
 ├── CLAUDE.md            ← このファイル
 ├── docs/                ← progress.md（進捗）/ wordpress.md（WP側）/ design-rules.md（色・フォント・ホバー）
 ├── app/                 ← ページ本体（＋ページ固有の _components/）。ホームはまだ疎通確認用の仮ページ
+│   ├── contact/         ← お問い合わせ（入力／thanks/ が完了）
 │   ├── reservation/     ← WEB予約（入力／thanks/ が完了）
 │   ├── opengraph-image.png ← OGP画像（＋ opengraph-image.alt.txt）
 │   └── icon.png         ← favicon。どちらもNext.jsの決まった名前なので自動で <head> に入る
 ├── components/          ← 共通部品（layout/ · icons/ · form/）。置き場所の決まりは下の「共通部品の置き場所」
 ├── lib/
-│   ├── clinic.ts        ← 医院の住所・電話番号（ヘッダー・フッター・SP固定バー・WEB予約で共通）
+│   ├── clinic.ts        ← 医院の住所・電話番号（ヘッダー・フッター・SP固定バー・WEB予約・お問い合わせで共通）
 │   ├── graphql-client.ts
 │   ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス
 │   ├── pagination.ts    ← ページ送り・前後記事・一覧URL（お知らせ・ブログ共通）
@@ -73,10 +74,12 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
 
 - **2ページ以上で使う部品** → `components/`（`@/components/...` で参照）
   - `components/layout/`：SiteHeader（＋SpMenu・spMenuInert）/ SiteFooter（＋FooterSitemap）/ PageHero / Breadcrumb /
-    ReserveFixedButton（PC右端）/ SpReserveBar（SP下端）/ BackToTop / TelNumber。ナビ6項目は navItems.ts
+    ReserveFixedButton（PC右端）/ SpReserveBar（SP下端）/ BackToTop / TelNumber /
+    FormPageShell（WEB予約・お問い合わせの外枠。ページ上部の見出しだけ引数）。ナビ6項目は navItems.ts
   - 電話番号は発信リンクにしない（架空の番号が実在した場合の誤発信を避けるため。表示だけの TelNumber を使う）
   - `components/icons/`：塗り・線は `currentColor`（親の文字色に追従させ、色違いのSVGを増やさない）
-  - `components/form/`：FormField（`control` でinput/select/textareaを出し分け）/ ChoiceGroup / FieldLabel
+  - `components/form/`：FormField（`control` でinput/select/textareaを出し分け）/ ChoiceGroup / FieldLabel /
+    FormHeading（斜線の飾り付き見出し）/ SubmitButton（「送　信」ボタン）
 - **1ページでしか使わない部品** → `app/<page>/_components/`
 - PC/SPはFigmaでは別コンポーネントだが、コードでは1つの部品の中でTailwindのレスポンシブクラスで出し分ける
 - 画面幅の切り替えは、ヘッダー（ナビ・SPメニュー）と固定ボタン類が `xl`（1280px）、それ以外は `lg`（1024px）。

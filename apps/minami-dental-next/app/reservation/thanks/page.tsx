@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { FormPageShell } from "@/components/layout/FormPageShell";
 import { CLINIC_TEL } from "@/lib/clinic";
-import { ReservationPageShell } from "../_components/ReservationPageShell";
 
 export const metadata: Metadata = {
   title: "WEB予約完了 | みなみ歯科",
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
  */
 export default function ReservationThanksPage() {
   return (
-    <ReservationPageShell
+    <FormPageShell
+      title="WEB予約"
+      eyebrow="RESERVE"
       breadcrumbItems={[
         { label: "WEB予約", href: "/reservation/" },
         { label: "WEB予約完了" },
@@ -27,6 +29,6 @@ export default function ReservationThanksPage() {
           ※1営業日以内に当院からの返信がない場合には、お電話(TEL {CLINIC_TEL})にてお問い合わせ下さい。
         </span>
       </p>
-    </ReservationPageShell>
+    </FormPageShell>
   );
 }

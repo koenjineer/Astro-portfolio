@@ -2,53 +2,35 @@
 
 import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
-import { ChoiceGroup } from "@/components/form/ChoiceGroup";
 import {
   FIELD_BORDER_COLOR_CLASS,
   FormField,
 } from "@/components/form/FormField";
 import { FormHeading } from "@/components/form/FormHeading";
 import { SubmitButton } from "@/components/form/SubmitButton";
-import { PreferredDates } from "./PreferredDates";
 
-const VISIT_TYPES = ["初診", "再診"];
-
-// 項目名はFigmaのとおり「診察内容」（ナビの「診療案内」とは別の言葉）
-const TREATMENTS = [
-  "虫歯",
-  "被せ物がとれた",
-  "歯科矯正",
-  "咬み合わせ",
-  "歯周病",
-  "小児歯科",
-  "入れ歯",
-  "インプラント",
-  "その他",
-];
-
-/**
- * 「ご連絡方法」の選択肢。Figmaには「メール」が選ばれた閉じた状態しか無く、
- * 開いた中身の指定が無い。ページの案内が「お電話」「メール」の2通りなので、その2つにしている
- */
-const CONTACT_METHODS = ["メール", "電話"];
-
-export function ReservationForm() {
+/** 項目・余白はWEB予約のフォームと同じ作り。Figmaでは5項目とも必須バッジ付き */
+export function ContactForm() {
   const router = useRouter();
 
   /**
-   * 架空の歯科医院のデモサイトなので送信先は作らない（CLAUDE.mdの合意事項）。
-   * 入力内容をどこにも送らず、完了ページへ移動するだけにする。
+   * 送信しない理由はWEB予約と同じ（CLAUDE.mdの合意事項）。入力内容をどこにも送らず、完了ページへ移るだけ。
    * （action + method="get" にすると氏名・メールアドレスがURLに残るため使わない）
    * 必須項目は required のままなので、未入力ならブラウザがここに来る前に止める。
    */
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    router.push("/reservation/thanks/");
+    router.push("/contact/thanks/");
   }
 
   return (
     <section className="flex flex-col items-center gap-10 lg:gap-[70px]">
-      <FormHeading>予約フォーム</FormHeading>
+      {/* SPはFigmaどおり「お問い合わせ／フォーム」の2行。PCは1行に収まるので改行しない */}
+      <FormHeading>
+        お問い合わせ
+        <br className="lg:hidden" />
+        フォーム
+      </FormHeading>
 
       <form
         onSubmit={handleSubmit}
@@ -85,34 +67,12 @@ export function ReservationForm() {
             autoComplete="email"
             required
           />
-          <ChoiceGroup
-            label="初診/再診"
-            name="visitType"
-            type="radio"
-            options={VISIT_TYPES}
-            required
-          />
-          <ChoiceGroup
-            label="診察内容"
-            name="treatments"
-            type="checkbox"
-            options={TREATMENTS}
-            note="※(複数選択可)"
-            required
-          />
-          <FormField
-            label="ご連絡方法"
-            name="contactMethod"
-            control="select"
-            options={CONTACT_METHODS}
-            required
-          />
-          <PreferredDates />
           <FormField
             label="お問い合わせ内容"
             name="message"
             control="textarea"
             placeholder="ご自由にご記入ください。"
+            required
           />
         </div>
 

@@ -70,7 +70,7 @@ Figma「ルールセット」（[node-id=25322-13320](https://www.figma.com/desi
 | ブログ一覧のカード（`archive-blog-card-pc`） | 同上 | 同上 | 未実装 |
 | サイドバーのブログカード（`sidebar-blog-card-pc`） | 同上 | 同上 | 未実装 |
 | グローバルナビ（`header-nav`、アイコン＋文字の6項目） | 文字とアイコンの色が変化し下線を表示（ホバーと現在地で共通） | 文字・アイコンが `main` に | `components/layout/SiteHeader.tsx`（下線は `::after`） |
-| フォームの送信ボタン（フォームコンポーネント内の `button-contact-pc`） | （注記なし。「通常」「ホバー」の見出しのみ） | 白地・`main` 枠 → `main` 塗り・白文字 | `app/reservation/_components/ReservationForm.tsx` |
+| フォームの送信ボタン（フォームコンポーネント内の `button-contact-pc`） | （注記なし。「通常」「ホバー」の見出しのみ） | 白地・`main` 枠 → `main` 塗り・白文字 | `components/form/SubmitButton.tsx`（WEB予約・お問い合わせ） |
 
 Figmaにホバーの無い部品：ページトップへ戻る（`BackToTop`）は、「枠線＋白地」のボタンに合わせて
 `main` で塗り矢印を白にした。パンくず・フッターのサイトマップは色を変えない（指定が無いため）。

@@ -1,16 +1,17 @@
+import type { ReactNode } from "react";
+
 interface FormHeadingProps {
-  children: string;
+  /** 見出しの文字。SPだけ改行する所には <br className="lg:hidden" /> を入れる（例: お問い合わせフォーム） */
+  children: ReactNode;
 }
 
-/**
- * 左右に斜線の飾りが付く見出し（Figma: Heading ＋ title-deco）。
- * 今はWEB予約でしか使わないのでページの中に置く。お問い合わせでも使うことになったら components/ へ移す
- */
+/** 左右に斜線の飾りが付く見出し（Figma: Heading ＋ title-deco）。WEB予約・お問い合わせのフォームの上に置く */
 export function FormHeading({ children }: FormHeadingProps) {
   return (
     <h2 className="flex items-center justify-center gap-[14px] text-xl/[1.5] font-bold tracking-[0.08em] lg:gap-7 lg:text-[28px]/[1.5]">
       <TitleDeco />
-      {children}
+      {/* span で包む：flex の直下に <br> を置いても改行にならないため。2行になった時はFigmaどおり中央揃え */}
+      <span className="text-center">{children}</span>
       <TitleDeco />
     </h2>
   );

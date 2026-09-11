@@ -12,6 +12,19 @@
   /* Figmaのcolor-base(#ffffff)は登録しない。--color-baseを足すとtext-base(文字色)が
      生成され、文字サイズを指す既存のtext-baseと衝突するため、白はtext-white/bg-whiteを使う */
   --shadow-default: 0 3px 6px #00000029;
+  /* スタッフ紹介の写真の帯（StaffPhotoStrip）。ゆっくり流し続けたいので一定の速さ。
+     1回で2周分（写真10枚分）動くので80秒（写真5枚分で40秒の速さ） */
+  --animate-staff-strip: staff-strip 80s linear infinite;
+
+  /* 同じ写真を4周分並べた列を、半分（2周分）動かしたら先頭に戻す。戻った位置は動く前と同じ見た目になる */
+  @keyframes staff-strip {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 body {

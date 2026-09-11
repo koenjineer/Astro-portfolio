@@ -12,8 +12,9 @@ interface SitemapGroup extends SitemapLink {
 }
 
 /**
- * 小項目（「ポリシーと特徴」など）は、飛び先のページが未実装で見出しの位置が決まっていないので、
- * ひとまずページの先頭へリンクする。各ページを実装するときにページ内の見出しへ付け替える。
+ * 小項目（「ポリシーと特徴」など）は、飛び先のページが未実装のものは見出しの位置が決まっていないので、
+ * ひとまずページの先頭へリンクする。各ページを実装するときにページ内の見出しへ付け替える（スタッフ紹介は付け替え済み）。
+ * ヘッダーは画面上部に固定していないので、飛んだ先の見出しが隠れないための余白（scroll-margin）は要らない。
  * 見出しの文言はFigmaのとおり（ナビは「ホーム」「診療案内」だが、ここは「TOP」「診療内容」）。
  */
 const SITEMAP_GROUPS: SitemapGroup[] = [
@@ -33,8 +34,8 @@ const SITEMAP_GROUPS: SitemapGroup[] = [
     href: "/staff/",
     columns: [
       [
-        { label: "院長のあいさつ", href: "/staff/" },
-        { label: "スタッフ", href: "/staff/" },
+        { label: "院長のあいさつ", href: "/staff/#message" },
+        { label: "スタッフ", href: "/staff/#staff" },
         { label: "スタッフブログ", href: "/blog/" },
       ],
     ],

@@ -1,12 +1,15 @@
 import type { ReactNode } from "react";
 
-interface FormHeadingProps {
+interface SectionHeadingProps {
   /** 見出しの文字。SPだけ改行する所には <br className="lg:hidden" /> を入れる（例: お問い合わせフォーム） */
   children: ReactNode;
 }
 
-/** 左右に斜線の飾りが付く見出し（Figma: Heading ＋ title-deco）。WEB予約・お問い合わせのフォームの上に置く */
-export function FormHeading({ children }: FormHeadingProps) {
+/**
+ * 左右に斜線の飾りが付くセクションの見出し（Figma: Heading ＋ title-deco）。
+ * WEB予約・お問い合わせのフォームの上と、スタッフ紹介の「院長のあいさつ」「スタッフ紹介」で使う
+ */
+export function SectionHeading({ children }: SectionHeadingProps) {
   return (
     <h2 className="flex items-center justify-center gap-[14px] text-xl/[1.5] font-bold tracking-[0.08em] lg:gap-7 lg:text-[28px]/[1.5]">
       <TitleDeco />

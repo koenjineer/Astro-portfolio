@@ -47,11 +47,12 @@ apps/minami-dental-next/
 ├── app/                 ← ページ本体（＋ページ固有の _components/）。ホームはまだ疎通確認用の仮ページ
 │   ├── news/            ← お知らせ（一覧・page/・category/・記事）。お知らせ専用の組み立ては _components/
 │   ├── blog/            ← スタッフブログ（news/ と同じ5ルート）。ブログ専用の組み立ては _components/
+│   ├── staff/           ← スタッフ紹介（院長のあいさつ・写真の帯・職種ごとのカード。詳細ページなし）
 │   ├── contact/         ← お問い合わせ（入力／thanks/ が完了）
 │   ├── reservation/     ← WEB予約（入力／thanks/ が完了）
 │   ├── opengraph-image.png ← OGP画像（＋ opengraph-image.alt.txt）
 │   └── icon.png         ← favicon。どちらもNext.jsの決まった名前なので自動で <head> に入る
-├── components/          ← 共通部品（layout/ · icons/ · form/ · archive/）。置き場所の決まりは下の「共通部品の置き場所」
+├── components/          ← 共通部品（layout/ · icons/ · form/ · heading/ · archive/）。置き場所の決まりは下の「共通部品の置き場所」
 ├── lib/
 │   ├── clinic.ts        ← 医院の名前・住所・電話番号・サイト名（`<title>` 用の短い名前 SITE_NAME）
 │   ├── graphql-client.ts
@@ -61,7 +62,8 @@ apps/minami-dental-next/
 │   └── queries/         ← news / blog / medical / staff
 └── public/images/
     ├── blog/            ← WPのアイキャッチ（WPと同じファイル名）
-    ├── medical/ · staff/ ← WPのアイキャッチ ＋ ページ上部の hero-{pc,sp}.webp
+    ├── medical/ · staff/ ← WPのアイキャッチ ＋ ページ上部の hero-{pc,sp}.webp。staff/ には院長の写真 director.webp と
+    │                       写真の帯の strip-01〜05.webp も置く（Figmaから書き出した固定の写真、WPには無い）
     ├── about/ · contact/ · home/ ← ページ固有の画像
     ├── news/            ← お知らせの代わりのサムネイル（全記事共通。お知らせはアイキャッチ無し）
     ├── archive/         ← お知らせ・ブログ共通の下層ページ上部・サイドバーの診察室の写真
@@ -84,8 +86,9 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
   - 電話番号は発信リンクにしない（架空の番号が実在した場合の誤発信を避けるため。表示だけの TelNumber を使う）
   - `components/icons/`：塗り・線は `currentColor`（親の文字色に追従させ、色違いのSVGを増やさない）
   - `components/form/`：FormField（`control` でinput/select/textareaを出し分け）/ ChoiceGroup / FieldLabel /
-    FormHeading（斜線の飾り付き見出し）/ SubmitButton（「送　信」ボタン）/
+    SubmitButton（「送　信」ボタン）/
     NoSendForm（送信しないフォームの外側：見出し＋区切り線の枠＋送信ボタン）/ ContactInfoFields（お名前〜メールの4項目）
+  - `components/heading/`：SectionHeading（斜線の飾り付き見出し。WEB予約・お問い合わせ・スタッフ紹介）
   - `components/archive/`：お知らせ・ブログ共通。ArchiveListPage（一覧・カテゴリー別の組み立て。取得は各セクション側）/
     archiveMetaTitle（`<title>` の並べ方）/ ArchivePageShell（外枠・2段組み）/ ArchiveCard（一覧と新着記事のカード）/
     CategoryTag / ArchiveSidebar / ArchivePagination / ArticleNav（前後の記事）/ ArchiveArticle（記事の本体＋ entry-content.css）。
@@ -93,7 +96,9 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
 - **1ページでしか使わない部品** → `app/<page>/_components/`
 - PC/SPはFigmaでは別コンポーネントだが、コードでは1つの部品の中でTailwindのレスポンシブクラスで出し分ける
 - 画面幅の切り替えは、ヘッダー（ナビ・SPメニュー）と固定ボタン類が `xl`（1280px）、それ以外は `lg`（1024px）。
-  ヘッダーはナビ6項目＋電話番号で約1115px必要で、1024pxでは入らないため
+  ヘッダーはナビ6項目＋電話番号で約1115px必要で、1024pxでは入らないため。
+  唯一の例外はスタッフ紹介のカードで、タブレットは `md`（768px）から2列にする
+  （Figmaにタブレットのデザインが無く、1列のままだとカードが大きくなりすぎるため）
 - ヘッダー・フッター・固定ボタン類は `app/layout.tsx` で全ページに入る（各ページでは置かない）
 
 ## URL設計

@@ -1,9 +1,13 @@
+import { cache } from "react";
 import { toPostDate, type PostDate } from "@/lib/dates";
 import { graphqlClient } from "@/lib/graphql-client";
 import { requireLocalImageSrc, type FeaturedImageNode } from "@/lib/images";
 
 // 11件の投稿だが、管理画面で増やされても取りこぼさないよう多めに取る
 const BLOG_FETCH_LIMIT = 100;
+
+/** 一覧（全件・カテゴリ別とも）の1ページの件数。Figmaの一覧がPC・SPとも9件 */
+export const BLOG_PER_PAGE = 9;
 
 const BLOG_THUMBNAIL_DIR = "/images/blog";
 
@@ -107,11 +111,10 @@ interface BlogCategoriesQueryResult {
   };
 }
 
-// hideEmpty：記事が1件も無いカテゴリは返さない。行き先の無いリンクを作らないため。
-// 並びはWordPressの既定（名前順）のまま。表示順はFigmaを見るページ実装時に決める
+// hideEmpty：記事が1件も無いカテゴリは返さない。行き先の無いリンクを作らないため
 const BLOG_CATEGORIES_QUERY = `
   {
-    blogCategories(first: ${BLOG_FETCH_LIMIT}, where: {hideEmpty: true}) {
+    blogCategories(first: ${BLOG_FETCH_LIMIT}, where: {hideEmpty: true, orderby: TERM_ID, order: ASC}) {
       nodes {
         name
         slug
@@ -120,22 +123,24 @@ const BLOG_CATEGORIES_QUERY = `
   }
 `;
 
+// Figmaのサイドバーの並び（歯科コラム→患者様の声→小児歯科）。作った順（TERM_ID昇順＝column→pediatric→voice）
+// では後ろ2つが逆になるので順番をコードに持つ。ここに無いslugは、sortが安定ソートなので後ろに作った順で付く
+const BLOG_CATEGORY_ORDER = ["column", "voice", "pediatric"];
+
+function categoryOrderIndex(slug: string): number {
+  const index = BLOG_CATEGORY_ORDER.indexOf(slug);
+
+  return index === -1 ? BLOG_CATEGORY_ORDER.length : index;
+}
+
 export async function getBlogCategories(): Promise<BlogCategory[]> {
   const data = await graphqlClient.request<BlogCategoriesQueryResult>(
     BLOG_CATEGORIES_QUERY
   );
 
-  return data.blogCategories.nodes.map((node) => ({
-    name: node.name,
-    slug: node.slug,
-  }));
-}
-
-export function filterBlogByCategory(
-  posts: BlogPost[],
-  categorySlug: string
-): BlogPost[] {
-  return posts.filter((post) => post.category?.slug === categorySlug);
+  return data.blogCategories.nodes
+    .map((node) => ({ name: node.name, slug: node.slug }))
+    .sort((first, second) => categoryOrderIndex(first.slug) - categoryOrderIndex(second.slug));
 }
 
 interface BlogPostQueryResult {
@@ -173,7 +178,8 @@ export interface BlogPostDetail extends BlogPost {
   contentHtml: string;
 }
 
-export async function getBlogPost(slug: string): Promise<BlogPostDetail> {
+// 詳細ページの generateMetadata と本体の両方で呼ばれる。cache() で同じページの書き出し中は1回だけ取りに行く
+export const getBlogPost = cache(async (slug: string): Promise<BlogPostDetail> => {
   const data = await graphqlClient.request<BlogPostQueryResult>(
     BLOG_POST_QUERY,
     { slug }
@@ -184,4 +190,4 @@ export async function getBlogPost(slug: string): Promise<BlogPostDetail> {
   }
 
   return { ...toBlogPost(data.blog), contentHtml: data.blog.content };
-}
+});

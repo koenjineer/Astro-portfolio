@@ -13,7 +13,7 @@ interface SitemapGroup extends SitemapLink {
 
 /**
  * 小項目（「ポリシーと特徴」など）は、飛び先のページが未実装のものは見出しの位置が決まっていないので、
- * ひとまずページの先頭へリンクする。各ページを実装するときにページ内の見出しへ付け替える（スタッフ紹介は付け替え済み）。
+ * ひとまずページの先頭へリンクする。各ページを実装するときにページ内の見出しへ付け替える（スタッフ紹介・診療案内は付け替え済み）。
  * ヘッダーは画面上部に固定していないので、飛んだ先の見出しが隠れないための余白（scroll-margin）は要らない。
  * 見出しの文言はFigmaのとおり（ナビは「ホーム」「診療案内」だが、ここは「TOP」「診療内容」）。
  */
@@ -44,17 +44,18 @@ const SITEMAP_GROUPS: SitemapGroup[] = [
     label: "診療内容",
     href: "/medical/",
     columns: [
+      // 飛び先は診療案内の各カード（id は WP の slug。slug 01〜08 が表示順）
       [
-        { label: "一般歯科", href: "/medical/" },
-        { label: "小児歯科", href: "/medical/" },
-        { label: "予防歯科", href: "/medical/" },
+        { label: "一般歯科", href: "/medical/#medical-01" },
+        { label: "小児歯科", href: "/medical/#medical-02" },
+        { label: "予防歯科", href: "/medical/#medical-03" },
       ],
       [
-        { label: "入れ歯", href: "/medical/" },
-        { label: "矯正歯科", href: "/medical/" },
-        { label: "ホワイトニング", href: "/medical/" },
-        { label: "口腔外科", href: "/medical/" },
-        { label: "レーザー治療", href: "/medical/" },
+        { label: "入れ歯", href: "/medical/#medical-04" },
+        { label: "矯正歯科", href: "/medical/#medical-05" },
+        { label: "ホワイトニング", href: "/medical/#medical-06" },
+        { label: "口腔外科", href: "/medical/#medical-07" },
+        { label: "レーザー治療", href: "/medical/#medical-08" },
       ],
     ],
   },

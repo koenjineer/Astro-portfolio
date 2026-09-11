@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { paginate } from "@/lib/pagination";
+import { filterByCategory, paginate } from "@/lib/pagination";
 import {
-  filterNewsByCategory,
   getNewsCategories,
   getNewsPosts,
   NEWS_PER_PAGE,
@@ -24,7 +23,7 @@ export async function generateStaticParams() {
 
   return categories.flatMap((category) => {
     const { totalPages } = paginate(
-      filterNewsByCategory(allPosts, category.slug),
+      filterByCategory(allPosts, category.slug),
       1,
       NEWS_PER_PAGE
     );

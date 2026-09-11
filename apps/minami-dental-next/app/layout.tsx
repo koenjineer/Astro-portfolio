@@ -5,6 +5,7 @@ import { ReserveFixedButton } from "@/components/layout/ReserveFixedButton";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SpReserveBar } from "@/components/layout/SpReserveBar";
+import { SITE_NAME } from "@/lib/clinic";
 import "./globals.css";
 
 // ルールセットの太さはMedium/Boldの2種だけ。使わない太さを読むと転送量が増えるだけなので2つに絞る
@@ -14,8 +15,7 @@ const mPlusRounded = M_PLUS_Rounded_1c({
   weight: ["500", "700"],
 });
 
-const SITE_NAME = "みなみ歯科";
-const SITE_DESCRIPTION = "みなみ歯科のWebサイト（ポートフォリオ用の架空サイト）";
+const SITE_DESCRIPTION = `${SITE_NAME}のWebサイト（ポートフォリオ用の架空サイト）`;
 
 // OGP画像は絶対URLでないとSNS側が読み取れない。公開先が決まったら
 // NEXT_PUBLIC_SITE_URL に本番ドメインを入れる（未設定なら開発サーバー扱い）

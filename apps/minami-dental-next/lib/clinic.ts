@@ -1,6 +1,8 @@
 // 医院の連絡先。ヘッダー・フッター・SP固定バー・WEB予約とお問い合わせの案内など複数か所に同じ値が出るため1か所で持つ
 
 export const CLINIC_NAME = "みなみ歯科クリニック";
+// サイト名。CLINIC_NAME（医院の正式名）とは別で、<title>・OGPの末尾に付ける短い名前（app/layout.tsx・お知らせ・ブログ）
+export const SITE_NAME = "みなみ歯科";
 export const CLINIC_POSTAL_CODE = "〒166-0001";
 export const CLINIC_ADDRESS = "東京都杉並区阿佐谷北7-3-1";
 // 架空の番号なので電話発信リンクにはしない（実在した場合に閲覧者が発信してしまうため。components/layout/TelNumber.tsx）

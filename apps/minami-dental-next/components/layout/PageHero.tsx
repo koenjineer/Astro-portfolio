@@ -1,6 +1,11 @@
 interface PageHeroProps {
-  /** 日本語の見出し（例: WEB予約）。ページのh1になる */
+  /** 日本語の見出し（例: WEB予約）。既定ではページのh1になる */
   title: string;
+  /**
+   * 見出しの要素（既定はh1）。お知らせ・ブログの記事ページは記事名がh1になるので "p" にする
+   * （1ページにh1は1つにするため）。見た目は変わらない
+   */
+  titleAs?: "h1" | "p";
   /** 英字の小見出し（例: RESERVE） */
   eyebrow: string;
   /** 背景写真。ページごとに違う写真が敷かれるので使う側から渡す */
@@ -17,6 +22,7 @@ const IMAGE_SP_HEIGHT = 376;
 /** 下層ページ上部（Figma: lower-top-pc / lower-top-sp） */
 export function PageHero({
   title,
+  titleAs: TitleTag = "h1",
   eyebrow,
   imagePcSrc,
   imageSpSrc,
@@ -50,9 +56,9 @@ export function PageHero({
         <div aria-hidden="true" className="absolute inset-0 bg-black/20" />
 
         <div className="relative flex flex-col items-center gap-[14px] text-center font-bold text-white lg:gap-[17px]">
-          <h1 className="text-2xl/[1.5] tracking-[0.2em] lg:text-[32px]/[1.5] lg:tracking-[0.1em]">
+          <TitleTag className="text-2xl/[1.5] tracking-[0.2em] lg:text-[32px]/[1.5] lg:tracking-[0.1em]">
             {title}
-          </h1>
+          </TitleTag>
           <p className="text-xs/[1.5] tracking-[0.1em] uppercase lg:text-sm/[1.5]">
             {eyebrow}
           </p>

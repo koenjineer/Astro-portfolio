@@ -62,7 +62,7 @@ npx vercel@latest build --prod
 npx vercel@latest deploy --prebuilt --prod
 ```
 
-引っかかる4点：
+引っかかる5点：
 
 - **リポジトリのルートで実行する。** Vercelプロジェクトの Root Directory が
   `apps/<name>` のとき、アプリのディレクトリで叩くとパスが二重になって落ちる
@@ -72,6 +72,11 @@ npx vercel@latest deploy --prebuilt --prod
 - **`.vercel` を `.gitignore` に入れる。** `vercel pull` で**本番の環境変数**が
   ここに降りてくる。`.gitignore` は**ディレクトリが作られる前に**直すこと。
   追跡が始まってから足しても外れない（`git rm -r --cached` が必要になる）
+- **ルートの `.vercel` は一度に1プロジェクトしかリンクできない。** モノレポの2つ目を公開するとき、
+  ルートで `vercel link` すると1つ目の紐付けが上書きされる（次に1つ目を出すときは張り替え直す）。
+  `vercel link --yes --project <name>` は Root Directory を持ってこないので、続けて
+  `vercel pull --yes --environment=production` を叩き、`.vercel/project.json` に
+  `rootDirectory` を降ろすこと。無いとルートをビルドしようとして落ちる
 - **Git連携の自動デプロイを `vercel.json` で止める。** 止めないと、プッシュやPRのたびに
   VercelがビルドしようとしてCMSに届かず失敗し、PRに赤い失敗表示が出続ける。
   本番は直前の成功デプロイが残るので実害は無いが、**本物の失敗と見分けられなくなる**。

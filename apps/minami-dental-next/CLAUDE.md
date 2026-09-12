@@ -152,8 +152,10 @@ npx vercel@latest deploy --prebuilt --prod
 
 このプロジェクト固有の値：
 
-- Vercelプロジェクト名 `minami-dental-next` / Root Directory `apps/minami-dental-next`（**未作成**）
-- `.env.local` に `NEXT_PUBLIC_WORDPRESS_API_URL` が必要。公開URLが決まったら `NEXT_PUBLIC_SITE_URL` も足す
+- 公開URL <https://minami-dental-next.vercel.app>（2026-09-12 公開）。
+  Vercelプロジェクト名 `minami-dental-next` / Root Directory `apps/minami-dental-next`
+- `.env.local` に `NEXT_PUBLIC_WORDPRESS_API_URL` と `NEXT_PUBLIC_SITE_URL` の2つが必要。
+  **Gitに入らない**ので、環境を作り直したら入れ直す（無いとOGPのURLが `localhost` に戻る）
 - 公開前に `grep -rl "minami-dental-cms.local" out/` が0件であることを確かめる
 - `vercel.json` でGit連携の自動デプロイを止めてある。Vercelプロジェクトを作った時点から
   失敗表示が出ないよう、プロジェクト作成前に置いた

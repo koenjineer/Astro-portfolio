@@ -59,14 +59,14 @@ Figma「ルールセット」（[node-id=25322-13320](https://www.figma.com/desi
 
 | 部品（Figmaの名前） | Figmaの注記 | カンプから読んだ見た目 | 実装した場所 |
 |---|---|---|---|
-| ボタン・矢印つき（`button-utility-pc`） | 色が変わり、矢印が少し右に移動 | 白地・`main` 枠 → `main` 塗り・白文字 | 未実装 |
+| ボタン・矢印つき（`button-utility-pc`） | 色が変わり、矢印が少し右に移動 | 白地・`main` 枠 → `main` 塗り・白文字 | ホーム（`app/_components/UtilityButton.tsx`） |
 | お問い合わせボタン（`button-contact-pc`、封筒アイコン） | 色が変わる | 白地・`main` 枠 → `main` 塗り・白文字 | フッター（`components/layout/SiteFooter.tsx`） |
 | WEB予約ボタン（`button-reserve-pc`、パソコンとスマホのアイコン） | 色が変わる | `main` 塗り → `main-dark` 塗り | フッター（同上） |
 | 下向き矢印ボタン（`button-arrow-down-pc`、「一般歯科」など） | 色が変わり、下向きの矢印を表示 | 白地・`main` 枠 → `main-light` 地＋文字の下に20pxの下向き矢印（間2px）。高さは72pxのまま、文字が少し上がる | 診療案内の目次（`app/medical/_components/MedicalNav.tsx`。SPも高さ60pxに固定し、矢印が出てもずれない） |
 | PC右端固定の予約ボタン（`button-reserve-fixed`、縦長） | 色が変わる | `main` 塗り → `main-dark` 塗り | `components/layout/ReserveFixedButton.tsx` |
-| お知らせの行（`news-link-pc`、日付＋タイトル＋右矢印） | 色が変わり、矢印が少し右に移動 | 文字が `main` に | 未実装 |
-| ホームの診療案内カード（写真＋白文字） | フィルターが濃くなり、画像が少し拡大、枠線を表示 | — | 未実装 |
-| トップのブログカード（`top-blog-card-pc`） | 文字の色が変化し、サムネイル画像が少し拡大 | 文字が `main` に | 未実装 |
+| お知らせの行（`news-link-pc`、日付＋タイトル＋右矢印） | 色が変わり、矢印が少し右に移動 | 文字が `main` に | ホーム（`app/_components/HomeNewsLink.tsx`） |
+| ホームの診療案内カード（写真＋白文字） | フィルターが濃くなり、画像が少し拡大、枠線を表示 | 膜が `black/20` → `black/40`、画像1.1倍、内側10pxに白2pxの枠線（角丸20px） | ホーム（`app/_components/MedicalGuideCard.tsx`。枠線は擬似要素で出す） |
+| トップのブログカード（`top-blog-card-pc`） | 文字の色が変化し、サムネイル画像が少し拡大 | 同上＋サムネイル1.1倍（ホバーの絵の 330/300） | ホーム（`app/_components/TopBlogCard.tsx`） |
 | ブログ一覧のカード（`archive-blog-card-pc`） | 同上 | 同上＋サムネイル1.1倍（ホバーの絵の 290.4/264） | `components/archive/ArchiveCard.tsx`（お知らせ・ブログの一覧） |
 | サイドバーのブログカード（`sidebar-blog-card-pc`） | 同上 | 同上＋サムネイル1.1倍（132/120） | 同上の `variant="sidebar"`（お知らせ・ブログのサイドバー） |
 | グローバルナビ（`header-nav`、アイコン＋文字の6項目） | 文字とアイコンの色が変化し下線を表示（ホバーと現在地で共通） | 文字・アイコンが `main` に | `components/layout/SiteHeader.tsx`（下線は `::after`） |
@@ -78,6 +78,7 @@ Figmaにホバーの無い部品：ページトップへ戻る（`BackToTop`）�
 お知らせ（ブログ共通）のページ送り・前後の記事ボタンは、枠線のボタンを `main` 塗り・白文字に、塗りのボタンを `main-dark` にした。
 サイドバーのカテゴリーは文字が `main` になり三角が右へ、「当院について」は矢印が右へ動く。
 記事本文のリンクは、ふだん `main`（下線付き）、ホバー・フォーカス時 `main-dark`。
+ホームのメインビジュアルの矢印は `BackToTop` に合わせて `main` で塗り山形を白に、ドットは今の1つ以外が `main` に変わる。
 スタッフ紹介のカードと写真の帯はホバーなし（カードはリンクではなく、帯は飾り。帯は動きを減らす設定だと止まる）。
 診療案内ページのカードもリンクではないのでホバーなし。
 

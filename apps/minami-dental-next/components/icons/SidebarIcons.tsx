@@ -2,7 +2,8 @@ import { SVG_BASE_PROPS } from "./SmallIcons";
 import type { IconProps } from "./types";
 
 // お知らせ・ブログのサイドバーだけで使うアイコン（見出しの前の3つと「当院について」の矢印）。
-// SmallIcons.tsx に足すと200行を超えるので分けた。どれもFigmaの書き出しのパスそのまま（色だけcurrentColorに置き換え）
+// 使う場所ごとにまとめているので SmallIcons.tsx とは分けている。
+// どれもFigmaの書き出しのパスそのまま（色だけcurrentColorに置き換え）
 
 /** 「クリニックの紹介」の病院（Figma: icon-02） */
 export function HospitalIcon({ className }: IconProps) {

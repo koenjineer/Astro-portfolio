@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import minamiDental from "../../public/minami-dental.webp";
 import globalStandard from "../../public/global-standard.webp";
 import ohaImage from "../../public/oha.webp";
 import ravek from "../../public/ravek.webp";
@@ -12,6 +13,8 @@ interface Project {
   title: string;
   image: ImageMetadata;
   link: string;
+  // Astroの中のmock_siteはサイト内の相対パス。別のVercelプロジェクトとして
+  // 公開しているNext.jsの2件（apps/minami-dental-next・apps/global-standard-next）だけ絶対URLになる
   preview: string;
   status: string;
   intent: string;
@@ -20,8 +23,16 @@ interface Project {
 
 const projects: Project[] = [
   {
-    // previewだけ他と違って絶対URL。この1件はAstroの中のmock_siteではなく、
-    // 別のVercelプロジェクト（apps/global-standard-next）として公開しているため
+    title: "みなみ歯科クリニック",
+    image: minamiDental as ImageMetadata,
+    link: "",
+    preview: "https://minami-dental-next.vercel.app",
+    status: "架空サイト",
+    intent:
+      "歯科医院のサイト。お知らせとスタッフブログをヘッドレスWordPressで管理し、Next.jsで静的書き出しする構成にしました。",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "WordPress"],
+  },
+  {
     title: "Global Standard",
     image: globalStandard as ImageMetadata,
     link: "",

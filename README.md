@@ -42,12 +42,13 @@
 
 ## 📁 Project Structure
 
-本リポジトリはモノレポ構成で、`apps/` 配下に2つのプロジェクトが入っています。
+本リポジトリはモノレポ構成で、`apps/` 配下に3つのプロジェクトが入っています。
 
 ```
 apps/
 ├── astro-portfolio/            # このポートフォリオサイト本体
-└── global-standard-next/       # 制作実績のひとつ（Next.js + ヘッドレスWordPress）
+├── global-standard-next/       # 制作実績のひとつ（Next.js + ヘッドレスWordPress）
+└── minami-dental-next/         # 制作実績のひとつ（Next.js + ヘッドレスWordPress）
 ```
 
 ポートフォリオサイト本体の構成：
@@ -116,6 +117,7 @@ pnpm dev
 
 | サイト名 | 種別 | 技術 |
 |---|---|---|
+| [みなみ歯科クリニック](https://minami-dental-next.vercel.app) | 歯科医院サイト（架空） | Next.js / TypeScript / Tailwind CSS / WordPress |
 | [Global Standard](https://global-standard-next.vercel.app) | コーポレートサイト（架空） | Next.js / TypeScript / Tailwind CSS / WordPress |
 | Ravek | BtoB SaaS LP（架空） | Astro / SCSS / JS |
 | Garden Salad | 飲食店サイト（架空） | Astro / SCSS / JS |

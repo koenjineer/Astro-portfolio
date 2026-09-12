@@ -19,8 +19,7 @@ Figma「ルールセット」（[node-id=25322-13320](https://www.figma.com/desi
 | `color-contrast-light` | `#888888` | `text-contrast-light` | 日付・補足などの薄い文字 |
 | `color-base` | `#ffffff` | **登録しない** → `text-white` / `bg-white` を使う | 背景・反転文字 |
 
-`color-base` を登録しない理由：`--color-base` を足すと文字色の `text-base` が生成され、
-文字サイズ16pxを指す既存の `text-base` と名前が衝突して意味が判別できなくなるため。
+`color-base` を登録しない理由は `/rules/tailwind.md`（`text-base` と名前が衝突するため）。
 
 ## フォント
 
@@ -45,12 +44,8 @@ Figma「ルールセット」（[node-id=25322-13320](https://www.figma.com/desi
 共通の約束：
 
 - 色は `transition-colors`、矢印の移動や画像の拡大は `transition-transform` で動かし、
-  どれにも `motion-reduce:transition-none` を添える
-  （Tailwind v4 の `transition-transform` は `transform, translate, scale, rotate` をまとめて対象にするので、
-  `translate-x-*` / `scale-*` もこれで動く。`transition-[transform]` と書くと `translate` / `scale` が外れて動かない）
-- **同じ要素**で色と動きを両方変えるときは `transition-[color,translate]` のように1つのクラスにまとめる。
-  `transition-colors` と `transition-transform` を並べると、どちらも同じ `transition-property` を
-  上書きするので後に来た方しか効かない
+  どれにも `motion-reduce:transition-none` を添える。
+  **角括弧を付けると壊れること・色と動きは1つにまとめること**は `/rules/tailwind.md`
 - ホバーと同じ見た目を `focus-visible:` にも付ける（キーボード操作でも同じ変化が見えるように）
 
 「Figmaの注記」はFigmaに書かれた文言そのまま。「カンプから読んだ見た目」は注記に無く、

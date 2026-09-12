@@ -1,8 +1,11 @@
 # Next.jsの静的書き出し（`output: "export"`）と、Vercelへの手元ビルド
 
 ビルド時にCMSからデータを取り、完全な静的HTMLとして書き出す構成の決まりごと。
-`global-standard-next`（2026-09、Next.js 16 / React 19 / Tailwind CSS v4）で
-実際に踏んだことだけを書く。WP側の話は `/rules/headless-wordpress.md`。
+`global-standard-next`・`minami-dental-next`（ともに2026-09、Next.js 16 / React 19 / Tailwind CSS v4）で
+実際に踏んだことだけを書く。
+
+関連：WP側は `/rules/headless-wordpress.md`、Tailwindの書き方は `/rules/tailwind.md`、
+カンプに答えが書かれていないときの決め方は `/rules/design-to-code.md`。
 
 ## 静的書き出しの制約
 
@@ -12,6 +15,7 @@
 const nextConfig: NextConfig = {
   output: "export",
   images: { unoptimized: true }, // 静的書き出しではImage最適化が使えない
+  trailingSlash: true,           // URLを末尾スラッシュ付きに統一する
 };
 ```
 
@@ -35,6 +39,19 @@ middleware、`next/image` の最適化。すべてビルド時に完結させる
 
 外部フォームサービス（Formspreeなど）を使うかは、
 「架空サイトの入力を外部に保存させたいか」で判断する。
+
+### OGP画像とfaviconは `app/` に決まった名前で置くだけ
+
+`app/opengraph-image.png`（＋説明文の `app/opengraph-image.alt.txt`）と `app/icon.png` は、
+Next.jsが自動で `<head>` に入れる。`layout.tsx` に書く必要はない。
+
+### 公開はするが検索結果に出したくないなら `noindex`。robots.txtでは止めない
+
+ポートフォリオ用の架空サイトのように、**公開はするが検索結果に載せたくない**場合は、
+全ページのメタデータに `noindex, nofollow` を入れる（`app/layout.tsx` の `metadata`）。
+
+**robots.txt でクロールを止めてはいけない。** クロール自体を止めると `noindex` が
+読まれないまま検索結果に載りうる（逆効果）。クロールは許して `noindex` を読ませる。
 
 ### `metadataBase` はビルド時に読まれる
 
@@ -80,7 +97,8 @@ npx vercel@latest deploy --prebuilt --prod
 - **Git連携の自動デプロイを `vercel.json` で止める。** 止めないと、プッシュやPRのたびに
   VercelがビルドしようとしてCMSに届かず失敗し、PRに赤い失敗表示が出続ける。
   本番は直前の成功デプロイが残るので実害は無いが、**本物の失敗と見分けられなくなる**。
-  Root Directory側（`apps/<name>/vercel.json`）に置く。手元の `vercel build` / `deploy --prebuilt` は止まらない
+  Root Directory側（`apps/<name>/vercel.json`）に置く。手元の `vercel build` / `deploy --prebuilt` は止まらない。
+  **Vercelプロジェクトを作る前に置いておく**と、作った時点から失敗表示が出ない
   ```json
   { "$schema": "https://openapi.vercel.sh/vercel.json", "git": { "deploymentEnabled": false } }
   ```
@@ -89,20 +107,22 @@ npx vercel@latest deploy --prebuilt --prod
 ビルドし直し→本番**の順に回す。プレビューは `--prod` を外して
 `vercel build` / `vercel deploy --prebuilt`（ターゲットが違うと混ぜられない）。
 
-公開前に書き出しを検査しておくと安全。
+公開前に書き出しを検査しておく。
 
 ```
-grep -rl "<CMSのホスト名>" out/    # ローカルCMSのURLが漏れていないか
-grep -rc "localhost" out/index.html # OGPのURLが差し替わっているか
+grep -rl "<CMSのホスト名>" out/     # ローカルCMSのURLが漏れていないか
+grep -c "localhost" out/index.html  # OGPのURLが差し替わっているか
 ```
+
+公開後は本番URLで5点を確かめる。
+
+1. 主要なルートと記事ページが200で返る
+2. OGP画像が本番URLで開ける
+3. 書き出した全ページに `noindex, nofollow` が入っている
+4. CMSのホスト名の残りが0件
+5. 画像が読み込めている
 
 ## そのほか、実装中に踏んだ罠
-
-### Tailwind v4の `translate-x-*` は `transform` ではない
-
-Tailwind v4の `translate-x-*` は `translate` プロパティに書き出す。
-`transition-[color,transform]` と書いても**何も動かない**。
-`transition-[color,translate]` にする。
 
 ### CMSが組み立てた本文へのCSSは、クラスではなくタグ名で当てる
 
@@ -126,7 +146,20 @@ h.style.width = 'max-content';
 h.getBoundingClientRect().width; // 折り返さずに必要な幅
 ```
 
-### 共通部品の変更は全ページに効く
+### 共通部品を抜き出すときは、書き出しHTMLの一致を確かめる
 
 1ページの都合で共通部品を触ると、完成済みのページが黙って変わる。
-触ったら**別のページでも1枚は確認する**。
+目視では気づけないので、**書き出したHTMLを突き合わせる**。
+
+完成済みのページから部品を抜き出すだけ（見た目を変えない共通化）なら、
+**抜き出しの前後でHTMLは完全一致する**はず。一致しなければ意図しない変更が混ざっている。
+
+```
+pnpm build && cp -r out /tmp/before   # 抜き出す前
+# 共通化する
+pnpm build && diff -r /tmp/before out # 差分ゼロなら安全
+```
+
+見た目を変える変更なら一致しないので、**変わってよいページにだけ差分が出ているか**を見る。
+完成済みのページが増えるほど効く。今回はホームを作るとき、先に完成していた
+4ページのHTMLが完全一致することを確かめてから先へ進んだ。

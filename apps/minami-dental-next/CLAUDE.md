@@ -43,9 +43,10 @@ WordPress側の状態（投稿タイプ・GraphQL名・件数・確認済みク�
 ```
 apps/minami-dental-next/
 ├── CLAUDE.md            ← このファイル
-├── docs/                ← progress.md（最新の記録・次のアクション）/ progress-log.md（完了分の記録）/
+├── docs/                ← progress.md（最新の記録・次のアクション）/ progress-log.md（完了分。古い分は progress-log-archive.md）/
 │                          wordpress.md（WP側）/ design-rules.md（色・フォント・ホバー）
 ├── app/                 ← ページ本体（＋ページ固有の _components/）。ホームはまだ疎通確認用の仮ページ
+│   ├── about/           ← 当院について（ポリシーと特徴・院内の様子。WPを使わない固定の文言と写真）
 │   ├── news/            ← お知らせ（一覧・page/・category/・記事）。お知らせ専用の組み立ては _components/
 │   ├── blog/            ← スタッフブログ（news/ と同じ5ルート）。ブログ専用の組み立ては _components/
 │   ├── medical/         ← 診療案内（目次・診療タイプごとの波の帯とカード。詳細ページなし）
@@ -83,7 +84,7 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
 - **2ページ以上で使う部品** → `components/`（`@/components/...` で参照）
   - `components/layout/`：SiteHeader（＋SpMenu・spMenuInert）/ SiteFooter（＋FooterSitemap）/ PageHero / Breadcrumb /
     ReserveFixedButton（PC右端）/ SpReserveBar（SP下端）/ BackToTop / TelNumber /
-    ContentWidth（本文の幅：左右20px＋幅の上限1000pxで中央。スタッフ紹介・診療案内）/
+    ContentWidth（本文の幅：左右20px＋幅の上限1000pxで中央。当院について・スタッフ紹介・診療案内）/
     FormPageShell（WEB予約・お問い合わせの外枠。ページ上部の見出しだけ引数）。
     案内とフォームの並び FormPageSections も同じファイル。ナビ6項目は navItems.ts
   - 電話番号は発信リンクにしない（架空の番号が実在した場合の誤発信を避けるため。表示だけの TelNumber を使う）
@@ -91,7 +92,7 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
   - `components/form/`：FormField（`control` でinput/select/textareaを出し分け）/ ChoiceGroup / FieldLabel /
     SubmitButton（「送　信」ボタン）/
     NoSendForm（送信しないフォームの外側：見出し＋区切り線の枠＋送信ボタン）/ ContactInfoFields（お名前〜メールの4項目）
-  - `components/heading/`：SectionHeading（斜線の飾り付き見出し。WEB予約・お問い合わせ・スタッフ紹介・診療案内）
+  - `components/heading/`：SectionHeading（斜線の飾り付き見出し。WEB予約・お問い合わせ・当院について・スタッフ紹介・診療案内）
   - `components/archive/`：お知らせ・ブログ共通。ArchiveListPage（一覧・カテゴリー別の組み立て。取得は各セクション側）/
     archiveMetaTitle（`<title>` の並べ方）/ ArchivePageShell（外枠・2段組み）/ ArchiveCard（一覧と新着記事のカード）/
     CategoryTag / ArchiveSidebar / ArchivePagination / ArticleNav（前後の記事）/ ArchiveArticle（記事の本体＋ entry-content.css）。

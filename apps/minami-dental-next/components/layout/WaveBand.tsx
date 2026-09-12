@@ -1,3 +1,6 @@
+import type { ReactNode } from "react";
+import { ContentWidth } from "@/components/layout/ContentWidth";
+
 interface WaveImage {
   src: string;
   width: number;
@@ -21,13 +24,41 @@ const WAVES: Record<"top" | "bottom", WaveSet> = {
   },
 };
 
-interface WaveBackgroundProps {
+interface WaveBandProps {
+  /** 帯の中身。見出しと中身の間はここで40px（PCは60px）空ける */
+  children: ReactNode;
+}
+
+/**
+ * 上下に波の付いた水色の帯（Figma: bg-section-pc / bg-section-sp）。
+ * 診療案内の診療タイプごとの帯と、ホームの診療案内セクションで使う（Figmaでは同じ組みで寸法も同じ）。
+ * 帯は画面の端から端まで、中身は幅の上限1000px。
+ */
+export function WaveBand({ children }: WaveBandProps) {
+  return (
+    <>
+      <Wave edge="top" />
+      {/* PCは上の波のすぐ下から見出しが始まるので上の余白なし。
+          下の余白は「下の波を重ねる分＋カードとの間」。SPは波を重ねる量が画面幅の14.4%で幅に比例して増えるので、
+          余白も同じ割合で増やす（固定だと広いSP幅で波のキラキラが最後のカードに掛かる。375px幅で62px＝Figmaどおり）。
+          PCはFigmaどおり85px固定 */}
+      <div className="bg-main-light pt-[30px] pb-[calc(14.4%+8px)] lg:pt-0 lg:pb-[85px]">
+        <ContentWidth>
+          <div className="flex flex-col gap-10 lg:gap-[60px]">{children}</div>
+        </ContentWidth>
+      </div>
+      <Wave edge="bottom" />
+    </>
+  );
+}
+
+interface WaveProps {
   /** 帯の上に置く波（top）か、帯の下に置く波（bottom）か */
   edge: "top" | "bottom";
 }
 
 /**
- * 水色の帯の上下の波（Figma: bg-top-pc / bg-bottom-pc ほか）。飾りなので読み上げの対象から外す。
+ * 帯の上下の波。飾りなので読み上げの対象から外す。
  * 画面の幅に合わせて比率を保ったまま伸び縮みさせる（1280pxより広い画面でも波が途中で切れないように）。
  *
  * 下の波は、SVGの上側（PC 117px/1280px・SP 54px/375px）がキラキラだけの透明な部分なので、その分を帯に重ねる。
@@ -40,7 +71,7 @@ interface WaveBackgroundProps {
  * 白い横線が出る。上の波は帯に1px重ね（-mb-px）、下の波は透明な部分の重なりに1px足して、
  * 継ぎ目の半透明の画素を白地ではなく帯の水色の上に描かせる
  */
-export function WaveBackground({ edge }: WaveBackgroundProps) {
+function Wave({ edge }: WaveProps) {
   const wave = WAVES[edge];
 
   return (

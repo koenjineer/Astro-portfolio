@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DevicesIcon } from "@/components/icons/DevicesIcon";
 import { MailIcon } from "@/components/icons/MailIcon";
 import { FooterSitemap } from "@/components/layout/FooterSitemap";
+import { MedicalTimeCard } from "@/components/layout/MedicalTimeCard";
 import { TelNumber } from "@/components/layout/TelNumber";
 import {
   CLINIC_ADDRESS,
@@ -14,10 +15,6 @@ import {
 // ボタン2つで共通の形（PC 220×56 / SP 150×38）
 const BUTTON_BASE_CLASS =
   "flex h-[38px] w-[150px] items-center justify-center gap-1.5 rounded-[30px] px-1.5 py-2 text-sm/[1.5] transition-colors duration-300 motion-reduce:transition-none lg:h-14 lg:w-[220px] lg:px-2.5 lg:py-4 lg:text-base/[1.5]";
-
-// 診療時間表はFigmaでも画像で置かれている。読み上げ用に表の中身を文章にする
-const MEDICAL_TIME_ALT =
-  "診療時間：9:00〜12:00は月曜〜日曜・祝日、13:00〜22:00は水曜を除く月曜〜日曜・祝日";
 
 export function SiteFooter() {
   return (
@@ -78,16 +75,7 @@ export function SiteFooter() {
                 </Link>
               </div>
 
-              <div className="w-full max-w-[335px] rounded-xl bg-white shadow-default lg:max-w-[477px]">
-                <Image
-                  src="/images/common/footer-medical-time.webp"
-                  alt={MEDICAL_TIME_ALT}
-                  width={800}
-                  height={279}
-                  loading="lazy"
-                  className="h-auto w-full"
-                />
-              </div>
+              <MedicalTimeCard />
             </div>
 
             {/* 地図はGoogleマップの埋め込みではなく、Figmaの地図を画像で置く（外部への通信を発生させない） */}

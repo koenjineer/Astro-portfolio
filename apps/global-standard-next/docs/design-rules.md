@@ -104,7 +104,8 @@ SPメニューでも同じ下線を出す（白）。ホバーは付けない。
 （`app/_components/HomeCaseCard.tsx`）。
 
 移す対象は `transition-[color,translate]` と書く。Tailwind v4の `translate-x-*` は
-`transform` ではなく `translate` プロパティを使うため、`transform` と書くと動かない。
+`transform` ではなく `translate` プロパティを使うため、`transition-[color,transform]` だと動かない
+（角括弧なしの `transition-transform` なら動く。`/rules/tailwind.md`）。
 
 「View more」の線が伸びる方も同じ理由で `transition-[right]`。丸・線・矢先を
 別々の要素で描いているのは、1枚のSVGでは線だけを伸ばせないため。

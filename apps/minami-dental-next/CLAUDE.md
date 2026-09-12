@@ -34,6 +34,8 @@
 - TypeScriptの書き方：`/rules/typescript.md`
 - ヘッドレスWordPress（WP側の設定と罠）：`/rules/headless-wordpress.md`
 - 静的書き出しとVercelへの手元ビルド：`/rules/nextjs-static-export.md`
+- Tailwind CSS v4の書き方と罠：`/rules/tailwind.md`
+- カンプに答えが書かれていないときの決め方（タブレット幅・素材の解像度・動きを減らす設定）：`/rules/design-to-code.md`
 - プルリクエストの自動チェック（CI）とGitHubの安全設定：`/rules/ci.md`
 
 WordPress側の状態（投稿タイプ・GraphQL名・件数・確認済みクエリ・画像の置き場所）は `docs/wordpress.md`。
@@ -43,8 +45,9 @@ WordPress側の状態（投稿タイプ・GraphQL名・件数・確認済みク�
 ```
 apps/minami-dental-next/
 ├── CLAUDE.md            ← このファイル
-├── docs/                ← progress.md（最新の記録・次のアクション）/ progress-log.md（完了分。古い分は progress-log-archive.md）/
-│                          wordpress.md（WP側）/ design-rules.md（色・フォント・ホバー）
+├── docs/                ← progress.md（最新の記録・プロジェクトの締めくくり）/ progress-log.md（完了分。古い分は progress-log-archive.md）/
+│                          wordpress.md（WP側）/ design-rules.md（色・フォント・ホバー）/
+│                          components.md（共通部品をどこに置いたか）
 ├── app/                 ← ページ本体（＋ページ固有の _components/）
 │   ├── page.tsx         ← ホーム（メインビジュアル・CONCEPT・3つのおすすめ・診療案内カード・ブログ6件）。
 │   │                      ホーム専用の部品は app/_components/。スライダーだけが "use client"
@@ -83,34 +86,12 @@ OGP画像・faviconは `app/` に決まった名前で置く（`app/layout.tsx` 
 
 ## 共通部品の置き場所
 
-姉妹サイト `apps/global-standard-next` と同じ決まり。
+どの部品をどこに置いたかは `docs/components.md`。決まりの要点は2つ。
 
 - **2ページ以上で使う部品** → `components/`（`@/components/...` で参照）
-  - `components/layout/`：SiteHeader（＋SpMenu・spMenuInert）/ SiteFooter（＋FooterSitemap）/ PageHero / Breadcrumb /
-    ReserveFixedButton（PC右端）/ SpReserveBar（SP下端）/ BackToTop / TelNumber /
-    ContentWidth（本文の幅：左右20px＋幅の上限1000pxで中央。当院について・スタッフ紹介・診療案内・ホーム）/
-    MediaBlock（写真＋文章のブロックと水色の飾り。当院についてのポリシーと特徴・ホームのCONCEPT）/
-    WaveBand（上下の波＋水色の帯。診療案内の帯・ホームの診療案内）/
-    MedicalTimeCard（診療時間表の白いカード。フッター・ホーム）/
-    FormPageShell（WEB予約・お問い合わせの外枠。ページ上部の見出しだけ引数）。
-    案内とフォームの並び FormPageSections も同じファイル。ナビ6項目は navItems.ts
-  - 電話番号は発信リンクにしない（架空の番号が実在した場合の誤発信を避けるため。表示だけの TelNumber を使う）
-  - `components/icons/`：塗り・線は `currentColor`（親の文字色に追従させ、色違いのSVGを増やさない）
-  - `components/form/`：FormField（`control` でinput/select/textareaを出し分け）/ ChoiceGroup / FieldLabel /
-    SubmitButton（「送　信」ボタン）/
-    NoSendForm（送信しないフォームの外側：見出し＋区切り線の枠＋送信ボタン）/ ContactInfoFields（お名前〜メールの4項目）
-  - `components/heading/`：SectionHeading（斜線の飾り付き見出し。WEB予約・お問い合わせ・当院について・スタッフ紹介・診療案内・ホーム）
-  - `components/archive/`：お知らせ・ブログ共通。ArchiveListPage（一覧・カテゴリー別の組み立て。取得は各セクション側）/
-    archiveMetaTitle（`<title>` の並べ方）/ ArchivePageShell（外枠・2段組み）/ ArchiveCard（一覧と新着記事のカード）/
-    CategoryTag / ArchiveSidebar / ArchivePagination / ArticleNav（前後の記事）/ ArchiveArticle（記事の本体＋ entry-content.css）。
-    記事・カテゴリー・URLの作り方は引数（`types.ts` の `ArchiveRoutes`）で受け取り、お知らせ・ブログ固有の名前やパスを中に持たない
 - **1ページでしか使わない部品** → `app/<page>/_components/`
-- PC/SPはFigmaでは別コンポーネントだが、コードでは1つの部品の中でTailwindのレスポンシブクラスで出し分ける
-- 画面幅の切り替えは、ヘッダー（ナビ・SPメニュー）と固定ボタン類が `xl`（1280px）、それ以外は `lg`（1024px）。
-  ヘッダーはナビ6項目＋電話番号で約1115px必要で、1024pxでは入らないため。
-  唯一の例外はスタッフ紹介のカードで、タブレットは `md`（768px）から2列にする
-  （Figmaにタブレットのデザインが無く、1列のままだとカードが大きくなりすぎるため）
-- ヘッダー・フッター・固定ボタン類は `app/layout.tsx` で全ページに入る（各ページでは置かない）
+
+1ページ目では専用の部品として作り、2ページ目で使うときに `components/` へ移して汎用化する。
 
 ## URL設計
 
@@ -163,8 +144,7 @@ npx vercel@latest deploy --prebuilt --prod
 ## 進め方の合意事項
 
 - 架空の歯科医院のサイトなので、全ページ `noindex, nofollow`（`app/layout.tsx`のmetadata）。
-  デプロイ後もこの設定は外さない。robots.txtでのブロックはしない
-  （クロール自体を止めるとnoindexが読まれず逆効果になるため）
+  **デプロイ後もこの設定は外さない。** robots.txtでブロックしない理由は `/rules/nextjs-static-export.md`
 - お問い合わせ・WEB予約とも**送信しない**。`onSubmit` で `preventDefault()` して完了ページへ移るだけで、
   入力内容はブラウザの外へ一切出ない（`action` + `method="get"` はURLに入力が残るので使わない）。
   実装は `components/form/NoSendForm.tsx` の1か所だけ
@@ -195,4 +175,4 @@ npx vercel@latest deploy --prebuilt --prod
 
 ## 進捗
 
-最新の記録と次のアクションは `docs/progress.md`、完了済みの作業の経緯・判断は `docs/progress-log.md`。
+最新の記録とプロジェクトの締めくくりは `docs/progress.md`、完了済みの作業の経緯・判断は `docs/progress-log.md`。

@@ -7,7 +7,8 @@ interface SectionHeadingProps {
 
 /**
  * 左右に斜線の飾りが付くセクションの見出し（Figma: Heading ＋ title-deco）。
- * WEB予約・お問い合わせのフォームの上と、スタッフ紹介の「院長のあいさつ」「スタッフ紹介」、診療案内の診療タイプ名で使う
+ * WEB予約・お問い合わせのフォームの上と、当院についての「ポリシーと特徴」「院内の様子」、
+ * スタッフ紹介の「院長のあいさつ」「スタッフ紹介」、診療案内の診療タイプ名で使う
  */
 export function SectionHeading({ children }: SectionHeadingProps) {
   return (

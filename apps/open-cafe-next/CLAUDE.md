@@ -49,16 +49,26 @@ apps/open-cafe-next/
 ├── CLAUDE.md            ← このファイル
 ├── docs/                ← wordpress.md（WP側）/ progress.md（記録と未決事項）
 ├── app/
-│   ├── layout.tsx       ← 最小版（noindex・metadataBase）。フォント・ヘッダー等はまだ無い
-│   └── page.tsx         ← 疎通確認用の仮ページ。TOP実装時に丸ごと置き換える
+│   ├── layout.tsx       ← フォント・noindex・metadataBase・タイトルの型（「ページ名 | OPEN CAFE」）・フッター・BackToTop
+│   ├── page.tsx         ← 疎通確認用の仮ページ。TOP実装時に丸ごと置き換える
+│   ├── icon.png / opengraph-image.png（＋.alt.txt）
+│   └── contact/         ← 入力・thanks/（完了）。_components/ に外枠とフォーム
+├── components/
+│   ├── layout/          ← PageHero（下層上部＋画面右上に固定のメニューボタン）/ DrawerMenu / drawerMenuInert.ts（開いている間ドロワー以外を inert）/ Breadcrumb / SiteFooter / SnsIcons / BackToTop
+│   ├── heading/         ← HeadingGroup（英字＋日本語の見出し）
+│   ├── ui/              ← Button（デフォルトボタン：ホバーで右下に凹む）
+│   └── form/            ← NoSendForm / FormField / ChoiceGroup / FieldLabel / SubmitButton
 └── lib/
+    ├── site.ts          ← サイト名・ナビ項目・フッターの店舗情報（Figmaの文言を固定で持つ）
     ├── graphql-client.ts
     ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス（アイキャッチ・ACF画像の両方）
     ├── dates.ts         ← WPの日付 → 表示用／datetime用
     └── queries/         ← news / menu / products / shops / top
 ```
 
-`public/images/<ページ>/` は各ページの実装時に作る。
+画像は `public/images/common/`（全ページ共通の飾り・アイコン・地図）と
+`public/images/firstview/`（下層上部の写真。ページ着手時に `<ページ>-pc.webp` / `-sp.webp` を足す）。
+PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px）。理由は `docs/progress.md`。
 
 ## URL設計
 
@@ -103,16 +113,22 @@ apps/open-cafe-next/
 
 ## Figmaデザイン参照
 
-ファイルキー：未記入
+ファイルキー：`dg9N8E30Qd7jBBmwgw41HB`
 
 | 参照先 | PC | SP |
 |---|---|---|
-| ルールセット | | |
-| 共通レイアウト | | |
+| ルールセット（フォント・色・ボタン・ホバー） | 19719:11092 | — |
+| OGP・favicon | 19731:5690（OGP 19745:4708 / favicon 19786:4751） | — |
+| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597） | 19719:11600 | 19719:11599 |
+| ドロワーメニュー | 19742:14510 | 19709:7335 |
+| TOPでスクロール後にドロワーボタンを出す | 19742:13912 | — |
 | TOP | | |
 | コンセプト | | |
 | メニュー 一覧 / ジャンル別 | | |
 | お知らせ 一覧 / カテゴリ別 / 詳細 | | |
 | ギフト・贈り物 | | |
 | 店舗情報 | | |
-| お問い合わせ（入力／完了） | | |
+| お問い合わせ（入力／完了） | 19719:10545 / 19719:10222 | 19719:10556 / 19719:10229 |
+
+共通部品のFigmaは、お問い合わせPCの中のインスタンス（mainvisual-pc 19719:10546、pankuzu-pc 19719:10547、
+footer-pc 19719:10553）を見る。

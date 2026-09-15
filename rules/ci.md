@@ -5,17 +5,18 @@
 
 ## 何が走るか
 
-3つのアプリそれぞれで、次の2つを行う。アプリごとに別々のチェックとして表示される。
+4つのアプリそれぞれで、次の2つを行う。アプリごとに別々のチェックとして表示される。
 
 | チェック名 | 中身 |
 | --- | --- |
 | check (astro-portfolio) | `pnpm lint` → `pnpm exec astro check` |
 | check (global-standard-next) | `pnpm lint` → `pnpm exec next typegen && pnpm exec tsc --noEmit` |
 | check (minami-dental-next) | `pnpm lint` → `pnpm exec next typegen && pnpm exec tsc --noEmit` |
+| check (open-cafe-next) | `pnpm lint` → `pnpm exec next typegen && pnpm exec tsc --noEmit` |
 
 - **lint**：書き方のルール違反を探す。**警告（warning）では落ちない。エラーだけで落ちる**
 - **型チェック**：TypeScriptの型の食い違いを探す
-- Next.jsの2サイトは、型チェックの前に `next typegen` を挟む。
+- Next.jsの3サイトは、型チェックの前に `next typegen` を挟む。
   型チェックに必要な自動生成ファイル（next-env.d.ts）がGitに入っていないため
 - 同じブランチに続けてプッシュすると、古い実行は止まって最新だけが走る
 - チェック名はマージ条件に使っている。**ci.yml の `name` や `app` の名前を変えると、
@@ -23,7 +24,7 @@
 
 ## ビルドは含めない
 
-Next.jsの2サイトは、ビルド時に**手元のMacにしか無いWordPress**を読みに行く。
+Next.jsの3サイトは、ビルド時に**手元のMacにしか無いWordPress**を読みに行く。
 GitHub上からは見えないので、ビルドはここでは行わない。
 ビルドとデプロイは今までどおり手元で行う（`/rules/nextjs-static-export.md`）。
 
@@ -31,7 +32,7 @@ GitHub上からは見えないので、ビルドはここでは行わない。
 
 ## チェックが通るまでマージできない
 
-`main` には「上の3つのチェックが通っていること」をマージ条件にする設定を入れる。
+`main` には「上の4つのチェックが通っていること」をマージ条件にする設定を入れる。
 1つでも赤（失敗）なら、マージボタンが押せない。直してプッシュし直せば自動で再検査される。
 
 ## GitHubの安全設定（有効にしてあるもの）
@@ -58,7 +59,7 @@ cd apps/<アプリ名>
 pnpm install --frozen-lockfile
 pnpm lint
 pnpm exec astro check                               # astro-portfolio の場合
-pnpm exec next typegen && pnpm exec tsc --noEmit    # Next.jsの2サイトの場合
+pnpm exec next typegen && pnpm exec tsc --noEmit    # Next.jsの3サイトの場合
 ```
 
 - **Install で落ちた**：package.json を変えたのにロックファイルを更新していない。

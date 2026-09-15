@@ -72,6 +72,18 @@ WPGraphQLのターム一覧は**名前順**で返る。カンプの並びとは�
 標準カテゴリーを使うと `uncategorized` のような**投稿0件のターム**が一覧に出る。
 `categories(where: {hideEmpty: true})` で落とす。
 
+### 7. `Menu`／`MenuItem` はGraphQL名に使えない
+
+WPGraphQLの予約語（WordPress標準のナビゲーションメニューが使っている）。
+「メニュー」という投稿タイプを作るなら、GraphQL名を別の単語にする
+（`open-cafe-next` では `dish` / `dishes`）。登録スラッグは `menu` のままでよい。
+
+### 8. ACFのGroup型の子フィールドは、GraphQL Field Nameが1文字に縮むことがある
+
+Group型（Repeaterも同様）の子フィールドを足すと、ラベルから自動で作られるGraphQL Field Nameが
+`a`・`b` のような1文字になることがある。**保存前に各フィールドの「GraphQL」タブを開いて確かめ、
+英単語に直す**（直すときは3.のとおり手でタイプする）。
+
 ## ACFから返る値のくせ
 
 - テキスト欄は**未入力だと `null`**（空文字ではない）。型定義とフォールバックをそこに合わせる

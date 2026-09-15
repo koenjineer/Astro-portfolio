@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+/* ルールセット（Figma 19719:11092）の色とフォント。色の名前はFigmaの変数名（cr-*）に合わせる */
+@theme inline {
+  --font-serif-jp: var(--font-noto-serif-jp);
+  --font-amatic: var(--font-amatic-sc);
+  --font-patua: var(--font-patua-one);
+  --font-damion: var(--font-damion);
+
+  --color-main: #382620;
+  --color-contrast: #222222;
+  --color-accent: #f07317;
+  --color-disable: #888888;
+  --color-base-dark: #eae0d5;
+  /* Figmaの cr-base(#F3EFEB)。--color-base で登録すると文字サイズの text-base と名前が衝突するため
+     base-light と呼ぶ（/rules/tailwind.md。白の cr-white も同じ理由で登録せず text-white を使う） */
+  --color-base-light: #f3efeb;
+}
+
+body {
+  background-color: var(--color-base-light);
+  color: var(--color-contrast);
+  font-family: var(--font-serif-jp), serif;
+  /* ルールセットの日本語はMedium/Boldの2種。既定をMediumにする */
+  font-weight: 500;
+}

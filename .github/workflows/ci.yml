@@ -1,4 +1,4 @@
-# プルリクエストごとに、3つのアプリそれぞれで lint と型チェックを自動で走らせる。
+# プルリクエストごとに、4つのアプリそれぞれで lint と型チェックを自動で走らせる。
 # 説明は /rules/ci.md。チェック名「check (アプリ名)」はマージ条件に使うので変えないこと。
 name: CI
 
@@ -25,7 +25,7 @@ jobs:
       # 1つのアプリが落ちても、残りのアプリの結果も最後まで見られるようにする
       fail-fast: false
       matrix:
-        app: [astro-portfolio, global-standard-next, minami-dental-next]
+        app: [astro-portfolio, global-standard-next, minami-dental-next, open-cafe-next]
         include:
           - app: astro-portfolio
             typecheck: pnpm exec astro check
@@ -35,12 +35,14 @@ jobs:
             typecheck: pnpm exec next typegen && pnpm exec tsc --noEmit
           - app: minami-dental-next
             typecheck: pnpm exec next typegen && pnpm exec tsc --noEmit
+          - app: open-cafe-next
+            typecheck: pnpm exec next typegen && pnpm exec tsc --noEmit
     # アプリごとに pnpm-lock.yaml を持つ独立構成なので、各アプリのフォルダで実行する
     defaults:
       run:
         working-directory: apps/${{ matrix.app }}
     # ビルド（next build / astro build）はここでは行わない。
-    # Next.jsの2サイトはビルド時に手元のMacにしか無いWordPressを読むため、
+    # Next.jsの3サイトはビルド時に手元のMacにしか無いWordPressを読むため、
     # GitHub上ではビルドできない。ビルドは手元で行う（/rules/nextjs-static-export.md）
     steps:
       - uses: actions/checkout@v4

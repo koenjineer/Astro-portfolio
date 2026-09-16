@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import type { BreadcrumbItem } from "@/components/layout/Breadcrumb";
-import { Breadcrumb } from "@/components/layout/Breadcrumb";
-import { PageHero } from "@/components/layout/PageHero";
+import { SubPageLayout } from "@/components/layout/SubPageLayout";
 
 interface ContactPageShellProps {
   /** 「TOP」の後ろに続く項目 */
@@ -19,19 +18,15 @@ export function ContactPageShell({
   children,
 }: ContactPageShellProps) {
   return (
-    <main className="flex-1">
-      <PageHero
-        title="お問い合わせ"
-        eyebrow="contact"
-        imagePcSrc="/images/firstview/contact-pc.webp"
-        imageSpSrc="/images/firstview/contact-sp.webp"
-      />
-      <Breadcrumb items={breadcrumbItems} />
-
-      <div className="px-5 pt-[60px] pb-40 md:pt-20">
-        <div className="mx-auto w-full max-w-[688px]">{children}</div>
-      </div>
-    </main>
+    <SubPageLayout
+      title="お問い合わせ"
+      eyebrow="contact"
+      imagePcSrc="/images/firstview/contact-pc.webp"
+      imageSpSrc="/images/firstview/contact-sp.webp"
+      breadcrumbItems={breadcrumbItems}
+    >
+      <div className="mx-auto w-full max-w-[688px]">{children}</div>
+    </SubPageLayout>
   );
 }
 

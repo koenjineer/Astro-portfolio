@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { HeadingGroup } from "@/components/heading/HeadingGroup";
 import { SnsIcons } from "@/components/layout/SnsIcons";
+import { ShopInfoList } from "@/components/shop/ShopInfoList";
 import { COPYRIGHT_TEXT, FOOTER_SHOP_INFO } from "@/lib/site";
 
 /**
@@ -39,25 +40,7 @@ export function SiteFooter() {
               className="aspect-[335/184] w-full border-5 border-white object-cover md:aspect-[688/377] md:border-10"
             />
 
-            <dl className="grid gap-[18px] text-sm/[1.5] font-bold text-contrast md:grid-flow-col md:grid-cols-2 md:grid-rows-[repeat(3,auto)] md:gap-x-10 md:gap-y-5">
-              {FOOTER_SHOP_INFO.map((row) => (
-                // 下余白は5px：Figmaの下線は内側の線で高さを増やさないが、CSSの border は1px足すため。
-                // 6pxのままだと1行ごとに1px高くなり、PCで3px・SPで6pxフッターが高くなった
-                <div
-                  key={row.label}
-                  className="flex gap-6 border-b border-contrast pb-[5px]"
-                >
-                  <dt className="w-14 shrink-0">{row.label}</dt>
-                  <dd>
-                    {row.lines.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <ShopInfoList rows={FOOTER_SHOP_INFO} />
           </div>
         </div>
       </section>

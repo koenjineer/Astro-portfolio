@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { graphqlClient } from "@/lib/graphql-client";
-import { requireLocalImageSrc, type ImageConnection } from "@/lib/images";
+import type { ImageConnection } from "@/lib/images";
+import { requireExistingLocalImageSrc } from "@/lib/images.server";
 
 // 9件だが、管理画面で増やされても取りこぼさないよう多めに取る
 const PRODUCTS_FETCH_LIMIT = 100;
@@ -31,10 +32,10 @@ export interface Product {
   imageSrc: string;
 }
 
-// 並びは仮にslug昇順。日本語のslugなので、Figmaの並びを見て決め直す
+// 投稿日時の古い順が、Figmaの並び（ハート型チョコレート→…→いちごマカロン）と一致する
 const PRODUCTS_QUERY = `
   {
-    products(first: ${PRODUCTS_FETCH_LIMIT}, where: {orderby: {field: SLUG, order: ASC}}) {
+    products(first: ${PRODUCTS_FETCH_LIMIT}, where: {orderby: {field: DATE, order: ASC}}) {
       nodes {
         title
         slug
@@ -63,7 +64,12 @@ function toProduct(node: ProductNode): Product {
     title: node.title,
     slug: node.slug,
     price: node.products.price,
-    imageSrc: requireLocalImageSrc(node.featuredImage, PRODUCTS_IMAGE_DIR, label),
+    // 画像がリポジトリに置かれているかまで確かめる（置き忘れたまま公開しないため）
+    imageSrc: requireExistingLocalImageSrc(
+      node.featuredImage,
+      PRODUCTS_IMAGE_DIR,
+      label
+    ),
   };
 }
 

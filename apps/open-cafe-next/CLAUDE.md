@@ -40,29 +40,38 @@
 - プルリクエストの自動チェック（CI）：`/rules/ci.md`
 
 WordPress側の状態（投稿タイプ・GraphQL名・件数・確認済みクエリ）は `docs/wordpress.md`。
-進み具合と未決事項は `docs/progress.md`。
+未決事項は `docs/progress.md`、ページごとに決めたことと実測値は `docs/progress/` の各ファイル。
 
 ## ディレクトリ構成
 
 ```
 apps/open-cafe-next/
 ├── CLAUDE.md            ← このファイル
-├── docs/                ← wordpress.md（WP側）/ progress.md（記録と未決事項）
+├── docs/                ← wordpress.md（WP側）/ progress.md（目次と未決事項）/ progress/（ページごとの記録）
 ├── app/
 │   ├── layout.tsx       ← フォント・noindex・metadataBase・タイトルの型（「ページ名 | OPEN CAFE」）・フッター・BackToTop
 │   ├── page.tsx         ← 疎通確認用の仮ページ。TOP実装時に丸ごと置き換える
 │   ├── icon.png / opengraph-image.png（＋.alt.txt）
 │   ├── contact/         ← 入力・thanks/（完了）。_components/ に外枠とフォーム
 │   ├── products/        ← ギフト・贈り物。_components/ に GiftCard（大・小）と WrappingNotice（ラッピング案内）
-│   └── shop/            ← 店舗情報。_components/ に ShopSection（1店舗分）
+│   ├── shop/            ← 店舗情報。_components/ に ShopSection（1店舗分）
+│   ├── news/            ← お知らせ一覧（page/[page]/）と詳細（[slug]/）。_components/NewsListPage.tsx は
+│   │                       カテゴリ別一覧と共有する（組みが同じで、違うのはパンくずと見出しだけ）
+│   └── archives/        ← お知らせ カテゴリ別一覧（category/[slug]/ と その page/[page]/）
 ├── components/
 │   ├── layout/          ← SubPageLayout（下層ページ共通の外枠）/ PageHero（下層上部＋画面右上に固定のメニューボタン）/ DrawerMenu / drawerMenuInert.ts（開いている間ドロワー以外を inert）/ Breadcrumb / SiteFooter / SnsIcons / BackToTop
 │   ├── heading/         ← HeadingGroup（英字＋日本語の見出し）/ BarHeading（左に縦棒の付く見出し）
 │   ├── shop/            ← ShopInfoList（住所・TELなどの表。フッターと店舗情報ページで共有）
+│   ├── news/            ← NewsCard（一覧・関連・サイドバー共通）/ CategoryBadge / NewsSidebar /
+│   │                       NewsPagination / NewsArticle / ArticleNav / RelatedNews /
+│   │                       entry-content.css（WPの本文HTMLにタグ名で当てるCSS）/ ChevronRightIcon / newsImage.ts
 │   ├── ui/              ← Button（デフォルトボタン：ホバーで右下に凹む）
 │   └── form/            ← NoSendForm / FormField / ChoiceGroup / FieldLabel / SubmitButton
 └── lib/
     ├── site.ts          ← サイト名・ナビ項目・フッターの店舗情報・店舗の並び順（Figmaの文言を固定で持つ）
+    ├── newsRoutes.ts    ← お知らせのURL・見出し・下層トップの写真（カテゴリ別だけURLの根元が違うので1か所に集める）
+    ├── newsContent.ts   ← WPの本文HTMLをリポジトリ内の画像を指す形に直す（引用元の行も分ける）
+    ├── pagination.ts    ← ページ分けと前後記事
     ├── graphql-client.ts
     ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス（アイキャッチ・ACF画像の両方）
     ├── images.server.ts ← 上に加えて public/ に実物が無ければビルドを止める（ビルド時専用。今はギフトと店舗が使う）
@@ -72,8 +81,8 @@ apps/open-cafe-next/
 
 画像は `public/images/common/`（全ページ共通の飾り・アイコン・地図）と
 `public/images/firstview/`（下層上部の写真。ページ着手時に `<ページ>-pc.webp` / `-sp.webp` を足す）、
-ページ固有のもの（`public/images/products/`・`public/images/shop/`）。
-PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px）。理由は `docs/progress.md`。
+ページ固有のもの（`public/images/products/`・`public/images/shop/`・`public/images/news/`）。
+PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px）。理由は `docs/progress/contact.md`。
 
 ## URL設計
 
@@ -88,14 +97,15 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 | `/news/` | お知らせ一覧 | `posts` |
 | `/archives/category/{slug}/` | お知らせ カテゴリ別（指示書どおり） | `posts` |
 | `/news/{slug}/` | お知らせ詳細 | `post` |
-| `/products/` | ギフト・贈り物一覧（詳細ページなし。「ショップで確認する」は同じページを指す仮リンク。`docs/progress.md`） | `products` |
+| `/products/` | ギフト・贈り物一覧（詳細ページなし。「ショップで確認する」は同じページを指す仮リンク。`docs/progress/products.md`） | `products` |
 | `/shop/` | 店舗情報 | `shops` |
 | `/contact/`・`/contact/thanks/` | お問い合わせ（入力／完了。送信しない） | — |
 
 お知らせ詳細は、指示書ではルート直下（`/{slug}/`）だったが、`/concept/` 等と衝突するので
 `/news/{slug}/` に変えた（Owner確認済み、minami-dental-nextと同じ判断）。
 
-1ページの件数・ページ送りの有無は未決（Figmaを見て決める。`docs/progress.md`）。
+お知らせ一覧は**1ページ8件**（Figma）。2ページ目以降は `/news/page/2/`・
+`/archives/category/{slug}/page/2/`。1ページ目には `page/1/` を付けない。
 
 ## デプロイ
 
@@ -124,13 +134,13 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 |---|---|---|
 | ルールセット（フォント・色・ボタン・ホバー） | 19719:11092 | — |
 | OGP・favicon | 19731:5690（OGP 19745:4708 / favicon 19786:4751） | — |
-| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593、shop は PC 19719:11605 / SP 19719:11589） | 19719:11600 | 19719:11599 |
+| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593、shop は PC 19719:11605 / SP 19719:11589、news は PC 19719:11604 / SP 19719:11585） | 19719:11600 | 19719:11599 |
 | ドロワーメニュー | 19742:14510 | 19709:7335 |
 | TOPでスクロール後にドロワーボタンを出す | 19742:13912 | — |
 | TOP | | |
 | コンセプト | | |
 | メニュー 一覧 / ジャンル別 | | |
-| お知らせ 一覧 / カテゴリ別 / 詳細 | | |
+| お知らせ 一覧 / カテゴリ別 / 詳細（カードの原稿は「【お知らせ】記事情報一覧」19730:5820） | 19716:3289 / 19730:5391 / 19716:4694 | 19716:3296 / 19731:4981 / 19716:4701 |
 | ギフト・贈り物（商品写真は「【ギフト】サムネイル画像」19731:5426） | 19719:9551 | 19719:9558 |
 | 店舗情報 | 19719:6384 | 19719:6391 |
 | お問い合わせ（入力／完了） | 19719:10545 / 19719:10222 | 19719:10556 / 19719:10229 |

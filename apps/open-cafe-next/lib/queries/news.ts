@@ -2,11 +2,21 @@ import { cache } from "react";
 import { toPostDate, type PostDate } from "@/lib/dates";
 import { graphqlClient } from "@/lib/graphql-client";
 import { toLocalImageSrc, type ImageConnection } from "@/lib/images";
+import { toLocalContentHtml } from "@/lib/newsContent";
 
 // 15件の投稿だが、管理画面で増やされても取りこぼさないよう多めに取る
 const NEWS_FETCH_LIMIT = 100;
 
 const NEWS_THUMBNAIL_DIR = "/images/news";
+
+/**
+ * アイキャッチが無い記事（post-02・03・06・11・15）に出す代わりの画像。
+ * Figmaのカードでは、この5件が写真ではなくOPEN CAFEのロゴになっている（19730:5820）
+ */
+const NEWS_NO_IMAGE_SRC = `${NEWS_THUMBNAIL_DIR}/no-image.webp`;
+
+/** 一覧1ページの件数（Figmaの一覧は8件＋ページ送りが2ページ分。19716:3289） */
+export const NEWS_PER_PAGE = 8;
 
 // WordPress既定のカテゴリ。記事の分類としては使っていないので、表示にも絞り込みにも出さない
 const UNCATEGORIZED_SLUG = "uncategorized";
@@ -41,11 +51,8 @@ export interface NewsPost extends PostDate {
   title: string;
   slug: string;
   category: NewsCategory;
-  /**
-   * 5件（post-02・03・06・11・15）はアイキャッチが無い（2026-09-15時点）。代わりの画像を使うか、
-   * 画像なしの見た目にするかはFigmaを見て決めるので、今は null のまま返す
-   */
-  thumbnailSrc: string | null;
+  /** アイキャッチが無い記事には代わりの画像（ロゴ）を入れるので、画面側は分岐しなくてよい */
+  thumbnailSrc: string;
 }
 
 const NEWS_LIST_QUERY = `
@@ -93,7 +100,9 @@ function toNewsPost(node: PostNode): NewsPost {
     slug: node.slug,
     ...toPostDate(node.date),
     category: toPrimaryCategory(node),
-    thumbnailSrc: toLocalImageSrc(node.featuredImage, NEWS_THUMBNAIL_DIR),
+    thumbnailSrc:
+      toLocalImageSrc(node.featuredImage, NEWS_THUMBNAIL_DIR) ??
+      NEWS_NO_IMAGE_SRC,
   };
 }
 
@@ -119,8 +128,8 @@ interface NewsCategoriesQueryResult {
 }
 
 // hideEmpty：記事が1件も無いカテゴリは返さない。行き先の無いリンクを作らないため。
-// 並びは仮に作った順（TERM_ID昇順＝キャンペーン→イベント情報→期間限定メニュー→営業時間）。
-// WordPressの既定は名前順。Figmaの並びを見て決め直す
+// 並びは作った順（TERM_ID昇順＝キャンペーン→イベント情報→期間限定メニュー→営業時間）。
+// Figmaのサイドバーの並びと一致するので、この順のまま出す（2026-09-16確認）
 const NEWS_CATEGORIES_QUERY = `
   {
     categories(first: ${NEWS_FETCH_LIMIT}, where: {hideEmpty: true, orderby: TERM_ID, order: ASC}) {
@@ -176,8 +185,8 @@ const NEWS_POST_QUERY = `
 export interface NewsPostDetail extends NewsPost {
   /**
    * WordPressが組み立て済みのHTML。全15件に `open-cafe-cms.local` の画像
-   * （img_firstview_concept）が埋め込まれている（2026-09-15確認）。
-   * そのまま出すと公開先で画像が切れるので、詳細ページの実装時に扱いを決める
+   * （img_firstview_concept）が埋め込まれているので、`lib/newsContent.ts` で
+   * リポジトリ内の画像を指す形に直してから返す
    */
   contentHtml: string;
 }
@@ -193,5 +202,31 @@ export const getNewsPost = cache(async (slug: string): Promise<NewsPostDetail> =
     throw new Error(`お知らせ（slug: ${slug}）が見つかりませんでした`);
   }
 
-  return { ...toNewsPost(data.post), contentHtml: data.post.content };
+  return {
+    ...toNewsPost(data.post),
+    contentHtml: toLocalContentHtml(data.post.content, slug),
+  };
 });
+
+/** Figmaの詳細ページの「関連記事」は2件（19719:5661） */
+export const RELATED_NEWS_COUNT = 2;
+
+/**
+ * 関連記事。同じカテゴリーの新しい順で、自分自身は除く（Figmaの詳細ページ＝期間限定メニューの記事に、
+ * 同じカテゴリーの2件が並んでいる）。同じカテゴリーが足りなければ、あるぶんだけ返す
+ *
+ * @param allPosts 新しい順の全記事
+ */
+export function getRelatedNewsPosts(
+  allPosts: NewsPost[],
+  current: NewsPost,
+  count: number = RELATED_NEWS_COUNT
+): NewsPost[] {
+  return allPosts
+    .filter(
+      (post) =>
+        post.slug !== current.slug &&
+        post.category.slug === current.category.slug
+    )
+    .slice(0, count);
+}

@@ -61,10 +61,6 @@ critical 2 / high 27 / medium 15 / low 7）。`package.json` と `pnpm-lock.yaml
   スマホ表示に切り替わり、既存のサムネイルと見え方がそろわない（みなみ歯科で発生）
 - 自動で動く部分があるなら `--force-prefers-reduced-motion` で止めてから撮る
 
-### open-cafe-next の `docs/progress.md` を分ける
-
-190行あり、200行の上限が近い（次のページを1つ作ると超える）。
-「決めたこと」と「未決事項」で分けるか、完了したページの記録を畳むかを決める。
 
 ### マージ済みのローカルブランチを掃除する
 

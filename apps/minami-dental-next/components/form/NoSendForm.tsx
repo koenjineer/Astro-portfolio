@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import type { FormEvent, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { FIELD_BORDER_COLOR_CLASS } from "@/components/form/FormField";
 import { SubmitButton } from "@/components/form/SubmitButton";
 import { SectionHeading } from "@/components/heading/SectionHeading";
@@ -25,11 +25,12 @@ export function NoSendForm({ heading, thanksHref, children }: NoSendFormProps) {
   /**
    * 架空の歯科医院のデモサイトなので送信先は作らない（CLAUDE.mdの合意事項）。
    * 入力内容をどこにも送らず、完了ページへ移動するだけにする。
-   * （action + method="get" にすると氏名・メールアドレスがURLに残るため使わない）
+   * onSubmit + preventDefault ではなく関数の action にする。onSubmit だと書き出したHTMLの
+   * <form> に action が無く、JSが動き出す前に送信すると氏名・メールアドレスがURLに付いて送られる。
+   * 関数の action は書き出し時に「送信しても何も起きない」HTMLになる（/rules/nextjs-static-export.md）。
    * 必須項目は required のままなので、未入力ならブラウザがここに来る前に止める。
    */
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function goToThanks() {
     router.push(thanksHref);
   }
 
@@ -38,7 +39,7 @@ export function NoSendForm({ heading, thanksHref, children }: NoSendFormProps) {
       <SectionHeading>{heading}</SectionHeading>
 
       <form
-        onSubmit={handleSubmit}
+        action={goToThanks}
         className="flex w-full flex-col items-center gap-10 lg:gap-[70px]"
       >
         <div className={`w-full border-t ${FIELD_BORDER_COLOR_CLASS}`}>

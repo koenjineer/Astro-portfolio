@@ -32,8 +32,12 @@ middleware、`next/image` の最適化。すべてビルド時に完結させる
 
 サーバーが無いので、フォームは送信できない。デモサイトなら**送信しない**のが素直。
 
-- `onSubmit` で `preventDefault()` してから完了ページへ移動するだけ
-- **`action` + `method="get"` は使わない。** 氏名やメールアドレスがURLに残る
+- `<form action={() => router.push(完了ページ)}>`（React 19 の関数action）で完了ページへ移動するだけ
+- **`onSubmit` + `preventDefault()` で止めてはいけない。** 書き出したHTMLの `<form>` に action/method が無いため、
+  JSが動き出す前（回線が遅い・JS無効）に送信するとブラウザ標準のGET送信になり、
+  `/contact/?name=…&email=…` と**入力内容がURL・閲覧履歴・アクセス記録に残る**。
+  関数actionなら書き出し時に `action="javascript:throw …"` になり、JS起動前に押しても何も起きない
+- **`action` + `method="get"` も使わない。** 同じく氏名やメールアドレスがURLに残る
 - 必須項目に `required` を付ければ、ブラウザ標準のバリデーションが止めてくれる
 - 結果として**入力内容がブラウザの外へ一切出ない**。これは説明できる利点になる
 

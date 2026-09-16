@@ -52,7 +52,8 @@ apps/open-cafe-next/
 │   ├── layout.tsx       ← フォント・noindex・metadataBase・タイトルの型（「ページ名 | OPEN CAFE」）・フッター・BackToTop
 │   ├── page.tsx         ← 疎通確認用の仮ページ。TOP実装時に丸ごと置き換える
 │   ├── icon.png / opengraph-image.png（＋.alt.txt）
-│   └── contact/         ← 入力・thanks/（完了）。_components/ に外枠とフォーム
+│   ├── contact/         ← 入力・thanks/（完了）。_components/ に外枠とフォーム
+│   └── products/        ← ギフト・贈り物。_components/ に GiftCard（大・小）と WrappingNotice（ラッピング案内）
 ├── components/
 │   ├── layout/          ← PageHero（下層上部＋画面右上に固定のメニューボタン）/ DrawerMenu / drawerMenuInert.ts（開いている間ドロワー以外を inert）/ Breadcrumb / SiteFooter / SnsIcons / BackToTop
 │   ├── heading/         ← HeadingGroup（英字＋日本語の見出し）
@@ -62,6 +63,7 @@ apps/open-cafe-next/
     ├── site.ts          ← サイト名・ナビ項目・フッターの店舗情報（Figmaの文言を固定で持つ）
     ├── graphql-client.ts
     ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス（アイキャッチ・ACF画像の両方）
+    ├── images.server.ts ← 上に加えて public/ に実物が無ければビルドを止める（ビルド時専用。今はギフトだけが使う）
     ├── dates.ts         ← WPの日付 → 表示用／datetime用
     └── queries/         ← news / menu / products / shops / top
 ```
@@ -83,7 +85,7 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 | `/news/` | お知らせ一覧 | `posts` |
 | `/archives/category/{slug}/` | お知らせ カテゴリ別（指示書どおり） | `posts` |
 | `/news/{slug}/` | お知らせ詳細 | `post` |
-| `/products/` | ギフト・贈り物一覧（詳細ページなし、ショップへのリンクは空） | `products` |
+| `/products/` | ギフト・贈り物一覧（詳細ページなし。「ショップで確認する」は同じページを指す仮リンク。`docs/progress.md`） | `products` |
 | `/shop/` | 店舗情報 | `shops` |
 | `/contact/`・`/contact/thanks/` | お問い合わせ（入力／完了。送信しない） | — |
 
@@ -119,14 +121,14 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 |---|---|---|
 | ルールセット（フォント・色・ボタン・ホバー） | 19719:11092 | — |
 | OGP・favicon | 19731:5690（OGP 19745:4708 / favicon 19786:4751） | — |
-| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597） | 19719:11600 | 19719:11599 |
+| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593） | 19719:11600 | 19719:11599 |
 | ドロワーメニュー | 19742:14510 | 19709:7335 |
 | TOPでスクロール後にドロワーボタンを出す | 19742:13912 | — |
 | TOP | | |
 | コンセプト | | |
 | メニュー 一覧 / ジャンル別 | | |
 | お知らせ 一覧 / カテゴリ別 / 詳細 | | |
-| ギフト・贈り物 | | |
+| ギフト・贈り物（商品写真は「【ギフト】サムネイル画像」19731:5426） | 19719:9551 | 19719:9558 |
 | 店舗情報 | | |
 | お問い合わせ（入力／完了） | 19719:10545 / 19719:10222 | 19719:10556 / 19719:10229 |
 

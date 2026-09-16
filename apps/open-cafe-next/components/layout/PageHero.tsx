@@ -1,8 +1,13 @@
 import { DrawerMenu } from "@/components/layout/DrawerMenu";
 
 interface PageHeroProps {
-  /** 日本語の見出し（例: お問い合わせ）。ページのh1になる */
+  /** 日本語の見出し（例: お問い合わせ）。既定ではページのh1になる */
   title: string;
+  /**
+   * 見出しのタグ。記事詳細のように、ページの中に本来のh1（記事名）があるページでは "p" を渡す。
+   * h1が2つあると、見出しをたどる読み上げでどちらがページの題か分からなくなるため
+   */
+  titleAs?: "h1" | "p";
   /** 英字の見出し（例: contact）。CSSで大文字にするのでFigmaの原稿どおり小文字で渡す */
   eyebrow: string;
   /** 背景写真。ページごとに違う写真が敷かれるので使う側から渡す（Figma: 下層トップ背景画像 PC/SP） */
@@ -22,6 +27,7 @@ const IMAGE_SP_HEIGHT = 240;
  */
 export function PageHero({
   title,
+  titleAs: TitleTag = "h1",
   eyebrow,
   imagePcSrc,
   imageSpSrc,
@@ -65,9 +71,9 @@ export function PageHero({
         <p className="font-amatic text-[32px]/[1.3] font-bold tracking-[0.2em] uppercase md:text-7xl/[1.3]">
           {eyebrow}
         </p>
-        <h1 className="text-xs/[1.5] font-bold tracking-[0.08em] md:text-base/[1.5]">
+        <TitleTag className="text-xs/[1.5] font-bold tracking-[0.08em] md:text-base/[1.5]">
           {title}
-        </h1>
+        </TitleTag>
       </div>
 
       {/* Figmaではメニューボタンが写真の右上に置かれている（TOP以外のページ共通）。

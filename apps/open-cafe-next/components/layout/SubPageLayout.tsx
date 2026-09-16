@@ -4,8 +4,10 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageHero } from "@/components/layout/PageHero";
 
 interface SubPageLayoutProps {
-  /** 日本語の見出し（例: 店舗情報）。ページのh1になる */
+  /** 日本語の見出し（例: 店舗情報）。既定ではページのh1になる */
   title: string;
+  /** 上部の見出しのタグ。記事詳細のように、本文側にh1があるページでは "p" を渡す */
+  titleAs?: "h1" | "p";
   /** 英字の見出し。CSSで大文字にするのでFigmaの原稿どおり小文字で渡す */
   eyebrow: string;
   /** 下層トップの背景写真（ページごとに違う） */
@@ -25,6 +27,7 @@ interface SubPageLayoutProps {
  */
 export function SubPageLayout({
   title,
+  titleAs,
   eyebrow,
   imagePcSrc,
   imageSpSrc,
@@ -35,6 +38,7 @@ export function SubPageLayout({
     <main className="flex-1">
       <PageHero
         title={title}
+        titleAs={titleAs}
         eyebrow={eyebrow}
         imagePcSrc={imagePcSrc}
         imageSpSrc={imageSpSrc}

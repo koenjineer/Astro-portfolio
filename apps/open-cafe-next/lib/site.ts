@@ -24,13 +24,26 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 /**
+ * ナビ項目のhrefの前方一致では拾えない配下のページ。
+ * お知らせのカテゴリー別一覧は指示書どおり `/archives/category/…` に置いたので、
+ * URLの根元が `/news/` と違う（CLAUDE.mdのURL設計）
+ */
+const EXTRA_NAV_PREFIXES: Record<string, string[]> = {
+  "/news/": ["/archives/category/"],
+};
+
+/**
  * 今いるページがナビ項目の配下か。お問い合わせ完了（/contact/thanks/）もお問い合わせの配下として扱う。
  * usePathname は末尾スラッシュを付けずに返すことがあるので、比べる前に揃える
  */
 export function isCurrentNavItem(pathname: string, href: string): boolean {
   const normalizedPathname = pathname.endsWith("/") ? pathname : `${pathname}/`;
   if (href === "/") return normalizedPathname === "/";
-  return normalizedPathname.startsWith(href);
+  if (normalizedPathname.startsWith(href)) return true;
+
+  return (EXTRA_NAV_PREFIXES[href] ?? []).some((prefix) =>
+    normalizedPathname.startsWith(prefix)
+  );
 }
 
 export interface ShopInfoRow {

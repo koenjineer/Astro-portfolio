@@ -1,0 +1,139 @@
+/* WordPressが組み立てた記事本文のHTMLに、Figmaの詳細ページ（PC 19716:4869 / SP 19719:5777）の見た目を当てる。
+   管理画面で足されるブロックにクラスを付けて回ることはできないので、Tailwindのクラスではなくタグ名を狙って書く
+   （`/rules/nextjs-static-export.md`）。色は app/globals.css の @theme inline が出すトークンを使う。
+   SPの値を先に書き、PCの値は他の部品と同じ境目（Tailwindの md＝48rem＝768px）から上書きする */
+
+/* ブロック同士の間隔（Figmaの section の中の間隔）。
+   margin ではなく gap にすると、見出しの上下で間隔が二重にならない */
+.entry-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 見出しで始まるまとまり（Figmaの section）同士は40px。gapの14pxに足りない分を足す */
+.entry-content > :is(h2, h3, h4, h5, h6):not(:first-child) {
+  margin-top: 26px;
+}
+
+.entry-content :is(p, ul, ol) {
+  font-size: 14px;
+  line-height: 2;
+  color: var(--color-contrast);
+}
+
+.entry-content :is(h2, h3, h4, h5, h6) {
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-main);
+}
+
+/* 左の縦棒は6px。Figmaの線は枠の内側に描かれて文字を動かさないが、CSSの border は文字を押し出すので、
+   左の余白はFigmaの16pxから棒の6pxを引く（components/heading/BarHeading.tsx と同じ考え方） */
+.entry-content h2 {
+  border-left: 6px solid var(--color-main);
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+/* 下線も枠の内側に描かれるので、下の余白はFigmaの12pxから線の1pxを引く */
+.entry-content h3 {
+  border-bottom: 1px solid var(--color-main);
+  padding-bottom: 11px;
+  font-size: 16px;
+}
+
+.entry-content :is(h4, h5, h6) {
+  font-size: 14px;
+}
+
+.entry-content strong {
+  font-weight: 700;
+}
+
+/* Tailwindの初期化で行頭記号と字下げが消えるので、Figmaの見た目に戻す */
+.entry-content :is(ul, ol) {
+  padding-left: 21px;
+}
+
+.entry-content ul {
+  list-style: disc;
+}
+
+.entry-content ol {
+  list-style: decimal;
+}
+
+/* 引用（Figma: quote 19719:12946）。箱の色はルールセットの色（cr-*）には無い薄いグレー */
+.entry-content blockquote {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: #f8f8f8;
+  padding: 20px;
+}
+
+/* 引用元の行。`lib/newsContent.ts` が本文と分けて <footer> に出している。PCでも14pxのまま */
+.entry-content blockquote footer {
+  font-size: 14px;
+  line-height: 2;
+  text-align: right;
+  color: var(--color-contrast);
+}
+
+.entry-content a {
+  text-decoration: underline;
+  transition: opacity 300ms;
+}
+
+/* Figmaに本文リンクのホバーの指定は無い。ルールセットの「その他リンク」と同じ透明度70%にする */
+.entry-content a:is(:hover, :focus-visible) {
+  opacity: 0.7;
+}
+
+.entry-content figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 48rem) {
+  .entry-content {
+    gap: 16px;
+  }
+
+  .entry-content > :is(h2, h3, h4, h5, h6):not(:first-child) {
+    margin-top: 24px;
+  }
+
+  .entry-content :is(p, ul, ol) {
+    font-size: 16px;
+  }
+
+  .entry-content h2 {
+    font-size: 24px;
+  }
+
+  .entry-content h3 {
+    font-size: 20px;
+  }
+
+  .entry-content :is(h4, h5, h6) {
+    font-size: 16px;
+  }
+
+  .entry-content :is(ul, ol) {
+    padding-left: 24px;
+  }
+
+  .entry-content blockquote {
+    gap: 16px;
+    padding: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry-content a {
+    transition: none;
+  }
+}

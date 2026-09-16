@@ -25,10 +25,11 @@ export const NAV_ITEMS: NavItem[] = [
 
 /**
  * ナビ項目のhrefの前方一致では拾えない配下のページ。
- * お知らせのカテゴリー別一覧は指示書どおり `/archives/category/…` に置いたので、
- * URLの根元が `/news/` と違う（CLAUDE.mdのURL設計）
+ * お知らせのカテゴリー別一覧は指示書どおり `/archives/category/…`、メニューのジャンル別は `/genre/…` に置いたので、
+ * URLの根元が `/news/`・`/menu/` と違う（CLAUDE.mdのURL設計）
  */
 const EXTRA_NAV_PREFIXES: Record<string, string[]> = {
+  "/menu/": ["/genre/"],
   "/news/": ["/archives/category/"],
 };
 

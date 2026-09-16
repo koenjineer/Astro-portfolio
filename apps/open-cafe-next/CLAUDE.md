@@ -53,23 +53,26 @@ apps/open-cafe-next/
 │   ├── page.tsx         ← 疎通確認用の仮ページ。TOP実装時に丸ごと置き換える
 │   ├── icon.png / opengraph-image.png（＋.alt.txt）
 │   ├── contact/         ← 入力・thanks/（完了）。_components/ に外枠とフォーム
-│   └── products/        ← ギフト・贈り物。_components/ に GiftCard（大・小）と WrappingNotice（ラッピング案内）
+│   ├── products/        ← ギフト・贈り物。_components/ に GiftCard（大・小）と WrappingNotice（ラッピング案内）
+│   └── shop/            ← 店舗情報。_components/ に ShopSection（1店舗分）
 ├── components/
-│   ├── layout/          ← PageHero（下層上部＋画面右上に固定のメニューボタン）/ DrawerMenu / drawerMenuInert.ts（開いている間ドロワー以外を inert）/ Breadcrumb / SiteFooter / SnsIcons / BackToTop
-│   ├── heading/         ← HeadingGroup（英字＋日本語の見出し）
+│   ├── layout/          ← SubPageLayout（下層ページ共通の外枠）/ PageHero（下層上部＋画面右上に固定のメニューボタン）/ DrawerMenu / drawerMenuInert.ts（開いている間ドロワー以外を inert）/ Breadcrumb / SiteFooter / SnsIcons / BackToTop
+│   ├── heading/         ← HeadingGroup（英字＋日本語の見出し）/ BarHeading（左に縦棒の付く見出し）
+│   ├── shop/            ← ShopInfoList（住所・TELなどの表。フッターと店舗情報ページで共有）
 │   ├── ui/              ← Button（デフォルトボタン：ホバーで右下に凹む）
 │   └── form/            ← NoSendForm / FormField / ChoiceGroup / FieldLabel / SubmitButton
 └── lib/
-    ├── site.ts          ← サイト名・ナビ項目・フッターの店舗情報（Figmaの文言を固定で持つ）
+    ├── site.ts          ← サイト名・ナビ項目・フッターの店舗情報・店舗の並び順（Figmaの文言を固定で持つ）
     ├── graphql-client.ts
     ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス（アイキャッチ・ACF画像の両方）
-    ├── images.server.ts ← 上に加えて public/ に実物が無ければビルドを止める（ビルド時専用。今はギフトだけが使う）
+    ├── images.server.ts ← 上に加えて public/ に実物が無ければビルドを止める（ビルド時専用。今はギフトと店舗が使う）
     ├── dates.ts         ← WPの日付 → 表示用／datetime用
     └── queries/         ← news / menu / products / shops / top
 ```
 
 画像は `public/images/common/`（全ページ共通の飾り・アイコン・地図）と
-`public/images/firstview/`（下層上部の写真。ページ着手時に `<ページ>-pc.webp` / `-sp.webp` を足す）。
+`public/images/firstview/`（下層上部の写真。ページ着手時に `<ページ>-pc.webp` / `-sp.webp` を足す）、
+ページ固有のもの（`public/images/products/`・`public/images/shop/`）。
 PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px）。理由は `docs/progress.md`。
 
 ## URL設計
@@ -121,7 +124,7 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 |---|---|---|
 | ルールセット（フォント・色・ボタン・ホバー） | 19719:11092 | — |
 | OGP・favicon | 19731:5690（OGP 19745:4708 / favicon 19786:4751） | — |
-| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593） | 19719:11600 | 19719:11599 |
+| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593、shop は PC 19719:11605 / SP 19719:11589） | 19719:11600 | 19719:11599 |
 | ドロワーメニュー | 19742:14510 | 19709:7335 |
 | TOPでスクロール後にドロワーボタンを出す | 19742:13912 | — |
 | TOP | | |
@@ -129,7 +132,7 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 | メニュー 一覧 / ジャンル別 | | |
 | お知らせ 一覧 / カテゴリ別 / 詳細 | | |
 | ギフト・贈り物（商品写真は「【ギフト】サムネイル画像」19731:5426） | 19719:9551 | 19719:9558 |
-| 店舗情報 | | |
+| 店舗情報 | 19719:6384 | 19719:6391 |
 | お問い合わせ（入力／完了） | 19719:10545 / 19719:10222 | 19719:10556 / 19719:10229 |
 
 共通部品のFigmaは、お問い合わせPCの中のインスタンス（mainvisual-pc 19719:10546、pankuzu-pc 19719:10547、

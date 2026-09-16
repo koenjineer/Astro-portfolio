@@ -40,9 +40,9 @@ export interface ShopInfoRow {
 }
 
 /**
- * フッターの店舗情報。Figmaの文言を固定で持つ。
- * WordPressの shops は3店舗あり、フッターの1件とどれが対応するか決まっていないため（店舗情報ページ着手時に見直す）。
- * 並びはSPの縦1列の順。PCの2列（左：住所・TEL・Mail／右：営業時間・定休日・座席）はCSSで列方向に流して作る
+ * フッターの店舗情報。Figmaの文言を固定で持つ。中身はWordPressの吉祥寺店と同じだが、
+ * フッターは全ページに出るので、WordPressの取得に失敗すると全ページが落ちる形にはしない（Owner判断）。
+ * 並びはSPの縦1列の順。PCの2列（左：住所・TEL・Mail／右：営業時間・定休日・座席）は ShopInfoList が作る
  */
 export const FOOTER_SHOP_INFO: ShopInfoRow[] = [
   { label: "住所", lines: ["〒000-0000", "東京都武蔵野市吉祥寺南町一丁目"] },
@@ -51,4 +51,17 @@ export const FOOTER_SHOP_INFO: ShopInfoRow[] = [
   { label: "営業時間", lines: ["7:00〜21:00", "※ラストオーダー 20:30"] },
   { label: "定休日", lines: ["水曜日"] },
   { label: "座席", lines: ["テーブル20席 ／ カウンター席6席"] },
+];
+
+/**
+ * 店舗情報ページに並べる順（Figma: 【PC】店舗情報 19719:6384）。
+ * WordPressのslugは日本語で意味のある順にならないため、店名の配列で固定する。
+ *
+ * 文字列はWordPressのタイトルと完全に一致させる（「OPEN CAFE」と店名の間は全角スペース）。
+ * 半角で書くと一致せず、エラーにならないまま並びだけが崩れる
+ */
+export const SHOP_TITLE_ORDER: string[] = [
+  "OPEN CAFE　吉祥寺店",
+  "OPEN CAFE　阿佐ヶ谷店",
+  "OPEN CAFE　中野店",
 ];

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import type { FormEvent } from "react";
 import { AgreementCheckbox } from "@/components/form/AgreementCheckbox";
 import { FormField } from "@/components/form/FormField";
 
@@ -43,17 +42,18 @@ export function DownloadForm() {
   /**
    * 架空の会社のデモサイトなので送信先は作らない方針。
    * 入力内容をどこにも送らず、完了ページへ移動するだけにする。
-   * （action + method="get" にすると氏名・メールアドレスがURLに残るため使わない）
+   * onSubmit + preventDefault ではなく関数の action にする。onSubmit だと書き出したHTMLの
+   * <form> に action が無く、JSが動き出す前に送信すると氏名・メールアドレスがURLに付いて送られる。
+   * 関数の action は書き出し時に「送信しても何も起きない」HTMLになる（/rules/nextjs-static-export.md）。
    * 必須項目はrequiredのままなので、未入力ならブラウザがここに来る前に止める。
    */
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function goToThanks() {
     router.push("/download/thanks");
   }
 
   return (
     <form
-      onSubmit={handleSubmit}
+      action={goToThanks}
       className="flex flex-col items-center gap-[34px] lg:gap-10"
     >
       <h2 className="w-full text-2xl font-bold text-contrast lg:text-[32px]">

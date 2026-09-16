@@ -145,8 +145,9 @@ npx vercel@latest deploy --prebuilt --prod
 
 - 架空の歯科医院のサイトなので、全ページ `noindex, nofollow`（`app/layout.tsx`のmetadata）。
   **デプロイ後もこの設定は外さない。** robots.txtでブロックしない理由は `/rules/nextjs-static-export.md`
-- お問い合わせ・WEB予約とも**送信しない**。`onSubmit` で `preventDefault()` して完了ページへ移るだけで、
-  入力内容はブラウザの外へ一切出ない（`action` + `method="get"` はURLに入力が残るので使わない）。
+- お問い合わせ・WEB予約とも**送信しない**。`<form action={関数}>`（React 19）で完了ページへ移るだけで、
+  入力内容はブラウザの外へ一切出ない。`onSubmit` + `preventDefault()` や `method="get"` は
+  JS起動前の送信で入力がURLに残るので使わない（理由は `/rules/nextjs-static-export.md`）。
   実装は `components/form/NoSendForm.tsx` の1か所だけ
 
 ## Figmaデザイン参照

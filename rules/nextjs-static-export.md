@@ -44,7 +44,8 @@ middleware、`next/image` の最適化。すべてビルド時に完結させる
 `action="javascript:throw new Error(...)"` が入るので、JS起動前に押しても何も起きない。
 
 - ビルド後に `out/<ページ>/index.html` の `<form` の属性を見て、`action="javascript:` になっていることを確かめる
-- `minami-dental-next`・`global-standard-next` の既存フォームは `onSubmit` のままなので、この穴がある
+- `global-standard-next` の既存フォーム（お問い合わせ・資料ダウンロード）は `onSubmit` のままなので、この穴がある
+  （`minami-dental-next` は2026-09-16に関数actionへ直した）
 
 外部フォームサービス（Formspreeなど）を使うかは、
 「架空サイトの入力を外部に保存させたいか」で判断する。

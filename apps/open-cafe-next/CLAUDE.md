@@ -55,6 +55,9 @@ apps/open-cafe-next/
 │   ├── contact/         ← 入力・thanks/（完了）。_components/ に外枠とフォーム
 │   ├── products/        ← ギフト・贈り物。_components/ に GiftCard（大・小）と WrappingNotice（ラッピング案内）
 │   ├── shop/            ← 店舗情報。_components/ に ShopSection（1店舗分）
+│   ├── menu/            ← メニュー一覧。_components/ に MenuPageShell（外枠＋タブ。ジャンル別と共有）/ GenreTabs /
+│   │                       DishList（料理のカード）/ DrinkMenu（ドリンクの表）
+│   ├── genre/           ← メニュー ジャンル別（[slug]/。親ジャンル4つだけ書き出す）
 │   ├── news/            ← お知らせ一覧（page/[page]/）と詳細（[slug]/）。_components/NewsListPage.tsx は
 │   │                       カテゴリ別一覧と共有する（組みが同じで、違うのはパンくずと見出しだけ）
 │   └── archives/        ← お知らせ カテゴリ別一覧（category/[slug]/ と その page/[page]/）
@@ -70,18 +73,19 @@ apps/open-cafe-next/
 └── lib/
     ├── site.ts          ← サイト名・ナビ項目・フッターの店舗情報・店舗の並び順（Figmaの文言を固定で持つ）
     ├── newsRoutes.ts    ← お知らせのURL・見出し・下層トップの写真（カテゴリ別だけURLの根元が違うので1か所に集める）
+    ├── menuRoutes.ts    ← メニューのURL・見出し・下層トップの写真（ジャンル別は `/genre/` と根元が違う）
     ├── newsContent.ts   ← WPの本文HTMLをリポジトリ内の画像を指す形に直す（引用元の行も分ける）
     ├── pagination.ts    ← ページ分けと前後記事
     ├── graphql-client.ts
     ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス（アイキャッチ・ACF画像の両方）
-    ├── images.server.ts ← 上に加えて public/ に実物が無ければビルドを止める（ビルド時専用。今はギフトと店舗が使う）
+    ├── images.server.ts ← 上に加えて public/ に実物が無ければビルドを止める（ビルド時専用。今はギフト・店舗・メニューが使う）
     ├── dates.ts         ← WPの日付 → 表示用／datetime用
     └── queries/         ← news / menu / products / shops / top
 ```
 
 画像は `public/images/common/`（全ページ共通の飾り・アイコン・地図）と
 `public/images/firstview/`（下層上部の写真。ページ着手時に `<ページ>-pc.webp` / `-sp.webp` を足す）、
-ページ固有のもの（`public/images/products/`・`public/images/shop/`・`public/images/news/`）。
+ページ固有のもの（`public/images/products/`・`public/images/shop/`・`public/images/news/`・`public/images/menu/`）。
 PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px）。理由は `docs/progress/contact.md`。
 
 ## URL設計
@@ -92,8 +96,8 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 |---|---|---|
 | `/` | TOP | Pick UPニュース（最新1件）・今月のスペシャルランチ（`top`）・グランドメニュー・ギャラリー・お知らせ |
 | `/concept/` | コンセプト | 固定テキスト |
-| `/menu/` | メニュー一覧 | `dishes`（ジャンルでグループ分け） |
-| `/genre/{slug}/` | メニュー ジャンル別 | `dishes` |
+| `/menu/` | メニュー一覧（料理のカード15品＋ドリンクの表。ページ送りなし） | `dishes`・`genres` |
+| `/genre/{slug}/` | メニュー ジャンル別（親ジャンル4つだけ。ドリンクは表だけ） | `dishes`・`genres` |
 | `/news/` | お知らせ一覧 | `posts` |
 | `/archives/category/{slug}/` | お知らせ カテゴリ別（指示書どおり） | `posts` |
 | `/news/{slug}/` | お知らせ詳細 | `post` |
@@ -134,12 +138,12 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 |---|---|---|
 | ルールセット（フォント・色・ボタン・ホバー） | 19719:11092 | — |
 | OGP・favicon | 19731:5690（OGP 19745:4708 / favicon 19786:4751） | — |
-| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593、shop は PC 19719:11605 / SP 19719:11589、news は PC 19719:11604 / SP 19719:11585） | 19719:11600 | 19719:11599 |
+| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593、shop は PC 19719:11605 / SP 19719:11589、news は PC 19719:11604 / SP 19719:11585、menu は PC 19719:11603 / SP 19719:11579） | 19719:11600 | 19719:11599 |
 | ドロワーメニュー | 19742:14510 | 19709:7335 |
 | TOPでスクロール後にドロワーボタンを出す | 19742:13912 | — |
 | TOP | | |
 | コンセプト | | |
-| メニュー 一覧 / ジャンル別 | | |
+| メニュー 一覧 / ジャンル別（料理 / ドリンク）（料理の写真は 19731:5689） | 19716:1875 / 19730:4292 / 19730:4837 | 19716:1882 / 19730:4320 / 19730:4854 |
 | お知らせ 一覧 / カテゴリ別 / 詳細（カードの原稿は「【お知らせ】記事情報一覧」19730:5820） | 19716:3289 / 19730:5391 / 19716:4694 | 19716:3296 / 19731:4981 / 19716:4701 |
 | ギフト・贈り物（商品写真は「【ギフト】サムネイル画像」19731:5426） | 19719:9551 | 19719:9558 |
 | 店舗情報 | 19719:6384 | 19719:6391 |

@@ -19,6 +19,6 @@ PC/SPの切り替えは `md`（768px）が既定。お知らせのサイドバ�
 TOPのファーストビューの縦ナビ・CONCEPTとセットの横並びは `xl`（1280px）で、
 理由と実測値は `docs/progress/news.md`・`docs/progress/menu.md`・`docs/progress/concept.md`・`docs/progress/top.md`。
 
-## 未決事項（Figma・原稿を見て決める）
+## 状態
 
-- なし（TOPのドロワーボタン・ギャラリー・ランチ画像の置き場所は `docs/progress/top.md` で決着）
+2026-09-17 全ページ完成・公開済み（`docs/progress/deploy.md`）。未決事項なし

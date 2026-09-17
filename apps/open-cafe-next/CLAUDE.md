@@ -86,7 +86,7 @@ apps/open-cafe-next/
 ```
 
 画像は `public/images/common/`（全ページ共通の飾り・アイコン・地図）と
-`public/images/firstview/`（下層上部の写真。ページ着手時に `<ページ>-pc.webp` / `-sp.webp` を足す）、
+`public/images/firstview/`（下層上部の写真。`<ページ>-pc.webp` / `-sp.webp`）、
 ページ固有のもの（`public/images/home/`（TOP）・`public/images/concept/`・`public/images/products/`・`public/images/shop/`・`public/images/news/`・`public/images/menu/`）。
 PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px）。理由は `docs/progress/contact.md`。
 
@@ -130,7 +130,6 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 
 - 架空のカフェのサイトなので、全ページ `noindex, nofollow`（`app/layout.tsx`のmetadata）。
   **デプロイ後もこの設定は外さない**
-- ページは1ブランチ1ページで進める
 
 ## Figmaデザイン参照
 

@@ -52,6 +52,7 @@ apps/open-cafe-next/
 │   ├── layout.tsx       ← フォント・noindex・metadataBase・タイトルの型（「ページ名 | OPEN CAFE」）・フッター・BackToTop
 │   ├── page.tsx         ← 疎通確認用の仮ページ。TOP実装時に丸ごと置き換える
 │   ├── icon.png / opengraph-image.png（＋.alt.txt）
+│   ├── concept/         ← コンセプト。content.ts（原稿）、_components/ に ConceptSection（文章＋写真の1段）/ ConceptPhotos（3段の写真の組みと飾りの四角）
 │   ├── contact/         ← 入力・thanks/（完了）。_components/ に外枠とフォーム
 │   ├── products/        ← ギフト・贈り物。_components/ に GiftCard（大・小）と WrappingNotice（ラッピング案内）
 │   ├── shop/            ← 店舗情報。_components/ に ShopSection（1店舗分）
@@ -85,7 +86,7 @@ apps/open-cafe-next/
 
 画像は `public/images/common/`（全ページ共通の飾り・アイコン・地図）と
 `public/images/firstview/`（下層上部の写真。ページ着手時に `<ページ>-pc.webp` / `-sp.webp` を足す）、
-ページ固有のもの（`public/images/products/`・`public/images/shop/`・`public/images/news/`・`public/images/menu/`）。
+ページ固有のもの（`public/images/concept/`・`public/images/products/`・`public/images/shop/`・`public/images/news/`・`public/images/menu/`）。
 PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px）。理由は `docs/progress/contact.md`。
 
 ## URL設計
@@ -138,11 +139,11 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 |---|---|---|
 | ルールセット（フォント・色・ボタン・ホバー） | 19719:11092 | — |
 | OGP・favicon | 19731:5690（OGP 19745:4708 / favicon 19786:4751） | — |
-| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593、shop は PC 19719:11605 / SP 19719:11589、news は PC 19719:11604 / SP 19719:11585、menu は PC 19719:11603 / SP 19719:11579） | 19719:11600 | 19719:11599 |
+| 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593、shop は PC 19719:11605 / SP 19719:11589、news は PC 19719:11604 / SP 19719:11585、menu は PC 19719:11603 / SP 19719:11579、concept は PC 19719:11601 / SP 19719:11575） | 19719:11600 | 19719:11599 |
 | ドロワーメニュー | 19742:14510 | 19709:7335 |
 | TOPでスクロール後にドロワーボタンを出す | 19742:13912 | — |
 | TOP | | |
-| コンセプト | | |
+| コンセプト | 19716:1559（中身 19716:1663） | 19716:1771（中身 19716:1836） |
 | メニュー 一覧 / ジャンル別（料理 / ドリンク）（料理の写真は 19731:5689） | 19716:1875 / 19730:4292 / 19730:4837 | 19716:1882 / 19730:4320 / 19730:4854 |
 | お知らせ 一覧 / カテゴリ別 / 詳細（カードの原稿は「【お知らせ】記事情報一覧」19730:5820） | 19716:3289 / 19730:5391 / 19716:4694 | 19716:3296 / 19731:4981 / 19716:4701 |
 | ギフト・贈り物（商品写真は「【ギフト】サムネイル画像」19731:5426） | 19719:9551 | 19719:9558 |

@@ -13,6 +13,7 @@
 | メニュー（一覧・ジャンル別） | `docs/progress/menu.md` |
 | コンセプト | `docs/progress/concept.md` |
 | TOP | `docs/progress/top.md` |
+| Vercelへの公開 | `docs/progress/deploy.md` |
 
 PC/SPの切り替えは `md`（768px）が既定。お知らせのサイドバーと、メニューのタブの200px固定・ドリンクの写真・コンセプトの横並びは `lg`（1024px）、
 TOPのファーストビューの縦ナビ・CONCEPTとセットの横並びは `xl`（1280px）で、

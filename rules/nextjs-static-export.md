@@ -104,6 +104,9 @@ npx vercel@latest deploy --prebuilt --prod
   `vercel link --yes --project <name>` は Root Directory を持ってこないので、続けて
   `vercel pull --yes --environment=production` を叩き、`.vercel/project.json` に
   `rootDirectory` を降ろすこと。無いとルートをビルドしようとして落ちる
+  **`vercel link` でプロジェクトを新規作成した場合は、Vercel側の Root Directory と Framework が空のまま**
+  （`pull` しても `null`）。管理画面の Settings かAPIで `apps/<name>`・`nextjs` を入れてから `pull` し直す
+  （`open-cafe-next` で発生）
 - **Git連携の自動デプロイを `vercel.json` で止める。** 止めないと、プッシュやPRのたびに
   VercelがビルドしようとしてCMSに届かず失敗し、PRに赤い失敗表示が出続ける。
   本番は直前の成功デプロイが残るので実害は無いが、**本物の失敗と見分けられなくなる**。

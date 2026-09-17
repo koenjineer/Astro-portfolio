@@ -121,10 +121,10 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 手順と引っかかりどころは `/rules/nextjs-static-export.md`。
 
 - `vercel.json` でGit連携の自動デプロイを止めてある（Vercelプロジェクト作成前に置いた）
-- `.env.local` に `NEXT_PUBLIC_WORDPRESS_API_URL` が必要。公開時は `NEXT_PUBLIC_SITE_URL` も足す。
+- `.env.local` に `NEXT_PUBLIC_WORDPRESS_API_URL` と `NEXT_PUBLIC_SITE_URL`（`https://open-cafe-next.vercel.app`）が必要。
   **Gitに入らない**ので、環境を作り直したら入れ直す
 - 公開前に `grep -rl "open-cafe-cms.local" out/` が0件であることを確かめる
-- 公開URL・Vercelプロジェクト名：未作成
+- 公開URL：https://open-cafe-next.vercel.app（Vercelプロジェクト `open-cafe-next`）。公開の記録は `docs/progress/deploy.md`
 
 ## 進め方の合意事項
 

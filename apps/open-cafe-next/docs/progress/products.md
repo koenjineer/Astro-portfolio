@@ -17,8 +17,8 @@
 - **ラッピング案内の枠の padding はFigmaから4px引いた値**（PC 56/75、SP 36）。Figmaの枠線は内側に描かれて寸法を増やさないため
 - **点線のSVGは、書き出しに付く `preserveAspectRatio="none"` 等の外側の属性を外した**（図形は書き出しのまま）。
   付けたまま11px幅のタイルにすると点が横に伸びて楕円になるため。点は11pxタイルの中央に描かれるので、PCは位置を−4px、SPは `space` で左右に4pxはみ出させて端にそろえる
-- **商品画像がpublic/に無いとビルドを止める**（`lib/images.server.ts` の `requireExistingLocalImageSrc`）。ギフトだけに効かせた。
-  TOPのランチは画像がまだリポジトリに無く、仮ページ `app/page.tsx` が読むため。**TOPを作るときに同じ確認に切り替える**（店舗は切り替え済み）
+- **商品画像がpublic/に無いとビルドを止める**（`lib/images.server.ts` の `requireExistingLocalImageSrc`）。
+  このときはギフトだけに効かせた（店舗・メニュー・TOPのランチも後で切り替え済み。TOPは `docs/progress/top.md`）
 - 商品写真はFigma「【ギフト】サムネイル画像」から1.5倍（792px）。シフォンケーキはレイヤー名が `img_item3` と誤っているので `img_item33.webp` にした。9枚ともWPの原本と見比べて一致
 - ラッピングの写真は2倍（920×600、元1920×1280）。縦並びのタブレット幅で横888pxまで広がるため
 

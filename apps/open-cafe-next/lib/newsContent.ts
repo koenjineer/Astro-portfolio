@@ -70,3 +70,36 @@ export function toLocalContentHtml(html: string, slug: string): string {
 
   return localized;
 }
+
+// WordPressの抜粋に付く「 [&hellip;]」（本文を途中で切ったしるし）。見た目の省略は CSS の line-clamp が付けるので落とす
+const EXCERPT_MORE_PATTERN = /\s*\[(?:&hellip;|&#8230;|…)\]\s*$/;
+
+// 抜粋に出てくる文字参照。WordPressの wptexturize が作るものに絞る
+const HTML_ENTITIES: Record<string, string> = {
+  "&amp;": "&",
+  "&lt;": "<",
+  "&gt;": ">",
+  "&quot;": '"',
+  "&#039;": "'",
+  "&nbsp;": " ",
+  "&hellip;": "…",
+  "&#8230;": "…",
+  "&#8211;": "–",
+  "&#8212;": "—",
+  "&#8216;": "‘",
+  "&#8217;": "’",
+  "&#8220;": "“",
+  "&#8221;": "”",
+};
+
+/**
+ * WordPressの抜粋（`<p>…本文の冒頭… [&hellip;]</p>`）を、画面にそのまま出せる1行の文字列にする。
+ * TOPのお知らせの大きいカードだけが使う（Figma: card-news-large-pc）
+ */
+export function toPlainExcerpt(html: string): string {
+  return html
+    .replace(/<[^>]*>/g, "")
+    .trim()
+    .replace(EXCERPT_MORE_PATTERN, "")
+    .replace(/&[#a-z0-9]+;/gi, (entity) => HTML_ENTITIES[entity] ?? entity);
+}

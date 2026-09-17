@@ -94,6 +94,8 @@
 { shops(first: 100) { nodes { title shopFields { address tel email time holiday count } featuredImage { node { sourceUrl } } } } }
 ```
 
+お知らせの一覧のクエリでは抜粋（`excerpt`）も取る（TOPの大きいカード用。`<p>…本文の冒頭… [&hellip;]</p>` の形で返る）。
+
 TOPはタイトル検索（`pages(where: {title: "TOP"})`）でも取れるが、同名ページが増えると取り違えるので
 URIで1件に決める。
 
@@ -125,9 +127,9 @@ WordPressには「どの記事にどの画像か」だけを持たせ、実体�
 | メニュー | `/images/menu/` |
 | ギフト | `/images/products/` |
 | 店舗の店内写真 | `/images/shop/`（WPの原本をそのまま置いている。二重に圧縮しないため） |
-| TOPのランチ | `/images/home/`（メニューと同じファイル。共有するかはTOP実装時に決める） |
+| TOPのランチ | `/images/menu/`（メニューと同じファイルを共有する。ユーザー決定） |
 
 ギフト・店舗・TOPのランチは、画像が外れるとビルドが止まる（意図どおり）。
-ギフト・店舗・メニューの料理は、`public/` に画像の実物が無くてもビルドが止まる（`lib/images.server.ts`）。
+ギフト・店舗・メニューの料理・TOPのランチは、`public/` に画像の実物が無くてもビルドが止まる（`lib/images.server.ts`）。
 メニューは料理（ドリンク以外）だけ画像が必須で、実物が無くても止まる。
 お知らせは画像の無い記事が最初からあるので止めない（代わりのロゴ画像を出す）。

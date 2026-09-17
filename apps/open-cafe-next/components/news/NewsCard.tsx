@@ -11,14 +11,27 @@ const HOVER =
 /** サイドバーの写真は100px四方（Figma: news-sidebar 19709:5714） */
 const SIDEBAR_IMAGE_SIZE = "size-[100px]";
 
+const IMAGE_CLASS_NAMES: Record<NewsCardProps["variant"], string> = {
+  grid: "aspect-[340/213] w-full object-cover",
+  sidebar: `${SIDEBAR_IMAGE_SIZE} shrink-0 object-cover`,
+  large: "aspect-[335/210] w-full object-cover md:aspect-[510/319]",
+};
+
+const DATE_CLASS_NAMES: Record<NewsCardProps["variant"], string> = {
+  grid: "text-xs/[1.5] md:text-sm/[1.5]",
+  sidebar: "text-xs/[1.5]",
+  large: "text-sm/[1.5]",
+};
+
 interface NewsCardProps {
   post: NewsPost;
   href: string;
   /**
    * `grid`：一覧と関連記事の縦組み（写真の上にカテゴリーのリボン）。
-   * `sidebar`：サイドバー「最近の投稿」の横組み（リボンなし）
+   * `sidebar`：サイドバー「最近の投稿」の横組み（リボンなし）。
+   * `large`：TOPのお知らせの大きいカード（写真・記事名が大きく、本文の冒頭が付く）
    */
-  variant: "grid" | "sidebar";
+  variant: "grid" | "sidebar" | "large";
   /** 見出しの深さ。一覧ではh2、サイドバーと関連記事ではその節の見出しの下なのでh3 */
   titleAs: "h2" | "h3";
   /** 画面のいちばん上に出るカードだけ先に読み込む */
@@ -26,7 +39,8 @@ interface NewsCardProps {
 }
 
 /**
- * お知らせのカード（Figma: card-news-pc 19709:6032 / card-news-sp 19716:3863 / news-sidebar）。
+ * お知らせのカード（Figma: card-news-pc 19709:6032 / card-news-sp 19716:3863 / news-sidebar /
+ * card-news-large-pc 19709:8796 / card-news-large-sp 19710:3939）。
  * 写真はどこでも同じ1枚を切り抜いて使うので、縦横比は枠の側で決める
  */
 export function NewsCard({
@@ -44,23 +58,34 @@ export function NewsCard({
       width={NEWS_IMAGE_WIDTH}
       height={NEWS_IMAGE_HEIGHT}
       loading={loading}
-      className={
-        variant === "grid"
-          ? "aspect-[340/213] w-full object-cover"
-          : `${SIDEBAR_IMAGE_SIZE} shrink-0 object-cover`
-      }
+      className={IMAGE_CLASS_NAMES[variant]}
     />
   );
 
   const date = (
-    <p
-      className={
-        variant === "grid" ? "text-xs/[1.5] md:text-sm/[1.5]" : "text-xs/[1.5]"
-      }
-    >
+    <p className={DATE_CLASS_NAMES[variant]}>
       <time dateTime={post.isoDate}>{post.displayDate}</time>
     </p>
   );
+
+  if (variant === "large") {
+    return (
+      <Link href={href} className={`flex flex-col gap-4 ${HOVER}`}>
+        <div className="relative">
+          {image}
+          <CategoryBadge name={post.category.name} size="large" />
+        </div>
+        <div className="flex flex-col gap-5 text-contrast">
+          {/* Figmaでは記事名は1〜2行、本文の冒頭は3行で「…」 */}
+          <TitleTag className="line-clamp-2 text-sm/[1.5] font-bold md:text-xl/[1.5]">
+            {post.title}
+          </TitleTag>
+          <p className="line-clamp-3 text-xs/[1.5] md:text-sm/[1.5]">{post.excerpt}</p>
+          {date}
+        </div>
+      </Link>
+    );
+  }
 
   if (variant === "sidebar") {
     return (

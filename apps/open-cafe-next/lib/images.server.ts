@@ -8,7 +8,6 @@ import { requireLocalImageSrc, type ImageConnection } from "@/lib/images";
  *
  * ファイルを読むので、ビルド時のデータ取得（`lib/queries/`）からだけ呼ぶ。`lib/images.ts` と分けたのは、
  * 画面側の部品から images.ts を読んでも `node:fs` がブラウザ向けに混ざらないようにするため。
- * 画像がまだリポジトリに無い種類（TOPのランチ）に使うとビルドが通らないので、そのページを作るときに切り替える。
  */
 export function requireExistingLocalImageSrc(
   image: ImageConnection | null,

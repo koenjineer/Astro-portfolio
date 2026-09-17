@@ -1,10 +1,11 @@
 import { cache } from "react";
 import { graphqlClient } from "@/lib/graphql-client";
-import { requireLocalImageSrc, type ImageConnection } from "@/lib/images";
+import type { ImageConnection } from "@/lib/images";
+import { requireExistingLocalImageSrc } from "@/lib/images.server";
 
-// ランチの写真はメニューと同じファイル（img_pasta1.webp 等）だが、置き場所は
-// TOPページのフォルダに仮置きする。メニューと共有するかはTOP実装時に決める
-const TOP_IMAGE_DIR = "/images/home";
+// ランチの写真はメニューと同じファイル（img_pasta1.webp 等）なので、メニューの置き場所を共有する
+// （同じ写真を2か所に置くと、差し替えたときに片方だけ古いまま残るため。ユーザー決定）
+const TOP_IMAGE_DIR = "/images/menu";
 
 // ACFのGroup型フィールド。4枠がそれぞれ別のフィールド（a〜d）になっている
 const LUNCH_SLOTS = ["a", "b", "c", "d"] as const;
@@ -68,7 +69,8 @@ export const getSpecialLunches = cache(async (): Promise<SpecialLunch[]> => {
 
     return {
       name: lunch.name,
-      imageSrc: requireLocalImageSrc(lunch.image, TOP_IMAGE_DIR, label),
+      // 画像がリポジトリに置かれているかまで確かめる（置き忘れたまま公開しないため）
+      imageSrc: requireExistingLocalImageSrc(lunch.image, TOP_IMAGE_DIR, label),
     };
   });
 });

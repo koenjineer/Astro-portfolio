@@ -50,7 +50,8 @@ apps/open-cafe-next/
 ├── docs/                ← wordpress.md（WP側）/ progress.md（目次と未決事項）/ progress/（ページごとの記録）
 ├── app/
 │   ├── layout.tsx       ← フォント・noindex・metadataBase・タイトルの型（「ページ名 | OPEN CAFE」）・フッター・BackToTop
-│   ├── page.tsx         ← 疎通確認用の仮ページ。TOP実装時に丸ごと置き換える
+│   ├── page.tsx         ← TOP。_components/ に TopFirstView（縦ナビ・コピー・Pick UP）/ MainVisualSlider / TopDrawerButton（FVを過ぎたらメニューボタン）/
+│   │                       ConceptBlock / SpecialLunchSection / GrandMenuSection / GallerySection / NewsSection、content.ts（原稿）
 │   ├── icon.png / opengraph-image.png（＋.alt.txt）
 │   ├── concept/         ← コンセプト。content.ts（原稿）、_components/ に ConceptSection（文章＋写真の1段）/ ConceptPhotos（3段の写真の組みと飾りの四角）
 │   ├── contact/         ← 入力・thanks/（完了）。_components/ に外枠とフォーム
@@ -66,27 +67,27 @@ apps/open-cafe-next/
 │   ├── layout/          ← SubPageLayout（下層ページ共通の外枠）/ PageHero（下層上部＋画面右上に固定のメニューボタン）/ DrawerMenu / drawerMenuInert.ts（開いている間ドロワー以外を inert）/ Breadcrumb / SiteFooter / SnsIcons / BackToTop
 │   ├── heading/         ← HeadingGroup（英字＋日本語の見出し）/ BarHeading（左に縦棒の付く見出し）
 │   ├── shop/            ← ShopInfoList（住所・TELなどの表。フッターと店舗情報ページで共有）
-│   ├── news/            ← NewsCard（一覧・関連・サイドバー共通）/ CategoryBadge / NewsSidebar /
+│   ├── news/            ← NewsCard（一覧・関連・サイドバー・TOPの大きいカード）/ CategoryBadge / NewsSidebar /
 │   │                       NewsPagination / NewsArticle / ArticleNav / RelatedNews /
 │   │                       entry-content.css（WPの本文HTMLにタグ名で当てるCSS）/ ChevronRightIcon / newsImage.ts
-│   ├── ui/              ← Button（デフォルトボタン：ホバーで右下に凹む）
+│   ├── ui/              ← Button（デフォルトボタン：ホバーで右下に凹む。href を渡すとリンク）
 │   └── form/            ← NoSendForm / FormField / ChoiceGroup / FieldLabel / SubmitButton
 └── lib/
     ├── site.ts          ← サイト名・ナビ項目・フッターの店舗情報・店舗の並び順（Figmaの文言を固定で持つ）
     ├── newsRoutes.ts    ← お知らせのURL・見出し・下層トップの写真（カテゴリ別だけURLの根元が違うので1か所に集める）
     ├── menuRoutes.ts    ← メニューのURL・見出し・下層トップの写真（ジャンル別は `/genre/` と根元が違う）
-    ├── newsContent.ts   ← WPの本文HTMLをリポジトリ内の画像を指す形に直す（引用元の行も分ける）
+    ├── newsContent.ts   ← WPの本文HTMLをリポジトリ内の画像を指す形に直す（引用元の行も分ける）・抜粋を文字列にする
     ├── pagination.ts    ← ページ分けと前後記事
     ├── graphql-client.ts
     ├── images.ts        ← WPの画像URL → リポジトリ内の画像パス（アイキャッチ・ACF画像の両方）
-    ├── images.server.ts ← 上に加えて public/ に実物が無ければビルドを止める（ビルド時専用。今はギフト・店舗・メニューが使う）
+    ├── images.server.ts ← 上に加えて public/ に実物が無ければビルドを止める（ビルド時専用。ギフト・店舗・メニュー・TOPのランチが使う）
     ├── dates.ts         ← WPの日付 → 表示用／datetime用
     └── queries/         ← news / menu / products / shops / top
 ```
 
 画像は `public/images/common/`（全ページ共通の飾り・アイコン・地図）と
 `public/images/firstview/`（下層上部の写真。ページ着手時に `<ページ>-pc.webp` / `-sp.webp` を足す）、
-ページ固有のもの（`public/images/concept/`・`public/images/products/`・`public/images/shop/`・`public/images/news/`・`public/images/menu/`）。
+ページ固有のもの（`public/images/home/`（TOP）・`public/images/concept/`・`public/images/products/`・`public/images/shop/`・`public/images/news/`・`public/images/menu/`）。
 PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px）。理由は `docs/progress/contact.md`。
 
 ## URL設計
@@ -129,7 +130,7 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 
 - 架空のカフェのサイトなので、全ページ `noindex, nofollow`（`app/layout.tsx`のmetadata）。
   **デプロイ後もこの設定は外さない**
-- ページは1ブランチ1ページで進める。ギャラリー（Instagram）の方針はTOPページ着手時に決める
+- ページは1ブランチ1ページで進める
 
 ## Figmaデザイン参照
 
@@ -142,7 +143,7 @@ PC/SPは1コンポーネント内で出し分け、切り替えは `md`（768px�
 | 下層トップ背景画像（contact は PC 19719:11609 / SP 19719:11597、gift は PC 19719:11606 / SP 19719:11593、shop は PC 19719:11605 / SP 19719:11589、news は PC 19719:11604 / SP 19719:11585、menu は PC 19719:11603 / SP 19719:11579、concept は PC 19719:11601 / SP 19719:11575） | 19719:11600 | 19719:11599 |
 | ドロワーメニュー | 19742:14510 | 19709:7335 |
 | TOPでスクロール後にドロワーボタンを出す | 19742:13912 | — |
-| TOP | | |
+| TOP（スライダー写真 PC 19719:11090 / SP 19709:7468） | 19709:8911 | 19710:4041 |
 | コンセプト | 19716:1559（中身 19716:1663） | 19716:1771（中身 19716:1836） |
 | メニュー 一覧 / ジャンル別（料理 / ドリンク）（料理の写真は 19731:5689） | 19716:1875 / 19730:4292 / 19730:4837 | 19716:1882 / 19730:4320 / 19730:4854 |
 | お知らせ 一覧 / カテゴリ別 / 詳細（カードの原稿は「【お知らせ】記事情報一覧」19730:5820） | 19716:3289 / 19730:5391 / 19716:4694 | 19716:3296 / 19731:4981 / 19716:4701 |

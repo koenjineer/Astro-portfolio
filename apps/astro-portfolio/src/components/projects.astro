@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import openCafe from "../../public/open-cafe.webp";
 import minamiDental from "../../public/minami-dental.webp";
 import globalStandard from "../../public/global-standard.webp";
 import ohaImage from "../../public/oha.webp";
@@ -14,7 +15,7 @@ interface Project {
   image: ImageMetadata;
   link: string;
   // Astroの中のmock_siteはサイト内の相対パス。別のVercelプロジェクトとして
-  // 公開しているNext.jsの2件（apps/minami-dental-next・apps/global-standard-next）だけ絶対URLになる
+  // 公開しているNext.jsの3件（apps/open-cafe-next・apps/minami-dental-next・apps/global-standard-next）だけ絶対URLになる
   preview: string;
   status: string;
   intent: string;
@@ -22,6 +23,16 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    title: "OPEN CAFE",
+    image: openCafe as ImageMetadata,
+    link: "",
+    preview: "https://open-cafe-next.vercel.app",
+    status: "架空サイト",
+    intent:
+      "カフェのブランドサイト。メニュー・お知らせ・ギフトをヘッドレスWordPressで管理し、Next.jsで静的書き出しする構成にしました。",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "WordPress"],
+  },
   {
     title: "みなみ歯科クリニック",
     image: minamiDental as ImageMetadata,

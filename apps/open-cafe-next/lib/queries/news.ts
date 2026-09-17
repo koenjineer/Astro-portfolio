@@ -2,7 +2,7 @@ import { cache } from "react";
 import { toPostDate, type PostDate } from "@/lib/dates";
 import { graphqlClient } from "@/lib/graphql-client";
 import { toLocalImageSrc, type ImageConnection } from "@/lib/images";
-import { toLocalContentHtml } from "@/lib/newsContent";
+import { toLocalContentHtml, toPlainExcerpt } from "@/lib/newsContent";
 
 // 15件の投稿だが、管理画面で増やされても取りこぼさないよう多めに取る
 const NEWS_FETCH_LIMIT = 100;
@@ -30,6 +30,8 @@ interface PostNode {
   title: string;
   slug: string;
   date: string;
+  // 抜粋も本文も空の記事では null になりうる
+  excerpt: string | null;
   categories: {
     nodes: CategoryNode[];
   };
@@ -53,6 +55,8 @@ export interface NewsPost extends PostDate {
   category: NewsCategory;
   /** アイキャッチが無い記事には代わりの画像（ロゴ）を入れるので、画面側は分岐しなくてよい */
   thumbnailSrc: string;
+  /** 本文の冒頭（タグを除いた文字列）。TOPのお知らせの大きいカードに出す */
+  excerpt: string;
 }
 
 const NEWS_LIST_QUERY = `
@@ -62,6 +66,7 @@ const NEWS_LIST_QUERY = `
         title
         slug
         date
+        excerpt
         categories {
           nodes {
             name
@@ -103,6 +108,7 @@ function toNewsPost(node: PostNode): NewsPost {
     thumbnailSrc:
       toLocalImageSrc(node.featuredImage, NEWS_THUMBNAIL_DIR) ??
       NEWS_NO_IMAGE_SRC,
+    excerpt: toPlainExcerpt(node.excerpt ?? ""),
   };
 }
 
@@ -166,6 +172,7 @@ const NEWS_POST_QUERY = `
       title
       slug
       date
+      excerpt
       content
       categories {
         nodes {

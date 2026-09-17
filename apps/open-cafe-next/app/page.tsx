@@ -1,48 +1,45 @@
 import { getMenu } from "@/lib/queries/menu";
-import { getNewsCategories, getNewsPosts } from "@/lib/queries/news";
-import { getProducts } from "@/lib/queries/products";
-import { getShops } from "@/lib/queries/shops";
+import { getNewsPosts } from "@/lib/queries/news";
 import { getSpecialLunches } from "@/lib/queries/top";
+import { ConceptBlock } from "./_components/ConceptBlock";
+import { GallerySection } from "./_components/GallerySection";
+import { GrandMenuSection } from "./_components/GrandMenuSection";
+import { NewsSection } from "./_components/NewsSection";
+import { SpecialLunchSection } from "./_components/SpecialLunchSection";
+import { TopDrawerButton } from "./_components/TopDrawerButton";
+import { TopFirstView } from "./_components/TopFirstView";
 
-// WordPressとの疎通確認用の仮ページ。TOPページを実装するときに丸ごと置き換える。
-// 件数と名前だけを並べ、画像やWordPressのURLは出さない
+/** Figma: 大きいカード1＋小さいカード4 */
+const NEWS_SECTION_COUNT = 5;
+
+const FIRST_VIEW_ID = "top-first-view";
+
+/**
+ * TOPページ（Figma: 【PC】TOP 19709:8911 / 【SP】TOP 19710:4041）。
+ * タイトルは layout の既定（サイト名だけ）を使うので metadata は書かない。
+ *
+ * 余白の塊（Figma: spacer）はCONCEPTの後とGRAND MENUの後に SP 120px / PC 160px。
+ * NEWSの後ろ（フッターの前）はSPだけ120px（NewsSection の下余白に含めた）
+ */
 export default async function Home() {
-  const [posts, categories, menu, products, shops, lunches] =
-    await Promise.all([
-      getNewsPosts(),
-      getNewsCategories(),
-      getMenu(),
-      getProducts(),
-      getShops(),
-      getSpecialLunches(),
-    ]);
-
-  const sections = [
-    { heading: "お知らせ", items: posts.map((post) => `${post.displayDate} [${post.category.name}] ${post.title}`) },
-    { heading: "お知らせのカテゴリー", items: categories.map((category) => `${category.name}（${category.slug}）`) },
-    { heading: "メニュー（料理）", items: menu.dishes.map((dish) => `[${dish.genre.name}] ${dish.title} ${dish.price}円`) },
-    { heading: "メニュー（ドリンク）", items: menu.drinkGroups.flatMap((group) => group.drinks.map((drink) => `[${group.genre.name}] ${drink.title} ${drink.price}円`)) },
-    { heading: "ジャンル", items: menu.genres.map((genre) => `${genre.name}（${genre.slug}）`) },
-    { heading: "ギフト", items: products.map((product) => `${product.title} ${product.price}円`) },
-    { heading: "店舗", items: shops.map((shop) => `${shop.title}（${shop.addressLines.join(" ")}）`) },
-    { heading: "今月のスペシャルランチ", items: lunches.map((lunch) => lunch.name) },
-  ];
+  const [posts, lunches, menu] = await Promise.all([
+    getNewsPosts(),
+    getSpecialLunches(),
+    getMenu(),
+  ]);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-8">
-      <h1 className="text-2xl font-bold">OPEN CAFE（疎通確認用の仮ページ）</h1>
-      {sections.map((section) => (
-        <section key={section.heading} className="mt-8">
-          <h2 className="text-lg font-bold">
-            {section.heading}：{section.items.length}件
-          </h2>
-          <ul className="mt-2 list-disc pl-6">
-            {section.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
-      ))}
+    // overflow-x-clip：飾り（コーヒー豆・葉っぱ・お皿）を画面の端からはみ出させて切る。縦は切らない
+    <main className="flex-1 overflow-x-clip">
+      <TopFirstView id={FIRST_VIEW_ID} pickupPost={posts.at(0)} />
+      <TopDrawerButton firstViewId={FIRST_VIEW_ID} />
+      <ConceptBlock />
+      <div aria-hidden="true" className="h-[120px] xl:h-40" />
+      <SpecialLunchSection lunches={lunches} />
+      <GrandMenuSection menu={menu} />
+      <div aria-hidden="true" className="h-[120px] xl:h-40" />
+      <GallerySection />
+      <NewsSection posts={posts.slice(0, NEWS_SECTION_COUNT)} />
     </main>
   );
 }

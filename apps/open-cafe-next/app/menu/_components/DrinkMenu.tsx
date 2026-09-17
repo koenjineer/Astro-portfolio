@@ -6,6 +6,8 @@ const IMAGE_SIZE = 622;
 
 interface DrinkMenuProps {
   drinkGroups: DrinkGroup[];
+  /** 表の見出し（コーヒー等）のタグ。TOPでは「GRAND MENU」→「ドリンク」の下に入るので h4 */
+  headingAs?: "h2" | "h4";
 }
 
 /**
@@ -17,7 +19,7 @@ interface DrinkMenuProps {
  *
  * 品名と価格の対なので dl。見出しの下線は、Figmaでは線が高さを増やさないので下余白を6→5pxにする
  */
-export function DrinkMenu({ drinkGroups }: DrinkMenuProps) {
+export function DrinkMenu({ drinkGroups, headingAs: HeadingTag = "h2" }: DrinkMenuProps) {
   return (
     <div className="flex items-start justify-between gap-10 px-5 md:px-0">
       <div className="hidden min-w-0 bg-white p-2 lg:block lg:w-[327px]">
@@ -38,12 +40,12 @@ export function DrinkMenu({ drinkGroups }: DrinkMenuProps) {
             aria-labelledby={`drink-${group.genre.slug}`}
             className="flex flex-col gap-[19px] md:flex-1 lg:w-[197px] lg:flex-none"
           >
-            <h2
+            <HeadingTag
               id={`drink-${group.genre.slug}`}
               className="border-b border-contrast pb-[5px] text-base/[1.5] font-bold text-contrast"
             >
               {group.genre.name}
-            </h2>
+            </HeadingTag>
             <dl className="flex flex-col gap-2 text-contrast">
               {group.drinks.map((drink) => (
                 <div

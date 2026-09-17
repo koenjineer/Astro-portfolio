@@ -12,13 +12,12 @@
 | お知らせ（一覧・カテゴリ別・詳細） | `docs/progress/news.md` |
 | メニュー（一覧・ジャンル別） | `docs/progress/menu.md` |
 | コンセプト | `docs/progress/concept.md` |
+| TOP | `docs/progress/top.md` |
 
-PC/SPの切り替えは `md`（768px）が既定。お知らせのサイドバーと、メニューのタブの200px固定・ドリンクの写真・コンセプトの横並びは `lg`（1024px）で、
-理由と実測値は `docs/progress/news.md`・`docs/progress/menu.md`・`docs/progress/concept.md`。
+PC/SPの切り替えは `md`（768px）が既定。お知らせのサイドバーと、メニューのタブの200px固定・ドリンクの写真・コンセプトの横並びは `lg`（1024px）、
+TOPのファーストビューの縦ナビ・CONCEPTとセットの横並びは `xl`（1280px）で、
+理由と実測値は `docs/progress/news.md`・`docs/progress/menu.md`・`docs/progress/concept.md`・`docs/progress/top.md`。
 
 ## 未決事項（Figma・原稿を見て決める）
 
-- **TOPのドロワーボタン（19742:13912）**：TOPはファーストビューを過ぎたらドロワーボタンを出す指示。TOP実装時に作る
-- **ギャラリー（Instagram）の実装方法**：TOPページ着手時に決める（ユーザー決定）
-- **TOPのランチ画像の置き場所**：メニューの画像（`public/images/menu/` に同じ img_pasta* がある）と共有するか（今は `/images/home/` を指す）。
-  TOP実装時に `getSpecialLunches` も `requireExistingLocalImageSrc` に切り替える
+- なし（TOPのドロワーボタン・ギャラリー・ランチ画像の置き場所は `docs/progress/top.md` で決着）

@@ -11,9 +11,10 @@
 | 店舗情報 | `docs/progress/shop.md` |
 | お知らせ（一覧・カテゴリ別・詳細） | `docs/progress/news.md` |
 | メニュー（一覧・ジャンル別） | `docs/progress/menu.md` |
+| コンセプト | `docs/progress/concept.md` |
 
-PC/SPの切り替えは `md`（768px）が既定。お知らせのサイドバーと、メニューのタブの200px固定・ドリンクの写真は `lg`（1024px）で、
-理由と実測値は `docs/progress/news.md`・`docs/progress/menu.md`。
+PC/SPの切り替えは `md`（768px）が既定。お知らせのサイドバーと、メニューのタブの200px固定・ドリンクの写真・コンセプトの横並びは `lg`（1024px）で、
+理由と実測値は `docs/progress/news.md`・`docs/progress/menu.md`・`docs/progress/concept.md`。
 
 ## 未決事項（Figma・原稿を見て決める）
 

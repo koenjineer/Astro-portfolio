@@ -57,10 +57,7 @@ const features: FeatureItem[] = [
           <span class="ws-feature__num">{feature.num}</span>
           <h3 class="ws-feature__title">
             {feature.title.split("\n").map((line, i, arr) => (
-              <>
-                {line}
-                {i < arr.length - 1 && <br />}
-              </>
+              <>{line}{i < arr.length - 1 && <br />}</>
             ))}
           </h3>
           <p class="ws-feature__text">{feature.text}</p>

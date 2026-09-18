@@ -30,7 +30,7 @@ const skillCategories: { icon: keyof typeof CategoryIcons; title: string; items:
     title: "デザイン・サイト制作",
     items: [
       "目的と見る人に合わせたデザインの立案（Figma）",
-      "Figma のデザインカンプの忠実な再現（パソコン・スマホ。カンプにない画面幅も判断して組む）",
+      "Figma デザインの忠実な再現（レスポンシブ対応）",
       "ランディングページ・企業サイトの制作（Astro / HTML・SCSS）",
       "既存サイトの改修",
     ],

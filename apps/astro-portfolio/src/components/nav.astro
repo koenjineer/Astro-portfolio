@@ -153,15 +153,18 @@ const navItems: NavItem[] = [
 
   document.addEventListener("DOMContentLoaded", () => {
     const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll("nav a[href^='#']");
-    const observerOptions = { threshold: 0.6 };
+    // ロゴも href="#home" なので、メニューの項目（li の中のリンク）だけを対象にする
+    const navLinks = document.querySelectorAll("nav li a[href^='#']");
+    // 「セクションの60%が見えたら」だと、画面より長いセクション（ホーム・制作実績）は
+    // 一度も条件を満たさない。画面の上から45%の位置を横切っているセクションを現在地にする
+    const observerOptions = { rootMargin: "-45% 0px -55% 0px", threshold: 0 };
 
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           navLinks.forEach((link) => link.classList.remove("active"));
           const id = entry.target.getAttribute("id");
-          const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+          const activeLink = document.querySelector(`nav li a[href="#${id}"]`);
           if (activeLink) {
             activeLink.classList.add("active");
           }

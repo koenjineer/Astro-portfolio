@@ -73,6 +73,15 @@ const { title } = Astro.props;
       if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         document.documentElement.classList.add("reveal-ready");
       }
+      // ナビの切り替えボタンで選んだ見た目を、描画の前に反映する（一瞬ライトで出る「ちらつき」を防ぐ）
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "light" || savedTheme === "dark") {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch {
+        // 保存領域が使えない環境では、端末の外観設定に合わせる
+      }
     </script>
   </head>
   <body class="bg-[--background] sm:px-28 lg:px-20 px-9">

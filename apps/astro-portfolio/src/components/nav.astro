@@ -35,16 +35,31 @@ const navItems: NavItem[] = [
         class="hidden md:flex items-center gap-2 shrink-0 group"
         aria-label="KoEnJineer ホームへ"
       >
-        <img
-          src="/logo-header.svg"
-          alt="KoEnJineer"
-          width="140"
-          height="28"
-          class="h-8 w-auto"
-        />
+        <!--
+          ダークモードで文字色が切り替わるよう、画像ファイルではなく直接書いている（元は public/logo-header.svg）。
+          書体は style で指定する（属性だと、全体の * { font-family } に上書きされる）
+        -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 140 28"
+          width="160"
+          height="32"
+          class="h-8 w-40 text-[var(--logo-ink)]"
+          aria-hidden="true"
+        >
+          <rect x="0.5" y="0.5" width="139" height="27" fill="none" stroke="currentColor" stroke-width="1" />
+          <text
+            x="12"
+            y="21"
+            style="font-family: 'Courier New', Courier, monospace"
+            font-size="19"
+            font-weight="700"
+            fill="currentColor"
+            letter-spacing="0.5">KoEn<tspan fill="#00bcd4">J</tspan>ineer</text>
+        </svg>
       </a>
       <ul
-        class="flex items-center justify-around md:justify-end w-full md:w-auto md:gap-10 gap-6"
+        class="flex items-center justify-around md:justify-end w-full md:w-auto md:gap-10 gap-0"
       >
         {
           navItems.map((item) => (
@@ -58,11 +73,26 @@ const navItems: NavItem[] = [
                   <fragment set:html={item.icon} />
                 </span>
                 <span class="hidden md:inline-block">{item.label}</span>
-                <span class="md:hidden">{item.label}</span>
+                <span class="md:hidden whitespace-nowrap">{item.label}</span>
               </a>
             </li>
           ))
         }
+        <li class="flex-1 md:flex-none">
+          <!-- 読み上げ名は押したときに起きること。今の見た目に合わせてスクリプトで書き換える -->
+          <button
+            type="button"
+            id="theme-toggle"
+            aria-label="ダークモードに切り替え"
+            class="flex flex-col items-center gap-1 w-full text-[var(--white-icon)] hover:text-[var(--sec)] transition-colors text-xs md:text-base cursor-pointer"
+          >
+            <span class="flex items-center justify-center w-6 h-6">
+              <svg data-theme-icon="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"></path></svg>
+              <svg data-theme-icon="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"></path></svg>
+            </span>
+            <span class="md:hidden whitespace-nowrap">テーマ</span>
+          </button>
+        </li>
       </ul>
     </div>
   </nav>
@@ -79,8 +109,31 @@ const navItems: NavItem[] = [
 
   nav.scrolling {
     background-color: var(--component-bg);
-    border-color: rgba(26, 26, 46, 0.1);
+    border-color: var(--nav-border);
     border-radius: 9999px;
+  }
+
+  /* 今ライトなら月（押すとダーク）、今ダークなら太陽。CSSで出し分けて、読み込み直後の入れ替わりを防ぐ */
+  [data-theme-icon="sun"] {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) [data-theme-icon="moon"] {
+      display: none;
+    }
+
+    :global(:root:not([data-theme="light"])) [data-theme-icon="sun"] {
+      display: block;
+    }
+  }
+
+  :global(:root[data-theme="dark"]) [data-theme-icon="moon"] {
+    display: none;
+  }
+
+  :global(:root[data-theme="dark"]) [data-theme-icon="sun"] {
+    display: block;
   }
 
   nav a.active .nav-indicator {
@@ -100,7 +153,7 @@ const navItems: NavItem[] = [
       left: 50%;
       position: fixed;
       border-radius: 1rem 1rem 0 0;
-      border-color: rgba(26, 26, 46, 0.1);
+      border-color: var(--nav-border);
     }
 
     nav.scrolling {
@@ -137,6 +190,39 @@ const navItems: NavItem[] = [
     { passive: true },
   );
 
+  // ダークモードの切り替え。押すと今の見た目の反対にして、選んだ方を覚えておく
+  const THEME_STORAGE_KEY = "theme";
+  const themeToggle = document.getElementById("theme-toggle");
+  const darkSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function currentTheme(): "light" | "dark" {
+    const chosenTheme = document.documentElement.dataset.theme;
+    if (chosenTheme === "light" || chosenTheme === "dark") return chosenTheme;
+    return darkSchemeQuery.matches ? "dark" : "light";
+  }
+
+  function updateThemeToggleLabel() {
+    themeToggle?.setAttribute(
+      "aria-label",
+      currentTheme() === "dark" ? "ライトモードに切り替え" : "ダークモードに切り替え",
+    );
+  }
+
+  themeToggle?.addEventListener("click", () => {
+    const nextTheme = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    } catch {
+      // 保存できない環境では、このページを開いている間だけ切り替わる
+    }
+    updateThemeToggleLabel();
+  });
+
+  // まだ押していない人は端末の設定に追従するので、設定が変わったら読み上げ名も合わせる
+  darkSchemeQuery.addEventListener("change", updateThemeToggleLabel);
+  updateThemeToggleLabel();
+
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
@@ -153,15 +239,18 @@ const navItems: NavItem[] = [
 
   document.addEventListener("DOMContentLoaded", () => {
     const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll("nav a[href^='#']");
-    const observerOptions = { threshold: 0.6 };
+    // ロゴも href="#home" なので、メニューの項目（li の中のリンク）だけを対象にする
+    const navLinks = document.querySelectorAll("nav li a[href^='#']");
+    // 「セクションの60%が見えたら」だと、画面より長いセクション（ホーム・制作実績）は
+    // 一度も条件を満たさない。画面の上から45%の位置を横切っているセクションを現在地にする
+    const observerOptions = { rootMargin: "-45% 0px -55% 0px", threshold: 0 };
 
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           navLinks.forEach((link) => link.classList.remove("active"));
           const id = entry.target.getAttribute("id");
-          const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+          const activeLink = document.querySelector(`nav li a[href="#${id}"]`);
           if (activeLink) {
             activeLink.classList.add("active");
           }

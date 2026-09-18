@@ -23,6 +23,9 @@ const technologies = [
   // "bash",
 ];
 
+// 黒っぽいロゴ。ダークモードの地に沈むので、ダークのときだけ明るく反転させる
+const darkInvertLogos = new Set(["astro", "github", "chatGPT", "cursor", "next"]);
+
 const labelOverrides: Record<string, string> = {
   claudeCode: "Claude Code",
 };
@@ -57,6 +60,7 @@ function label(tech: string) {
             height="30"
             loading={index < technologies.length ? "eager" : "lazy"}
             decoding="async"
+            data-dark-invert={darkInvertLogos.has(tech) ? "" : undefined}
           />
           <span class="text-lg font-medium text-[var(--white)] whitespace-nowrap">
             {label(tech)}
@@ -78,6 +82,17 @@ function label(tech: string) {
   }
   .animate-scroll {
     animation: scroll 60s linear infinite;
+  }
+
+  /* 反転したあと色相を半周戻すと、黒は白に、Astro のオレンジはオレンジのまま残る */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) [data-dark-invert] {
+      filter: invert(1) hue-rotate(180deg);
+    }
+  }
+
+  :root[data-theme="dark"] [data-dark-invert] {
+    filter: invert(1) hue-rotate(180deg);
   }
 
   @media (min-width: 768px) {

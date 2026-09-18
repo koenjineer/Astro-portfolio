@@ -35,13 +35,28 @@ const navItems: NavItem[] = [
         class="hidden md:flex items-center gap-2 shrink-0 group"
         aria-label="KoEnJineer ホームへ"
       >
-        <img
-          src="/logo-header.svg"
-          alt="KoEnJineer"
-          width="140"
-          height="28"
-          class="h-8 w-auto"
-        />
+        <!--
+          ダークモードで文字色が切り替わるよう、画像ファイルではなく直接書いている（元は public/logo-header.svg）。
+          書体は style で指定する（属性だと、全体の * { font-family } に上書きされる）
+        -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 140 28"
+          width="160"
+          height="32"
+          class="h-8 w-40 text-[var(--logo-ink)]"
+          aria-hidden="true"
+        >
+          <rect x="0.5" y="0.5" width="139" height="27" fill="none" stroke="currentColor" stroke-width="1" />
+          <text
+            x="12"
+            y="21"
+            style="font-family: 'Courier New', Courier, monospace"
+            font-size="19"
+            font-weight="700"
+            fill="currentColor"
+            letter-spacing="0.5">KoEn<tspan fill="#00bcd4">J</tspan>ineer</text>
+        </svg>
       </a>
       <ul
         class="flex items-center justify-around md:justify-end w-full md:w-auto md:gap-10 gap-6"
@@ -79,7 +94,7 @@ const navItems: NavItem[] = [
 
   nav.scrolling {
     background-color: var(--component-bg);
-    border-color: rgba(26, 26, 46, 0.1);
+    border-color: var(--nav-border);
     border-radius: 9999px;
   }
 
@@ -100,7 +115,7 @@ const navItems: NavItem[] = [
       left: 50%;
       position: fixed;
       border-radius: 1rem 1rem 0 0;
-      border-color: rgba(26, 26, 46, 0.1);
+      border-color: var(--nav-border);
     }
 
     nav.scrolling {

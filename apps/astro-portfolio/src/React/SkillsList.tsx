@@ -86,7 +86,7 @@ const SkillsList = () => (
           key={category.title}
           data-reveal
           style={{ "--reveal-delay": `${(index % GRID_COLUMNS) * REVEAL_STEP_SECONDS}s` } as CSSProperties}
-          className="bg-white rounded-2xl border border-[var(--white-icon-tr)] p-6 md:p-8"
+          className="bg-[var(--component-bg)] rounded-2xl border border-[var(--white-icon-tr)] p-6 md:p-8"
         >
           <div className="flex items-center gap-3">
             {CategoryIcons[category.icon]}

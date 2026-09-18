@@ -117,6 +117,41 @@ const { title } = Astro.props;
     --white-icon: #1a1a2e99;
     --white-icon-tr: #1a1a2e15;
     --component-bg: #ffffff;
+    --nav-border: rgba(26, 26, 46, 0.1);
+    --logo-ink: #1a1a1a;
+    color-scheme: light dark;
+  }
+
+  /*
+    ダークモード：端末の外観設定に合わせて変数だけを差し替える。
+    data-theme は今は付けていない。将来の切り替えボタンは、<html> に
+    data-theme="light" / "dark" を付け外しするだけで済むように、両方の書き方にしてある
+  */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --background: #0f1117;
+      --white: #e8e9ee;
+      --white-icon: #e8e9ee99;
+      --white-icon-tr: #e8e9ee1a;
+      --component-bg: #181b24;
+      --nav-border: #e8e9ee1a;
+      --logo-ink: #e8e9ee;
+    }
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --background: #0f1117;
+    --white: #e8e9ee;
+    --white-icon: #e8e9ee99;
+    --white-icon-tr: #e8e9ee1a;
+    --component-bg: #181b24;
+    --nav-border: #e8e9ee1a;
+    --logo-ink: #e8e9ee;
   }
 
   * {

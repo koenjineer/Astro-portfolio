@@ -22,6 +22,10 @@ interface Project {
   tech: string[];
 }
 
+// 2列のカードは1行ずつ画面に入るので、列ごとに少し遅らせて並びを見せる
+const REVEAL_STEP_SECONDS = 0.08;
+const GRID_COLUMNS = 2;
+
 const projects: Project[] = [
   {
     title: "OPEN CAFE",
@@ -121,13 +125,17 @@ const projects: Project[] = [
   class="py-12 border-t border-[var(--white-icon-tr)] text-[var(--white)]"
 >
   <div class="max-w-5xl mx-auto">
-    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">実績</h2>
-    <h3 class="text-4xl md:text-5xl font-medium mb-8">制作実績</h3>
+    <h2 data-reveal class="text-lg text-[var(--sec)] mb-2 shiny-sec">実績</h2>
+    <h3 data-reveal class="text-4xl md:text-5xl font-medium mb-8">制作実績</h3>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {
-        projects.map((project) => (
-          <div class="project-card group">
+        projects.map((project, index) => (
+          <div
+            class="project-card group"
+            data-reveal
+            style={`--reveal-delay: ${(index % GRID_COLUMNS) * REVEAL_STEP_SECONDS}s`}
+          >
             <div class="project-img-area rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-4 relative cursor-pointer">
               <Image
                 src={project.image}

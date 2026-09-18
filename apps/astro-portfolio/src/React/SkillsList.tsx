@@ -1,3 +1,9 @@
+import type { CSSProperties } from "react";
+
+// 2列のカードは1行ずつ画面に入るので、列ごとに少し遅らせて並びを見せる
+const REVEAL_STEP_SECONDS = 0.08;
+const GRID_COLUMNS = 2;
+
 const ICON_CLASS = "w-6 h-6 text-[var(--sec)] opacity-70 shrink-0";
 
 // アイコンは Remix Icon の形をそのまま使っている
@@ -70,14 +76,16 @@ const skillCategories: { icon: keyof typeof CategoryIcons; title: string; items:
 // 日本語を文節の途中で折り返さない（auto-phrase は lang="ja" のときに効く）
 const SkillsList = () => (
   <div className="text-left pt-3 md:pt-9 [word-break:auto-phrase]">
-    <h3 className="text-[var(--white)] text-3xl md:text-4xl font-semibold">できること</h3>
-    <p className="mt-4 text-[var(--white-icon)] text-base md:text-lg text-pretty">
+    <h3 data-reveal className="text-[var(--white)] text-3xl md:text-4xl font-semibold">できること</h3>
+    <p data-reveal className="mt-4 text-[var(--white-icon)] text-base md:text-lg text-pretty">
       デザインの立案から公開・運用まで、一人で責任を持って形にします。
     </p>
     <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8 md:mt-10">
-      {skillCategories.map((category) => (
+      {skillCategories.map((category, index) => (
         <li
           key={category.title}
+          data-reveal
+          style={{ "--reveal-delay": `${(index % GRID_COLUMNS) * REVEAL_STEP_SECONDS}s` } as CSSProperties}
           className="bg-white rounded-2xl border border-[var(--white-icon-tr)] p-6 md:p-8"
         >
           <div className="flex items-center gap-3">

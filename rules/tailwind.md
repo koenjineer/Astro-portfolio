@@ -16,8 +16,6 @@ Tailwind v4の `translate-x-*` / `scale-*` は `transform` ではなく
 `transition-colors` と `transition-transform` を並べると、どちらも同じ
 `transition-property` を上書きするので**後に来た方しか効かない**。
 
-動きには `motion-reduce:transition-none` を添える（`/rules/design-to-code.md`）。
-
 ## 行の高さは、文字サイズと一緒に書く（親の `leading-*` は子に届かない）
 
 Tailwind v4 の `text-xs` / `text-sm` / `text-2xl` などは、文字サイズと同時に

@@ -75,7 +75,7 @@ const SkillsList = () => (
     <p className="mt-4 text-[var(--white-icon)] text-base md:text-lg text-pretty">
       デザインの立案から公開・運用まで、一人で責任を持って形にします。
     </p>
-    <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mt-8 md:mt-10">
+    <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8 md:mt-10">
       {skillCategories.map((category) => (
         <li
           key={category.title}

@@ -20,7 +20,6 @@
 ## 冗長な記述を避ける
 
 - `font-family`は`body`への設定のみとし、各コンポーネントでの個別指定は禁止
-- セクション共通タイトル構造は`@mixin section-heading`を使用する
 - SPメディアクエリ内でPCと同じ値を再宣言しない（差分のみ記述）
 - センタリングは`margin-inline: auto`を使用する（`margin-left: auto; margin-right: auto;`は禁止）
 - `!important`禁止（緊急時のみ、コメント必須）

@@ -36,7 +36,7 @@
 - ヘッドレスWordPress（WP側の設定と罠）：`/rules/headless-wordpress.md`
 - 静的書き出しとVercelへの手元ビルド：`/rules/nextjs-static-export.md`
 - Tailwind CSS v4の書き方と罠：`/rules/tailwind.md`
-- カンプに答えが書かれていないときの決め方：`/rules/design-to-code.md`
+- カンプからの素材の書き出し（解像度・形式）：`/rules/design-to-code.md`
 - プルリクエストの自動チェック（CI）：`/rules/ci.md`
 
 WordPress側の状態（投稿タイプ・GraphQL名・件数・確認済みクエリ）は `docs/wordpress.md`。

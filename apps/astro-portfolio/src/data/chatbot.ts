@@ -60,7 +60,7 @@ export const topics: ChatTopic[] = [
     id: "projects",
     question: "制作実績を見たい",
     answer: [
-      "飲食店、歯科医院、人材会社、BtoB SaaS、フィットネスジム、アプリなど、さまざまな業種を想定した架空サイトを作っています。",
+      "飲食店、歯科医院、人材会社、BtoB SaaS、フィットネスジム、水素水サーバー、アプリなど、さまざまな業種を想定した架空サイトを作っています。",
       "架空サイトですが、ヘッドレスWordPress × Next.js の構成や、Astro で作り込んだランディングページなど、実際の案件を想定した作りです。",
     ],
     links: [{ label: "制作実績を見る", href: "#projects" }],

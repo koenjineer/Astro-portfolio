@@ -38,7 +38,8 @@ $font-yomogi: 'Yomogi', cursive;
     font-weight: 400;
     font-size: 40px;
     color: $color-gray-1;
-    letter-spacing: 0.03em;
+    letter-spacing: 1.2px;
+    line-height: 53px; // Figma の見出し行は装飾画像と同じ 53px
     white-space: nowrap;
   }
 
@@ -133,7 +134,8 @@ $font-yomogi: 'Yomogi', cursive;
     padding: 56px $side-padding 40px;
     gap: 40px;
 
-    &__title { font-size: 24px; }
+    &__title-wrap { height: 52px; gap: 8px; }
+    &__title { font-size: 24px; letter-spacing: 0; line-height: normal; }
     &__title-deco { width: 25px; height: 40px; }
 
     &__list {
@@ -149,6 +151,7 @@ $font-yomogi: 'Yomogi', cursive;
       grid-template-rows: auto auto auto;
       column-gap: 24px;
       align-items: center;
+      row-gap: 3px;
       width: 359px;
       height: auto;
       margin-top: 0;
@@ -161,7 +164,7 @@ $font-yomogi: 'Yomogi', cursive;
       position: static;
       top: auto !important; // インライン style を上書き
       left: auto;
-      transform: rotate(-5deg);
+      transform: none; // SP の手書きラベルは傾けない
       font-size: 15px;
       letter-spacing: -1.35px;
       white-space: nowrap;
@@ -191,7 +194,9 @@ $font-yomogi: 'Yomogi', cursive;
       font-size: 20px;
       text-align: left;
       white-space: nowrap;
-      line-height: 1.4;
+      line-height: normal;
+      letter-spacing: 0;
+      margin-bottom: 5px; // label との gap 3 + 本文との gap 8 の差
     }
 
     // 右列 3行目（説明テキスト）
@@ -202,8 +207,10 @@ $font-yomogi: 'Yomogi', cursive;
       top: auto;
       left: auto;
       transform: none;
-      width: 100%;
+      width: 217px;
       font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: 0;
       text-align: left;
     }
   }

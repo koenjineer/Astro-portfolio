@@ -62,7 +62,7 @@ const navItems: NavItem[] = navLinks.flatMap((link, i) =>
 
     <!-- 免責文 -->
     <p class="sp-footer__disclaimer">
-      このサイトは株式会社コスモスエンタープライズ様のご協力のもと作成したコーディング用の練習課題です。実在の人物・団体とは関係ありません。
+      このサイトは株式会社コスモスエンタープライズ様のご協力のもと作成したコーディング用の練習課題です。<br class="sp-only" />実在の人物・団体とは関係ありません。
     </p>
 
     <!-- Copyright -->
@@ -75,10 +75,9 @@ const navItems: NavItem[] = navLinks.flatMap((link, i) =>
     <img
       class="sp-footer__wave"
       src="/mock_site/suisopot/images/footer-wave.svg"
-      alt=""
+      alt="" aria-hidden="true"
       width="1440"
-      height="101"
-    />
+      height="101" loading="lazy" />
   </div>
 
 </footer>

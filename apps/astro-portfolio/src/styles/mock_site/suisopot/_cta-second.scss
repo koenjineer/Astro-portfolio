@@ -1,10 +1,11 @@
 @use 'variables' as *;
 
+// Figma 113:2827 (PC 1440×471) / 1:2545 (SP 390×579)
+// 波形50 + 水色パネル(上30 + タイトル63 + 32 + ボタン160 + 下80 = 365) + 下の白余白56。製品はパネル下端からはみ出す
 .sp-cta-second {
   position: relative;
-  overflow: hidden;
-  padding: 60px $side-padding 80px;
-  background: $color-accent-green;
+  height: 471px;
+  background: $color-white;
 
   &__wave {
     position: absolute;
@@ -16,13 +17,13 @@
     pointer-events: none;
   }
 
-  &__product {
+  &__panel {
     position: absolute;
+    top: 50px;
+    left: 0;
     right: 0;
-    bottom: 0;
-    width: 200px;
-    height: auto;
-    pointer-events: none;
+    padding: 30px $side-padding 80px;
+    background: $color-accent-green;
   }
 
   &__inner {
@@ -30,11 +31,8 @@
     flex-direction: column;
     align-items: center;
     gap: 32px;
-    max-width: $content-max;
+    max-width: 926px;
     margin-inline: auto;
-    padding-top: 10px;
-    // prevent overlap with right product image on PC
-    padding-right: 220px;
   }
 
   &__title {
@@ -42,13 +40,13 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
-    font-family: $font-jp-sans;
+    height: 63px;
     font-weight: 400;
     font-size: 32px;
     color: $color-gray-1;
     line-height: 1.7;
-    letter-spacing: 0.03em;
-    text-align: center;
+    letter-spacing: 0.96px;
+    white-space: nowrap;
 
     strong {
       font-weight: 700;
@@ -56,118 +54,239 @@
   }
 
   &__title-deco {
-    width: 32px;
-    height: 98px;
-    object-fit: contain;
+    width: 33px;
+    height: 53px;
     flex-shrink: 0;
-  }
-
-  &__title-text {
-    flex: 1;
-    min-width: 0;
   }
 
   &__btn-list {
     display: flex;
     gap: 48px;
-    flex-wrap: wrap;
+    align-items: flex-end;
     justify-content: center;
   }
 
   &__btn-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    width: 400px;
+    position: relative;
+    width: 401px;
+    height: 160px;
   }
 
+  // ＼ ／ は Figma の Line を回転して再現
   &__btn-lead {
-    font-family: $font-jp-sans;
-    font-weight: 700;
-    font-size: 24px;
-    color: $color-gray-1;
-    letter-spacing: 0.03em;
-  }
-
-  &__btn {
-    display: inline-flex;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    width: 100%;
-    height: 88px;
-    padding: 0 32px;
-    background: $color-accent;
-    color: $color-white;
-    border-radius: 52px;
-    font-family: $font-jp-sans;
     font-weight: 700;
-    font-size: 26px;
+    font-size: 24px;
+    color: $color-gray-1;
+    line-height: 1.7;
+    letter-spacing: 0.72px;
     white-space: nowrap;
-    box-shadow: 0 0 1.5px rgba(83, 46, 37, 0.25);
-    transition: opacity 0.2s ease;
-
-    &:hover {
-      opacity: 0.85;
-    }
   }
 
-  &__btn-text {
+  &__slash {
+    display: block;
+    width: 22px;
+    height: auto;
+    flex-shrink: 0;
+
+    &--left  { transform: rotate(70deg) scaleY(-1); }
+    &--right { transform: rotate(110deg); }
+  }
+
+  &__btn {
+    position: absolute;
+    top: 58px;
+    left: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7.5px;
+    width: 400px;
+    height: 88px;
+    padding: 0 48px 4px 60px; // 文字の中心を Figma (上20/下24 の余白) に合わせる
+    background: $color-accent;
+    color: $color-white;
+    border-radius: 52.4px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: normal;
     white-space: nowrap;
+    box-shadow: 0 0 1.5px rgba(83, 46, 37, 0.25);
+    @include hover-invert-accent;
+  }
+
+  &__btn-text strong {
+    font-weight: 700;
+  }
+
+  // 「で」「をする」は 28px
+  &__btn-text {
+    font-size: 28.07px;
 
     strong {
-      font-weight: 700;
+      font-size: 30px;
+    }
+
+    &--plain {
+      font-size: 30px;
     }
   }
 
   &__btn-arrow {
-    display: inline-block;
+    position: relative;
     flex-shrink: 0;
+    width: 20.6px;
+    height: 20.6px;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20.6px;
+      height: 11.1px;
+      max-width: none;
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
   }
 
-  @media (max-width: $bp-sp) {
-    padding: 48px $side-padding 40px;
-    overflow: visible;
+  // 製品：マスク位置 x=1195.4 / y=50+124.5、サイズ 166.8×292 (1440幅基準)
+  &__product {
+    position: absolute;
+    top: 174.5px;
+    left: calc(50% + 475.4px);
+    width: 166.8px;
+    height: 292px;
+    pointer-events: none;
+  }
 
+  // 製品が右に収まらない幅では隠す（ボタンと重なるため）
+  @media (max-width: 1283px) {
     &__product {
       display: none;
     }
+  }
 
-    &__inner {
-      gap: 20px;
-      padding-top: 0;
-      padding-right: 0;
-    }
+  // 中間幅：見出しが折り返せるよう、パネルを高さ可変にする
+  @media (max-width: 1099px) {
+    height: auto;
+    padding-top: 50px;
 
-    &__title {
-      font-size: 18px;
-      gap: 8px;
-    }
-
-    &__title-deco {
-      width: 20px;
-      height: 61px;
+    &__panel {
+      position: relative;
+      top: auto;
     }
 
     &__btn-list {
+      flex-wrap: wrap;
+      row-gap: 16px;
+    }
+
+    &__title {
+      height: auto;
+      min-height: 63px;
+      white-space: normal;
+      text-align: center;
+    }
+  }
+
+  // ===== SP (Figma 1:2545 / 390×579) =====
+  @media (max-width: $bp-sp) {
+    height: 579px;
+    padding-top: 0;
+
+    &__wave {
+      top: 0;
+      height: 16px;
+    }
+
+    &__panel {
+      position: absolute;
+      top: 13px;
+      height: 525px;
+      padding: 56px 0 0;
+    }
+
+    &__inner {
+      gap: 0;
+      max-width: none;
+      height: 100%;
+      position: relative;
+    }
+
+    &__title {
+      gap: 8px;
+      height: 63px;
+      font-size: 24px;
+      line-height: 1.3;
+      letter-spacing: -0.72px;
+      text-align: left;
+    }
+
+    &__title-deco {
+      width: 24.9px;
+      height: 40px;
+    }
+
+    // ボタン2つは縦並び（1つ目 top183 / 2つ目 top318、パネル基準）
+    &__btn-list {
+      position: absolute;
+      top: 127px; // 183 - 56(パネルの上余白)
+      left: 0;
+      right: 0;
       flex-direction: column;
-      gap: 20px;
-      width: 100%;
+      align-items: center;
+      gap: 50px; // 2つ目のリード文が top:318 になる間隔
     }
 
     &__btn-item {
-      width: 100%;
+      width: 300px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
 
     &__btn-lead {
+      position: static;
       font-size: 16px;
+      line-height: normal;
+      letter-spacing: 0;
     }
 
     &__btn {
-      height: 64px;
-      font-size: 18px;
-      padding: 0 24px;
+      position: static;
+      width: 300px;
+      height: 56px;
+      font-size: 22px;
+      padding-bottom: 0;
+    }
+
+    &__btn-text {
+      font-size: 20px;
+
+      strong {
+        font-size: 22px;
+      }
+
+      &--plain {
+        font-size: 22px;
+      }
+    }
+
+    &__product {
+      display: block;
+      top: 441.7px;
+      left: calc(50% - 39.3px);
+      width: 77.5px;
+      height: 136.5px;
     }
   }
 }

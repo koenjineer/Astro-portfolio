@@ -19,8 +19,7 @@ const points = [
     alt=""
     aria-hidden="true"
     width="1440"
-    height="2035"
-  />
+    height="2035" loading="lazy" />
 
   <img
     class="sp-kaiketu__arrow"
@@ -28,42 +27,22 @@ const points = [
     alt=""
     aria-hidden="true"
     width="90"
-    height="50"
-  />
+    height="50" loading="lazy" />
 
   <div class="sp-kaiketu__inner">
     <h2 class="sp-kaiketu__title sp-fade" id="kaiketu-title">
-      <img
-        class="sp-kaiketu__title-deco"
-        src="/mock_site/suisopot/images/title-deco-left.webp"
-        alt=""
-        aria-hidden="true"
-        width="50"
-        height="80"
-        loading="lazy"
-      />
-      <span class="sp-kaiketu__title-text">そんなお悩みや心配は</span>
-      <img
-        class="sp-kaiketu__title-logo"
-        src="/mock_site/suisopot/images/kaiketu-logo.webp"
-        alt="SUISOPOT"
-        width="187"
-        height="72"
-        loading="lazy"
-      />
-      <span class="sp-kaiketu__title-text">が解決します</span>
-      <img
-        class="sp-kaiketu__title-deco"
-        src="/mock_site/suisopot/images/title-deco-right.webp"
-        alt=""
-        aria-hidden="true"
-        width="50"
-        height="80"
-        loading="lazy"
-      />
+      <img class="sp-kaiketu__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="50" height="80" loading="lazy" />
+      <span class="sp-kaiketu__title-main">
+        <span class="sp-kaiketu__title-text">そんなお悩みや心配は</span>
+        <span class="sp-kaiketu__title-line">
+          <img class="sp-kaiketu__title-logo" src="/mock_site/suisopot/images/kaiketu-logo.webp" alt="SUISOPOT" width="187" height="72" loading="lazy" />
+          <span class="sp-kaiketu__title-text">が解決します</span>
+        </span>
+      </span>
+      <img class="sp-kaiketu__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="50" height="80" loading="lazy" />
     </h2>
 
-    <p class="sp-kaiketu__subtitle sp-fade">SUISOPOTは手軽にナノバブル水素水を作れるサーバーです</p>
+    <p class="sp-kaiketu__subtitle sp-fade">SUISOPOTは手軽にナノバブル水素水を<br class="sp-only" />作れるサーバーです</p>
 
     <ul class="sp-kaiketu__points sp-fade">
       {points.map((p) => (
@@ -84,7 +63,7 @@ const points = [
     </ul>
 
     <div class="sp-kaiketu__talk sp-fade">
-      <h3 class="sp-kaiketu__talk-heading">そもそも、ナノバブル水素水って？</h3>
+      <h3 class="sp-kaiketu__talk-heading">そもそも、<br class="sp-only" />ナノバブル水素水って？</h3>
 
       <div class="sp-kaiketu__talk-inner">
         <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
@@ -100,14 +79,14 @@ const points = [
         <div class="sp-kaiketu__balloon sp-kaiketu__balloon--right">
           <img class="sp-kaiketu__avatar" src={userAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
           <p class="sp-kaiketu__balloon-body">
-            なるほど！だから近年水素ブームが来ているんですね！
+            なるほど！だから近年水素ブームが<br class="sp-only" />来ているんですね！
           </p>
         </div>
 
         <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
           <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
           <p class="sp-kaiketu__balloon-body">
-            それから、ナノバブルというのは、こんなに小さな泡の事です！
+            それから、ナノバブルというのは、<br class="sp-only" />こんなに小さな泡の事です！
           </p>
         </div>
 
@@ -129,15 +108,13 @@ const points = [
           </picture>
         </div>
 
-        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
-          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left sp-kaiketu__balloon--noavatar">
           <p class="sp-kaiketu__balloon-body">
             この泡のスゴイ所は浸透力と持続力！
           </p>
         </div>
 
-        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left">
-          <img class="sp-kaiketu__avatar" src={expertAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
+        <div class="sp-kaiketu__balloon sp-kaiketu__balloon--left sp-kaiketu__balloon--noavatar sp-kaiketu__balloon--wide">
           <p class="sp-kaiketu__balloon-body">
             「ナノバブル水素水」には、この泡が1ccあたり3億3,000万個という高濃度のナノバブルを含んでいます。<br />
             <strong>大量のナノバブルが素早く体内に水素と酸素を浸透させる</strong>事ができるんです！
@@ -147,7 +124,7 @@ const points = [
         <div class="sp-kaiketu__balloon sp-kaiketu__balloon--right">
           <img class="sp-kaiketu__avatar" src={userAvatar} alt="" aria-hidden="true" width="90" height="90" loading="lazy" />
           <p class="sp-kaiketu__balloon-body">
-            ナノバブルって凄い！普通の水素水とは全然違うのね！
+            ナノバブルって凄い！普通の水素水<br class="sp-only" />とは全然違うのね！
           </p>
         </div>
       </div>

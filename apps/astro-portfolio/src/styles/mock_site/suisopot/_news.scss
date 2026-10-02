@@ -39,7 +39,8 @@ $news-gradient: linear-gradient(179.38deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.
     font-weight: 400;
     font-size: 40px;
     color: $color-gray-1;
-    letter-spacing: 0.03em;
+    letter-spacing: 1.2px;
+    line-height: 53px; // Figma の見出し行は装飾画像と同じ 53px
     white-space: nowrap;
   }
 
@@ -49,7 +50,6 @@ $news-gradient: linear-gradient(179.38deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.
     padding: 0;
     margin: 0;
     width: 100%;
-    border-top: 1px solid $color-gray-3;
   }
 
   &__item {
@@ -58,24 +58,26 @@ $news-gradient: linear-gradient(179.38deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.
 
   // 各ニュース行
   // Figma: リスト h-[300px] / 4件 = 1行約75px → padding 24px 0
+  // Figma: 区切り線の間隔は81px（1行目のみ上余白なしで57px）。文字は線の31px下から始まる
   &__row {
     display: flex;
     align-items: center;
     gap: 24px;
-    padding: 24px 0;
+    padding: 31px 0 23px;
     text-decoration: none;
-    transition: opacity 0.2s;
+  }
 
-    &:hover { opacity: 0.7; }
+  &__item:first-child &__row {
+    padding-top: 7px;
   }
 
   // 日付
   &__date {
-    font-family: $font-en; // Figma: Lato → Jost で代替
+    font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.48px;
     color: $color-gray-1;
     white-space: nowrap;
     flex-shrink: 0;
@@ -88,10 +90,11 @@ $news-gradient: linear-gradient(179.38deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.
     padding: 2px 8px;
     border: 1px solid $color-gray-2;
     border-radius: 2px;
-    font-family: $font-en;
+    font-family: 'Lato', sans-serif;
     font-size: 12px;
     line-height: 1.7;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.36px;
+    text-transform: uppercase;
     color: $color-gray-2;
     white-space: nowrap;
     flex-shrink: 0;
@@ -124,24 +127,34 @@ $news-gradient: linear-gradient(179.38deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.
     line-height: 1.5;
     color: $color-white;
     white-space: nowrap;
-    transition: opacity 0.2s;
-
-    &:hover { opacity: 0.85; }
+    @include hover-invert-teal;
   }
 
-  // ===== レスポンシブ (SP) =====
+  // ===== レスポンシブ (SP) Figma 1:3165 / 390×660 =====
   @media (max-width: $bp-sp) {
-    padding: 48px $side-padding;
+    padding: 56px $side-padding 40px;
 
-    &__title { font-size: 20px; }
-    &__title-deco { width: 22px; height: 35px; }
-    &__header { gap: 16px; }
+    &__inner { gap: 40px; }
 
-    &__row { gap: 12px; flex-wrap: wrap; padding: 12px 0; }
-    &__date { font-size: 13px; }
-    &__badge { font-size: 10px; }
-    &__text { font-size: 14px; flex-basis: 100%; }
+    &__header { gap: 8px; height: 52px; }
+    &__title { font-size: 24px; letter-spacing: 0; line-height: normal; }
+    &__title-deco { width: 24.9px; height: 40px; }
 
-    &__btn { padding: 16px 40px; }
+    &__item { height: 76px; }
+    &__item + &__item { margin-top: 24px; }
+
+    // 日付+バッジの下に本文。区切り線は行の下端76px
+    &__row {
+      flex-wrap: wrap;
+      gap: 0 24px;
+      align-items: flex-start;
+      padding: 0 0 6px;
+    }
+
+    &__item:first-child &__row { padding-top: 0; }
+
+    &__date { line-height: 1.5; letter-spacing: 0; }
+    &__badge { line-height: 1.2; letter-spacing: 0.48px; }
+    &__text { flex-basis: 100%; line-height: normal; letter-spacing: 0.64px; text-align: justify; }
   }
 }

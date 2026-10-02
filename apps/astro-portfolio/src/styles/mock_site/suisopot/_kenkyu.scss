@@ -1,32 +1,24 @@
 @use 'variables' as *;
 
-// セクション11: kenkyu (Figma 113:2908)
-// 水色背景 / 白カード(992px, 角丸40px) / 吹き出し（左右交互）
-
+// Figma 113:2908 (PC 1440×804) / 1:2713 (SP 390×759)
+// 水色背景 / 白カード(992×641, 角丸40px) / 吹き出し3つ（左右交互）
 .sp-kenkyu {
-  padding: 80px $side-padding;
+  padding: 80px $side-padding 83px;
   background: $color-base-blue;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
 
-  // ===== カード =====
   &__card {
     max-width: 992px;
-    width: 100%;
+    height: 641px;
+    margin-inline: auto;
     background: $color-white;
     border-radius: 40px;
     box-shadow: 0 0 2px rgba(0, 29, 104, 0.25);
-    padding: 48px 56px;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+    padding: 48px 82px 0;
   }
 
-  // ===== タイトルエリア =====
   &__head {
     text-align: center;
+    margin-bottom: 58px;
   }
 
   &__title {
@@ -34,8 +26,8 @@
     font-weight: 400;
     font-size: 40px;
     color: $color-gray-1;
-    letter-spacing: 0.03em;
-    line-height: 1.4;
+    letter-spacing: 1.2px;
+    line-height: 58px;
     white-space: nowrap;
   }
 
@@ -44,26 +36,27 @@
     font-weight: 400;
     font-size: 30px;
     color: $color-gray-2;
-    letter-spacing: 0.03em;
-    line-height: 1.7;
-    margin-top: 4px;
+    line-height: 48px;
+    margin-top: -1px;
   }
 
-  // ===== 吹き出しリスト =====
   &__talks {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 30px;
   }
 
-  // ===== 個別吹き出し行 =====
   &__talk {
     display: flex;
     align-items: flex-start;
     gap: 24px;
+
+    &--right {
+      justify-content: flex-end;
+      margin-right: 0;
+    }
   }
 
-  // ===== アバター =====
   &__avatar {
     flex-shrink: 0;
     width: 90px;
@@ -72,16 +65,15 @@
     object-fit: cover;
   }
 
-  // ===== 吹き出し =====
+  // 吹き出しは本文の幅に合わせて縮む
   &__bubble {
     position: relative;
+    max-width: calc(var(--kenkyu-text-w) + 32px);
     background: $color-white;
     border-radius: 24px;
     box-shadow: 0 0 2px rgba(0, 29, 104, 0.25);
     padding: 16px;
-    flex: 1;
 
-    // 左向きテール（アバターが左・吹き出しが右）
     .sp-kenkyu__talk--left & {
       &::before {
         content: '';
@@ -97,7 +89,6 @@
       }
     }
 
-    // 右向きテール（吹き出しが左・アバターが右）
     .sp-kenkyu__talk--right & {
       &::after {
         content: '';
@@ -115,48 +106,94 @@
   }
 
   &__bubble-text {
-    font-family: $font-jp-sans;
     font-size: 20px;
     font-weight: 400;
     line-height: 1.7;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.6px;
     color: $color-gray-1;
 
     strong {
       font-weight: 700;
-      background: $color-accent-green; // Figma: accent green #c6ecec
-      padding: 0 2px;
+      // Figma: 行高34pxのうち 約6〜30px に緑のマーカー
+      background: linear-gradient(transparent 18%, $color-accent-green 18%, $color-accent-green 88%, transparent 88%);
     }
   }
 
-  // ===== ドット =====
-  &__dots {
-    display: flex;
-    justify-content: center;
-    img { display: block; }
+  &__line {
+    display: block;
   }
 
-  // ===== レスポンシブ (SP) =====
-  @media (max-width: $bp-sp) {
-    padding: 48px $side-padding;
-
+  // カード幅に収まらない中間幅では本文を折り返す
+  @media (max-width: 1099px) {
     &__card {
-      padding: 32px 20px;
-      border-radius: 24px;
-      gap: 24px;
+      height: auto;
+      padding: 48px 32px 33px;
     }
 
     &__title {
-      font-size: 20px;
+      white-space: normal;
+    }
+  }
+
+  // ===== SP (Figma 1:2713) =====
+  @media (max-width: $bp-sp) {
+    padding: 56px 15px 40px;
+
+    &__card {
+      max-width: 360px;
+      min-height: 663px;
+      padding: 40px 11px 41px;
+      border-radius: 40px;
+    }
+
+    &__head {
+      margin-bottom: 25.5px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 30.5px;
+      letter-spacing: 0;
       white-space: normal;
     }
 
-    &__subtitle { font-size: 16px; }
+    &__subtitle {
+      font-size: 15px;
+      line-height: normal;
+      margin-top: 8px;
+    }
 
-    &__talk { gap: 12px; }
+    &__talks {
+      gap: 18px;
+    }
 
-    &__avatar { width: 56px; height: 56px; }
+    &__talk {
+      gap: 16px;
+    }
 
-    &__bubble-text { font-size: 14px; }
+    &__avatar {
+      width: 50px;
+      height: 50px;
+    }
+
+    &__bubble {
+      max-width: none;
+      flex: 0 1 271px;
+    }
+
+    &__bubble-text {
+      font-size: 15px;
+      letter-spacing: -0.15px;
+      text-align: justify;
+    }
+
+    // SP は改行を使わず流し込む（Figma は1つ目の1行目だけ段落分け）
+    &__line {
+      display: inline;
+    }
+
+    &__talk:first-child &__line:first-child {
+      display: block;
+    }
   }
 }

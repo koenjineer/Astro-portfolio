@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  padding: 24px $side-padding 95px;
+  padding: 24px $side-padding 85px;
   background: $color-white;
 
   &__title {
@@ -16,6 +16,7 @@
     font-family: $font-jp-serif;
     font-weight: 400;
     font-size: 40px;
+    line-height: 1; // Figma title は lineHeight 100%。normalだと68pxになりタイトル周りが+15pxずれる
     color: $color-gray-1;
     letter-spacing: 0.03em;
     text-align: center;
@@ -52,7 +53,6 @@
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 4px;
     }
 
     &:nth-child(2) {
@@ -65,31 +65,38 @@
   }
 
   @media (max-width: $bp-sp) {
-    padding: 24px $side-padding 48px;
-    gap: 24px;
+    padding: 40px 0;
+    gap: 40px;
+    overflow-x: clip; // 左右の写真は画面外にはみ出して端だけ見せる（Figma 1:2599）
 
     &__title {
-      font-size: 22px;
+      font-size: 24px;
       gap: 8px;
+      white-space: nowrap; // 375px幅でも「ピッタリ」が折り返さないように
+    }
+
+    &__title-deco {
+      width: 25px;
+      height: 40px;
     }
 
     &__lead {
       font-size: 14px;
+      line-height: 1.2;
     }
 
+    // 300px×3枚を中央揃えのまま折り返さず並べ、中央の1枚だけ見せる
     &__gallery {
-      flex-direction: column;
-      gap: 16px;
+      flex-wrap: nowrap;
+      gap: 24px;
+      max-width: none;
+      overflow: clip; // はみ出す左右の写真をギャラリー自身で切り、ページ幅を広げない
     }
 
-    &__gallery-item {
-      &,
-      &:nth-child(2),
-      &:nth-child(odd) {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 480px;
-      }
+    &__gallery-item,
+    &__gallery-item:nth-child(2),
+    &__gallery-item:nth-child(odd) {
+      flex: 0 0 300px;
     }
   }
 }

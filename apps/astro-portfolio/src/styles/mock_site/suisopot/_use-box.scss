@@ -1,7 +1,10 @@
 @use 'variables' as *;
 
+$item-w: 236px;
+$slider-max-w: 992px;
+
 // セクション9: use_box (Figma 113:2863)
-// 背景: $color-base-blue / カード: 白・角丸24px / スライダー静的
+// 背景: $color-base-blue / カード: 白・角丸24px / Swiper
 
 .sp-use-box {
   padding: 80px $side-padding;
@@ -10,7 +13,7 @@
   &__card {
     max-width: 1280px;
     margin-inline: auto;
-    padding: 40px 40px 56px;
+    padding: 40px 40px 48px;
     background: $color-white;
     border-radius: 24px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
@@ -38,13 +41,16 @@
     font-family: $font-jp-serif;
     font-weight: 400;
     font-size: 40px;
+    line-height: 1; // Figma title は lineHeight 100%。normalだと68pxになりタイトル周りが+15pxずれる
     color: $color-gray-1;
     letter-spacing: 0.03em;
     white-space: nowrap;
   }
 
   // ===== リード文 =====
+  // Figma: タイトル下44px / スライダー上49px / ドット上48px（gap24px との差分をmarginで補う）
   &__lead {
+    margin-block: 20px 25px;
     font-family: $font-jp-sans;
     font-size: 18px;
     line-height: 1.7;
@@ -84,32 +90,37 @@
       opacity: 0.4;
       cursor: default;
     }
+
+    @include hover-opacity-button;
   }
 
-  // カードリスト
+  // Swiper コンテナ: 236px×4枚+gap16px×3 = 992px で頭打ち（狭い幅では表示枚数が減る）
+  &__swiper {
+    overflow: hidden;
+    width: 100%;
+    max-width: $slider-max-w;
+    margin-inline: 0; // Swiper標準のauto余白だと矢印との間隔が40pxより広がる
+  }
+
   &__list {
-    display: flex;
-    gap: 16px; // Figma: 16px
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
+  // 波形の切り抜きは画像側に焼き込み済みなので、角丸やcropはかけない
   &__item {
-    flex: 0 0 236px;
-    width: 236px;
+    width: $item-w;
 
     img {
       display: block;
       width: 100%;
-      height: 154px;
-      object-fit: cover;
-      border-radius: 4px;
+      height: auto;
     }
   }
 
   &__caption {
-    margin-top: 16px;
+    margin-top: 24px; // 画像154px + 24px = Figma の文字位置 top:178px
     font-family: $font-jp-sans;
     font-size: 16px;
     line-height: 1.7;
@@ -119,7 +130,9 @@
   }
 
   // ===== ページネーションドット =====
+  // スライダー枠はFigmaで195px（キャプションの行ボックス下端10pxは枠外）なので、その分を詰める
   &__dots {
+    margin-top: 14px;
     display: flex;
     gap: 8px;
     align-items: center;
@@ -129,39 +142,38 @@
     display: block;
     width: 8px;
     height: 8px;
+    padding: 0;
+    border: none;
     border-radius: 50%;
-    background: $color-gray-3; // 非アクティブ: gray3
+    cursor: pointer;
+    background: $color-gray-3;
 
     &--active {
-      background: $color-accent-blue; // アクティブ: #82bfed
+      background: $color-gray-2;
     }
   }
 
   // ===== レスポンシブ (SP) =====
   @media (max-width: $bp-sp) {
-    padding: 40px $side-padding;
+    padding: 56px $side-padding; // Figma 1:2615: 上下56px
 
     &__card {
-      padding: 24px 16px 40px;
+      padding: 40px 9px 40px; // 矢印を左右9pxに置くため
       gap: 16px;
       border-radius: 16px;
     }
 
     &__title { font-size: 24px; }
 
-    &__lead { font-size: 14px; }
+    // Figma 1:2615: 文字幅330px・スライダー上263px（リード下の余白は約42px）
+    &__lead { margin-block: 0 26px; font-size: 15px; line-height: 1.5; padding-inline: 5px; text-align: left; }
 
-    &__slider-area { gap: 12px; }
+    &__slider-area { gap: 24px; }
 
-    &__list {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      &::-webkit-scrollbar { display: none; }
-    }
+    &__swiper { max-width: $item-w; }
 
-    &__item { flex: 0 0 180px; width: 180px; }
+    &__dots { gap: 16px; margin-top: 15px; }
 
-    &__item img { height: 120px; }
+    &__dot { width: 12px; height: 12px; }
   }
 }

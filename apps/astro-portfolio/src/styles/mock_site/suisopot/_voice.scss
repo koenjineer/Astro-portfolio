@@ -6,6 +6,8 @@
 $card-w: 320px;
 $card-h: 378px;
 $photo-h: 225px; // 写真エリアの高さ
+$sp-card-w: 236px;
+$sp-card-radius: 11.8px;
 
 .sp-voice {
   padding: 80px $side-padding;
@@ -33,6 +35,7 @@ $photo-h: 225px; // 写真エリアの高さ
     font-family: $font-jp-serif;
     font-weight: 400;
     font-size: 40px;
+    line-height: 1; // Figma title は lineHeight 100%。normalだと68pxになりタイトル周りが+15pxずれる
     color: $color-gray-1;
     letter-spacing: 0.03em;
     white-space: nowrap;
@@ -48,9 +51,12 @@ $photo-h: 225px; // 写真エリアの高さ
   }
 
   // Swiper コンテナ
+  // Figma 113:3062: 320px×3枚 + gap16px×2 = 992px
   &__swiper {
     overflow: hidden;
     width: 100%;
+    max-width: 992px;
+    margin-inline: 0; // Swiper標準のauto余白だと矢印が左右端に押し出される
   }
 
   // 矢印ボタン
@@ -75,6 +81,8 @@ $photo-h: 225px; // 写真エリアの高さ
       opacity: 0.4;
       cursor: default;
     }
+
+    @include hover-opacity-button;
   }
 
   // ===== カードリスト（Swiper wrapper） =====
@@ -86,19 +94,20 @@ $photo-h: 225px; // 写真エリアの高さ
   }
 
   // 各カード（幅は Swiper が slidesPerView に基づいて管理）
+  // 見出しの行数で高さが変わっても名前が切れないよう、固定高さ+absoluteではなく
+  // 縦積みの最低高さにする。Swiper が同じ行のスライドを同じ高さに揃える
   &__item {
-    position: relative;
-    height: $card-h;
+    display: flex;
+    flex-direction: column;
+    height: auto; // Swiper標準の height:100% だと行内で高さがばらつくため、flex の stretch に任せる
+    min-height: $card-h;
     border-radius: 16px;
     box-shadow: 0 4px 2px rgba(199, 218, 255, 0.25);
   }
 
   // 写真エリア（カード上部）
   &__photo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    flex-shrink: 0;
     height: $photo-h;
 
     img {
@@ -112,18 +121,13 @@ $photo-h: 225px; // 写真エリアの高さ
 
   // テキストボディ（写真の下）
   &__body {
-    position: absolute;
-    top: $photo-h;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    flex: 1;
     background: $color-white;
     border-radius: 0 0 16px 16px;
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 32px;
-    overflow: hidden;
   }
 
   // カード見出し
@@ -135,6 +139,12 @@ $photo-h: 225px; // 写真エリアの高さ
     letter-spacing: 0.03em;
     color: $color-gray-1;
   }
+
+  // 本文(1:1824)はPC・SPどのカンプにも載っていないため出さない（データだけ保持）
+  &__text { display: none; }
+
+  // 3行になる長い見出しは2行に収める（PC: 18px → 15px）
+  &__heading--compact { font-size: 15px; }
 
   // 氏名＋矢印ボタン行
   &__meta {
@@ -152,7 +162,9 @@ $photo-h: 225px; // 写真エリアの高さ
     flex: 1;
   }
 
+  // カード右下の矢印ボタン（カード全体が対象ではなく、見た目だけのボタン）
   &__btn {
+    @include hover-opacity-button;
     display: block;
     width: 22px;
     height: 22px;
@@ -170,7 +182,10 @@ $photo-h: 225px; // 写真エリアの高さ
     display: block;
     width: 8px;
     height: 8px;
+    padding: 0;
+    border: none;
     border-radius: 50%;
+    cursor: pointer;
     background: $color-gray-3; // 非アクティブ: #b6b7b7
 
     &--active {
@@ -179,30 +194,45 @@ $photo-h: 225px; // 写真エリアの高さ
   }
 
   // ===== レスポンシブ (SP) =====
+  // Figma 1:2943 / 1:1824: 236px幅・角丸11.8px・本文つきの小型カードを矢印で挟んで1枚見せ
   @media (max-width: $bp-sp) {
-    padding: 48px $side-padding;
+    padding: 32px 15px 40px;
     gap: 40px;
 
     &__title { font-size: 24px; }
-    &__title-deco { width: 22px; height: 35px; }
+    &__title-deco { width: 25px; height: 40px; }
 
-    &__slider { gap: 12px; }
+    &__slider { gap: 24px; }
+
+    &__swiper { max-width: $sp-card-w; min-width: 0; } // 320px幅では矢印を残してカードを縮める
 
     &__item {
-      height: 286px;
+      width: $sp-card-w;
+      min-height: 0; // SPは一番高いカードに全カードが揃う
+      border-radius: $sp-card-radius;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
     }
 
     &__photo {
-      height: 169px; // 225 × (240/320)
+      height: 166px;
+
+      img { border-radius: $sp-card-radius $sp-card-radius 0 0; }
     }
 
     &__body {
-      top: 169px;
-      gap: 16px;
+      padding: 12px;
+      gap: 23.6px;
+      border-radius: 0 0 $sp-card-radius $sp-card-radius;
     }
 
-    &__heading { font-size: 14px; }
-    &__name { font-size: 13px; }
-    &__btn { width: 18px; height: 18px; }
+    // Figma 1:2943: SPカードは見出し(15px・通常ウェイト)と名前のみ。本文は出さない
+    &__heading { font-size: 15px; font-weight: 400; line-height: normal; letter-spacing: 0; }
+
+    &__meta { gap: 15px; margin-top: auto; }
+    &__name { font-size: 11.755px; line-height: normal; letter-spacing: 0; }
+    &__btn { width: 16px; height: 16px; }
+
+    &__dots { gap: 16px; }
+    &__dot { width: 12px; height: 12px; }
   }
 }

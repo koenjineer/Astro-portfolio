@@ -30,7 +30,8 @@
     font-weight: 400;
     font-size: 40px;
     color: $color-gray-1;
-    letter-spacing: 0.03em;
+    letter-spacing: 1.2px;
+    line-height: 53px; // Figma の見出し行は装飾画像と同じ 53px
     white-space: nowrap;
   }
 
@@ -73,7 +74,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.48px;
     color: $color-gray-1;
     width: 100px;
     flex-shrink: 0;
@@ -84,24 +85,47 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.48px;
     color: $color-gray-1;
     margin: 0;
   }
 
-  // ===== レスポンシブ (SP) =====
+  // ===== レスポンシブ (SP) Figma 1:3187 / 390×830 =====
   @media (max-width: $bp-sp) {
-    padding: 48px $side-padding;
+    padding: 56px 15px 40px;
     gap: 40px;
 
-    &__title { font-size: 24px; }
-    &__title-deco { width: 22px; height: 35px; }
+    &__title-wrap { height: 52px; gap: 8px; }
+    &__title { font-size: 24px; letter-spacing: 0; line-height: normal; }
+    &__title-deco { width: 24.9px; height: 40px; }
 
-    &__body { flex-direction: column; align-items: center; gap: 32px; }
+    &__body { flex-direction: column; align-items: center; gap: 40px; }
 
-    &__img-wrap { width: 180px; }
+    &__img-wrap { width: 151.5px; }
 
-    &__label { width: 80px; font-size: 14px; }
-    &__value { font-size: 14px; }
+    &__specs { gap: 12px; }
+    &__row { gap: 0; }
+
+    &__label {
+      width: 94px;
+      height: 23px;
+      font-size: 13px;
+      line-height: normal;
+      letter-spacing: 0;
+    }
+
+    &__value {
+      width: 249px;
+      font-size: 13px;
+      line-height: normal;
+      letter-spacing: -0.39px;
+    }
+
+    // 商品名だけ 16px
+    &__row:first-child &__value {
+      font-size: 16px;
+      line-height: 1.7;
+      letter-spacing: 0.48px;
+    }
   }
 }

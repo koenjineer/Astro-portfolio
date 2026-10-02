@@ -1,9 +1,10 @@
 ---
-// セクション8: room (Figma 113:2853 / SP 1:2582)
+// セクション8: room (Figma 113:2853 / SP 1:2582 / 写真3枚 174:1382)
+// 波形の切り抜きは画像に焼き込み済み。PCとSPで写真の切り出しが違うので picture で出し分ける
 const images = [
-  { src: 'room-1.webp', w: 320, h: 209, alt: 'お部屋に置いたSUISOPOTの設置例1' },
-  { src: 'room-2.webp', w: 480, h: 313, alt: 'お部屋に置いたSUISOPOTの設置例2 (メイン)' },
-  { src: 'room-3.webp', w: 320, h: 209, alt: 'お部屋に置いたSUISOPOTの設置例3' },
+  { name: 'room-1', w: 320, h: 209, spW: 300, spH: 206, alt: 'お部屋に置いたSUISOPOTの設置例1' },
+  { name: 'room-2', w: 480, h: 313, spW: 300, spH: 206, alt: 'お部屋に置いたSUISOPOTの設置例2 (メイン)' },
+  { name: 'room-3', w: 320, h: 209, spW: 300, spH: 206, alt: 'お部屋に置いたSUISOPOTの設置例3' },
 ];
 ---
 
@@ -31,7 +32,7 @@ const images = [
   </h2>
 
   <p class="sp-room__lead sp-fade">
-    ホワイトとシルバーを基調にしたデザイン＆コンパクトサイズ<br />
+    ホワイトとシルバーを基調にしたデザイン<br class="sp-only" />＆コンパクトサイズ<br />
     どんなインテリアにも馴染むシンプルなデザイン
   </p>
 
@@ -39,14 +40,17 @@ const images = [
     {
       images.map((img) => (
         <li class="sp-room__gallery-item sp-fade">
-          <img
-            src={`/mock_site/suisopot/images/${img.src}`}
-            alt={img.alt}
-            width={img.w}
-            height={img.h}
-            loading="lazy"
-            decoding="async"
-          />
+          <picture>
+            <source media="(max-width: 767px)" srcset={`/mock_site/suisopot/images/${img.name}-sp.webp`} width={img.spW} height={img.spH} />
+            <img
+              src={`/mock_site/suisopot/images/${img.name}.webp`}
+              alt={img.alt}
+              width={img.w}
+              height={img.h}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </li>
       ))
     }

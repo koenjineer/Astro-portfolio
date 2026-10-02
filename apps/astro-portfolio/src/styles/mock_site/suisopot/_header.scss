@@ -50,10 +50,10 @@
     font-weight: 500;
     font-size: 16px;
     color: $color-gray-2;
-    transition: color 0.2s ease;
+    transition: opacity $hover-fade;
 
-    &:hover {
-      color: $color-gray-1;
+    @media (hover: hover) {
+      &:hover { opacity: $hover-opacity-link; }
     }
   }
 
@@ -121,11 +121,7 @@
     font-size: 16px;
     letter-spacing: 0.2em;
     box-shadow: 0 0 4px rgba(83, 46, 37, 0.25);
-    transition: opacity 0.2s ease;
-
-    &:hover {
-      opacity: 0.85;
-    }
+    @include hover-invert-accent;
   }
 
   // SPのみ表示する新規お申込ボタン (Figma 1:2241)
@@ -140,16 +136,11 @@
     background: transparent;
     border: 0;
     cursor: pointer;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 5px;
+    padding: 0;
 
-    span {
-      display: block;
-      width: 27px;
-      height: 2px;
-      background: $color-gray-1;
-    }
+    img { display: block; width: 27px; height: 18px; } // Figma 1:2239
   }
 
   // SP〜タブレット：ハンバーガー表示
@@ -179,18 +170,21 @@
       border-radius: 32px;
       font-family: $font-jp-sans;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1;
       box-shadow: 0 0 1.5px rgba(83, 46, 37, 0.25);
+      @include hover-invert-accent;
       white-space: nowrap;
       justify-self: end;
     }
 
+    // 15x9 の上向き矢印を90度回して ＞ にする（回転後 9x15）
     &__sp-cta-arrow {
-      display: inline-block;
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 1;
+      display: block;
+      width: 15px;
+      height: 9px;
+      margin: 3px; // 回転後の見た目の幅(9)・高さ(15)に合わせた余白
+      transform: rotate(90deg);
     }
 
     // PC用ナビ・連絡先はSPでは非表示（ドロワーで代替）
@@ -278,44 +272,33 @@
 
   &__close {
     position: relative;
-    width: 28px;
-    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
     background: transparent;
     border: 0;
     cursor: pointer;
     justify-self: end;
-  }
 
-  &__close-bar {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 24px;
-    height: 2px;
-    background: $color-gray-1;
-    transform-origin: center;
-
-    &--1 {
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-
-    &--2 {
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
+    img { display: block; width: 27px; height: 17px; } // Figma 1:2109
   }
 
   // ナビ (Figma 170:1604 系)：左64pxから開始 / 上下区切り線 / 各高さ約69px
   &__nav {
     position: relative;
     z-index: 1;
-    padding: 7px 15px 0; // Figma 1:2128 top 22.28% × 524 ≒ 117 - 60(head) - 50(初回line) を逆算
+    // Figma 1:2099: 1項目目の文字中心 y=141 → head60 + 上余白37 + 項目内の文字中心44.5。区切り線は x=15〜375
+    padding: 37px 15px 0;
     flex: 0 0 auto;
   }
 
   &__nav-list {
     list-style: none;
     margin: 0;
-    padding: 0 49px; // 左 64 - 15 = 49
+    padding: 0;
   }
 
   &__nav-item {
@@ -328,7 +311,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 69px; // (524 * (31.66 - 22.28)% ≒ 49 + line) Figmaの間隔 ≒ 69
+    height: 69px; // Figma の項目ピッチ
+    padding: 20px 49px 0; // 文字左端 x=64 / 矢印右端 x=326、文字中心は線の24.5px上
+    box-sizing: border-box;
     color: $color-gray-2;
     font-family: $font-jp-sans;
     font-weight: 400;
@@ -342,11 +327,10 @@
 
   // 矢印「>」 border ベースのシェブロン
   &__nav-arrow {
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid $color-gray-2;
-    border-top: 2px solid $color-gray-2;
-    transform: rotate(45deg);
+    width: 15px;
+    height: 9px;
+    margin: 3px; // 回転後(9x15)の占有幅に合わせる
+    transform: rotate(90deg);
     flex-shrink: 0;
     align-self: center;
   }
@@ -374,8 +358,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: $font-en; // Figma: Lato Bold → Jost で代替（news と統一）
-    font-weight: 700;
+    font-weight: 700; // Figma SP ドロワー(1:2116)は Noto Sans JP Bold（PCヘッダーのみ Lato）
     font-size: 24px;
     color: $color-gray-1;
     line-height: 1;
@@ -416,10 +399,6 @@
     letter-spacing: 0.2em;
     box-shadow: 0 0 4px rgba(83, 46, 37, 0.25);
     text-decoration: none;
-    transition: opacity 0.2s ease;
-
-    &:hover {
-      opacity: 0.85;
-    }
+    @include hover-invert-accent;
   }
 }

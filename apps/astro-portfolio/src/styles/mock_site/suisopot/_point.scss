@@ -1,54 +1,76 @@
 @use 'variables' as *;
 
+// Figma 113:2477 (PC 1440×2100) / 1:2536 (SP 390×4098)
+$point-image-w: 310px;
+$point-image-h: 284px;
+$point-text-w: 650px;
+$font-point-no: 'Lato', sans-serif;
+
 .sp-point {
-  padding: 80px $side-padding;
+  position: relative;
+  padding: 80px $side-padding 40px;
   background: $color-white;
+  overflow: hidden; // 点線SVGがはみ出さないように
 
   &__inner {
-    max-width: $content-max;
+    position: relative;
+    z-index: 1; // 点線より前面
+    max-width: $point-image-w + 32px + $point-text-w;
     margin-inline: auto;
-    position: relative; // connector の絶対配置基準
   }
 
   &__title {
+    height: 58px;
+    margin-bottom: 39px;
     font-family: $font-jp-serif;
     font-weight: 400;
     font-size: 40px;
+    line-height: 58px;
     color: $color-gray-1;
     text-align: center;
-    letter-spacing: 0.03em;
-    margin-bottom: 64px;
+    letter-spacing: 1.2px;
   }
 
-  // Figma: ashirai_line 接続ライン（各POINTをつなぐ曲線装飾）
-  // top: タイトル(約56px) + margin-bottom(64px) = 約120px でリスト上端に合わせる
+  // 全体の点線（Figma ashirai_line: 中心 x=50%+66px, top 432px）
   &__connector {
     position: absolute;
-    top: 120px;
-    left: 50%;
+    top: 432px;
+    left: calc(50% + 66.3px);
     transform: translateX(-50%);
-    width: 634px;
-    height: auto;
+    width: 634.4px;
+    height: 1517.2px;
+    max-width: none;
     pointer-events: none;
-    z-index: 0;
+  }
+
+  // POINT01→02 の波線（Figma Line 83: -16.09° 回転、中心 x=50%+25px, y=805px）
+  &__connector-wave {
+    position: absolute;
+    top: 805.3px;
+    left: calc(50% + 25.4px);
+    width: 526.9px;
+    height: 70.2px;
+    max-width: none;
+    transform: translate(-50%, -50%) rotate(-16.09deg);
+    pointer-events: none;
   }
 
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 56px;
-    position: relative;
-    z-index: 1; // connector より前面
+    gap: 32px;
   }
 
   &__item {
     display: grid;
-    grid-template-columns: 310px 1fr;
+    grid-template-columns: $point-image-w 1fr;
     gap: 32px;
     align-items: center;
+    min-height: $point-image-h;
 
-    &--reverse {
-      grid-template-columns: 1fr 310px;
+    // 偶数は画像を右に
+    &:nth-child(even) {
+      grid-template-columns: 1fr $point-image-w;
 
       .sp-point__image {
         order: 2;
@@ -58,40 +80,89 @@
         order: 1;
       }
     }
+
+    // 02 は腸のイラスト (255×232) で、組み全体を中央に寄せる
+    &:nth-child(2) {
+      grid-template-columns: 1fr 255px;
+      max-width: $point-text-w + 32px + 255px;
+      margin-inline: auto;
+    }
   }
 
   &__image img {
+    display: block;
     width: 100%;
-    height: 284px;
+    height: $point-image-h;
     object-fit: cover;
     border-radius: 2px;
   }
 
-  &__text {
-    max-width: 650px;
+  &__item:nth-child(2) &__image img {
+    height: 232px;
+    object-fit: contain;
+    border-radius: 0;
   }
 
-  &__num {
+  &__text {
     display: flex;
-    align-items: baseline;
+    flex-direction: column;
+    justify-content: flex-end;
     gap: 8px;
-    margin-bottom: 16px;
+    max-width: $point-text-w;
+  }
+
+  // 番号 + POINT ラベル。ラベルは数字の左上に白地で重なる (Figma point_no 90×75)
+  &__num {
+    position: relative;
+    width: 90px;
+    height: 75px;
   }
 
   &__num-en {
-    font-family: $font-en;
-    font-weight: 500;
+    position: absolute;
+    top: 0;
+    left: 57.5px;
+    transform: translateX(-50%);
+    font-family: $font-point-no;
+    font-weight: 400;
     font-size: 64px;
+    line-height: normal;
     color: $color-accent-blue;
-    line-height: 1;
+    white-space: nowrap;
   }
 
   &__num-label {
-    font-family: $font-en;
+    position: absolute;
+    top: 29px;
+    left: -4px;
+    background: $color-white;
+    font-family: $font-point-no;
+    font-weight: 400;
     font-size: 16px;
+    line-height: normal;
     color: $color-gray-1;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  // 偶数は数字・ラベルの基準が6px/4pxずれている (Figma)
+  &__item:nth-child(even) &__num-en {
+    top: -6px;
+    left: 61.5px;
+  }
+
+  &__item:nth-child(even) &__num-label {
+    top: 23px;
+    left: 1px;
+    width: 48px;
+    height: 21px;
+    text-align: center;
+  }
+
+  &__texts {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 
   &__h3 {
@@ -100,66 +171,115 @@
     font-size: 24px;
     color: $color-accent-blue-deep;
     line-height: 1.7;
-    letter-spacing: 0.03em;
-    margin-bottom: 16px;
+    letter-spacing: 0.72px;
   }
 
   &__body {
+    max-width: $point-text-w;
     font-family: $font-jp-sans;
     font-size: 18px;
     line-height: 1.7;
     color: $color-gray-1;
     text-align: justify;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.54px;
+  }
+
+  &__item:nth-child(3) &__body {
+    max-width: 630px;
   }
 
   &__note {
-    margin-top: 8px;
-    font-size: 14px;
     color: $color-gray-2;
-    line-height: 1.7;
   }
 
+  // 中間幅：画像とテキストが並ばないため縦積みにして点線も隠す
+  @media (max-width: 899px) {
+    &__connector,
+    &__connector-wave {
+      display: none;
+    }
+  }
+
+  // ===== SP (Figma 1:2536 / 390×4098) =====
   @media (max-width: $bp-sp) {
-    padding: 40px $side-padding;
+    padding: 56px 15px 40px;
 
     &__title {
+      height: auto;
+      margin-bottom: 24px;
       font-size: 24px;
-      margin-bottom: 32px;
+      line-height: normal;
+      letter-spacing: 0;
     }
 
     &__list {
-      gap: 32px;
+      gap: 40px;
     }
 
     &__item,
-    &__item--reverse {
-      grid-template-columns: 1fr;
-      gap: 16px;
+    &__item:nth-child(even),
+    &__item:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      min-height: 0;
+      max-width: none;
 
       .sp-point__image {
-        order: 0;
+        order: 2;
+        width: 100%;
       }
 
       .sp-point__text {
-        order: 0;
+        display: contents;
       }
     }
 
-    &__image img {
-      height: 200px;
+    // 番号 → 画像 → テキストの順にする
+    &__num,
+    &__item:nth-child(even) &__num {
+      order: 1;
     }
 
-    &__num-en {
-      font-size: 48px;
+    &__texts {
+      order: 3;
+      gap: 16px;
+      padding-top: 24px;
+    }
+
+    &__image img {
+      height: 330px;
+    }
+
+    &__item:nth-child(2) &__image img {
+      height: 330px;
+      object-fit: contain;
+    }
+
+    // SP は偶数も奇数と同じ位置
+    &__item:nth-child(even) &__num-en {
+      top: 0;
+      left: 57.5px;
+    }
+
+    &__item:nth-child(even) &__num-label {
+      top: 29px;
+      left: -4px;
+      width: auto;
+      height: auto;
     }
 
     &__h3 {
-      font-size: 18px;
+      font-size: 20px;
+      line-height: normal;
+      letter-spacing: 0;
     }
 
     &__body {
-      font-size: 15px;
+      font-size: 16px;
+      letter-spacing: 0.48px;
     }
   }
 }

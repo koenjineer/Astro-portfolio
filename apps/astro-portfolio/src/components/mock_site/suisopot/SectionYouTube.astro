@@ -24,7 +24,7 @@ const cards = [
 ];
 ---
 
-<section class="sp-youtube" id="youtube">
+<section class="sp-youtube" id="youtube" aria-label="動画でご紹介">
   {cards.map((card) => (
     <a
       class="sp-youtube__card sp-fade"
@@ -50,18 +50,14 @@ const cards = [
           alt=""
           aria-hidden="true"
           width="64"
-          height="64"
-        />
+          height="64" loading="lazy" />
       </div>
       <div class="sp-youtube__info" style={`padding-left: ${card.infoPad}px; padding-right: ${card.infoPad}px`}>
-        <img
+        <span
           class="sp-youtube__icon"
-          src={`/mock_site/suisopot/images/${card.iconSrc}`}
-          alt=""
           aria-hidden="true"
-          width={card.iconW}
-          height={card.iconH}
-        />
+          style={`width: ${card.iconW}px; height: ${card.iconH}px; --yt-icon: url(/mock_site/suisopot/images/${card.iconSrc})`}
+        ></span>
         <p class="sp-youtube__label">{card.label}</p>
       </div>
     </a>

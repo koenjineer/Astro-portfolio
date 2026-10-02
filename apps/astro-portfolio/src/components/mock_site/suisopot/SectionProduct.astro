@@ -7,7 +7,7 @@ const specs = [
   { label: '型番',        value: 'ＳＷ-800' },
   { label: 'サイズ',      value: '約幅288×奥行356×高さ316(㎜)' },
   { label: '本体質量',    value: '約3.3kg' },
-  { label: '電源',        value: 'AC/DCアダプター入力AC100V 50/60Hz 出力DC24V 0.7A' },
+  { label: '電源',        value: 'AC/DCアダプター入力AC100V 50/60Hz |出力DC24V 0.7A' }, // | は SP のみ改行,
   { label: '生成モード',  value: '60分　90分　120分' },
   { label: '容量',        value: '5リットル' },
   { label: '使用する水質', value: 'ミネラルウォーター、水道水' },
@@ -40,7 +40,7 @@ const specs = [
       {specs.map((spec) => (
         <div class="sp-product__row">
           <dt class="sp-product__label">{spec.label}</dt>
-          <dd class="sp-product__value">{spec.value}</dd>
+          <dd class="sp-product__value">{spec.value.split('|').map((part, i) => <>{i > 0 && <br class="sp-only" />}{part}</>)}</dd>
         </div>
       ))}
     </dl>

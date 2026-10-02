@@ -26,6 +26,7 @@ const steps = [
     labelTop: -49,
     subtitle: 'ボタンを押す',
     descLines: ['還元時間を設定し', 'スタートボタンを押すだけ'],
+    joinOnSp: true, // SP は1文として流し込む
   },
   {
     src: '4step-4.webp',
@@ -63,7 +64,7 @@ const steps = [
         <p class="sp-4step__subtitle">{step.subtitle}</p>
         <p class="sp-4step__desc">
           {step.descLines.map((line, i) => (
-            <>{line}{i < step.descLines.length - 1 && <br />}</>
+            <>{line}{i < step.descLines.length - 1 && <br class={step.joinOnSp ? 'pc-only' : undefined} />}</>
           ))}
         </p>
       </li>

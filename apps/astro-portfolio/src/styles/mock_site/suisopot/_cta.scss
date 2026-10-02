@@ -1,58 +1,56 @@
 @use 'variables' as *;
 
+// Figma のカードは絶対配置のため、カード内座標(px)をそのまま使う
+$cta-card-w: 856px;
+$cta-card-h: 327px;
+
 .sp-cta {
-  padding: 80px $side-padding;
+  padding: 41.5px $side-padding; // 410px = カード327 + 上下
   // Figma: 白背景 + きらきら装飾テクスチャ重ね
   background: $color-white url('/mock_site/suisopot/images/cta1-bg.webp') center / cover no-repeat;
 
   &__card {
     position: relative;
-    display: grid;
-    // 中央列を広げてテキスト折り返しを防ぐ（Figma: テキストエリア約360px）
-    grid-template-columns: 200px 1fr 160px;
-    align-items: center;
-    gap: 24px;
-    max-width: 860px;
-    min-height: 327px;
+    width: $cta-card-w;
+    max-width: 100%;
+    height: $cta-card-h;
     margin-inline: auto;
-    padding: 32px 40px 56px;
-    background: linear-gradient(180deg, rgba(205, 251, 243, 0.7) 0%, rgba(205, 230, 250, 0) 100%);
+    overflow: hidden;
     border-radius: 16px;
     box-shadow: 0 0 4px #dae4ee;
-  }
-
-  &__visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      max-height: 280px;
-      width: auto;
-      max-width: 100%;
-    }
-  }
-
-  &__body {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    background:
+      linear-gradient(180deg, rgba(205, 251, 243, 0.7) 0%, rgba(205, 230, 250, 0) 100%),
+      url('/mock_site/suisopot/images/cta-product.webp') center / cover no-repeat;
+    font-family: $font-jp-sans;
+    color: $color-gray-1;
     text-align: center;
   }
 
+  &__product {
+    position: absolute;
+    left: 50px;
+    top: 53px;
+    width: 152px;
+    height: 266px;
+    z-index: 1; // Figma では本体の足元が白帯の上に重なる
+  }
+
   &__heading {
-    font-family: $font-jp-sans;
-    font-weight: 700;
-    font-size: 24px;
-    color: $color-gray-1;
+    position: absolute;
+    top: 49px;
+    left: 248px;
+    width: 360px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    white-space: nowrap; // 折り返し防止
+    gap: 6px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    white-space: nowrap;
   }
 
-  // Figma: Line67/Line66 を CSS 回転で ＼ ／ 風に再現
+  // Figma: Line67/Line66 を回転して ＼ ／ を再現
   &__heading-deco {
     display: block;
     width: 22px;
@@ -64,116 +62,250 @@
   }
 
   &__price {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid $color-accent;
+    position: absolute;
+    top: 94px;
+    left: 248px;
+    width: 360px;
+    height: 77px;
+  }
+
+  &__price-label-wrap {
+    position: absolute;
+    left: 12px; // 初期手数料の中心 x=360 に合わせる
+    top: 19px;
+    width: 200px;
+  }
+
+  &__dots {
+    position: absolute;
+    top: 0;
+    left: 16.5px;
+    width: 167px;
+    height: 7px;
   }
 
   &__price-label {
-    font-family: $font-jp-sans;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 200px;
     font-weight: 500;
     font-size: 40px;
-    color: $color-gray-1;
+    line-height: 1.2;
+    text-shadow: 0 4px 4px rgba(255, 255, 255, 0.25);
   }
 
   &__price-em {
-    font-family: $font-jp-sans;
+    position: absolute;
+    top: 0;
+    left: 220px;
+    width: 128px;
     font-weight: 700;
     font-size: 64px;
-    color: $color-gray-1;
+    line-height: 1.2;
+    text-shadow: 0 4px 4px rgba(255, 255, 255, 0.25);
+  }
+
+  &__line {
+    position: absolute;
+    top: 179px;
+    left: 248px;
+    width: 360px;
+    height: 2px;
   }
 
   &__campaign {
-    font-family: $font-jp-sans;
+    position: absolute;
+    top: 187px;
+    left: 248px;
+    width: 360px;
     font-weight: 700;
     font-size: 32px;
-    color: $color-gray-1;
-    letter-spacing: 0.2em;
-    white-space: nowrap; // 折り返し防止
-  }
-
-  &__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 152px;
-    height: 152px;
-    border-radius: 50%;
-    background: $color-accent;
-    color: $color-white;
-    font-family: $font-jp-sans;
-    font-weight: 700;
-    font-size: 18px;
-    text-align: center;
-    box-shadow: 0 0 6px rgba(83, 46, 37, 0.25);
-    transition: opacity 0.2s ease;
-
-    &:hover {
-      opacity: 0.85;
-    }
-  }
-
-  &__btn-arrow {
-    display: inline-block;
+    line-height: 1.2;
+    letter-spacing: 6.4px;
+    white-space: nowrap;
   }
 
   &__note {
     position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 16px;
+    top: 278px;
+    left: 0;
+    width: 100%;
+    padding: 8px 0;
     background: $color-white;
-    font-family: $font-jp-sans;
     font-weight: 700;
     font-size: 14px;
+    line-height: 1.2;
     color: $color-gray-2;
-    white-space: nowrap;
+  }
+
+  &__btn {
+    position: absolute;
+    top: 91px;
+    left: 647px;
+    width: 152px;
+    height: 152px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    border-radius: 50%;
+    background: $color-accent;
+    color: $color-white;
+    font-size: 18px;
+    line-height: 1.2;
+    @include hover-invert-accent;
+  }
+
+  // 矢印SVGは横長(20x11)を90度回して縦長の ＞ にする
+  &__btn-arrow {
+    position: relative;
+    width: 11px;
+    height: 20px;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20.364px;
+      height: 10.933px;
+      max-width: none;
+      transform: translate(-50%, -50%) rotate(90deg);
+      transition: opacity $hover-fade;
+    }
+
+    // 矢印SVGは白塗りなので、ホバー時は同形のマスクを accent で重ねて色を反転する
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20.364px;
+      height: 10.933px;
+      background: $color-accent;
+      mask: url('/mock_site/suisopot/images/cta-btn-arrow.svg') center / 100% 100% no-repeat;
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+      transition: opacity $hover-fade;
+    }
+  }
+
+  &__btn:hover &__btn-arrow {
+    img { opacity: 0; }
+    &::after { opacity: 1; }
+  }
+
+  @media (min-width: #{$bp-sp + 1}) and (max-width: 899px) {
+    // カードが収まらない幅は縮小して見切れを防ぐ
+    &__card {
+      zoom: 0.85;
+    }
   }
 
   @media (max-width: $bp-sp) {
-    padding: 40px $side-padding;
+    padding: 24px 15px;
 
     &__card {
-      grid-template-columns: 1fr;
-      padding: 24px 16px 64px;
-      gap: 16px;
+      width: 360px;
+      height: 195px;
+      zoom: 1;
     }
 
-    &__visual {
-      max-width: 140px;
-      margin: 0 auto;
+    &__product {
+      left: 5px;
+      top: 24px;
+      width: 78px;
+      height: 136px;
     }
 
     &__heading {
-      font-size: 18px;
-    }
-
-    &__price-label {
-      font-size: 24px;
-    }
-
-    &__price-em {
-      font-size: 44px;
-    }
-
-    &__campaign {
-      font-size: 20px;
-    }
-
-    &__btn {
+      top: 30px;
+      left: 0;
       width: 100%;
-      height: 64px;
-      border-radius: 32px;
+      padding-left: 49px; // 中心を x=204.66 にずらす
+      gap: 3.5px;
       font-size: 16px;
     }
 
+    &__heading-deco {
+      width: 18px;
+    }
+
+    &__price {
+      top: 55px;
+      left: 84px;
+      width: 192px;
+      height: 48px;
+    }
+
+    &__price-label-wrap {
+      left: 0;
+      top: 10.5px;
+      width: 104px;
+    }
+
+    &__dots {
+      left: 13px;
+      width: 78.4px;
+      height: 4px;
+    }
+
+    &__price-label {
+      top: 5.6px;
+      width: 104px;
+      white-space: nowrap;
+      font-size: 19px;
+      letter-spacing: 1.9px;
+      text-shadow: 0 2px 2px rgba(255, 255, 255, 0.25);
+    }
+
+    &__price-em {
+      left: 106px;
+      width: 84px;
+      font-size: 40px;
+      text-shadow: 0 2px 2px rgba(255, 255, 255, 0.25);
+    }
+
+    &__line {
+      top: 109px;
+      left: 84px;
+      width: 191px;
+    }
+
+    &__campaign {
+      top: 115px;
+      left: 84px;
+      width: 192px;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 6px;
+    }
+
     &__note {
-      font-size: 12px;
+      top: 157px;
+      padding: 3.5px 0;
+      font-size: 13px;
+      letter-spacing: 0.78px;
+    }
+
+    &__btn {
+      top: 60px;
+      left: 281px;
+      width: 71px;
+      height: 71px;
+      gap: 0;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    &__btn-label {
+      display: block;
+      width: 4em; // 「資料請求」で折り返し、「する」を2行目に
+      text-align: center;
+    }
+
+    &__btn-arrow {
+      display: none;
     }
   }
 }

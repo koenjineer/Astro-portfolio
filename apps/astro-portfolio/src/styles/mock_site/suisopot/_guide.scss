@@ -31,7 +31,8 @@ $guide-max-w: 800px;
     font-weight: 400;
     font-size: 40px;
     color: $color-gray-1;
-    letter-spacing: 0.03em;
+    letter-spacing: 1.2px;
+    line-height: 53px; // Figma の見出し行は装飾画像と同じ 53px
     white-space: nowrap;
   }
 
@@ -90,11 +91,14 @@ $guide-max-w: 800px;
   }
 
   // 料金リスト（破線ボーダー付き）
+  // Figma: 上下に200px幅の破線、間に2行
   &__price-list {
     list-style: none;
-    padding: 0;
-    margin: 0;
-    max-width: 200px; // Figma: 200px幅の破線に合わせる
+    padding: 16px 0;
+    margin: 1px 0 0;
+    max-width: 200px;
+    border-top: 1px dashed $color-gray-3;
+    border-bottom: 1px dashed $color-gray-3;
   }
 
   &__price-row {
@@ -103,11 +107,9 @@ $guide-max-w: 800px;
     font-size: 16px;
     line-height: normal;
     color: $color-gray-1;
-    letter-spacing: 0.03em;
-    border-top: 1px dashed $color-gray-2;
-    padding: 8px 0;
+    letter-spacing: 0.48px;
 
-    &:last-child { border-bottom: 1px dashed $color-gray-2; }
+    & + & { margin-top: 4px; }
   }
 
   // カスタマーセンター情報（太字）
@@ -138,6 +140,11 @@ $guide-max-w: 800px;
     &:first-child { margin-top: 0; }
   }
 
+  // Figma: 解約の本文と「・交換について」の間は28px（.sp-guide__text p + p より強く指定）
+  &__text &__sub-heading + p + &__sub-heading {
+    margin-top: 28px;
+  }
+
   // 注釈（13px / gray2）
   &__note {
     font-family: $font-jp-sans;
@@ -149,19 +156,22 @@ $guide-max-w: 800px;
     margin-top: 8px;
   }
 
-  // ===== レスポンシブ (SP) =====
+  // ===== レスポンシブ (SP) Figma 1:3121 / 390×1341 =====
   @media (max-width: $bp-sp) {
-    padding-top: 48px;
+    padding-top: 40px;
 
-    &__title { font-size: 24px; }
-    &__title-deco { width: 22px; height: 35px; }
+    &__title-wrap { height: 40px; gap: 8px; }
+    &__title { font-size: 24px; letter-spacing: 0; line-height: normal; }
+    &__title-deco { width: 24.9px; height: 40px; }
 
-    &__body { padding: 40px 0; gap: 32px; }
+    &__body { padding: 40px 15px 24px; gap: 40px; }
 
-    &__section-title { font-size: 18px; }
-    &__text { font-size: 14px; }
-    &__price-row { font-size: 14px; }
-    &__contact-line { font-size: 14px; }
-    &__note { font-size: 12px; }
+    &__section-title { font-size: 20px; line-height: normal; letter-spacing: 0; }
+    &__text { font-size: 15px; line-height: 1.6; letter-spacing: 0.45px; }
+    &__price-list { max-width: 215px; }
+    &__price-row { font-size: 15px; letter-spacing: 0.45px; }
+    &__contact-line { font-size: 16px; line-height: normal; }
+    &__sub-heading { font-size: 15px; line-height: normal; letter-spacing: 0.45px; }
+    &__note { font-size: 13px; line-height: normal; letter-spacing: 0; }
   }
 }

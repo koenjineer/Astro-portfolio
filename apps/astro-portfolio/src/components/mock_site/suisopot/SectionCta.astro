@@ -1,6 +1,6 @@
 ---
-// セクション3: cta① (Figma 113:2227) / セクション14: cta③ (Figma 123:3772)
-// 共通コンポーネント - props で文言・画像を切替
+// セクション3: cta① (Figma 113:2227 / SP 1:2913) / セクション14: cta③ (Figma 123:3772 / SP 135:2493)
+// 共通コンポーネント - props で文言を切替。Figma が絶対配置のため、カード内は固定寸法で再現する
 export interface Props {
   id?: string;
   heading?: string;
@@ -24,30 +24,31 @@ const {
 
 <section class="sp-cta" id={id} aria-label="キャンペーンのご案内">
   <div class="sp-cta__card sp-fade">
-    <div class="sp-cta__visual">
-      <img src={imageSrc} alt="SUISOPOT 水素水サーバー本体" width="346" height="606" loading="lazy" decoding="async" />
-    </div>
+    <img class="sp-cta__product" src={imageSrc} alt="SUISOPOT 水素水サーバー本体" width="346" height="606" loading="lazy" decoding="async" />
 
-    <div class="sp-cta__body">
-      <h2 class="sp-cta__heading">
-        <img class="sp-cta__heading-deco sp-cta__heading-deco--left" src="/mock_site/suisopot/images/cta1-deco-left.svg" alt="" aria-hidden="true" width="22" height="2" />
-        {heading}
-        <img class="sp-cta__heading-deco sp-cta__heading-deco--right" src="/mock_site/suisopot/images/cta1-deco-right.svg" alt="" aria-hidden="true" width="22" height="2" />
-      </h2>
+    <h2 class="sp-cta__heading">
+      <img class="sp-cta__heading-deco sp-cta__heading-deco--left" src="/mock_site/suisopot/images/cta1-deco-left.svg" alt="" aria-hidden="true" width="22" height="2" loading="lazy" />
+      <span>{heading}</span>
+      <img class="sp-cta__heading-deco sp-cta__heading-deco--right" src="/mock_site/suisopot/images/cta1-deco-right.svg" alt="" aria-hidden="true" width="22" height="2" loading="lazy" />
+    </h2>
 
-      <p class="sp-cta__price">
+    <div class="sp-cta__price">
+      <div class="sp-cta__price-label-wrap">
+        <img class="sp-cta__dots" src="/mock_site/suisopot/images/cta-dots.svg" alt="" aria-hidden="true" width="167" height="7" loading="lazy" />
         <span class="sp-cta__price-label">{highlight}</span>
-        <span class="sp-cta__price-em">無料</span>
-      </p>
-
-      <p class="sp-cta__campaign">キャンペーン実施中</p>
+      </div>
+      <span class="sp-cta__price-em">無料</span>
     </div>
-
-    <a href={href} class="sp-cta__btn">
-      <span>{btnLabel}</span>
-      <span class="sp-cta__btn-arrow" aria-hidden="true">→</span>
-    </a>
+    <img class="sp-cta__line" src="/mock_site/suisopot/images/cta-dashed-line.svg" alt="" aria-hidden="true" width="360" height="2" loading="lazy" />
+    <p class="sp-cta__campaign">キャンペーン実施中</p>
 
     <p class="sp-cta__note">{note}</p>
+
+    <a href={href} class="sp-cta__btn">
+      <span class="sp-cta__btn-label">{btnLabel}</span>
+      <span class="sp-cta__btn-arrow" aria-hidden="true">
+        <img src="/mock_site/suisopot/images/cta-btn-arrow.svg" alt="" aria-hidden="true" width="20" height="11" loading="lazy" />
+      </span>
+    </a>
   </div>
 </section>

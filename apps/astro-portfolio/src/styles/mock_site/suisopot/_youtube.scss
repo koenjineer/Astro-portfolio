@@ -3,7 +3,8 @@
 // セクション18: YouTube (Figma 113:3137)
 // 白背景 / 動画リンクカード2枚 / テール付きグラデーション
 
-$yt-gradient: linear-gradient(179deg, #50bfcb 29.45%, rgba(80, 191, 203, 0.42) 127.88%);
+// Figma の描画色（上 #67c7d2 → 下 #a1dce3）に合わせた淡いグラデーション
+$yt-gradient: linear-gradient(180deg, #65c6d1 0%, #a3dde4 100%);
 $yt-thumb-w: 226px;
 $yt-thumb-h: 160px;
 $font-yomogi: 'Yomogi', cursive;
@@ -12,7 +13,8 @@ $font-yomogi: 'Yomogi', cursive;
   padding: 40px $side-padding;
   background: $color-white;
   display: flex;
-  gap: 84px;
+  flex-wrap: wrap;
+  gap: 24px 84px;
   justify-content: center;
   align-items: center;
 
@@ -25,9 +27,27 @@ $font-yomogi: 'Yomogi', cursive;
     text-decoration: none;
     overflow: hidden;
     flex-shrink: 0;
-    transition: opacity 0.2s;
+    transition: background $hover-fade;
 
-    &:hover { opacity: 0.85; }
+    // Figma ホバー時: 白地 + ティール2pxの枠 + 文字・アイコンはティールのグラデ + 再生ボタン1.25倍
+    @media (hover: hover) {
+      &:hover {
+        background: $color-white;
+        outline: 2px solid $color-teal;
+        outline-offset: -2px;
+      }
+
+      &:hover .sp-youtube__play { transform: translate(-50%, -50%) scale(1.25); }
+
+      &:hover .sp-youtube__icon { background: $gradient-teal-text; }
+
+      &:hover .sp-youtube__label {
+        color: transparent;
+        background: $gradient-teal-text;
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+    }
   }
 
   // サムネイルエリア
@@ -65,6 +85,7 @@ $font-yomogi: 'Yomogi', cursive;
     width: 64px;
     height: 64px;
     display: block;
+    transition: transform $hover-fade;
   }
 
   // 右側テキストエリア
@@ -78,8 +99,12 @@ $font-yomogi: 'Yomogi', cursive;
     padding-bottom: 8px;
   }
 
+  // アイコンは白塗りSVGをマスクにして背景色で着色する（ホバーでティールに切り替えるため）
   &__icon {
     display: block;
+    background: $color-white;
+    mask: var(--yt-icon) center / 100% 100% no-repeat;
+    transition: background $hover-fade;
   }
 
   // Yomogi ラベルテキスト
@@ -91,20 +116,36 @@ $font-yomogi: 'Yomogi', cursive;
     white-space: nowrap;
   }
 
-  // ===== レスポンシブ (SP) =====
+  // ===== レスポンシブ (SP) Figma 1:3033 / 390×336 =====
   @media (max-width: $bp-sp) {
-    padding: 32px $side-padding;
+    padding: 40px $side-padding;
     gap: 16px;
     flex-direction: column;
+    align-items: center;
+
+    &__card {
+      width: 100%;
+      max-width: 360px;
+      height: 120px;
+    }
 
     &__thumb {
-      width: 160px;
-      height: 112px;
+      width: 50%;
+      height: 120px;
       border-radius: 16px 0 0 16px;
     }
 
-    &__play { width: 48px; height: 48px; }
+    &__play { width: 50px; height: 50px; }
 
-    &__label { font-size: 18px; }
+    // 右側は残り半分に中央寄せ（PC 用のインライン余白は無効化）
+    &__info {
+      flex: 1;
+      padding-inline: 8px !important; // インラインの padding を上書き（PC 専用値のため）
+      gap: 6px;
+    }
+
+    &__icon { transform: scale(0.85); }
+
+    &__label { font-size: 20px; letter-spacing: -1.8px; }
   }
 }

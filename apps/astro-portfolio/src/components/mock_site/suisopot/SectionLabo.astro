@@ -6,16 +6,19 @@ const cards = [
   {
     src: 'labo-1.webp',
     alt: 'ペットの写真',
+    mod: 'pet',
     lines: ['還元水素水', 'ペットも飲める？'],
   },
   {
     src: 'labo-2.webp',
     alt: '医療の写真',
+    mod: 'medical',
     lines: ['ウルトラファインバブル', '医療分野での活用'],
   },
   {
     src: 'labo-3.webp',
     alt: '海辺の写真',
+    mod: 'seaside',
     lines: ['還元水素水で', 'カラダの活性酸素を除去'],
   },
 ];
@@ -26,7 +29,7 @@ const cards = [
   <div class="sp-labo__header sp-fade">
     <img class="sp-labo__title-deco" src="/mock_site/suisopot/images/title-deco-left.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
     <div class="sp-labo__title-block">
-      <p class="sp-labo__title">ナノバブルLabo</p>
+      <h2 class="sp-labo__title">ナノバブルLabo</h2>
       <p class="sp-labo__subtitle">健康な暮らしのためのナノバブルとお水に関する情報サイト</p>
     </div>
     <img class="sp-labo__title-deco" src="/mock_site/suisopot/images/title-deco-right.webp" alt="" aria-hidden="true" width="33" height="53" loading="lazy" />
@@ -34,7 +37,7 @@ const cards = [
 
   <div class="sp-labo__cards sp-fade">
     {cards.map((card) => (
-      <article class="sp-labo__card">
+      <article class={`sp-labo__card sp-labo__card--${card.mod}`}>
         <img
           class="sp-labo__card-img"
           src={`/mock_site/suisopot/images/${card.src}`}
@@ -55,7 +58,7 @@ const cards = [
   </div>
 
   <a class="sp-labo__btn sp-fade" href="#">
-    ナノバブルLaboをもっと見る
+    <span>ナノバブルLaboをもっと見る</span>
   </a>
 
 </section>

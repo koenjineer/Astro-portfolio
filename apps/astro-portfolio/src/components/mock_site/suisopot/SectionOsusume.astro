@@ -24,7 +24,7 @@ const items = [
     num: 4,
     src: 'osusume-4.webp',
     title: '環境に優しい',
-    desc: 'SUIREX5をご利用いただくことで、年間約3,600本分ものペットボトルを削減でき、年間350㎏の温暖化ガス削減効果があります。',
+    desc: 'SUISOPOTをご利用いただくことで、年間約3,600本分ものペットボトルを削減でき、年間350㎏の温暖化ガス削減効果があります。',
   },
   {
     num: 5,
@@ -85,10 +85,9 @@ const rows = [items.slice(0, 3), items.slice(3)];
                 <img
                   class="sp-osusume__badge-bg"
                   src="/mock_site/suisopot/images/osusume-badge.svg"
-                  alt=""
+                  alt="" aria-hidden="true"
                   width="64"
-                  height="64"
-                />
+                  height="64" loading="lazy" />
                 <span class="sp-osusume__badge-num">{item.num}</span>
               </div>
             </div>

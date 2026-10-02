@@ -32,39 +32,45 @@ $q-icon-size: 33px;
     font-family: $font-jp-serif;
     font-weight: 400;
     font-size: 40px;
+    line-height: 1; // タイトル枠の高さはデコ画像(53px)で決まる（Figma）
     color: $color-gray-1;
     letter-spacing: 0.03em;
     white-space: nowrap;
   }
 
-  // ===== FAQリスト =====
+  // ===== FAQリスト（details/summary） =====
   &__list {
     width: 100%;
     max-width: $faq-max-w;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 24px; // Figma PC: 質問行の間隔
   }
 
-  // 各FAQ項目
+  // 各FAQ項目。線は項目の下端（Figma: shitsumon_list の Line）
   &__item {
     border-bottom: 1px solid $color-gray-3;
-
-    &:first-child { border-top: 1px solid $color-gray-3; }
   }
 
-  // 質問行（dt）
+  // 質問行。下padding 24px が開いたときの質問と回答の間隔(24px)を兼ねる
   &__question {
     display: flex;
-    align-items: center;
-    gap: 17px; // Figma: Qアイコン33px → テキスト left:50px → gap:17px
-    padding: 12px 0;
-    min-height: 57px;
+    align-items: flex-start;
+    gap: 17px; // Qバッジ33px → テキスト left:50px
+    padding-bottom: 23px; // Figma PC: 行の高さ57px（線を含む）= 33 + 23 + 線1
     cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker { display: none; }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent-blue;
+      outline-offset: 4px;
+    }
   }
 
-  // Qバッジ（円＋Q文字）
-  &__q-badge {
+  // Q / A 共通のバッジ（円＋文字）
+  &__badge {
     position: relative;
     flex-shrink: 0;
     width: $q-icon-size;
@@ -78,7 +84,7 @@ $q-icon-size: 33px;
     }
   }
 
-  &__q-letter {
+  &__badge-letter {
     position: absolute;
     inset: 0;
     display: flex;
@@ -88,14 +94,15 @@ $q-icon-size: 33px;
     font-weight: 700;
     font-size: 16px;
     line-height: 1.5;
-    color: $color-white;
-    padding-left: 2px; // Figma: left:6px within 33px container
+
+    &--q { color: $color-white; }
+    &--a { color: $color-accent-blue; } // A は白地に青の線円
   }
 
   // 質問テキスト
   &__q-text {
     flex: 1;
-    font-family: $font-jp-sans;
+    padding-top: 4px; // Figma: text top:4 / アイコン top:1
     font-weight: 700;
     font-size: 16px;
     line-height: 1.7;
@@ -103,24 +110,70 @@ $q-icon-size: 33px;
     color: $color-gray-1;
   }
 
-  // 下向き矢印
+  // 下向き矢印。開くと上向き（Figma SP: 180°回転）
   &__arrow {
     flex-shrink: 0;
     width: 24px;
     height: 24px;
     display: block;
+    margin-top: 4px;
+    transition: transform 0.25s ease;
   }
 
-  // ===== レスポンシブ (SP) =====
+  &__item[open] &__arrow { transform: rotate(180deg); }
+
+  // 回答行
+  &__answer {
+    display: flex;
+    align-items: flex-start;
+    gap: 17px;
+    padding-bottom: 23px;
+  }
+
+  &__a-text {
+    flex: 1;
+    padding-top: 4px;
+    font-size: 16px;
+    line-height: 1.81; // Figma SP: 1.81
+    letter-spacing: 0.03em;
+    text-align: justify;
+    color: $color-gray-1;
+  }
+
+  // ===== レスポンシブ (SP) — Figma 1:1880 =====
   @media (max-width: $bp-sp) {
-    padding: 48px $side-padding;
+    padding: 56px $side-padding 40px;
     gap: 40px;
 
     &__title { font-size: 24px; }
-    &__title-deco { width: 22px; height: 35px; }
+    &__title-wrap { gap: 8px; }
+    &__title-deco { width: 32px; height: 52px; }
 
-    &__question { gap: 12px; }
+    // 閉じた行ピッチ約71px（25 + 24 + 線1 + 21）。開いた項目だけ Figma 通り40px空ける
+    &__list { gap: 21px; }
+    &__item[open] { margin-bottom: 19px; }
+    &__question,
+    &__answer { padding-bottom: 24px; }
 
-    &__q-text { font-size: 14px; }
+    &__question,
+    &__answer { gap: 8px; }
+
+    &__badge {
+      width: 25px;
+      height: 25px;
+    }
+
+    &__badge-letter { font-size: 15px; }
+
+    &__q-text {
+      padding-top: 0;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: 0.04em;
+    }
+
+    &__arrow { margin-top: 0; }
+
+    &__a-text { padding-top: 0; }
   }
 }

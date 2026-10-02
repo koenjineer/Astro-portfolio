@@ -1,6 +1,7 @@
 ---
 // セクション15: voice (Figma 113:3062)
-// 背景: $color-base-blue / Swiper スライダー（3枚/9ドット）
+// compact: 見出しが3行になり名前が切れる長文カードだけ、文字を小さくして2行に収める（全カード同じ高さを保つため）
+// 背景: $color-base-blue / Swiper スライダー（PC3枚表示 / 9枚・9ドット）
 
 const voices = [
   {
@@ -8,18 +9,65 @@ const voices = [
     alt: '子供の写真',
     heading: '子供にはいい水を飲ませたい。だからSUISOPOTを使用。',
     name: 'T様 （東京都 40代）',
+    body: '子供が産まれてからは子供が口にするものをすごく考えるようになりました。 例え親が水道水を飲んでいても、息子にだけにはいいものを食べさせたり飲ませたりします（笑） 子供にはずっと笑っていて欲しいですからね。',
   },
   {
     src: 'voice-2.webp',
     alt: '女性の写真',
     heading: 'ナノバブル水素水が飲み放題なマシンです。',
     name: '田中菜々子様',
+    body: '本体に水道水を注ぐだけで小さな泡を含んだナノバブル水素水がつくり放題だという点に興味を持ちました。',
   },
   {
     src: 'voice-3.webp',
     alt: '女性の写真',
     heading: '毎日の生活には、SUISOPOTのお水は欠かせません。',
     name: 'Y様 （東京都 80代）',
+    body: 'SUISOPOTを使用して約3年です。 毎日SUISOPOTのお水を飲んだけでなく、化粧水代わりにお肌にスプレーをするなど大活躍です。 重いペットボトルの水を買わなくて済む点も嬉しいです。',
+  },
+  {
+    src: 'voice-4.webp',
+    alt: '眼鏡をかけて笑う男性の写真',
+    heading: '家族の健康のために。毎日飲む水はやはり身体に良いものじゃないと。',
+    compact: true,
+    name: '杉本まき様',
+    body: '毎朝起きて最初に飲むのがSUISOPOTでできたナノバブル水素水です。 自宅の水道水だけで簡単につくれるのもいいですね。',
+  },
+  {
+    src: 'voice-5.webp',
+    alt: '海辺で笑う女性の写真',
+    heading: '毎日お腹スッキリ！身体も軽やかになりました。',
+    name: 'H様（千葉県 40代）',
+    body: '口当たりがまろやかで、毎日家族みんなでゴクゴク飲んでいます。やっぱり家族が毎日飲むお水にはしっかりとこだわりたいですね。',
+  },
+  {
+    src: 'voice-6.webp',
+    alt: 'グラスの水を飲む女性の写真',
+    heading: 'SUISOPOTは健康維持の頼もしいパートナーです。',
+    name: 'H様（神奈川県 40代）',
+    body: 'もともと小型の浄水器を使用していましたが、より健康を意識して探していたところ「SUISOPOT」に出会いました。 そのまま飲むだけでなく、お茶やコーヒー、野菜の洗浄など1台で何役もこなしてくれるのも「SUISOPOT」の魅力です。',
+  },
+  {
+    src: 'voice-7.webp',
+    alt: '水を飲む男性の写真',
+    heading: '水の舌触りが柔らかく、市販のミネラルウォーターと比べても味が美味しい。',
+    compact: true,
+    name: 'O様（福岡県 30代）',
+    body: '健康診断をきっかけにナノバブル水素水の｢SUISOPOT｣を導入しました。 水を注ぐだけで水素水を作ることができる点が決め手でした。飲んでみてびっくり。 水の舌触りが柔らかく、市販のミネラルウォーターと比べても味が美味しかったのでずっと愛用しています。',
+  },
+  {
+    src: 'voice-8.webp',
+    alt: '笑顔の母と子の写真',
+    heading: '最近はおうちで簡単に水素水を作っています。',
+    name: '長谷川直也様',
+    body: '「子供の健康のために・・」いろいろと探してSUISOPOTにたどり着きました！ 水道水を注ぐだけという手軽さも便利ですし、コンパクトなので置き場所が自由自在というものうれしいです。',
+  },
+  {
+    src: 'voice-9.webp',
+    alt: '犬と過ごす家族の写真',
+    heading: '家族全員でナノバブル水素水はじめました！',
+    name: '稲垣遥様',
+    body: '健康のことを考えて我が家では全員このナノバブル水素水を飲んでいますね。 ミネラル分が豊富な点も気に入っています。 キッチンにおいておけば料理にもさっと使えるのでありがたいです。',
   },
 ];
 ---
@@ -52,7 +100,8 @@ const voices = [
               />
             </div>
             <div class="sp-voice__body">
-              <p class="sp-voice__heading">{v.heading}</p>
+              <p class:list={['sp-voice__heading', v.compact && 'sp-voice__heading--compact']}>{v.heading}</p>
+              <p class="sp-voice__text">{v.body}</p>
               <div class="sp-voice__meta">
                 <p class="sp-voice__name">{v.name}</p>
                 <img
@@ -75,7 +124,11 @@ const voices = [
     </button>
   </div>
 
-  <div class="sp-voice__dots" aria-hidden="true"></div>
+  <div class="sp-voice__dots">
+    {voices.map((v, i) => (
+      <button class:list={['sp-voice__dot', i === 0 && 'sp-voice__dot--active']} type="button" aria-label={`${i + 1}件目の声へ`}></button>
+    ))}
+  </div>
 
 </section>
 
@@ -83,27 +136,22 @@ const voices = [
   (function () {
     function initVoiceSwiper() {
       if (typeof Swiper === 'undefined') return;
-      new Swiper('.sp-voice__swiper', {
+      var dots = document.querySelectorAll('.sp-voice__dot');
+      var swiper = new Swiper('.sp-voice__swiper', {
         slidesPerView: 3,
         spaceBetween: 16,
-        loop: false,
+        // 端に着いても止まらず続ける。複製スライドが出るので、ドットは realIndex で扱う
+        loop: true,
         navigation: {
           nextEl: '.sp-voice__arrow--next',
           prevEl: '.sp-voice__arrow--prev',
         },
-        pagination: {
-          el: '.sp-voice__dots',
-          clickable: true,
-          bulletClass: 'sp-voice__dot',
-          bulletActiveClass: 'sp-voice__dot--active',
-          renderBullet: function (index, className) {
-            return '<span class="' + className + '"></span>';
-          },
-        },
         breakpoints: {
+          // SPはカード幅236px固定（Figma 1:2943 / 1:1824）= コンテナ幅なので1枚表示。
+          // 'auto' + loop は複製スライドが作られず、端で動かなくなるため使わない
           0: {
-            slidesPerView: 1.15,
-            spaceBetween: 12,
+            slidesPerView: 1,
+            spaceBetween: 16,
           },
           768: {
             slidesPerView: 3,
@@ -111,20 +159,22 @@ const voices = [
           },
         },
         on: {
-          init: function (swiper) {
-            updateArrows(swiper);
-          },
-          slideChange: function (swiper) {
-            updateArrows(swiper);
-          },
+          init: updateDots,
+          realIndexChange: updateDots,
         },
       });
 
-      function updateArrows(swiper) {
-        var prev = document.querySelector('.sp-voice__arrow--prev');
-        var next = document.querySelector('.sp-voice__arrow--next');
-        if (prev) prev.disabled = swiper.isBeginning;
-        if (next) next.disabled = swiper.isEnd;
+      // PCは3枚表示でスナップ位置が減るが、カンプは9枚=9ドットなので自前で描画する
+      dots.forEach(function (dot, index) {
+        dot.addEventListener('click', function () {
+          swiper.slideToLoop(index);
+        });
+      });
+
+      function updateDots(instance) {
+        dots.forEach(function (dot, index) {
+          dot.classList.toggle('sp-voice__dot--active', index === instance.realIndex);
+        });
       }
     }
 

@@ -1,14 +1,15 @@
 ---
-// セクション9: use_box (Figma 113:2863)
-// スライダー → 静的4枚表示（スライダーJS後回し）
+// セクション9: use_box (Figma 113:2863 / SP 1:2615 / 全7枚 1:2092)
+// Swiper スライダー（PC4枚表示 / SP1枚表示 / 7ドット）
 const items = [
   { src: 'use-1.webp', label: 'お茶やコーヒー' },
   { src: 'use-2.webp', label: '野菜の洗浄' },
   { src: 'use-3.webp', label: '植物の水やり' },
   { src: 'use-4.webp', label: 'ペットの飲用水' },
+  { src: 'use-5.webp', label: '洗顔' },
+  { src: 'use-6.webp', label: 'お料理' },
+  { src: 'use-7.webp', label: 'お酒の割り水' },
 ];
-// ページネーション dot 数（Figma: 7dots）
-const DOTS = 7;
 ---
 
 <section class="sp-use-box" id="use">
@@ -22,31 +23,34 @@ const DOTS = 7;
 
     <p class="sp-use-box__lead">
       健康的な生活のための飲用水としてはもちろん、お茶やお料理にもお使いいただけます。<br />
-      さらに、ペットの飲用水、植物の水やり、お肌を整えるための洗顔など、<br />
+      さらに、ペットの飲用水、植物の水やり、お肌を整えるための洗顔など、<br class="pc-only" />
       ライフスタイルに合わせて、幅広く活用ができます。
     </p>
 
     <div class="sp-use-box__slider-area">
       <!-- 左矢印（右矢印SVGをCSSでflip） -->
-      <button class="sp-use-box__arrow sp-use-box__arrow--prev" type="button" aria-label="前へ" disabled>
+      <button class="sp-use-box__arrow sp-use-box__arrow--prev" type="button" aria-label="前へ">
         <img src="/mock_site/suisopot/images/use-arrow.svg" alt="" aria-hidden="true" width="29" height="29" />
       </button>
 
-      <ul class="sp-use-box__list">
-        {items.map((item) => (
-          <li class="sp-use-box__item">
-            <img
-              src={`/mock_site/suisopot/images/${item.src}`}
-              alt={item.label}
-              width="236"
-              height="154"
-              loading="lazy"
-              decoding="async"
-            />
-            <p class="sp-use-box__caption">{item.label}</p>
-          </li>
-        ))}
-      </ul>
+      <div class="swiper sp-use-box__swiper">
+        <ul class="swiper-wrapper sp-use-box__list">
+          {items.map((item) => (
+            <li class="swiper-slide sp-use-box__item">
+              <img
+                src={`/mock_site/suisopot/images/${item.src}`}
+                alt=""
+                aria-hidden="true"
+                width="236"
+                height="154"
+                loading="lazy"
+                decoding="async"
+              />
+              <p class="sp-use-box__caption">{item.label}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <!-- 右矢印 -->
       <button class="sp-use-box__arrow sp-use-box__arrow--next" type="button" aria-label="次へ">
@@ -54,12 +58,59 @@ const DOTS = 7;
       </button>
     </div>
 
-    <!-- ページネーション（静的） -->
-    <div class="sp-use-box__dots" aria-hidden="true">
-      {Array.from({ length: DOTS }).map((_, i) => (
-        <span class:list={['sp-use-box__dot', i === 0 && 'sp-use-box__dot--active']} />
+    <div class="sp-use-box__dots">
+      {items.map((item, i) => (
+        <button class:list={['sp-use-box__dot', i === 0 && 'sp-use-box__dot--active']} type="button" aria-label={`${item.label}へ`}></button>
       ))}
     </div>
 
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    function initUseSwiper() {
+      if (typeof Swiper === 'undefined') return;
+      var prev = document.querySelector('.sp-use-box__arrow--prev');
+      var next = document.querySelector('.sp-use-box__arrow--next');
+      var dots = document.querySelectorAll('.sp-use-box__dot');
+
+      // 1枚の幅が固定(236px)なので、PCは auto でコンテナ幅に応じた表示枚数に任せる
+      var swiper = new Swiper('.sp-use-box__swiper', {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        // 端に着いても止まらず続ける。複製スライドが出るので、ドットは realIndex で扱う
+        loop: true,
+        navigation: { nextEl: next, prevEl: prev },
+        breakpoints: {
+          // PCは236px×4枚+gap の幅に収まる分だけ見せる。SPは1枚。
+          // SPで 'auto' + loop にすると複製スライドが作られず、端で動かなくなる
+          768: { slidesPerView: 'auto' },
+        },
+        on: {
+          init: sync,
+          realIndexChange: sync,
+        },
+      });
+
+      // 表示枚数が変わってもドットはカンプ通り7個にするため、自前で制御する
+      dots.forEach(function (dot, index) {
+        dot.addEventListener('click', function () {
+          swiper.slideToLoop(index);
+        });
+      });
+
+      function sync(instance) {
+        dots.forEach(function (dot, index) {
+          dot.classList.toggle('sp-use-box__dot--active', index === instance.realIndex);
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initUseSwiper);
+    } else {
+      initUseSwiper();
+    }
+  })();
+</script>

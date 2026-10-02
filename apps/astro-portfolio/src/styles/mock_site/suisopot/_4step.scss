@@ -37,7 +37,8 @@ $font-yomogi: 'Yomogi', cursive;
     font-weight: 400;
     font-size: 40px;
     color: $color-gray-1;
-    letter-spacing: 0.03em;
+    letter-spacing: 1.2px;
+    line-height: 53px; // Figma の見出し行は装飾画像と同じ 53px
     white-space: nowrap;
   }
 
@@ -46,6 +47,8 @@ $font-yomogi: 'Yomogi', cursive;
     display: flex;
     gap: 31px;
     align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -125,64 +128,102 @@ $font-yomogi: 'Yomogi', cursive;
     text-align: center;
   }
 
-  // ===== レスポンシブ (SP) =====
+  // 4つ並ばない幅は折り返す（手書きラベルが上に出るので行間を広く取る）
+  @media (max-width: 1099px) {
+    &__list { row-gap: 100px; }
+  }
+
+  // ===== レスポンシブ (SP) Figma 1:3006 / 390×784 =====
+  // 3step と同じ「左に円・右にテキスト」の縦並び。上下端は 16px の波形
   @media (max-width: $bp-sp) {
-    padding: 48px $side-padding;
+    padding: 56px $side-padding 40px; // 波16 + 上余白40 / 下余白24 + 波16
     gap: 40px;
+    position: relative;
+    background: linear-gradient($color-base-blue, $color-base-blue) 0 16px / 100% calc(100% - 32px) no-repeat;
+    background-color: $color-white;
 
-    &__title { font-size: 24px; }
-    &__title-deco { width: 22px; height: 35px; }
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 16px;
+      background: url('/mock_site/suisopot/images/4step-wave-sp.svg') center / 100% 100% no-repeat;
+    }
 
-    // SP: 2列グリッドに変更
+    &::before { top: 0; }
+
+    // 下端は上端の波を上下反転
+    &::after {
+      bottom: 0;
+      transform: scaleY(-1);
+    }
+
+    &__title-wrap { height: 52px; gap: 8px; }
+    &__title { font-size: 24px; letter-spacing: 0; line-height: normal; }
+    &__title-deco { width: 24.9px; height: 40px; }
+
     &__list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
     }
 
     &__item {
-      width: auto;
-      height: auto;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 118px 1fr;
+      grid-template-rows: auto auto auto;
+      column-gap: 24px;
+      row-gap: 3px;
       align-items: center;
-      gap: 12px;
+      width: 359px;
+      height: auto;
     }
 
     &__label {
-      position: relative;
-      top: auto !important;
-      left: auto;
-      transform: rotate(-5deg);
-      font-size: 18px;
-      margin-bottom: 4px;
+      grid-column: 2;
+      grid-row: 1;
+      position: static;
+      transform: none;
+      font-size: 15px;
+      letter-spacing: -1.35px;
+      text-align: left;
     }
 
     &__circle {
-      position: relative;
-      top: auto;
-      left: auto;
+      grid-column: 1;
+      grid-row: 1 / 4;
+      position: static;
       transform: none;
-      width: 120px;
-      height: 120px;
+      width: 118px;
+      height: 118px;
     }
 
     &__subtitle {
-      position: relative;
-      top: auto;
-      left: auto;
+      grid-column: 2;
+      grid-row: 2;
+      position: static;
       transform: none;
-      font-size: 18px;
-      white-space: normal;
+      width: auto;
+      font-size: 20px;
+      line-height: normal;
+      letter-spacing: 0;
+      text-align: left;
+      margin-bottom: 5px;
     }
 
     &__desc {
-      position: relative;
-      top: auto;
-      left: auto;
+      grid-column: 2;
+      grid-row: 3;
+      position: static;
       transform: none;
-      width: 100%;
-      font-size: 13px;
+      width: 217px;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: 0;
+      text-align: left;
     }
   }
 }

@@ -7,17 +7,17 @@ const navItems = [
   { label: '特長', href: '#point' },
   { label: 'お客様の声', href: '#voice' },
   { label: 'ご利用料金', href: '#price' },
-  { label: 'ご利用までの流れ', href: '#step' },
+  { label: 'ご利用までの流れ', href: '#3step' },
   { label: 'よくある質問', href: '#faq' },
 ];
 ---
 
 <header class="sp-header">
   <div class="sp-header__inner">
-    <a href="#" class="sp-header__logo" aria-label="SUIREX5">
+    <a href="#" class="sp-header__logo" aria-label="SUISOPOT">
       <img
         src="/mock_site/suisopot/images/logo.webp"
-        alt="SUIREX5"
+        alt="SUISOPOT"
         width="187"
         height="72"
         loading="eager"
@@ -55,7 +55,7 @@ const navItems = [
 
     <a href="#" class="sp-header__sp-cta" aria-label="新規お申込">
       新規お申込
-      <span class="sp-header__sp-cta-arrow" aria-hidden="true">›</span>
+      <img class="sp-header__sp-cta-arrow" src="/mock_site/suisopot/images/header-sp-cta-arrow.svg" alt="" aria-hidden="true" width="15" height="9" />
     </a>
 
     <button
@@ -65,9 +65,7 @@ const navItems = [
       aria-expanded="false"
       aria-controls="sp-header-drawer"
     >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
+      <img src="/mock_site/suisopot/images/header-hamburger.svg" alt="" aria-hidden="true" width="27" height="18" />
     </button>
   </div>
 
@@ -83,10 +81,10 @@ const navItems = [
 
       {/* ヘッダー：ロゴ + 閉じる */}
       <div class="sp-drawer__head">
-        <a href="#" class="sp-drawer__logo" aria-label="SUIREX5">
+        <a href="#" class="sp-drawer__logo" aria-label="SUISOPOT">
           <img
             src="/mock_site/suisopot/images/logo.webp"
-            alt="SUIREX5"
+            alt="SUISOPOT"
             width="151"
             height="58"
           />
@@ -96,8 +94,7 @@ const navItems = [
           class="sp-drawer__close"
           aria-label="メニューを閉じる"
         >
-          <span class="sp-drawer__close-bar sp-drawer__close-bar--1" aria-hidden="true"></span>
-          <span class="sp-drawer__close-bar sp-drawer__close-bar--2" aria-hidden="true"></span>
+          <img src="/mock_site/suisopot/images/header-close.svg" alt="" aria-hidden="true" width="27" height="17" />
         </button>
       </div>
 
@@ -109,7 +106,7 @@ const navItems = [
               <li class="sp-drawer__nav-item">
                 <a href={item.href} class="sp-drawer__nav-link">
                   <span class="sp-drawer__nav-label">{item.label}</span>
-                  <span class="sp-drawer__nav-arrow" aria-hidden="true"></span>
+                  <img class="sp-drawer__nav-arrow" src="/mock_site/suisopot/images/header-drawer-arrow.svg" alt="" aria-hidden="true" width="15" height="9" />
                 </a>
               </li>
             ))
@@ -147,6 +144,9 @@ const navItems = [
       drawer.setAttribute('aria-hidden', String(!open));
       drawer.classList.toggle('is-open', open);
       document.body.style.overflow = open ? 'hidden' : '';
+      // 開いたらドロワー内へ、閉じたらハンバーガーへフォーカスを移す
+      if (open && closeBtn) closeBtn.focus();
+      else btn.focus();
     }
 
     btn.addEventListener('click', () => {
@@ -156,6 +156,9 @@ const navItems = [
     if (closeBtn) {
       closeBtn.addEventListener('click', () => setOpen(false));
     }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && drawer.classList.contains('is-open')) setOpen(false);
+    });
     // ナビリンククリックで閉じる
     drawer.querySelectorAll('.sp-drawer__nav-link').forEach((a) => {
       a.addEventListener('click', () => setOpen(false));

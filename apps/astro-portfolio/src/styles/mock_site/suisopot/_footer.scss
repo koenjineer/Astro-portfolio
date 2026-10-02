@@ -16,7 +16,7 @@
     align-items: center;
     // Figma: copyright が top:449px（wave と重なる領域）に位置する設計
     // footer 高さ 499px = 64(pt) + コンテンツ(406px) + 29px
-    padding-bottom: 29px;
+    padding-bottom: 30px;
   }
 
   // ===== ナビゲーション =====
@@ -32,10 +32,15 @@
     font-family: $font-jp-sans;
     font-weight: 500;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: normal;
     color: $color-gray-2;
     text-decoration: none;
     white-space: nowrap;
+    transition: opacity $hover-fade;
+
+    @media (hover: hover) {
+      &:hover { opacity: $hover-opacity-link; }
+    }
 
     &--ext { text-decoration: underline; }
   }
@@ -52,7 +57,7 @@
   // ===== ロゴ =====
   &__logo-wrap {
     // nav下端からロゴ上端まで: 143px(top) - 64px(padding) - 24px(nav高さ) ≒ 55px
-    margin-top: 55px;
+    margin-top: 48px; // nav(31px)の下端95pxからロゴ上端143pxまで
     width: 141px;
     height: 141px;
   }
@@ -68,23 +73,26 @@
   &__disclaimer {
     // ロゴ下端からの距離: 332px - (143px + 141px) = 48px
     margin-top: 48px;
-    max-width: 788px;
+    width: 788px;
+    max-width: 100%;
     font-family: $font-jp-sans;
     font-weight: 500;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: normal;
     color: $color-gray-2;
-    text-align: center;
+    text-align: left;
   }
 
   // ===== Copyright =====
   &__copyright {
+    position: relative;
+    z-index: 1; // 波画像(absolute)の下に隠れないようにする
     // 免責文下端からの距離: 449px - 332px - ~48px(disclaimer高) ≒ 69px
-    margin-top: 69px;
+    margin-top: 71px; // 免責文(2行)の下端378pxからcopyright上端449pxまで
     font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: normal;
     color: $color-gray-2;
     white-space: nowrap;
     text-align: center;
@@ -122,7 +130,7 @@
     }
     &__sep { display: none; }
 
-    &__nav-link { font-size: 13px; }
+    &__nav-link { font-size: 13px; font-weight: 400; }
 
     &__logo-wrap {
       margin-top: 40px;
@@ -132,18 +140,21 @@
 
     &__disclaimer {
       margin-top: 40px;
+      width: 360px;
       font-size: 13px;
       text-align: left;
     }
 
     // copyright は wave 内に絶対配置（Figma SP 設計に合わせる）
     &__copyright {
+    position: relative;
+    z-index: 1; // 波画像(absolute)の下に隠れないようにする
       position: absolute;
       bottom: 17px;
       left: 50%;
       transform: translateX(-50%);
       margin-top: 0;
-      font-size: 12px;
+      font-size: 7px;
       white-space: nowrap;
     }
 

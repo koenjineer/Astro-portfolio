@@ -9,6 +9,10 @@ export default {
           '50%': { transform: 'scale(1.1)' },
           '100%': { transform: 'scale(1)' },
         },
+        'chat-message-in': {
+          '0%': { opacity: '0', transform: 'translateY(6px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         'heart-pulse': {
           '0%': { transform: 'scale(1)' },
           '25%': { transform: 'scale(1.1)' },
@@ -20,6 +24,7 @@ export default {
       animation: {
         scale: 'scaleAnim 300ms ease-in-out',
         'heart-pulse': 'heart-pulse 0.6s ease-in-out',
+        'chat-message-in': 'chat-message-in 0.3s ease-out',
       },
     },
   },

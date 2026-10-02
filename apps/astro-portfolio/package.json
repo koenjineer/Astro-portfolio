@@ -33,7 +33,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.6.3",
-    "astro-eslint-parser": "^3.1.0",
+    "astro-eslint-parser": "^3.2.0",
     "autoprefixer": "^10.6.1",
     "eslint": "^9.39.5",
     "eslint-plugin-astro": "^3.2.1",

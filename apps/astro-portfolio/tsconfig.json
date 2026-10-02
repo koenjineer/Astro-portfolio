@@ -15,6 +15,9 @@
       ],
       "@components/*": [
         "src/components/*"
+      ],
+      "@vercel/analytics/astro": [
+        "node_modules/@vercel/analytics/dist/astro/component.ts"
       ]
     },
     "jsx": "react-jsx",

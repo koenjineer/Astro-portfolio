@@ -5,18 +5,6 @@
 - BEMプレフィックス：各mock_siteごとに固定（例：`sp-` for suisopot）
 - SCSSネスト3階層以内：超えたらBEM設計を見直す
 
-## 単位と計算関数
-
-- フォントサイズ・余白は`rem()`関数を使用する：Figma等のpx値をそのまま記述し、コンパイル時にremへ変換させる
-
-```scss
-// utilities等に定義しておく関数の例
-@use "sass:math";
-@function rem($px) {
-  @return math.div($px, 16) * 1rem;
-}
-```
-
 ## 冗長な記述を避ける
 
 - `font-family`は`body`への設定のみとし、各コンポーネントでの個別指定は禁止

@@ -7,7 +7,7 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { label: "制作実績", value: 12, suffix: "件" },
+  { label: "制作実績", value: 10, suffix: "件" },
   { label: "対応言語・技術", value: 10, suffix: "以上" },
   { label: "納品満足度", value: 100, suffix: "%" },
 ];

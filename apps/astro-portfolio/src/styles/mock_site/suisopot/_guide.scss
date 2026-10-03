@@ -69,7 +69,6 @@ $guide-max-w: 800px;
 
   // セクションタイトルテキスト（20px）
   &__section-title {
-    font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 20px;
     line-height: 1.7;
@@ -79,7 +78,6 @@ $guide-max-w: 800px;
 
   // 本文（16px）
   &__text {
-    font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
@@ -102,7 +100,6 @@ $guide-max-w: 800px;
   }
 
   &__price-row {
-    font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 16px;
     line-height: normal;
@@ -120,7 +117,6 @@ $guide-max-w: 800px;
   }
 
   &__contact-line {
-    font-family: $font-jp-sans;
     font-weight: 700;
     font-size: 16px;
     line-height: 1.7;
@@ -130,7 +126,6 @@ $guide-max-w: 800px;
 
   // サブ見出し（・解約について等）
   &__sub-heading {
-    font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
@@ -147,7 +142,6 @@ $guide-max-w: 800px;
 
   // 注釈（13px / gray2）
   &__note {
-    font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 13px;
     line-height: 1.7;

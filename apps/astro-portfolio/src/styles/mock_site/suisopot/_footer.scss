@@ -29,7 +29,6 @@
   }
 
   &__nav-link {
-    font-family: $font-jp-sans;
     font-weight: 500;
     font-size: 16px;
     line-height: normal;
@@ -75,7 +74,6 @@
     margin-top: 48px;
     width: 788px;
     max-width: 100%;
-    font-family: $font-jp-sans;
     font-weight: 500;
     font-size: 16px;
     line-height: normal;
@@ -89,7 +87,6 @@
     z-index: 1; // 波画像(absolute)の下に隠れないようにする
     // 免責文下端からの距離: 449px - 332px - ~48px(disclaimer高) ≒ 69px
     margin-top: 71px; // 免責文(2行)の下端378pxからcopyright上端449pxまで
-    font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 14px;
     line-height: normal;

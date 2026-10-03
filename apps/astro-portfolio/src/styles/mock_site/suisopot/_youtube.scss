@@ -95,8 +95,7 @@ $font-yomogi: 'Yomogi', cursive;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding: 8px var(--info-pad); // 左右余白は .astro 側でカードごとに --info-pad として渡す
   }
 
   // アイコンは白塗りSVGをマスクにして背景色で着色する（ホバーでティールに切り替えるため）
@@ -137,10 +136,10 @@ $font-yomogi: 'Yomogi', cursive;
 
     &__play { width: 50px; height: 50px; }
 
-    // 右側は残り半分に中央寄せ（PC 用のインライン余白は無効化）
+    // 右側は残り半分に中央寄せ（PC 用の --info-pad は使わず固定余白にする）
     &__info {
       flex: 1;
-      padding-inline: 8px !important; // インラインの padding を上書き（PC 専用値のため）
+      padding-inline: 8px;
       gap: 6px;
     }
 

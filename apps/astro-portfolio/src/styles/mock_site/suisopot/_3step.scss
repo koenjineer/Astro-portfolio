@@ -64,6 +64,7 @@ $font-yomogi: 'Yomogi', cursive;
   // Yomogi 手書きラベル（絶対配置、円の上）
   &__label {
     position: absolute;
+    top: var(--label-top); // 縦位置は .astro 側で項目ごとに --label-top として渡す（SP は static のため auto）
     left: 50%;
     transform: translateX(-50%) rotate(-5deg);
     font-family: $font-yomogi;
@@ -100,7 +101,6 @@ $font-yomogi: 'Yomogi', cursive;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    font-family: $font-jp-sans;
     font-weight: 700;
     font-size: 24px;
     line-height: 1.7;
@@ -117,7 +117,6 @@ $font-yomogi: 'Yomogi', cursive;
     left: 50%;
     transform: translateX(-50%);
     width: $step-item-w + 1px; // Figma: 235px
-    font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
@@ -162,7 +161,7 @@ $font-yomogi: 'Yomogi', cursive;
       grid-column: 2;
       grid-row: 1;
       position: static;
-      top: auto !important; // インライン style を上書き
+      top: auto; // PC 用の --label-top 指定を打ち消す
       left: auto;
       transform: none; // SP の手書きラベルは傾けない
       font-size: 15px;

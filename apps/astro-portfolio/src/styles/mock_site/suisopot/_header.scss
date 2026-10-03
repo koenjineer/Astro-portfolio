@@ -46,7 +46,6 @@
   }
 
   &__nav-link {
-    font-family: $font-jp-sans;
     font-weight: 500;
     font-size: 16px;
     color: $color-gray-2;
@@ -116,7 +115,6 @@
     background: $color-accent;
     color: $color-white;
     border-radius: 40px;
-    font-family: $font-jp-sans;
     font-weight: 700;
     font-size: 16px;
     letter-spacing: 0.2em;
@@ -168,7 +166,6 @@
       background: $color-accent;
       color: $color-white;
       border-radius: 32px;
-      font-family: $font-jp-sans;
       font-weight: 700;
       font-size: 16px;
       line-height: 1;
@@ -315,7 +312,6 @@
     padding: 20px 49px 0; // 文字左端 x=64 / 矢印右端 x=326、文字中心は線の24.5px上
     box-sizing: border-box;
     color: $color-gray-2;
-    font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 20px;
     text-decoration: none;
@@ -393,7 +389,6 @@
     background: $color-accent;
     color: $color-white;
     border-radius: 40px;
-    font-family: $font-jp-sans;
     font-weight: 700;
     font-size: 16px;
     letter-spacing: 0.2em;

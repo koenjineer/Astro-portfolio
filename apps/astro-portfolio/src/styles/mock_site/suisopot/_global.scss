@@ -31,6 +31,8 @@ section[id] {
 }
 
 // アクセシビリティ：モーション低減
+// !important が必要な理由：各コンポーネント側の animation / transition 指定は詳細度がまちまちなので、
+// 詳細度に関わらず一括で止めるには !important で上書きするしかない（利用者の設定を最優先するための例外）
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

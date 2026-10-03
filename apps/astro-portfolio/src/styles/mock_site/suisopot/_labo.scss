@@ -51,7 +51,6 @@ $font-yomogi: 'Yomogi', cursive;
 
   // サブタイトル
   &__subtitle {
-    font-family: $font-jp-sans;
     font-weight: 400;
     font-size: 18px;
     line-height: 1.7;
@@ -128,7 +127,6 @@ $font-yomogi: 'Yomogi', cursive;
 
   // テキスト行
   &__text-line {
-    font-family: $font-jp-sans;
     font-weight: 900;
     font-size: 24px;
     line-height: 1.2;
@@ -148,7 +146,6 @@ $font-yomogi: 'Yomogi', cursive;
     background: $labo-gradient;
     box-shadow: 0 0 4px rgba(41, 81, 86, 0.25);
     text-decoration: none;
-    font-family: $font-jp-sans;
     font-weight: 700;
     font-size: 16px;
     line-height: 1.5;

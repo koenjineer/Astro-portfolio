@@ -132,7 +132,6 @@ $sp-card-radius: 11.8px;
 
   // カード見出し
   &__heading {
-    font-family: $font-jp-sans;
     font-weight: 700;
     font-size: 18px;
     line-height: 1.7;
@@ -154,7 +153,6 @@ $sp-card-radius: 11.8px;
   }
 
   &__name {
-    font-family: $font-jp-sans;
     font-size: 16px;
     line-height: 1.7;
     letter-spacing: 0.03em;

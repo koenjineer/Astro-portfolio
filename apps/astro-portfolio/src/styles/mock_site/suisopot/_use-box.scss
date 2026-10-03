@@ -51,7 +51,6 @@ $slider-max-w: 992px;
   // Figma: タイトル下44px / スライダー上49px / ドット上48px（gap24px との差分をmarginで補う）
   &__lead {
     margin-block: 20px 25px;
-    font-family: $font-jp-sans;
     font-size: 18px;
     line-height: 1.7;
     letter-spacing: 0.03em;
@@ -121,7 +120,6 @@ $slider-max-w: 992px;
 
   &__caption {
     margin-top: 24px; // 画像154px + 24px = Figma の文字位置 top:178px
-    font-family: $font-jp-sans;
     font-size: 16px;
     line-height: 1.7;
     letter-spacing: 0.03em;
